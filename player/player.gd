@@ -66,13 +66,6 @@ func _process(delta: float) -> void:
 		shoot()
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_text_backspace"):
-		get_tree().reload_current_scene()
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
-
-
 func shoot() -> void:
 	var projectile := projectile_scene.instantiate() as Projectile
 	projectile_manager.add_child(projectile)

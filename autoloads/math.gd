@@ -1,15 +1,15 @@
 extends Node
 
 
-func rand_mediani(min: int, median: int, max: int) -> int:
+func rand_mediani(min_: int, median_: int, max_: int) -> int:
 	if randf() < 0.5:
-		return randi_range(min, median)
+		return randi_range(min_, median_)
 	else:
-		return randi_range(median, max)
+		return randi_range(median_, max_)
 
 
-func rand_medianf(min: float, median: float, max: float) -> float:
+func rand_medianf(min_: float, median_: float, max_: float) -> float:
 	if randf() < 0.5:
-		return randf_range(min, median)
+		return randf_range(min_, median_)
 	else:
-		return randf_range(median, max)
+		return randf_range(median_, max_)

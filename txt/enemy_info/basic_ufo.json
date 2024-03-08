@@ -1,13 +1,15 @@
 {
+	"max_health": 100,
+	"collide_damage": 50,
 	"speed": {
 		"min": 100,
-		"median": 150,
-		"max": 200
+		"median": 120,
+		"max": 150
 	},
 	"move_interval": {
 		"min": 0.5,
 		"median": 1.0,
 		"max": 1.5
 	},
-	"follow_spread": 0.7
+	"follow_spread": 0.5
 }

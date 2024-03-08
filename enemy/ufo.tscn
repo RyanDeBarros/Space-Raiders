@@ -8,6 +8,15 @@ script/source = "var ufo: Enemy
 var tree: SceneTree
 var player: Player
 
+var max_health: int
+var health: int:
+	set(value):
+		health = maxi(value, 0)
+		if health == 0:
+			ufo.queue_free()
+
+var collide_damage: int
+
 var speed_dict: Dictionary
 var speed: int
 var direction: Vector2
@@ -24,6 +33,7 @@ func _init(ufo_enemy: Enemy, scene_tree: SceneTree, json_file_name: String) -> v
 	move_interval_timer = ufo.get_node(\"MoveIntervalTimer\")
 	move_interval_timer.timeout.connect(_on_move_interval_end)
 	setup(json_file_name)
+	health = max_health
 	_on_move_interval_end()
 
 
@@ -36,20 +46,26 @@ func _on_move_interval_end() -> void:
 	direction = ufo.position.direction_to(player.position).rotated(randf() * follow_spread)
 
 
+func _restart_move_interval() -> void:
+	speed = Math.rand_mediani(speed_dict[\"min\"], speed_dict[\"median\"], speed_dict[\"max\"])
+	move_interval = Math.rand_medianf(
+			move_interval_dict[\"min\"], move_interval_dict[\"median\"], move_interval_dict[\"max\"])
+	move_interval_timer.start(move_interval)
+
+
 func setup(json_file_name: String) -> void:
 	var file := FileAccess.open(json_file_name, FileAccess.READ)
 	var json = JSON.parse_string(file.get_as_text())
+	max_health = json[\"max_health\"]
+	collide_damage = json[\"collide_damage\"]
 	speed_dict = json[\"speed\"]
 	move_interval_dict = json[\"move_interval\"]
 	follow_spread = json[\"follow_spread\"]
 	file.close()
 
 
-func _restart_move_interval() -> void:
-	speed = Math.rand_mediani(speed_dict[\"min\"], speed_dict[\"median\"], speed_dict[\"max\"])
-	move_interval = Math.rand_medianf(
-			move_interval_dict[\"min\"], move_interval_dict[\"median\"], move_interval_dict[\"max\"])
-	move_interval_timer.start(move_interval)
+func take_damage(damage: int):
+	health -= damage
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptld1"]
@@ -65,4 +81,4 @@ texture = ExtResource("2_1wwpp")
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource("CircleShape2D_ptld1")
 
-[node name="MoveIntervalTimer" type="Timer" parent="." index="2"]
+[node name="MoveIntervalTimer" type="Timer" parent="." index="3"]

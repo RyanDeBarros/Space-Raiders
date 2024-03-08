@@ -5,25 +5,20 @@ extends Node2D
 @export var behavior_script: GDScript
 @export_file("*.json") var behavior_json: String
 
-@export_group("Combat")
-@export var max_health := 100
-@export var collide_damage := 50
-
 var behavior
 
-var health: int:
+var colliding_player: bool:
 	set(value):
-		health = maxi(value, 0)
-		if health == 0:
-			die()
+		colliding_player = value
+		collide_player()
 
 @onready var area_2d: Area2D = $Area2D
-
+@onready var collide_damage_timer: Timer = $CollideDamageTimer
+@onready var player: Player
 
 func _ready() -> void:
 	behavior = behavior_script.new(self, get_tree(), behavior_json)
-	health = max_health
-	area_2d.area_entered.connect(_on_area_entered)
+	player = get_tree().get_first_node_in_group("player")
 
 
 func _process(delta: float) -> void:
@@ -33,12 +28,22 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D):
 	if area.is_in_group("area_player_projectile"):
 		var proj := area.get_parent() as Projectile
-		health -= proj.damage
+		behavior.take_damage(proj.damage)
 		proj.hit()
 	elif area.is_in_group("area_player"):
-		var player := area.get_parent() as Player
-		health -= player.collide_damage
-		player.health -= collide_damage
+		colliding_player = true
+
+
+func _on_area_exited(area: Area2D):
+	if area.is_in_group("area_player"):
+		colliding_player = false
+
+
+func collide_player() -> void:
+	if colliding_player:
+		behavior.take_damage(player.collide_damage)
+		player.health -= behavior.collide_damage
+		collide_damage_timer.start()
 
 
 func die() -> void:

@@ -30,7 +30,10 @@ shape = SubResource("RectangleShape2D_sewky")
 
 [node name="ProjectileManager" type="Node2D" parent="." groups=["projectile_manager"]]
 
-[node name="UFO" parent="." instance=ExtResource("4_g75es")]
-position = Vector2(274, -182)
-
 [node name="Player" parent="." instance=ExtResource("2_1vmdd")]
+
+[node name="Enemies" type="Node2D" parent="."]
+z_index = -10
+
+[node name="UFO" parent="Enemies" instance=ExtResource("4_g75es")]
+position = Vector2(274, -182)
