@@ -8,20 +8,18 @@ var aggro_range_squared: float
 var follow_spread: float
 var move_interval_dict: Dictionary
 var move_interval: float
-var move_interval_timer: Timer
 
 var angular_speed := 1.0
 var _speed := 0.0
 var acceleration := 10.0
 var deceleration := 10.0
 
+@onready var move_interval_timer := $MoveIntervalTimer as Timer
 
-func _init(ufo: Enemy, scene_tree: SceneTree, json_file_name: String) -> void:
-	super._init(ufo, scene_tree)
-	can_process = true
-	move_interval_timer = enemy.get_node("MoveIntervalTimer")
+
+func _ready() -> void:
 	move_interval_timer.timeout.connect(_on_move_interval_end)
-	setup(json_file_name)
+	setup()
 	_on_move_interval_end()
 
 
@@ -52,8 +50,8 @@ func _restart_move_interval() -> void:
 	move_interval_timer.start(move_interval)
 
 
-func setup(json_file_name: String) -> void:
-	var file := FileAccess.open(json_file_name, FileAccess.READ)
+func setup() -> void:
+	var file := FileAccess.open(configuration, FileAccess.READ)
 	var json = JSON.parse_string(file.get_as_text())
 	speed_dict = json["speed"]
 	move_interval_dict = json["move_interval"]

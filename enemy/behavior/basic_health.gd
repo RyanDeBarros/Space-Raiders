@@ -9,15 +9,13 @@ var health: int:
 			enemy.queue_free()
 
 
-func _init(enemy_: Enemy, scene_tree: SceneTree, json_file_name: String) -> void:
-	super._init(enemy_, scene_tree)
-	can_take_damage = true
-	setup(json_file_name)
+func _ready() -> void:
+	setup()
 	health = max_health
 
 
-func setup(json_file_name: String) -> void:
-	var file := FileAccess.open(json_file_name, FileAccess.READ)
+func setup() -> void:
+	var file := FileAccess.open(configuration, FileAccess.READ)
 	var json = JSON.parse_string(file.get_as_text())
 	max_health = json["max_health"]
 	file.close()
@@ -25,3 +23,8 @@ func setup(json_file_name: String) -> void:
 
 func take_damage(damage: int):
 	health -= damage
+
+
+func receive_projectile(projectile: Projectile):
+	take_damage(projectile.damage)
+	projectile.hit()

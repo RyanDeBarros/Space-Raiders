@@ -11,9 +11,7 @@ script = ExtResource("1_egje8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
-[node name="CollideDamageTimer" type="Timer" parent="."]
-one_shot = true
+[node name="Components" type="Node" parent="."]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_exited"]
-[connection signal="timeout" from="CollideDamageTimer" to="." method="collide_player"]
