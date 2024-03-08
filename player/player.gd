@@ -1,6 +1,7 @@
 class_name Player
 extends Node2D
 
+const BASIC_PROJECTILE := "res://txt/projectile_info/basic.json"
 
 @export_group("Movement")
 @export var max_speed := 350
@@ -12,14 +13,22 @@ extends Node2D
 
 @export_group("Combat")
 @export var projectile_scene: PackedScene
+@export var max_health := 100
+@export var collide_damage := 50
 
-var arena_rect: Rect2:
+var arena_rect: Rect2i:
 	set(value):
 		arena_rect = value
 		camera_2d.limit_left = arena_rect.position.x
 		camera_2d.limit_right = arena_rect.position.x + arena_rect.size.x
 		camera_2d.limit_top = arena_rect.position.y
 		camera_2d.limit_bottom = arena_rect.position.y + arena_rect.size.y
+
+var health: int:
+	set(value):
+		health = maxi(value, 0)
+		if health == 0:
+			die()
 
 var speed := 0.0
 var prev_direction := Vector2.ZERO
@@ -30,6 +39,7 @@ var projectile_manager: Node2D
 
 
 func _ready() -> void:
+	health = max_health
 	camera_2d.position_smoothing_speed = max_speed * camera_smoothing_ratio
 	projectile_manager = get_tree().get_first_node_in_group("projectile_manager")
 
@@ -64,8 +74,12 @@ func _input(event: InputEvent) -> void:
 
 func shoot() -> void:
 	var projectile := projectile_scene.instantiate() as Projectile
-	projectile.add_to_group("player_projectile")
 	projectile_manager.add_child(projectile)
+	projectile.area_2d.add_to_group("area_player_projectile")
+	projectile.setup(BASIC_PROJECTILE, arena_rect)
 	projectile.position = position
 	projectile.rotation = rotation + 3.14
-	projectile.global_bounds = arena_rect
+
+
+func die() -> void:
+	queue_free()
