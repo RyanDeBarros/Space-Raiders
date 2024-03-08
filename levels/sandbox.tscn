@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctxltwcj5mpeg"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_8a0rs"]
+[ext_resource type="Texture2D" uid="uid://ik1e7w7dpgce" path="res://assets/bkgs/darkPurple.png" id="1_dnclm"]
+[ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://player/player.tscn" id="2_1vmdd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sewky"]
+size = Vector2(3000, 3000)
+
+[node name="Sandbox" type="Node2D"]
+script = ExtResource("1_8a0rs")
+
+[node name="BKGLayer" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="BKGLayer"]
+motion_mirroring = Vector2(1152, 648)
+
+[node name="TextureRect" type="TextureRect" parent="BKGLayer/ParallaxLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_dnclm")
+stretch_mode = 1
+
+[node name="Arena" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
+shape = SubResource("RectangleShape2D_sewky")
+
+[node name="ProjectileManager" type="Node2D" parent="." groups=["projectile_manager"]]
+
+[node name="Player" parent="." instance=ExtResource("2_1vmdd")]
