@@ -9,10 +9,8 @@ var tree: SceneTree
 var player: Player
 
 var speed_dict: Dictionary
-var speed: int
-var direction: Vector2
-var follow_spread: float
 var move_interval_dict: Dictionary
+var speed: int
 var move_interval: float
 var move_interval_timer: Timer
 
@@ -22,18 +20,13 @@ func _init(ufo_enemy: Enemy, scene_tree: SceneTree, json_file_name: String) -> v
 	tree = scene_tree
 	player = tree.get_first_node_in_group(\"player\")
 	move_interval_timer = ufo.get_node(\"MoveIntervalTimer\")
-	move_interval_timer.timeout.connect(_on_move_interval_end)
 	setup(json_file_name)
-	_on_move_interval_end()
+	restart_move_interval()
 
 
 func _process(delta: float) -> void:
+	var direction := ufo.position.direction_to(player.position)
 	ufo.position += direction * delta * speed
-
-
-func _on_move_interval_end() -> void:
-	_restart_move_interval()
-	direction = ufo.position.direction_to(player.position).rotated(randf() * follow_spread)
 
 
 func setup(json_file_name: String) -> void:
@@ -41,15 +34,13 @@ func setup(json_file_name: String) -> void:
 	var json = JSON.parse_string(file.get_as_text())
 	speed_dict = json[\"speed\"]
 	move_interval_dict = json[\"move_interval\"]
-	follow_spread = json[\"follow_spread\"]
 	file.close()
 
 
-func _restart_move_interval() -> void:
+func restart_move_interval() -> void:
 	speed = Math.rand_mediani(speed_dict[\"min\"], speed_dict[\"median\"], speed_dict[\"max\"])
 	move_interval = Math.rand_medianf(
 			move_interval_dict[\"min\"], move_interval_dict[\"median\"], move_interval_dict[\"max\"])
-	move_interval_timer.start(move_interval)
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptld1"]

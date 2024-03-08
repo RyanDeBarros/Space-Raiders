@@ -42,6 +42,7 @@ func _ready() -> void:
 	health = max_health
 	camera_2d.position_smoothing_speed = max_speed * camera_smoothing_ratio
 	projectile_manager = get_tree().get_first_node_in_group("projectile_manager")
+	Input.set_default_cursor_shape(Input.CURSOR_CROSS)
 
 
 func _process(delta: float) -> void:

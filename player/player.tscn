@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3touy"]
 radius = 31.0644
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_evl4l")
 projectile_scene = ExtResource("2_p8mgu")
 

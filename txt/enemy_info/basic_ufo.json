@@ -1,0 +1,13 @@
+{
+	"speed": {
+		"min": 100,
+		"median": 150,
+		"max": 200
+	},
+	"move_interval": {
+		"min": 0.5,
+		"median": 1.0,
+		"max": 1.5
+	},
+	"follow_spread": 0.7
+}
