@@ -1,78 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://bowc4q5hg75wy"]
+[gd_scene load_steps=7 format=3 uid="uid://bowc4q5hg75wy"]
 
 [ext_resource type="PackedScene" uid="uid://dbfeu2nwkni0i" path="res://enemy/enemy.tscn" id="1_i5u8j"]
 [ext_resource type="Texture2D" uid="uid://b1lwr4nvb08jh" path="res://assets/ships/ufos/ufoBlue.png" id="2_1wwpp"]
-
-[sub_resource type="GDScript" id="GDScript_1jnvl"]
-script/source = "var ufo: Enemy
-var tree: SceneTree
-var player: Player
-
-var max_health: int
-var health: int:
-	set(value):
-		health = maxi(value, 0)
-		if health == 0:
-			ufo.queue_free()
-
-var collide_damage: int
-
-var speed_dict: Dictionary
-var speed: int
-var direction: Vector2
-var follow_spread: float
-var move_interval_dict: Dictionary
-var move_interval: float
-var move_interval_timer: Timer
-
-
-func _init(ufo_enemy: Enemy, scene_tree: SceneTree, json_file_name: String) -> void:
-	ufo = ufo_enemy
-	tree = scene_tree
-	player = tree.get_first_node_in_group(\"player\")
-	move_interval_timer = ufo.get_node(\"MoveIntervalTimer\")
-	move_interval_timer.timeout.connect(_on_move_interval_end)
-	setup(json_file_name)
-	health = max_health
-	_on_move_interval_end()
-
-
-func _process(delta: float) -> void:
-	ufo.position += direction * delta * speed
-
-
-func _on_move_interval_end() -> void:
-	_restart_move_interval()
-	direction = ufo.position.direction_to(player.position).rotated(randf() * follow_spread)
-
-
-func _restart_move_interval() -> void:
-	speed = Math.rand_mediani(speed_dict[\"min\"], speed_dict[\"median\"], speed_dict[\"max\"])
-	move_interval = Math.rand_medianf(
-			move_interval_dict[\"min\"], move_interval_dict[\"median\"], move_interval_dict[\"max\"])
-	move_interval_timer.start(move_interval)
-
-
-func setup(json_file_name: String) -> void:
-	var file := FileAccess.open(json_file_name, FileAccess.READ)
-	var json = JSON.parse_string(file.get_as_text())
-	max_health = json[\"max_health\"]
-	collide_damage = json[\"collide_damage\"]
-	speed_dict = json[\"speed\"]
-	move_interval_dict = json[\"move_interval\"]
-	follow_spread = json[\"follow_spread\"]
-	file.close()
-
-
-func take_damage(damage: int):
-	health -= damage
-"
+[ext_resource type="Script" path="res://enemy/behavior/basic_health.gd" id="2_06hs4"]
+[ext_resource type="Script" path="res://enemy/behavior/basic_collide.gd" id="3_i3txk"]
+[ext_resource type="Script" path="res://enemy/behavior/ufo_movement.gd" id="4_lm0gw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptld1"]
 radius = 36.0
 
 [node name="UFO" instance=ExtResource("1_i5u8j")]
-behavior_script = SubResource("GDScript_1jnvl")
+bs_health = ExtResource("2_06hs4")
+bs_collide = ExtResource("3_i3txk")
+bs_movement = ExtResource("4_lm0gw")
+bj_health = "res://txt/enemy_info/ufo/health.json"
+bj_collide = "res://txt/enemy_info/ufo/collide.json"
+bj_movement = "res://txt/enemy_info/ufo/movement.json"
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(0.8, 0.8)

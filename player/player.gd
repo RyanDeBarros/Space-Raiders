@@ -5,8 +5,8 @@ const BASIC_PROJECTILE := "res://txt/projectile_info/basic.json"
 
 @export_group("Movement")
 @export var max_speed := 350
-@export var acceleration := 20
-@export var deceleration := 20
+@export var acceleration := 500
+@export var deceleration := 500
 
 @export_group("Camera")
 @export var camera_smoothing_ratio := 0.005
@@ -15,6 +15,8 @@ const BASIC_PROJECTILE := "res://txt/projectile_info/basic.json"
 @export var projectile_scene: PackedScene
 @export var max_health := 100
 @export var collide_damage := 50
+
+var active := true
 
 var arena_rect: Rect2i:
 	set(value):
@@ -35,6 +37,8 @@ var prev_direction := Vector2.ZERO
 
 var projectile_manager: Node2D
 
+@onready var sprite: Sprite2D = $Sprite
+@onready var area_2d: Area2D = $Area2D
 @onready var camera_2d: Camera2D = $Camera2D
 
 
@@ -46,12 +50,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if not active:
+		return
+	
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction:
-		speed = min(speed + deceleration, max_speed)
+		speed = min(speed + acceleration * delta, max_speed)
 		prev_direction = direction
 	else:
-		speed = max(speed - deceleration, 0)
+		speed = max(speed - deceleration * delta, 0)
 		direction = prev_direction
 	position += direction * speed * delta
 		
@@ -76,4 +83,8 @@ func shoot() -> void:
 
 
 func die() -> void:
-	queue_free()
+	sprite.queue_free()
+	area_2d.queue_free()
+	active = false
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		enemy.active = false

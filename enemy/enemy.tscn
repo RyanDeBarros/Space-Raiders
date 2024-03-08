@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_egje8"]
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_egje8")
-behavior_json = "res://txt/enemy_info/basic_ufo.json"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

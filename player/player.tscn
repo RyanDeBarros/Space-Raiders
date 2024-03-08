@@ -17,6 +17,7 @@ texture = ExtResource("1_uecug")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.3, 0.3)
+zoom = Vector2(0.8, 0.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 

@@ -14,18 +14,18 @@ script = ExtResource("1_8a0rs")
 [node name="BKGLayer" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="BKGLayer"]
-motion_mirroring = Vector2(1152, 648)
+motion_mirroring = Vector2(2304, 1296)
 
 [node name="TextureRect" type="TextureRect" parent="BKGLayer/ParallaxLayer"]
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 2304.0
+offset_bottom = 1296.0
 texture = ExtResource("1_dnclm")
 stretch_mode = 1
 
 [node name="Arena" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
-visible = false
 shape = SubResource("RectangleShape2D_sewky")
 
 [node name="ProjectileManager" type="Node2D" parent="." groups=["projectile_manager"]]
@@ -37,3 +37,15 @@ z_index = -10
 
 [node name="UFO" parent="Enemies" instance=ExtResource("4_g75es")]
 position = Vector2(274, -182)
+
+[node name="UFO2" parent="Enemies" instance=ExtResource("4_g75es")]
+position = Vector2(-261, -383)
+
+[node name="UFO3" parent="Enemies" instance=ExtResource("4_g75es")]
+position = Vector2(-523, -144)
+
+[node name="UFO4" parent="Enemies" instance=ExtResource("4_g75es")]
+position = Vector2(202, 243)
+
+[node name="UFO5" parent="Enemies" instance=ExtResource("4_g75es")]
+position = Vector2(-866, 315)
