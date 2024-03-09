@@ -13,6 +13,7 @@ extends Node2D
 @export_group("Combat")
 @export var max_health := 100
 @export var collide_damage := 50
+@export var explosion_scale_mult := 1.0
 
 var active := true
 
@@ -44,7 +45,6 @@ func _ready() -> void:
 	health = max_health
 	camera_2d.position_smoothing_speed = max_speed * camera_smoothing_ratio
 	projectile_manager = get_tree().get_first_node_in_group("projectile_manager")
-	Input.set_default_cursor_shape(Input.CURSOR_CROSS)
 
 
 func _process(delta: float) -> void:
@@ -101,3 +101,8 @@ func die() -> void:
 	active = false
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.active = false
+	
+	var explosion = Scenes.EXPLOSION_SCENE.instantiate()
+	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
+	explosion.position = position
+	explosion.scale *= explosion_scale_mult

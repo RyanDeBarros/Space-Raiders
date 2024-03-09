@@ -2,6 +2,8 @@ class_name Enemy
 extends Node2D
 
 
+@export var explosion_scale_mult := 1.0
+
 var active := true:
 	set(value):
 		active = value
@@ -44,4 +46,8 @@ func _on_area_exited(area: Area2D):
 
 
 func die() -> void:
+	var explosion = Scenes.EXPLOSION_SCENE.instantiate()
+	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
+	explosion.position = position
+	explosion.scale *= explosion_scale_mult
 	queue_free()

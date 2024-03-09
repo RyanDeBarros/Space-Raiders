@@ -2,6 +2,8 @@ class_name Projectile
 extends Node2D
 
 
+@export var explosion_scale_mult := 1.0
+
 var global_bounds: Rect2i
 var outside_margin := 100.0
 
@@ -33,4 +35,9 @@ func setup(json_file_name: String) -> void:
 
 
 func hit():
+	var explosion = Scenes.EXPLOSION_SCENE.instantiate()
+	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
+	explosion.position = position
+	explosion.scale *= explosion_scale_mult
+	
 	queue_free()

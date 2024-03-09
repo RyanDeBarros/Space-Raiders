@@ -8,6 +8,7 @@ size = Vector2(14, 34.5)
 
 [node name="Projectile" type="Node2D"]
 script = ExtResource("1_v0adl")
+explosion_scale_mult = 0.4
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

@@ -8,6 +8,7 @@ extends Node2D
 
 func _ready() -> void:
 	player.arena_rect = arena_collision.shape.get_rect()
+	Input.set_default_cursor_shape(Input.CURSOR_CROSS)
 
 
 func _input(event: InputEvent) -> void:

@@ -6,7 +6,7 @@ var health: int:
 	set(value):
 		health = maxi(value, 0)
 		if health == 0:
-			enemy.queue_free()
+			enemy.die()
 
 
 func _ready() -> void:

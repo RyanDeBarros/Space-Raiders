@@ -21,6 +21,7 @@ func _ready() -> void:
 	move_interval_timer.timeout.connect(_on_move_interval_end)
 	setup()
 	_on_move_interval_end()
+	angular_speed *= randi_range(0, 1) * 2 - 1
 
 
 func _process(delta: float) -> void:

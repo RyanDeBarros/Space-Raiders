@@ -29,6 +29,9 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
 shape = SubResource("RectangleShape2D_sewky")
 
+[node name="ExplosionManager" type="Node2D" parent="." groups=["explosion_manager"]]
+z_index = -40
+
 [node name="ProjectileManager" type="Node2D" parent="." groups=["projectile_manager"]]
 z_index = -20
 
