@@ -1,0 +1,6 @@
+{
+	"cooldown": 2.0,
+	"cooldown_pm": 0.5,
+	"range": 900.0,
+	"projectile_config": "basic"
+}

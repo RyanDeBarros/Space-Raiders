@@ -1,0 +1,9 @@
+{
+	"range": {
+		"detect": 1000,
+		"middle": 350
+	},
+	"speed_mult": 0.01,
+	"orbiting_speed": 120.0,
+	"orbital_speed_pm": 20.0
+}

@@ -55,6 +55,6 @@ func setup() -> void:
 	var json = JSON.parse_string(file.get_as_text())
 	speed_dict = json["speed"]
 	move_interval_dict = json["move_interval"]
-	aggro_range_squared = json["aggro_range_squared"]
+	aggro_range_squared = json["aggro_range"] ** 2
 	follow_spread = json["follow_spread"]
 	file.close()

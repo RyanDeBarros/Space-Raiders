@@ -13,3 +13,7 @@ func rand_medianf(min_: float, median_: float, max_: float) -> float:
 		return randf_range(min_, median_)
 	else:
 		return randf_range(median_, max_)
+
+
+func pm_randf(center: float, pm: float) -> float:
+	return randf_range(center - pm, center + pm)

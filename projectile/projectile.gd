@@ -22,13 +22,13 @@ func _process(delta: float) -> void:
 		queue_free()
 
 
-func setup(json_file_name: String, bounds: Rect2i) -> void:
+func setup(json_file_name: String) -> void:
 	var file := FileAccess.open(json_file_name, FileAccess.READ)
 	var json = JSON.parse_string(file.get_as_text())
 	speed = json["speed"]
 	damage = json["damage"]
 	sprite.texture = load("res://assets/projectiles/%s" % json["filename"])
-	global_bounds = bounds
+	global_bounds = get_parent().get_parent().arena_collision.shape.get_rect()
 	file.close()
 
 

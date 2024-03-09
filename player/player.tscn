@@ -1,15 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnuto0c2ouck5"]
+[gd_scene load_steps=4 format=3 uid="uid://dnuto0c2ouck5"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_evl4l"]
 [ext_resource type="Texture2D" uid="uid://dlylixhmdi3g0" path="res://assets/ships/players/spaceShips_008.png" id="1_uecug"]
-[ext_resource type="PackedScene" uid="uid://tc56q58obdo8" path="res://projectile/projectile.tscn" id="2_p8mgu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3touy"]
 radius = 31.0644
 
 [node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_evl4l")
-projectile_scene = ExtResource("2_p8mgu")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
@@ -25,3 +23,5 @@ position_smoothing_speed = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_3touy")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

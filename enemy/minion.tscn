@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://dc3tg4sxnqxqr"]
+
+[ext_resource type="PackedScene" uid="uid://dbfeu2nwkni0i" path="res://enemy/enemy.tscn" id="1_30hse"]
+[ext_resource type="Texture2D" uid="uid://dxa1rxixke17e" path="res://assets/ships/minions/enemyGreen3.png" id="2_y11en"]
+[ext_resource type="Script" path="res://enemy/behavior/basic_health.gd" id="3_2lb5t"]
+[ext_resource type="Script" path="res://enemy/behavior/basic_collide.gd" id="4_y77lv"]
+[ext_resource type="Script" path="res://enemy/behavior/minion_movement.gd" id="5_ctyv7"]
+[ext_resource type="Script" path="res://enemy/behavior/simple_shooting.gd" id="6_edqm6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6cxgp"]
+radius = 40.0125
+
+[node name="Minion" instance=ExtResource("1_30hse")]
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_y11en")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_6cxgp")
+
+[node name="Health" type="Node" parent="Components" index="0" node_paths=PackedStringArray("enemy")]
+script = ExtResource("3_2lb5t")
+enemy = NodePath("../..")
+configuration = "res://txt/enemy_info/minion/health.json"
+
+[node name="Collide" type="Node" parent="Components" index="1" node_paths=PackedStringArray("health_component", "enemy")]
+script = ExtResource("4_y77lv")
+health_component = NodePath("../Health")
+enemy = NodePath("../..")
+configuration = "res://txt/enemy_info/minion/collide.json"
+
+[node name="CollideDamageTimer" type="Timer" parent="Components/Collide" index="0"]
+
+[node name="Movement" type="Node" parent="Components" index="2" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_ctyv7")
+enemy = NodePath("../..")
+configuration = "res://txt/enemy_info/minion/movement.json"
+
+[node name="Combat" type="Node" parent="Components" index="3" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_edqm6")
+enemy = NodePath("../..")
+configuration = "res://txt/enemy_info/minion/combat.json"
+
+[node name="CooldownTimer" type="Timer" parent="Components/Combat" index="0"]

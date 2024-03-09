@@ -9,6 +9,6 @@
 		"median": 1.0,
 		"max": 2.0
 	},
-	"aggro_range_squared": 810000,
+	"aggro_range": 900,
 	"follow_spread": 0.7
 }

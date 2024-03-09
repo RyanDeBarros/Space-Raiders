@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctxltwcj5mpeg"]
+[gd_scene load_steps=7 format=3 uid="uid://ctxltwcj5mpeg"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_8a0rs"]
 [ext_resource type="Texture2D" uid="uid://ik1e7w7dpgce" path="res://assets/bkgs/darkPurple.png" id="1_dnclm"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://player/player.tscn" id="2_1vmdd"]
 [ext_resource type="PackedScene" uid="uid://bowc4q5hg75wy" path="res://enemy/ufo.tscn" id="4_g75es"]
+[ext_resource type="PackedScene" uid="uid://dc3tg4sxnqxqr" path="res://enemy/minion.tscn" id="5_72cr4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sewky"]
 size = Vector2(3000, 3000)
@@ -29,8 +30,10 @@ visible = false
 shape = SubResource("RectangleShape2D_sewky")
 
 [node name="ProjectileManager" type="Node2D" parent="." groups=["projectile_manager"]]
+z_index = -20
 
 [node name="Player" parent="." instance=ExtResource("2_1vmdd")]
+max_health = 300
 
 [node name="Enemies" type="Node2D" parent="."]
 z_index = -10
@@ -49,3 +52,15 @@ position = Vector2(202, 243)
 
 [node name="UFO5" parent="Enemies" instance=ExtResource("4_g75es")]
 position = Vector2(-866, 315)
+
+[node name="Minion" parent="Enemies" instance=ExtResource("5_72cr4")]
+position = Vector2(56, -359)
+
+[node name="Minion2" parent="Enemies" instance=ExtResource("5_72cr4")]
+position = Vector2(-547, 512)
+
+[node name="Minion3" parent="Enemies" instance=ExtResource("5_72cr4")]
+position = Vector2(547, -505)
+
+[node name="Minion4" parent="Enemies" instance=ExtResource("5_72cr4")]
+position = Vector2(900, 90)
