@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bowc4q5hg75wy"]
 
-[ext_resource type="PackedScene" uid="uid://dbfeu2nwkni0i" path="res://enemy/enemy.tscn" id="1_i5u8j"]
+[ext_resource type="PackedScene" uid="uid://dbfeu2nwkni0i" path="res://enemy/enemy_old.tscn" id="1_i5u8j"]
 [ext_resource type="Texture2D" uid="uid://b1lwr4nvb08jh" path="res://assets/ships/ufos/ufoBlue.png" id="2_1wwpp"]
 [ext_resource type="Script" path="res://enemy/behavior/basic_health.gd" id="2_06hs4"]
 [ext_resource type="Script" path="res://enemy/behavior/basic_collide.gd" id="3_i3txk"]
@@ -15,7 +15,7 @@ radius = 36.0
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_1wwpp")
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CircleShape2D_ptld1")
 
 [node name="Health" type="Node" parent="Components" index="0" node_paths=PackedStringArray("enemy")]

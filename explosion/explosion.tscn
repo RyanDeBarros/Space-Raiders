@@ -11,6 +11,33 @@
 [ext_resource type="Texture2D" uid="uid://bqybve7n0327s" path="res://assets/VFX/explosion/explosion07.png" id="8_edsqr"]
 [ext_resource type="Texture2D" uid="uid://c4ckvjs7yc0ig" path="res://assets/VFX/explosion/explosion08.png" id="9_20xe8"]
 
+[sub_resource type="Animation" id="Animation_2d2u4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_l3870")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.164179, 0.164179)]
+}
+
 [sub_resource type="Animation" id="Animation_xfshu"]
 resource_name = "explode"
 length = 0.45
@@ -37,33 +64,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0.04, 0.04), Vector2(0.17, 0.17)]
-}
-
-[sub_resource type="Animation" id="Animation_2d2u4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_l3870")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.164179, 0.164179)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_435i2"]

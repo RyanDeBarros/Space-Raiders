@@ -25,6 +25,6 @@ func take_damage(damage: int):
 	health -= damage
 
 
-func receive_projectile(projectile: Projectile):
+func receive_projectile(projectile):
 	take_damage(projectile.damage)
 	projectile.hit()

@@ -1,6 +1,8 @@
 extends Node
 
 
+# RNG
+
 func rand_mediani(min_: int, median_: int, max_: int) -> int:
 	if randf() < 0.5:
 		return randi_range(min_, median_)

@@ -6,10 +6,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3touy"]
 radius = 31.0644
 
-[node name="Player" type="Node2D" groups=["player"]]
+[node name="Player" type="Area2D" groups=["player"]]
 script = ExtResource("1_evl4l")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+z_index = 5
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_uecug")
 
@@ -19,9 +20,9 @@ zoom = Vector2(0.8, 0.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
-[node name="Area2D" type="Area2D" parent="." groups=["area_player"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3touy")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[node name="ProjectileManager" type="Node" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,5 +1,5 @@
 class_name Player
-extends Node2D
+extends Area2D
 
 
 @export_group("Movement")
@@ -14,37 +14,33 @@ extends Node2D
 @export var max_health := 100
 @export var collide_damage := 50
 @export var explosion_scale_mult := 1.0
+@export var projectile_info_index := "basic"
 
 var active := true
+var dead := false
 
-var arena_rect: Rect2i:
-	set(value):
-		arena_rect = value
-		camera_2d.limit_left = arena_rect.position.x
-		camera_2d.limit_right = arena_rect.position.x + arena_rect.size.x
-		camera_2d.limit_top = arena_rect.position.y
-		camera_2d.limit_bottom = arena_rect.position.y + arena_rect.size.y
+var arena_rect
 
 var health: int:
 	set(value):
-		health = maxi(value, 0)
-		if health == 0:
+		value = maxi(value, 0)
+		if value < health:
+			play_hit()
+		health = value
+		if health == 0 and not dead:
 			die()
-
 
 var velocity := Vector2.ZERO
 
-var projectile_manager: Node2D
-
 @onready var sprite: Sprite2D = $Sprite
-@onready var area_2d: Area2D = $Area2D
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var projectile_manager: Node = $ProjectileManager
+@onready var projectile_info := Info.projectile_JSON[projectile_info_index] as Dictionary
 
 
 func _ready() -> void:
 	health = max_health
 	camera_2d.position_smoothing_speed = max_speed * camera_smoothing_ratio
-	projectile_manager = get_tree().get_first_node_in_group("projectile_manager")
 
 
 func _process(delta: float) -> void:
@@ -79,25 +75,29 @@ func _process(delta: float) -> void:
 		shoot()
 
 
-func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("area_enemy_projectile"):
-		var proj := area.get_parent() as Projectile
-		health -= proj.damage
-		proj.hit()
+func setup_camera_limits() -> void:
+	arena_rect = Info.level_data["arena_rect"]
+	camera_2d.limit_left = arena_rect.position.x
+	camera_2d.limit_right = arena_rect.position.x + arena_rect.size.x
+	camera_2d.limit_top = arena_rect.position.y
+	camera_2d.limit_bottom = arena_rect.position.y + arena_rect.size.y
 
 
 func shoot() -> void:
-	var projectile := Scenes.PROJECTILE_SCENE.instantiate() as Projectile
-	projectile_manager.add_child(projectile)
-	projectile.area_2d.add_to_group("area_player_projectile")
-	projectile.setup(Scenes.PLAYER_PROJECTILE_CONFIG["basic"])
-	projectile.position = position
-	projectile.rotation = rotation + 3.14
+	var basic_shot := Scenes.PROJECTILES["basic"].instantiate() as BasicShot
+	projectile_manager.add_child(basic_shot)
+	basic_shot.setup_from_node(self, projectile_info, 1.57)
+	basic_shot.add_to_group("player_owned")
+
+
+func play_hit():
+	#Scenes.play_explosion(Scenes.EXPLOSIONS["cloud"], position)
+	pass
 
 
 func die() -> void:
+	dead = true
 	sprite.queue_free()
-	area_2d.queue_free()
 	active = false
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.active = false
@@ -106,3 +106,8 @@ func die() -> void:
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
 	explosion.position = position
 	explosion.scale *= explosion_scale_mult
+
+
+func projectile_hit(projectile) -> void:
+	health -= projectile.damage
+	projectile.hit()

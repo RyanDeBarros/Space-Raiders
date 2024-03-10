@@ -1,7 +1,6 @@
 extends Node
 
 
-const PROJECTILE_SCENE := preload("res://projectile/projectile.tscn")
 const EXPLOSION_SCENE := preload("res://explosion/explosion.tscn")
 
 const PLAYER_PROJECTILE_CONFIG = {
@@ -9,5 +8,10 @@ const PLAYER_PROJECTILE_CONFIG = {
 }
 
 const ENEMY_PROJECTILE_CONFIG = {
-	"basic": "res://txt/projectile_info/basic.json"
+	"basic": "res://txt/projectile_info/basic_slow.json"
+}
+
+
+const PROJECTILES = {
+	"basic": preload("res://projectile/basic_shot.tscn")
 }

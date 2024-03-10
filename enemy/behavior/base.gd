@@ -2,7 +2,7 @@ class_name BaseBehavior
 extends Node
 
 
-@export var enemy: Enemy
+@export var enemy: EnemyOld
 @export_file("*.json") var configuration: String
 
 var active := true

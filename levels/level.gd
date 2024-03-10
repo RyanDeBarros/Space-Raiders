@@ -7,7 +7,8 @@ extends Node2D
 
 
 func _ready() -> void:
-	player.arena_rect = arena_collision.shape.get_rect()
+	Info.level_data["arena_rect"] = arena_collision.shape.get_rect()
+	player.setup_camera_limits()
 	Input.set_default_cursor_shape(Input.CURSOR_CROSS)
 
 

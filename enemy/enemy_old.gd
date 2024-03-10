@@ -1,4 +1,4 @@
-class_name Enemy
+class_name EnemyOld
 extends Node2D
 
 
@@ -13,7 +13,6 @@ var active := true:
 var health_component = null
 var collide_component = null
 
-@onready var area_2d: Area2D = $Area2D
 @onready var components: Node = $Components
 @onready var player: Player
 
@@ -28,21 +27,20 @@ func _ready() -> void:
 
 
 func _on_area_entered(area: Area2D):
-	if area.is_in_group("area_player_projectile"):
-		var proj := area.get_parent() as Projectile
-		if health_component:
-			health_component.receive_projectile(proj)
-		else:
-			proj.hit()
-	elif area.is_in_group("area_player"):
+	if area is Player:
 		if collide_component:
 			collide_component.player_enter()
 
 
 func _on_area_exited(area: Area2D):
-	if area.is_in_group("area_player"):
+	if area is Player:
 		if collide_component:
 			collide_component.player_exit()
+
+
+func projectile_hit(projectile):
+	if health_component:
+		health_component.receive_projectile(projectile)
 
 
 func die() -> void:

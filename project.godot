@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Math="*res://autoloads/math.gd"
 Scenes="*res://autoloads/scenes.gd"
+Info="*res://autoloads/info.gd"
 
 [display]
 

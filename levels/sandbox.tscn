@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://ctxltwcj5mpeg"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_8a0rs"]
-[ext_resource type="Texture2D" uid="uid://ik1e7w7dpgce" path="res://assets/bkgs/darkPurple.png" id="1_dnclm"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://player/player.tscn" id="2_1vmdd"]
-[ext_resource type="PackedScene" uid="uid://bowc4q5hg75wy" path="res://enemy/ufo.tscn" id="4_g75es"]
-[ext_resource type="PackedScene" uid="uid://dc3tg4sxnqxqr" path="res://enemy/minion.tscn" id="5_72cr4"]
+[ext_resource type="Texture2D" uid="uid://eahqm3cqwbbd" path="res://assets/bkgs/blue.png" id="2_lejju"]
+[ext_resource type="PackedScene" uid="uid://bowc4q5hg75wy" path="res://enemy/ufo_old.tscn" id="4_g75es"]
+[ext_resource type="PackedScene" uid="uid://dc3tg4sxnqxqr" path="res://enemy/minion_old.tscn" id="5_72cr4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sewky"]
 size = Vector2(3000, 3000)
@@ -20,7 +20,7 @@ motion_mirroring = Vector2(2304, 1296)
 [node name="TextureRect" type="TextureRect" parent="BKGLayer/ParallaxLayer"]
 offset_right = 2304.0
 offset_bottom = 1296.0
-texture = ExtResource("1_dnclm")
+texture = ExtResource("2_lejju")
 stretch_mode = 1
 
 [node name="Arena" type="Area2D" parent="."]

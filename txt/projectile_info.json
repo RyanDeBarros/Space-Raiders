@@ -1,0 +1,14 @@
+{
+	"basic": {
+		"initial_speed": 500.0,
+		"acceleration": 10.0,
+		"damage": 35,
+		"filename": "spaceMissiles_019.png"
+	},
+	"basic_slow": {
+		"initial_speed": 300.0,
+		"acceleration": 20.0,
+		"damage": 35,
+		"filename": "spaceMissiles_008.png"
+	}
+}
