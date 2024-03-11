@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 
 
 func _on_move_interval_end() -> void:
-	max_speed = Math.rand_mediani(ufo_info["speed"]["min"], ufo_info["speed"]["median"],\
+	max_speed = Math.rand_mediani(ufo_info["speed"]["min"], ufo_info["speed"]["median"],
 			ufo_info["speed"]["max"])
 	move_interval = Math.rand_medianf(ufo_info["move_interval"]["min"],\
 			ufo_info["move_interval"]["median"], ufo_info["move_interval"]["max"])
@@ -53,8 +53,9 @@ func setup_info(lvl := level) -> void:
 
 
 func collide_player(player: Area2D) -> void:
-	player.take_damage(ufo_info["collide"]["damage"])
-	health_component.health -= player.collide_damage
+	if player:
+		player.take_damage(ufo_info["collide"]["damage"])
+		health_component.health -= player.collide_damage
 
 
 func projectile_hit(projectile: Area2D) -> void:
@@ -72,3 +73,4 @@ func die() -> void:
 func disable() -> void:
 	overlap_component.disable()
 	active = false
+	move_interval_timer.stop()

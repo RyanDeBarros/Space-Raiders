@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="Space Raiders"
-run/main_scene="res://levels/sandbox.tscn"
+run/main_scene="res://source/level/sandbox.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Math="*res://autoloads/math.gd"
-Scenes="*res://autoloads/scenes.gd"
-Info="*res://autoloads/info.gd"
+Math="*res://source/autoloads/math.gd"
+Scenes="*res://source/autoloads/scenes.gd"
+Info="*res://source/autoloads/info.gd"
 
 [display]
 

@@ -12,9 +12,9 @@ var projectile_manager: Node
 
 
 func _init() -> void:
-	var file = FileAccess.open("res://txt/projectile_info.json", FileAccess.READ)
+	var file = FileAccess.open("res://config/projectile_info.json", FileAccess.READ)
 	projectile_JSON = JSON.parse_string(file.get_as_text())
 	file.close()
-	file = FileAccess.open("res://txt/enemy_info.json", FileAccess.READ)
+	file = FileAccess.open("res://config/enemy_info.json", FileAccess.READ)
 	enemy_JSON = JSON.parse_string(file.get_as_text())
 	file.close()

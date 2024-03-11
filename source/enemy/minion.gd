@@ -69,8 +69,9 @@ func shoot():
 
 
 func collide_player(player: Area2D) -> void:
-	player.take_damage(minion_info["collide"]["damage"])
-	health_component.health -= player.collide_damage
+	if player:
+		player.take_damage(minion_info["collide"]["damage"])
+		health_component.health -= player.collide_damage
 
 
 func projectile_hit(projectile: Area2D) -> void:
@@ -88,3 +89,4 @@ func die() -> void:
 func disable() -> void:
 	overlap_component.disable()
 	active = false
+	cooldown_timer.stop()

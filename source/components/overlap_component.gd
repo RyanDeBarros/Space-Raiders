@@ -11,6 +11,8 @@ var wait_time := 1.0:
 		wait_time = value
 		timer.wait_time = wait_time
 
+var target: Area2D = null
+
 @onready var timer: Timer = $Timer
 
 
@@ -20,15 +22,16 @@ func _ready() -> void:
 	instance.area_exited.connect(_deactivate)
 
 
-func _delegate(area: Area2D) -> void:
-	instance.call(callback, area)
+func _delegate() -> void:
+	instance.call(callback, target)
 
 
 func _activate(area: Area2D) -> void:
 	for group in target_groups:
 		if area.is_in_group(group):
 			if timer.is_stopped():
-				_delegate(area)
+				target = area
+				_delegate()
 				timer.start()
 			return
 
@@ -36,6 +39,7 @@ func _activate(area: Area2D) -> void:
 func _deactivate(area: Area2D) -> void:
 	for group in target_groups:
 		if area.is_in_group(group):
+			target = null
 			timer.stop()
 			return
 

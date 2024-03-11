@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://6gjbgm3xmmt8"]
 
-[ext_resource type="Script" path="res://logic/overlap_component.gd" id="1_2ltm5"]
+[ext_resource type="Script" path="res://source/components/overlap_component.gd" id="1_2ltm5"]
 
 [node name="OverlapComponent" type="Node"]
 script = ExtResource("1_2ltm5")

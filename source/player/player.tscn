@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dnuto0c2ouck5"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_evl4l"]
+[ext_resource type="Script" path="res://source/player/player.gd" id="1_evl4l"]
 [ext_resource type="Texture2D" uid="uid://dlylixhmdi3g0" path="res://assets/ships/players/spaceShips_008.png" id="1_uecug"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3touy"]

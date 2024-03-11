@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bilntsvd8ywk5"]
 
 [ext_resource type="Texture2D" uid="uid://b1lwr4nvb08jh" path="res://assets/ships/ufos/ufoBlue.png" id="1_88iab"]
-[ext_resource type="Script" path="res://enemy/ufo.gd" id="1_ice5w"]
-[ext_resource type="PackedScene" uid="uid://tw06550bothw" path="res://logic/health_component.tscn" id="3_mdwq7"]
-[ext_resource type="PackedScene" uid="uid://6gjbgm3xmmt8" path="res://logic/overlap_component.tscn" id="4_aypkv"]
+[ext_resource type="Script" path="res://source/enemy/ufo.gd" id="1_ice5w"]
+[ext_resource type="PackedScene" uid="uid://tw06550bothw" path="res://source/components/health_component.tscn" id="3_mdwq7"]
+[ext_resource type="PackedScene" uid="uid://6gjbgm3xmmt8" path="res://source/components/overlap_component.tscn" id="4_aypkv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptld1"]
 radius = 36.0

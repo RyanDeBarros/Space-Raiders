@@ -11,8 +11,8 @@
 			},
 			"speed": {
 				"min": 100,
-				"median": 120,
-				"max": 150
+				"median": 130,
+				"max": 160
 			},
 			"move_interval": {
 				"min": 0.5,
