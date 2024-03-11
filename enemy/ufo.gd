@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 	rotation += ufo_info["movement"]["angular_speed"] * angular_dir * delta
 
 
-func _on_move_interval_end():
+func _on_move_interval_end() -> void:
 	max_speed = Math.rand_mediani(ufo_info["speed"]["min"], ufo_info["speed"]["median"],\
 			ufo_info["speed"]["max"])
 	move_interval = Math.rand_medianf(ufo_info["move_interval"]["min"],\
@@ -45,19 +45,19 @@ func _on_move_interval_end():
 	direction = position.direction_to(Info.player.position).rotated(randf() * ufo_info["follow_spread"])
 
 
-func setup_info(lvl := level):
+func setup_info(lvl := level) -> void:
 	ufo_info = Info.enemy_JSON["ufo"][str(lvl)]
 	overlap_component.wait_time = ufo_info["collide"]["wait_time"]
 	health_component.initial_health = ufo_info["max_health"]
 	aggro_range_squared = ufo_info["aggro_range"] ** 2
 
 
-func collide_player(player: Area2D):
+func collide_player(player: Area2D) -> void:
 	player.take_damage(ufo_info["collide"]["damage"])
 	health_component.health -= player.collide_damage
 
 
-func projectile_hit(projectile: Area2D):
+func projectile_hit(projectile: Area2D) -> void:
 	health_component.health -= projectile.damage
 
 
@@ -69,6 +69,6 @@ func die() -> void:
 	queue_free()
 
 
-func disable():
+func disable() -> void:
 	overlap_component.disable()
 	active = false

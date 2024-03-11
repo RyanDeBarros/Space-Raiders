@@ -30,6 +30,9 @@
 	},
 	"minion": {
 		"1": {
+			"appearance": {
+				"explosion_scale_mult": 1.0
+			},
 			"max_health": 200,
 			"collide": {
 				"wait_time": 1.0,
@@ -48,7 +51,7 @@
 				"cooldown": 2.0,
 				"cooldown_pm": 0.5,
 				"range": 900,
-				"projectile_config": "basic_slow"
+				"projectile_info_index": "basic_slow"
 			}
 		}
 	},

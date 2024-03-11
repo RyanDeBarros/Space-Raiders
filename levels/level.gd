@@ -9,6 +9,7 @@ extends Node2D
 func _ready() -> void:
 	Info.level_data["arena_rect"] = arena_collision.shape.get_rect()
 	Info.player = get_tree().get_first_node_in_group("player")
+	Info.projectile_manager = projectile_manager
 	player.setup_camera_limits()
 	Input.set_default_cursor_shape(Input.CURSOR_CROSS)
 

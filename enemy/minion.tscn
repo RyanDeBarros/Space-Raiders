@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvlltr3uqepum"]
+
+[ext_resource type="Script" path="res://enemy/minion.gd" id="1_2dj6f"]
+[ext_resource type="Texture2D" uid="uid://dxa1rxixke17e" path="res://assets/ships/minions/enemyGreen3.png" id="1_m2aac"]
+[ext_resource type="PackedScene" uid="uid://tw06550bothw" path="res://logic/health_component.tscn" id="2_u5co5"]
+[ext_resource type="PackedScene" uid="uid://6gjbgm3xmmt8" path="res://logic/overlap_component.tscn" id="3_ycos2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6cxgp"]
+radius = 40.0125
+
+[node name="Minion" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_2dj6f")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_m2aac")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6cxgp")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("die_object") instance=ExtResource("2_u5co5")]
+die_object = NodePath("..")
+die_callback = "die"
+
+[node name="OverlapComponent" parent="." node_paths=PackedStringArray("instance") instance=ExtResource("3_ycos2")]
+instance = NodePath("..")
+callback = "collide_player"
+target_groups = Array[String](["player"])
+
+[node name="CooldownTimer" type="Timer" parent="."]

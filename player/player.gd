@@ -34,7 +34,6 @@ var velocity := Vector2.ZERO
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var camera_2d: Camera2D = $Camera2D
-@onready var projectile_manager: Node = $ProjectileManager
 @onready var projectile_info := Info.projectile_JSON[projectile_info_index] as Dictionary
 
 
@@ -85,7 +84,7 @@ func setup_camera_limits() -> void:
 
 func shoot() -> void:
 	var basic_shot := Scenes.PROJECTILES["basic"].instantiate() as BasicShot
-	projectile_manager.add_child(basic_shot)
+	Info.projectile_manager.add_child(basic_shot)
 	basic_shot.setup_from_node(self, projectile_info, 1.57)
 	basic_shot.add_to_group("player_owned")
 
@@ -104,7 +103,7 @@ func die() -> void:
 	sprite.queue_free()
 	active = false
 	for enemy in get_tree().get_nodes_in_group("enemy"):
-		enemy.active = false
+		enemy.disable()
 	
 	var explosion = Scenes.EXPLOSION_SCENE.instantiate()
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)

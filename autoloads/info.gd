@@ -4,13 +4,14 @@ var level_data = {
 	"arena_rect": Rect2(0, 0, 0, 0)
 }
 
-var projectile_JSON
-var enemy_JSON
+var projectile_JSON: Dictionary
+var enemy_JSON: Dictionary
 
-var player
+var player: Area2D
+var projectile_manager: Node
 
 
-func _ready() -> void:
+func _init() -> void:
 	var file = FileAccess.open("res://txt/projectile_info.json", FileAccess.READ)
 	projectile_JSON = JSON.parse_string(file.get_as_text())
 	file.close()
