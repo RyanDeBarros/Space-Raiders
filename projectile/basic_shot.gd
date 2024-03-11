@@ -5,16 +5,18 @@ extends Area2D
 @onready var projectile_motion: ProjectileMotion = $ProjectileMotion
 @onready var sprite: Sprite2D = $Sprite
 
-var damage := 35
+var damage: int
 
 
 func _on_area_entered(area: Area2D) -> void:
 	if is_in_group("player_owned"):
 		if area.is_in_group("enemy"):
 			area.projectile_hit(self)
+			hit()
 	elif is_in_group("enemy_owned"):
 		if area is Player:
 			area.projectile_hit(self)
+			hit()
 
 
 func setup_from_node(node: Node2D, projectile_info: Dictionary, rotation_offset := 0.0):

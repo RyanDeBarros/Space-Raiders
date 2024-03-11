@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctxltwcj5mpeg"]
+[gd_scene load_steps=6 format=3 uid="uid://ctxltwcj5mpeg"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_8a0rs"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://player/player.tscn" id="2_1vmdd"]
 [ext_resource type="Texture2D" uid="uid://eahqm3cqwbbd" path="res://assets/bkgs/blue.png" id="2_lejju"]
-[ext_resource type="PackedScene" uid="uid://bowc4q5hg75wy" path="res://enemy/ufo_old.tscn" id="4_g75es"]
-[ext_resource type="PackedScene" uid="uid://dc3tg4sxnqxqr" path="res://enemy/minion_old.tscn" id="5_72cr4"]
+[ext_resource type="PackedScene" uid="uid://bilntsvd8ywk5" path="res://enemy/ufo.tscn" id="4_wbnl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sewky"]
 size = Vector2(3000, 3000)
@@ -24,7 +23,6 @@ texture = ExtResource("2_lejju")
 stretch_mode = 1
 
 [node name="Arena" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
 shape = SubResource("RectangleShape2D_sewky")
@@ -41,29 +39,17 @@ max_health = 300
 [node name="Enemies" type="Node2D" parent="."]
 z_index = -10
 
-[node name="UFO" parent="Enemies" instance=ExtResource("4_g75es")]
-position = Vector2(274, -182)
+[node name="UFO" parent="Enemies" instance=ExtResource("4_wbnl3")]
+position = Vector2(-467, -204)
 
-[node name="UFO2" parent="Enemies" instance=ExtResource("4_g75es")]
-position = Vector2(-261, -383)
+[node name="UFO2" parent="Enemies" instance=ExtResource("4_wbnl3")]
+position = Vector2(-164, -308)
 
-[node name="UFO3" parent="Enemies" instance=ExtResource("4_g75es")]
-position = Vector2(-523, -144)
+[node name="UFO3" parent="Enemies" instance=ExtResource("4_wbnl3")]
+position = Vector2(560, -299)
 
-[node name="UFO4" parent="Enemies" instance=ExtResource("4_g75es")]
-position = Vector2(202, 243)
+[node name="UFO4" parent="Enemies" instance=ExtResource("4_wbnl3")]
+position = Vector2(389, 468)
 
-[node name="UFO5" parent="Enemies" instance=ExtResource("4_g75es")]
-position = Vector2(-866, 315)
-
-[node name="Minion" parent="Enemies" instance=ExtResource("5_72cr4")]
-position = Vector2(56, -359)
-
-[node name="Minion2" parent="Enemies" instance=ExtResource("5_72cr4")]
-position = Vector2(-547, 512)
-
-[node name="Minion3" parent="Enemies" instance=ExtResource("5_72cr4")]
-position = Vector2(547, -505)
-
-[node name="Minion4" parent="Enemies" instance=ExtResource("5_72cr4")]
-position = Vector2(900, 90)
+[node name="UFO5" parent="Enemies" instance=ExtResource("4_wbnl3")]
+position = Vector2(-874, 344)

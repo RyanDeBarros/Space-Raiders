@@ -90,6 +90,10 @@ func shoot() -> void:
 	basic_shot.add_to_group("player_owned")
 
 
+func take_damage(damage: int) -> void:
+	health -= damage
+
+
 func play_hit():
 	#Scenes.play_explosion(Scenes.EXPLOSIONS["cloud"], position)
 	pass

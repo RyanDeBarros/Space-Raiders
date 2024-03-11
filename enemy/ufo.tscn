@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bilntsvd8ywk5"]
+
+[ext_resource type="Texture2D" uid="uid://b1lwr4nvb08jh" path="res://assets/ships/ufos/ufoBlue.png" id="1_88iab"]
+[ext_resource type="Script" path="res://enemy/ufo.gd" id="1_ice5w"]
+[ext_resource type="PackedScene" uid="uid://tw06550bothw" path="res://logic/health_component.tscn" id="3_mdwq7"]
+[ext_resource type="PackedScene" uid="uid://6gjbgm3xmmt8" path="res://logic/overlap_component.tscn" id="4_aypkv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ptld1"]
+radius = 36.0
+
+[node name="UFO" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_ice5w")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_88iab")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ptld1")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("die_object") instance=ExtResource("3_mdwq7")]
+die_object = NodePath("..")
+die_callback = "die"
+
+[node name="OverlapComponent" parent="." node_paths=PackedStringArray("instance") instance=ExtResource("4_aypkv")]
+instance = NodePath("..")
+callback = "collide_player"
+target_groups = Array[String](["player"])
+
+[node name="MoveIntervalTimer" type="Timer" parent="."]
+one_shot = true

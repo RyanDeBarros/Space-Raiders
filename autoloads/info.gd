@@ -5,9 +5,15 @@ var level_data = {
 }
 
 var projectile_JSON
+var enemy_JSON
+
+var player
 
 
 func _ready() -> void:
 	var file = FileAccess.open("res://txt/projectile_info.json", FileAccess.READ)
 	projectile_JSON = JSON.parse_string(file.get_as_text())
+	file.close()
+	file = FileAccess.open("res://txt/enemy_info.json", FileAccess.READ)
+	enemy_JSON = JSON.parse_string(file.get_as_text())
 	file.close()
