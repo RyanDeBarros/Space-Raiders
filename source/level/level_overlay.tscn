@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://buomqsie1fp74"]
+[gd_scene load_steps=10 format=3 uid="uid://buomqsie1fp74"]
 
 [ext_resource type="Script" path="res://source/level/level_overlay.gd" id="1_0h2vc"]
 [ext_resource type="Texture2D" uid="uid://52xkiklkrwu6" path="res://assets/ui/bars/divider-005.png" id="1_pgffh"]
 [ext_resource type="Texture2D" uid="uid://mjwwgw0wdpiy" path="res://assets/ui/bars/divider-002.png" id="2_wmn45"]
+[ext_resource type="Texture2D" uid="uid://dcgc6wywew1qe" path="res://assets/ui/bars/divider-004.png" id="4_f3s56"]
+[ext_resource type="Texture2D" uid="uid://ctrtt7ccwxyut" path="res://assets/ui/bars/divider-003.png" id="5_apoye"]
+[ext_resource type="Texture2D" uid="uid://66iypmmk00u0" path="res://assets/ui/bars/divider-001.png" id="6_7a2av"]
+
+[sub_resource type="Gradient" id="Gradient_yhrtp"]
+colors = PackedColorArray(1, 1, 1, 0.0980392, 0, 0, 0, 0.0980392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5fg0x"]
+gradient = SubResource("Gradient_yhrtp")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_msbv7"]
+load_path = "res://.godot/imported/divider-001.png-fbf33adc27cc3fafca8e09188e4d296a.ctex"
 
 [node name="LevelOverlay" type="Control"]
 layout_mode = 3
@@ -13,27 +25,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_0h2vc")
-health_bar_head_trx_threshold = 136
+health_bar_arrowhead_width = 56
+shield_bar_arrowhead_width = 56
+power_bar_arrowhead_width = 52
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -68.0
+offset_right = 203.0
+offset_bottom = -4.0
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_5fg0x")
 
 [node name="HealthBar" type="ColorRect" parent="."]
+modulate = Color(0, 1, 0.333333, 1)
 clip_contents = true
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -52.0
-offset_right = -16.0
-offset_bottom = -4.0
+offset_left = 8.0
+offset_top = -40.0
+offset_right = -192.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(0.75, 0.75)
-pivot_offset = Vector2(0, 48)
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(0, 24)
 color = Color(1, 1, 1, 0)
 
 [node name="Head" type="TextureRect" parent="HealthBar"]
-self_modulate = Color(1, 0, 0, 1)
 layout_mode = 2
 offset_left = 192.0
 offset_top = 6.0
@@ -42,9 +68,91 @@ offset_bottom = 42.0
 texture = ExtResource("1_pgffh")
 
 [node name="Tail" type="TextureRect" parent="HealthBar"]
-self_modulate = Color(1, 0, 0, 1)
 layout_mode = 2
 offset_top = 14.0
 offset_right = 192.0
 offset_bottom = 34.0
 texture = ExtResource("2_wmn45")
+
+[node name="ShieldBar" type="ColorRect" parent="."]
+modulate = Color(0, 0.666667, 1, 1)
+clip_contents = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -57.0
+offset_right = -192.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(0, 24)
+color = Color(1, 1, 1, 0)
+
+[node name="Head" type="TextureRect" parent="ShieldBar"]
+layout_mode = 2
+offset_left = 192.0
+offset_top = 4.0
+offset_right = 384.0
+offset_bottom = 32.0
+texture = ExtResource("4_f3s56")
+
+[node name="Tail" type="TextureRect" parent="ShieldBar"]
+layout_mode = 2
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 28.0
+texture = ExtResource("2_wmn45")
+
+[node name="Minimum" type="TextureRect" parent="ShieldBar"]
+layout_mode = 2
+offset_left = -94.0
+offset_top = -4.0
+offset_right = 98.0
+offset_bottom = 40.0
+pivot_offset = Vector2(0, 22)
+texture = SubResource("CompressedTexture2D_msbv7")
+
+[node name="PowerBar" type="ColorRect" parent="."]
+modulate = Color(1, 0, 0.666667, 1)
+clip_contents = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -77.0
+offset_right = -192.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(0, 24)
+color = Color(1, 1, 1, 0)
+
+[node name="Head" type="TextureRect" parent="PowerBar"]
+layout_mode = 2
+offset_left = 192.0
+offset_right = 384.0
+offset_bottom = 36.0
+texture = ExtResource("5_apoye")
+
+[node name="Tail" type="TextureRect" parent="PowerBar"]
+layout_mode = 2
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 28.0
+texture = ExtResource("2_wmn45")
+
+[node name="Minimum" type="TextureRect" parent="PowerBar"]
+layout_mode = 2
+offset_left = -54.0
+offset_top = -4.0
+offset_right = 138.0
+offset_bottom = 40.0
+pivot_offset = Vector2(0, 22)
+texture = ExtResource("6_7a2av")
