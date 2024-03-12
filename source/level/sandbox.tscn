@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctxltwcj5mpeg"]
+[gd_scene load_steps=8 format=3 uid="uid://ctxltwcj5mpeg"]
 
 [ext_resource type="Script" path="res://source/level/level.gd" id="1_8a0rs"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://source/player/player.tscn" id="2_1vmdd"]
 [ext_resource type="Texture2D" uid="uid://eahqm3cqwbbd" path="res://assets/bkgs/blue.png" id="2_lejju"]
+[ext_resource type="PackedScene" uid="uid://buomqsie1fp74" path="res://source/level/level_overlay.tscn" id="3_ecdyn"]
 [ext_resource type="PackedScene" uid="uid://bilntsvd8ywk5" path="res://source/enemy/ufo.tscn" id="4_wbnl3"]
 [ext_resource type="PackedScene" uid="uid://dvlltr3uqepum" path="res://source/enemy/minion.tscn" id="5_hjmbv"]
 
@@ -21,9 +22,12 @@ motion_mirroring = Vector2(2304, 1296)
 offset_right = 2304.0
 offset_bottom = 1296.0
 mouse_filter = 2
-mouse_default_cursor_shape = 3
 texture = ExtResource("2_lejju")
 stretch_mode = 1
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="LevelOverlay" parent="Overlay" instance=ExtResource("3_ecdyn")]
 
 [node name="Arena" type="Area2D" parent="."]
 

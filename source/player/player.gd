@@ -2,6 +2,8 @@ class_name Player
 extends Area2D
 
 
+signal health_changed(new_health: int)
+
 @export_group("Movement")
 @export var max_speed := 350
 @export var acceleration := 700
@@ -27,6 +29,7 @@ var health: int:
 		if value < health:
 			play_hit()
 		health = value
+		health_changed.emit(health)
 		if health == 0 and not dead:
 			die()
 
