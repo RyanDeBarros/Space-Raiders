@@ -25,6 +25,7 @@ shield_bar_arrowhead_width = 56
 power_bar_arrowhead_width = 52
 
 [node name="NinePatchRectNode" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.352941)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -190,7 +191,7 @@ pivot_offset = Vector2(0, 22)
 texture = SubResource("CompressedTexture2D_msbv7")
 
 [node name="PowerBar" type="ColorRect" parent="."]
-modulate = Color(1, 0, 0.666667, 1)
+modulate = Color(0.916667, 0, 1, 1)
 clip_contents = true
 layout_mode = 1
 anchors_preset = 12

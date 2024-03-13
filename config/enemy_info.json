@@ -43,7 +43,7 @@
 				"middle": 350
 			},
 			"movement": {
-				"speed_mult": 0.01,
+				"speed_mult": 0.009,
 				"orbiting_speed": 120.0,
 				"orbital_speed_pm": 20.0
 			},

@@ -71,7 +71,7 @@ func shoot():
 func collide_player(player: Area2D) -> void:
 	if player:
 		player.take_damage(minion_info["collide"]["damage"])
-		health_component.health -= player.collide_damage
+		health_component.health -= player.get_collide_damage()
 
 
 func projectile_hit(projectile: Area2D) -> void:

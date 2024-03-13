@@ -55,6 +55,9 @@ func set_shield_bar_proportion(fraction: float) -> void:
 		shield_bar_tail.position.x = shield_bar_head.position.x - shield_bar_arrowhead_width
 	else:
 		shield_bar_tail.position.x = 0
+	
+	shield_bar_minimum.visible = shield_bar_head.position.x + shield_bar_head.size.x\
+			- shield_bar_arrowhead_width > shield_bar_minimum_fraction * shield_bar_width
 
 
 func set_power_bar_proportion(fraction: float) -> void:
@@ -63,6 +66,9 @@ func set_power_bar_proportion(fraction: float) -> void:
 		power_bar_tail.position.x = power_bar_head.position.x - power_bar_arrowhead_width
 	else:
 		power_bar_tail.position.x = 0
+	
+	power_bar_minimum.visible = power_bar_head.position.x + power_bar_head.size.x\
+			- power_bar_arrowhead_width > power_bar_minimum_fraction * power_bar_width
 
 
 func set_shield_bar_minimum(fraction: float) -> void:

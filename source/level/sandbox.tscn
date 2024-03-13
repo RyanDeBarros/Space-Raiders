@@ -32,7 +32,23 @@ stretch_mode = 1
 [node name="Arena" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
+visible = false
 shape = SubResource("RectangleShape2D_sewky")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Arena"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1510.0
+offset_top = -1510.0
+offset_right = 1510.0
+offset_bottom = 1510.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.027451, 0.831373, 0, 1)
+border_width = 20.0
 
 [node name="ExplosionManager" type="Node2D" parent="." groups=["explosion_manager"]]
 z_index = -40
