@@ -11,6 +11,10 @@ extends Control
 @export_group("Power Bar", "power_bar_")
 @export var power_bar_arrowhead_width: int
 
+@export_group("EXP Bar", "exp_bar_")
+@export var exp_bar_min_size_x: int
+@export var exp_bar_max_size_x: int
+
 var health_bar_width: float
 var shield_bar_width: float
 var power_bar_width: float
@@ -30,6 +34,7 @@ var power_bar_minimum_fraction := 0.0
 @onready var power_bar_minimum: TextureRect = $StatsBars/PowerBar/Minimum
 
 @onready var minimap: MiniMap = $MiniMap
+@onready var exp_bar: NinePatchRect = $Exp/ExpBar
 
 
 func _ready() -> void:
@@ -79,3 +84,7 @@ func set_shield_bar_minimum(fraction: float) -> void:
 
 func set_power_bar_minimum(fraction: float) -> void:
 	power_bar_minimum.position.x = fraction * power_bar_width - power_bar_minimum.size.x
+
+
+func set_exp_bar_proportion(fraction: float) -> void:
+	exp_bar.size.x = lerpf(exp_bar_min_size_x, exp_bar_max_size_x, fraction)

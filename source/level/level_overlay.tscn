@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://buomqsie1fp74"]
+[gd_scene load_steps=12 format=3 uid="uid://buomqsie1fp74"]
 
 [ext_resource type="Script" path="res://source/level/level_overlay.gd" id="1_0h2vc"]
 [ext_resource type="Texture2D" uid="uid://52xkiklkrwu6" path="res://assets/ui/bars/divider-005.png" id="1_pgffh"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://66iypmmk00u0" path="res://assets/ui/bars/divider-001.png" id="6_7a2av"]
 [ext_resource type="Texture2D" uid="uid://bgwusneakkoxt" path="res://assets/ui/panels/panel-transparent-center-005.png" id="7_4bufj"]
 [ext_resource type="PackedScene" uid="uid://dgn55qa4vv2dr" path="res://source/level/mini_map.tscn" id="8_ubpwb"]
+[ext_resource type="Texture2D" uid="uid://dakhacbvk0w8t" path="res://assets/ui/panels/panel-border-006.png" id="9_12ook"]
+[ext_resource type="Texture2D" uid="uid://c2ttr7tbome8o" path="res://assets/ui/bars/divider-fade-000.png" id="10_jyvmn"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_msbv7"]
 load_path = "res://.godot/imported/divider-001.png-fbf33adc27cc3fafca8e09188e4d296a.ctex"
@@ -25,6 +27,8 @@ script = ExtResource("1_0h2vc")
 health_bar_arrowhead_width = 56
 shield_bar_arrowhead_width = 56
 power_bar_arrowhead_width = 52
+exp_bar_min_size_x = 48
+exp_bar_max_size_x = 2824
 
 [node name="StatsBars" type="Control" parent="."]
 layout_mode = 1
@@ -166,3 +170,27 @@ offset_top = 506.0
 offset_right = 904.0
 offset_bottom = 506.0
 scale = Vector2(0.210704, 0.210704)
+
+[node name="Exp" type="NinePatchRect" parent="."]
+clip_contents = true
+layout_mode = 0
+offset_left = 223.0
+offset_top = 10.0
+offset_right = 3047.0
+offset_bottom = 78.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_12ook")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="ExpBar" type="NinePatchRect" parent="Exp"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 0
+offset_top = 12.0
+offset_right = 48.0
+offset_bottom = 56.0
+texture = ExtResource("10_jyvmn")
+patch_margin_left = 24
+patch_margin_right = 24
