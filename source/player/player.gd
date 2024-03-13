@@ -25,6 +25,7 @@ signal shield_meter_changed(new_shield_meter: int)
 @export var shield_consumption_rate := 0.08
 @export var shield_initiate_fraction := 0.3
 @export var shield_activation_speed := 1.0
+@export var shield_on_collide_mult := 0.2
 
 
 var active := true
@@ -175,4 +176,4 @@ func projectile_hit(projectile) -> void:
 
 
 func get_collide_damage() -> int:
-	return int(collide_damage * (1.0 if not shield_on else 0.5))
+	return int(collide_damage * (1.0 if not shield_on else shield_on_collide_mult))

@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN\
 				if not fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	if event.is_action_pressed("toggle_minimap"):
-		level_overlay.minimap.visible = not level_overlay.minimap.visible
+		level_overlay.toggle_minimap()
 
 
 func _on_player_health_changed(health: int) -> void:

@@ -27,7 +27,8 @@ stretch_mode = 1
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 
-[node name="LevelOverlay" parent="Overlay" instance=ExtResource("3_ecdyn")]
+[node name="LevelOverlay" parent="Overlay" node_paths=PackedStringArray("enemies_parent_node") instance=ExtResource("3_ecdyn")]
+enemies_parent_node = NodePath("../../Enemies")
 
 [node name="Arena" type="Area2D" parent="."]
 
