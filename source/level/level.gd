@@ -8,7 +8,10 @@ extends Node2D
 
 
 func _ready() -> void:
-	Info.level_data["arena_rect"] = arena_collision.shape.get_rect()
+	var arena_rect := arena_collision.shape.get_rect()
+	Info.level_data["arena_rect"] = arena_rect
+	Info.level_data["arena_rect_inv"] = Rect2(arena_rect.position.x, arena_rect.position.y,\
+			1 / arena_rect.size.x, 1 / arena_rect.size.y)
 	Info.player = player
 	Info.projectile_manager = projectile_manager
 	
@@ -23,8 +26,14 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_text_backspace"):
 		get_tree().reload_current_scene()
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("quit"):
 		get_tree().quit()
+	if event.is_action_pressed("full_screen"):
+		var fullscreen = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN\
+				if not fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
+	if event.is_action_pressed("toggle_minimap"):
+		level_overlay.minimap.visible = not level_overlay.minimap.visible
 
 
 func _on_player_health_changed(health: int) -> void:

@@ -5,6 +5,7 @@ extends Area2D
 signal health_changed(new_health: int)
 signal shield_meter_changed(new_shield_meter: int)
 
+
 @export_group("Movement")
 @export var max_speed := 350
 @export var acceleration := 700
@@ -24,6 +25,7 @@ signal shield_meter_changed(new_shield_meter: int)
 @export var shield_consumption_rate := 0.08
 @export var shield_initiate_fraction := 0.3
 @export var shield_activation_speed := 1.0
+
 
 var active := true
 var dead := false
@@ -173,4 +175,4 @@ func projectile_hit(projectile) -> void:
 
 
 func get_collide_damage() -> int:
-	return int(collide_damage * (1 if not shield_on else 0.5))
+	return int(collide_damage * (1.0 if not shield_on else 0.5))

@@ -1,7 +1,8 @@
 extends Node
 
 var level_data = {
-	"arena_rect": Rect2(0, 0, 0, 0)
+	"arena_rect": Rect2(0, 0, 0, 0),
+	"arena_rect_inv": Rect2(0, 0, 0, 0)
 }
 
 var projectile_JSON: Dictionary

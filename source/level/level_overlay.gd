@@ -18,16 +18,18 @@ var power_bar_width: float
 var shield_bar_minimum_fraction := 0.0
 var power_bar_minimum_fraction := 0.0
 
-@onready var health_bar_head: TextureRect = $HealthBar/Head
-@onready var health_bar_tail: TextureRect = $HealthBar/Tail
+@onready var health_bar_head: TextureRect = $StatsBars/HealthBar/Head
+@onready var health_bar_tail: TextureRect = $StatsBars/HealthBar/Tail
 
-@onready var shield_bar_head: TextureRect = $ShieldBar/Head
-@onready var shield_bar_tail: TextureRect = $ShieldBar/Tail
-@onready var shield_bar_minimum: TextureRect = $ShieldBar/Minimum
+@onready var shield_bar_head: TextureRect = $StatsBars/ShieldBar/Head
+@onready var shield_bar_tail: TextureRect = $StatsBars/ShieldBar/Tail
+@onready var shield_bar_minimum: TextureRect = $StatsBars/ShieldBar/Minimum
 
-@onready var power_bar_head: TextureRect = $PowerBar/Head
-@onready var power_bar_tail: TextureRect = $PowerBar/Tail
-@onready var power_bar_minimum: TextureRect = $PowerBar/Minimum
+@onready var power_bar_head: TextureRect = $StatsBars/PowerBar/Head
+@onready var power_bar_tail: TextureRect = $StatsBars/PowerBar/Tail
+@onready var power_bar_minimum: TextureRect = $StatsBars/PowerBar/Minimum
+
+@onready var minimap: MiniMap = $MiniMap
 
 
 func _ready() -> void:

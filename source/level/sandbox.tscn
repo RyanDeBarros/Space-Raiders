@@ -47,6 +47,7 @@ offset_right = 1510.0
 offset_bottom = 1510.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 border_color = Color(0.027451, 0.831373, 0, 1)
 border_width = 20.0
 

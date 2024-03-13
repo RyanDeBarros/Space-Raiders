@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://buomqsie1fp74"]
+[gd_scene load_steps=10 format=3 uid="uid://buomqsie1fp74"]
 
 [ext_resource type="Script" path="res://source/level/level_overlay.gd" id="1_0h2vc"]
 [ext_resource type="Texture2D" uid="uid://52xkiklkrwu6" path="res://assets/ui/bars/divider-005.png" id="1_pgffh"]
@@ -7,11 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://ctrtt7ccwxyut" path="res://assets/ui/bars/divider-003.png" id="5_apoye"]
 [ext_resource type="Texture2D" uid="uid://66iypmmk00u0" path="res://assets/ui/bars/divider-001.png" id="6_7a2av"]
 [ext_resource type="Texture2D" uid="uid://bgwusneakkoxt" path="res://assets/ui/panels/panel-transparent-center-005.png" id="7_4bufj"]
+[ext_resource type="PackedScene" uid="uid://dgn55qa4vv2dr" path="res://source/level/mini_map.tscn" id="8_ubpwb"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_msbv7"]
 load_path = "res://.godot/imported/divider-001.png-fbf33adc27cc3fafca8e09188e4d296a.ctex"
 
 [node name="LevelOverlay" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,209 +26,143 @@ health_bar_arrowhead_width = 56
 shield_bar_arrowhead_width = 56
 power_bar_arrowhead_width = 52
 
-[node name="NinePatchRectNode" type="Control" parent="."]
-modulate = Color(1, 1, 1, 0.352941)
+[node name="StatsBars" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -68.0
-offset_right = 202.0
-offset_bottom = -2.0
+offset_left = 5.0
+offset_top = -75.0
+offset_right = 219.0
+offset_bottom = -5.0
 grow_vertical = 0
-scale = Vector2(0.6, 0.6)
+mouse_filter = 2
 
-[node name="TopLeft" type="NinePatchRect" parent="NinePatchRectNode"]
+[node name="Backdrop" type="NinePatchRect" parent="StatsBars"]
+modulate = Color(1, 1, 1, 0.352941)
 layout_mode = 0
-offset_top = -5.0
-offset_right = 22.0
-offset_bottom = 17.0
+offset_right = 428.0
+offset_bottom = 140.0
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_4bufj")
-region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
 
-[node name="TopMiddle" type="NinePatchRect" parent="NinePatchRectNode"]
-layout_mode = 0
-offset_left = 22.0
-offset_top = -5.0
-offset_right = 330.0
-offset_bottom = 17.0
-texture = ExtResource("7_4bufj")
-region_rect = Rect2(32, 0, 32, 32)
-
-[node name="TopRight" type="NinePatchRect" parent="NinePatchRectNode"]
-layout_mode = 0
-offset_left = 330.0
-offset_top = -5.0
-offset_right = 352.0
-offset_bottom = 17.0
-texture = ExtResource("7_4bufj")
-region_rect = Rect2(64, 0, 32, 32)
-
-[node name="MiddleLeft" type="NinePatchRect" parent="NinePatchRectNode"]
-layout_mode = 0
-offset_top = 17.0
-offset_right = 22.0
-offset_bottom = 90.0
-texture = ExtResource("7_4bufj")
-region_rect = Rect2(0, 32, 32, 32)
-
-[node name="Center" type="NinePatchRect" parent="NinePatchRectNode"]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 17.0
-offset_right = 330.0
-offset_bottom = 90.0
-texture = ExtResource("7_4bufj")
-region_rect = Rect2(32, 32, 32, 32)
-
-[node name="MiddleRight" type="NinePatchRect" parent="NinePatchRectNode"]
-layout_mode = 0
-offset_left = 330.0
-offset_top = 17.0
-offset_right = 352.0
-offset_bottom = 90.0
-texture = ExtResource("7_4bufj")
-region_rect = Rect2(64, 32, 32, 32)
-
-[node name="BottomLeft" type="NinePatchRect" parent="NinePatchRectNode"]
-layout_mode = 0
-offset_top = 90.0
-offset_right = 22.0
-offset_bottom = 112.0
-texture = ExtResource("7_4bufj")
-region_rect = Rect2(0, 64, 32, 32)
-
-[node name="BottomMiddle" type="NinePatchRect" parent="NinePatchRectNode"]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 90.0
-offset_right = 330.0
-offset_bottom = 112.0
-texture = ExtResource("7_4bufj")
-region_rect = Rect2(32, 64, 32, 32)
-
-[node name="BottomRight" type="NinePatchRect" parent="NinePatchRectNode"]
-layout_mode = 0
-offset_left = 330.0
-offset_top = 90.0
-offset_right = 352.0
-offset_bottom = 112.0
-texture = ExtResource("7_4bufj")
-region_rect = Rect2(64, 64, 32, 32)
-
-[node name="HealthBar" type="ColorRect" parent="."]
+[node name="HealthBar" type="ColorRect" parent="StatsBars"]
 modulate = Color(0, 1, 0.333333, 1)
 clip_contents = true
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 0
 offset_left = 10.0
-offset_top = -40.0
-offset_right = -190.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_top = 31.0
+offset_right = 394.0
+offset_bottom = 79.0
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(0, 24)
+mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Head" type="TextureRect" parent="HealthBar"]
+[node name="Head" type="TextureRect" parent="StatsBars/HealthBar"]
 layout_mode = 2
 offset_left = 192.0
 offset_top = 6.0
 offset_right = 384.0
 offset_bottom = 42.0
+mouse_filter = 2
 texture = ExtResource("1_pgffh")
 
-[node name="Tail" type="TextureRect" parent="HealthBar"]
+[node name="Tail" type="TextureRect" parent="StatsBars/HealthBar"]
 layout_mode = 2
 offset_top = 14.0
 offset_right = 192.0
 offset_bottom = 34.0
+mouse_filter = 2
 texture = ExtResource("2_wmn45")
 
-[node name="ShieldBar" type="ColorRect" parent="."]
+[node name="ShieldBar" type="ColorRect" parent="StatsBars"]
 modulate = Color(0, 0.666667, 1, 1)
 clip_contents = true
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 0
 offset_left = 10.0
-offset_top = -57.0
-offset_right = -190.0
-offset_bottom = -21.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_top = 14.0
+offset_right = 394.0
+offset_bottom = 50.0
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(0, 24)
+mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Head" type="TextureRect" parent="ShieldBar"]
+[node name="Head" type="TextureRect" parent="StatsBars/ShieldBar"]
 layout_mode = 2
 offset_left = 192.0
 offset_top = 4.0
 offset_right = 384.0
 offset_bottom = 32.0
+mouse_filter = 2
 texture = ExtResource("4_f3s56")
 
-[node name="Tail" type="TextureRect" parent="ShieldBar"]
+[node name="Tail" type="TextureRect" parent="StatsBars/ShieldBar"]
 layout_mode = 2
 offset_top = 8.0
 offset_right = 192.0
 offset_bottom = 28.0
+mouse_filter = 2
 texture = ExtResource("2_wmn45")
 
-[node name="Minimum" type="TextureRect" parent="ShieldBar"]
+[node name="Minimum" type="TextureRect" parent="StatsBars/ShieldBar"]
 layout_mode = 2
 offset_left = -94.0
 offset_top = -4.0
 offset_right = 98.0
 offset_bottom = 40.0
 pivot_offset = Vector2(0, 22)
+mouse_filter = 2
 texture = SubResource("CompressedTexture2D_msbv7")
 
-[node name="PowerBar" type="ColorRect" parent="."]
+[node name="PowerBar" type="ColorRect" parent="StatsBars"]
 modulate = Color(0.916667, 0, 1, 1)
 clip_contents = true
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 0
 offset_left = 10.0
-offset_top = -77.0
-offset_right = -190.0
-offset_bottom = -41.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_top = -6.0
+offset_right = 394.0
+offset_bottom = 30.0
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(0, 24)
+mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Head" type="TextureRect" parent="PowerBar"]
+[node name="Head" type="TextureRect" parent="StatsBars/PowerBar"]
 layout_mode = 2
 offset_left = 192.0
 offset_right = 384.0
 offset_bottom = 36.0
+mouse_filter = 2
 texture = ExtResource("5_apoye")
 
-[node name="Tail" type="TextureRect" parent="PowerBar"]
+[node name="Tail" type="TextureRect" parent="StatsBars/PowerBar"]
 layout_mode = 2
 offset_top = 8.0
 offset_right = 192.0
 offset_bottom = 28.0
+mouse_filter = 2
 texture = ExtResource("2_wmn45")
 
-[node name="Minimum" type="TextureRect" parent="PowerBar"]
+[node name="Minimum" type="TextureRect" parent="StatsBars/PowerBar"]
 layout_mode = 2
 offset_left = -54.0
 offset_top = -4.0
 offset_right = 138.0
 offset_bottom = 40.0
 pivot_offset = Vector2(0, 22)
+mouse_filter = 2
 texture = ExtResource("6_7a2av")
+
+[node name="MiniMap" parent="." instance=ExtResource("8_ubpwb")]
+layout_mode = 1
+offset_left = 904.0
+offset_top = 506.0
+offset_right = 904.0
+offset_bottom = 506.0
+scale = Vector2(0.210704, 0.210704)
