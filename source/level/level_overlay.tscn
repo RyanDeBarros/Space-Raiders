@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://buomqsie1fp74"]
+[gd_scene load_steps=9 format=3 uid="uid://buomqsie1fp74"]
 
 [ext_resource type="Script" path="res://source/level/level_overlay.gd" id="1_0h2vc"]
 [ext_resource type="Texture2D" uid="uid://52xkiklkrwu6" path="res://assets/ui/bars/divider-005.png" id="1_pgffh"]
@@ -6,12 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dcgc6wywew1qe" path="res://assets/ui/bars/divider-004.png" id="4_f3s56"]
 [ext_resource type="Texture2D" uid="uid://ctrtt7ccwxyut" path="res://assets/ui/bars/divider-003.png" id="5_apoye"]
 [ext_resource type="Texture2D" uid="uid://66iypmmk00u0" path="res://assets/ui/bars/divider-001.png" id="6_7a2av"]
-
-[sub_resource type="Gradient" id="Gradient_yhrtp"]
-colors = PackedColorArray(1, 1, 1, 0.0980392, 0, 0, 0, 0.0980392)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5fg0x"]
-gradient = SubResource("Gradient_yhrtp")
+[ext_resource type="Texture2D" uid="uid://bgwusneakkoxt" path="res://assets/ui/panels/panel-transparent-center-005.png" id="7_4bufj"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_msbv7"]
 load_path = "res://.godot/imported/divider-001.png-fbf33adc27cc3fafca8e09188e4d296a.ctex"
@@ -29,17 +24,95 @@ health_bar_arrowhead_width = 56
 shield_bar_arrowhead_width = 56
 power_bar_arrowhead_width = 52
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="NinePatchRectNode" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
+offset_left = 1.0
 offset_top = -68.0
-offset_right = 203.0
-offset_bottom = -4.0
+offset_right = 202.0
+offset_bottom = -2.0
 grow_vertical = 0
-texture = SubResource("GradientTexture2D_5fg0x")
+scale = Vector2(0.6, 0.6)
+
+[node name="TopLeft" type="NinePatchRect" parent="NinePatchRectNode"]
+layout_mode = 0
+offset_top = -5.0
+offset_right = 22.0
+offset_bottom = 17.0
+texture = ExtResource("7_4bufj")
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="TopMiddle" type="NinePatchRect" parent="NinePatchRectNode"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = -5.0
+offset_right = 330.0
+offset_bottom = 17.0
+texture = ExtResource("7_4bufj")
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="TopRight" type="NinePatchRect" parent="NinePatchRectNode"]
+layout_mode = 0
+offset_left = 330.0
+offset_top = -5.0
+offset_right = 352.0
+offset_bottom = 17.0
+texture = ExtResource("7_4bufj")
+region_rect = Rect2(64, 0, 32, 32)
+
+[node name="MiddleLeft" type="NinePatchRect" parent="NinePatchRectNode"]
+layout_mode = 0
+offset_top = 17.0
+offset_right = 22.0
+offset_bottom = 90.0
+texture = ExtResource("7_4bufj")
+region_rect = Rect2(0, 32, 32, 32)
+
+[node name="Center" type="NinePatchRect" parent="NinePatchRectNode"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 17.0
+offset_right = 330.0
+offset_bottom = 90.0
+texture = ExtResource("7_4bufj")
+region_rect = Rect2(32, 32, 32, 32)
+
+[node name="MiddleRight" type="NinePatchRect" parent="NinePatchRectNode"]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 17.0
+offset_right = 352.0
+offset_bottom = 90.0
+texture = ExtResource("7_4bufj")
+region_rect = Rect2(64, 32, 32, 32)
+
+[node name="BottomLeft" type="NinePatchRect" parent="NinePatchRectNode"]
+layout_mode = 0
+offset_top = 90.0
+offset_right = 22.0
+offset_bottom = 112.0
+texture = ExtResource("7_4bufj")
+region_rect = Rect2(0, 64, 32, 32)
+
+[node name="BottomMiddle" type="NinePatchRect" parent="NinePatchRectNode"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 90.0
+offset_right = 330.0
+offset_bottom = 112.0
+texture = ExtResource("7_4bufj")
+region_rect = Rect2(32, 64, 32, 32)
+
+[node name="BottomRight" type="NinePatchRect" parent="NinePatchRectNode"]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 90.0
+offset_right = 352.0
+offset_bottom = 112.0
+texture = ExtResource("7_4bufj")
+region_rect = Rect2(64, 64, 32, 32)
 
 [node name="HealthBar" type="ColorRect" parent="."]
 modulate = Color(0, 1, 0.333333, 1)
@@ -49,9 +122,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
+offset_left = 10.0
 offset_top = -40.0
-offset_right = -192.0
+offset_right = -190.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -82,9 +155,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
+offset_left = 10.0
 offset_top = -57.0
-offset_right = -192.0
+offset_right = -190.0
 offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -124,9 +197,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
+offset_left = 10.0
 offset_top = -77.0
-offset_right = -192.0
+offset_right = -190.0
 offset_bottom = -41.0
 grow_horizontal = 2
 grow_vertical = 0
