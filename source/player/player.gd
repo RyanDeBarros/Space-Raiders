@@ -51,7 +51,7 @@ var shield_meter := 1.0:
 
 
 @onready var sprite: Sprite2D = $Sprite
-@onready var camera_2d: Camera2D = $Camera2D
+@onready var camera: Camera2D = $Camera
 @onready var projectile_info := Info.projectile_JSON[projectile_info_index] as Dictionary
 @onready var shield: Sprite2D = $Shield
 @onready var shield_regeneration_delay: Timer = $Shield/RegenerationDelay
@@ -59,7 +59,7 @@ var shield_meter := 1.0:
 
 func _ready() -> void:
 	health = max_health
-	camera_2d.position_smoothing_speed = max_speed * camera_smoothing_ratio
+	camera.position_smoothing_speed = max_speed * camera_smoothing_ratio
 
 
 func _process(delta: float) -> void:
@@ -109,10 +109,10 @@ func _update_velocity(delta: float) -> void:
 
 func setup_camera_limits() -> void:
 	arena_rect = Info.level_data["arena_rect"]
-	camera_2d.limit_left = arena_rect.position.x
-	camera_2d.limit_right = arena_rect.position.x + arena_rect.size.x
-	camera_2d.limit_top = arena_rect.position.y
-	camera_2d.limit_bottom = arena_rect.position.y + arena_rect.size.y
+	camera.limit_left = arena_rect.position.x
+	camera.limit_right = arena_rect.position.x + arena_rect.size.x
+	camera.limit_top = arena_rect.position.y
+	camera.limit_bottom = arena_rect.position.y + arena_rect.size.y
 
 
 func shoot() -> void:

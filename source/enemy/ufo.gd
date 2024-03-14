@@ -1,7 +1,12 @@
+class_name Ufo
 extends Area2D
 
 
+signal enemy_destroyed(score: int)
+
+
 @export var level := 1
+@export var score := 50
 
 var ufo_info: Dictionary
 
@@ -19,6 +24,7 @@ var aggro_range_squared: float
 
 
 func _ready():
+	add_to_group("enemy")
 	setup_info()
 	move_interval_timer.timeout.connect(_on_move_interval_end)
 	angular_dir = randi_range(0, 1) * 2 - 1
@@ -45,8 +51,8 @@ func _on_move_interval_end() -> void:
 	direction = position.direction_to(Info.player.position).rotated(randf() * ufo_info["follow_spread"])
 
 
-func setup_info(lvl := level) -> void:
-	ufo_info = Info.enemy_JSON["ufo"][str(lvl)]
+func setup_info() -> void:
+	ufo_info = Info.enemy_JSON["ufo"][str(level)]
 	overlap_component.wait_time = ufo_info["collide"]["wait_time"]
 	health_component.initial_health = ufo_info["max_health"]
 	aggro_range_squared = ufo_info["aggro_range"] ** 2
@@ -67,6 +73,7 @@ func die() -> void:
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
 	explosion.position = position
 	explosion.scale *= ufo_info["appearance"]["explosion_scale_mult"]
+	enemy_destroyed.emit(score)
 	queue_free()
 
 

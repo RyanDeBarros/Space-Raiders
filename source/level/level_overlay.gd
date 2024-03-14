@@ -2,7 +2,7 @@ class_name LevelOverlay
 extends Control
 
 
-@export var enemies_parent_node: Node2D
+@export var enemy_manager: EnemyManager
 
 @export_group("Health Bar", "health_bar_")
 @export var health_bar_arrowhead_width: int
@@ -61,7 +61,7 @@ func _process(delta: float) -> void:
 
 
 func update_enemy_sensors() -> void:
-	var enemy_list := Utility.get_all_children(enemies_parent_node)
+	var enemy_list := Utility.get_all_children(enemy_manager.directory)
 	var total_weight := float(enemy_list.size())
 	var sector_nw := 0
 	var sector_ne := 0

@@ -15,7 +15,7 @@ shield_activation_speed = 8.0
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_uecug")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 scale = Vector2(0.3, 0.3)
 zoom = Vector2(0.8, 0.8)
 position_smoothing_enabled = true

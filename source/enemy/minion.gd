@@ -1,7 +1,12 @@
+class_name Minion
 extends Area2D
 
 
+signal enemy_destroyed(score: int)
+
+
 @export var level := 1
+@export var score := 100
 
 var minion_info: Dictionary
 
@@ -17,6 +22,7 @@ var projectile_info: Dictionary
 
 
 func _ready() -> void:
+	add_to_group("enemy")
 	setup_info()
 	angular_velocity = Math.pm_randf(minion_info["movement"]["orbiting_speed"],
 			minion_info["movement"]["orbital_speed_pm"]) * (randi_range(0, 1) * 2 - 1)
@@ -49,8 +55,8 @@ func _on_cooldown_end():
 	shoot()
 
 
-func setup_info(lvl := level) -> void:
-	minion_info = Info.enemy_JSON["minion"][str(lvl)]
+func setup_info() -> void:
+	minion_info = Info.enemy_JSON["minion"][str(level)]
 	overlap_component.wait_time = minion_info["collide"]["wait_time"]
 	health_component.initial_health = minion_info["max_health"]
 	range_shoot_squared = minion_info["combat"]["range"] ** 2
@@ -83,6 +89,7 @@ func die() -> void:
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
 	explosion.position = position
 	explosion.scale *= minion_info["appearance"]["explosion_scale_mult"]
+	enemy_destroyed.emit(score)
 	queue_free()
 
 

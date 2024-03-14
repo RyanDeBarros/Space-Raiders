@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctxltwcj5mpeg"]
+[gd_scene load_steps=7 format=3 uid="uid://ctxltwcj5mpeg"]
 
-[ext_resource type="Script" path="res://source/level/level.gd" id="1_8a0rs"]
+[ext_resource type="Script" path="res://source/level/stage.gd" id="1_8a0rs"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://source/player/player.tscn" id="2_1vmdd"]
 [ext_resource type="Texture2D" uid="uid://eahqm3cqwbbd" path="res://assets/bkgs/blue.png" id="2_lejju"]
 [ext_resource type="PackedScene" uid="uid://buomqsie1fp74" path="res://source/level/level_overlay.tscn" id="3_ecdyn"]
-[ext_resource type="PackedScene" uid="uid://bilntsvd8ywk5" path="res://source/enemy/ufo.tscn" id="4_wbnl3"]
-[ext_resource type="PackedScene" uid="uid://dvlltr3uqepum" path="res://source/enemy/minion.tscn" id="5_hjmbv"]
+[ext_resource type="PackedScene" uid="uid://rxoyafmcr1jm" path="res://source/enemy/manager/enemy_manager.tscn" id="5_fhh1b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sewky"]
 size = Vector2(3000, 3000)
@@ -27,8 +26,8 @@ stretch_mode = 1
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 
-[node name="LevelOverlay" parent="Overlay" node_paths=PackedStringArray("enemies_parent_node") instance=ExtResource("3_ecdyn")]
-enemies_parent_node = NodePath("../../Enemies")
+[node name="LevelOverlay" parent="Overlay" node_paths=PackedStringArray("enemy_manager") instance=ExtResource("3_ecdyn")]
+enemy_manager = NodePath("../../EnemyManager")
 
 [node name="Arena" type="Area2D" parent="."]
 
@@ -61,32 +60,5 @@ z_index = -20
 [node name="Player" parent="." instance=ExtResource("2_1vmdd")]
 max_health = 300
 
-[node name="Enemies" type="Node2D" parent="."]
-z_index = -10
-
-[node name="UFO" parent="Enemies" instance=ExtResource("4_wbnl3")]
-position = Vector2(-467, -204)
-
-[node name="UFO2" parent="Enemies" instance=ExtResource("4_wbnl3")]
-position = Vector2(-164, -308)
-
-[node name="UFO3" parent="Enemies" instance=ExtResource("4_wbnl3")]
-position = Vector2(560, -299)
-
-[node name="UFO4" parent="Enemies" instance=ExtResource("4_wbnl3")]
-position = Vector2(389, 468)
-
-[node name="UFO5" parent="Enemies" instance=ExtResource("4_wbnl3")]
-position = Vector2(-874, 344)
-
-[node name="Minion" parent="Enemies" instance=ExtResource("5_hjmbv")]
-position = Vector2(-592, 292)
-
-[node name="Minion2" parent="Enemies" instance=ExtResource("5_hjmbv")]
-position = Vector2(-200, 559)
-
-[node name="Minion3" parent="Enemies" instance=ExtResource("5_hjmbv")]
-position = Vector2(295, -492)
-
-[node name="Minion4" parent="Enemies" instance=ExtResource("5_hjmbv")]
-position = Vector2(704, -3)
+[node name="EnemyManager" parent="." node_paths=PackedStringArray("stage") instance=ExtResource("5_fhh1b")]
+stage = NodePath("..")
