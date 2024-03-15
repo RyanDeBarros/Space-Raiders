@@ -3,12 +3,55 @@
 		"initial_speed": 500.0,
 		"acceleration": 10.0,
 		"damage": 35,
-		"filename": "spaceMissiles_019.png"
+		"filename": "spaceMissiles_01/"
 	},
 	"basic_slow": {
 		"initial_speed": 300.0,
 		"acceleration": 20.0,
 		"damage": 35,
-		"filename": "spaceMissiles_008.png"
-	}
+		"filename": "spaceMissiles_02/"
+	},
+	"charge": {
+		"initial_speed": 550.0,
+		"acceleration": 15.0,
+		"min_damage": 35,
+		"damage_inc": 25,
+		"filename": "spaceMissiles_07/",
+		"minimum_power": 40
+	},
+	"burst": {
+		"initial_speed": 500.0,
+		"acceleration": 10.0,
+		"damage": 35,
+		"filename": "spaceMissiles_07/",
+		"minimum_power": 40
+	},
+	"bomb": {
+		"initial_speed": 500.0,
+		"acceleration": 10.0,
+		"damage": 35,
+		"filename": "spaceMissiles_07/",
+		"minimum_power": 40
+	},
+	"cannon": {
+		"initial_speed": 500.0,
+		"acceleration": 10.0,
+		"damage": 35,
+		"filename": "spaceMissiles_07/",
+		"minimum_power": 40
+	},
+	"emp": {
+		"initial_speed": 500.0,
+		"acceleration": 10.0,
+		"damage": 35,
+		"filename": "spaceMissiles_07/",
+		"minimum_power": 60
+	},
+	"laser": {
+		"initial_speed": 500.0,
+		"acceleration": 10.0,
+		"damage": 35,
+		"filename": "spaceMissiles_07/",
+		"minimum_power": 80
+	},
 }

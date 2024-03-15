@@ -165,11 +165,11 @@ texture = ExtResource("6_7a2av")
 
 [node name="MiniMap" parent="." instance=ExtResource("8_ubpwb")]
 layout_mode = 1
-offset_left = 904.0
-offset_top = 506.0
-offset_right = 904.0
-offset_bottom = 506.0
-scale = Vector2(0.210704, 0.210704)
+offset_left = 937.0
+offset_top = 524.0
+offset_right = 937.0
+offset_bottom = 524.0
+scale = Vector2(0.181, 0.181)
 
 [node name="Exp" type="NinePatchRect" parent="."]
 clip_contents = true

@@ -4,6 +4,8 @@ extends Area2D
 
 signal health_changed(new_health: int)
 signal shield_meter_changed(new_shield_meter: int)
+signal power_meter_changed(new_power_meter: float)
+signal power_minimum_meter_changed(new_power_minimum_meter: int)
 
 
 @export_group("Movement")
@@ -12,26 +14,30 @@ signal shield_meter_changed(new_shield_meter: int)
 @export var deceleration := 700
 
 @export_group("Camera")
-@export var camera_smoothing_ratio := 0.005
+@export var camera_smoothing_ratio := 0.01
 
 @export_group("Combat")
 @export var max_health := 100
 @export var collide_damage := 50
 @export var explosion_scale_mult := 1.0
-@export var projectile_info_index := "basic"
+@export var projectile_info_color := "red"
 
 @export_subgroup("Shield", "shield_")
 @export var shield_regeneration_rate := 0.02
 @export var shield_consumption_rate := 0.08
 @export var shield_initiate_fraction := 0.3
-@export var shield_activation_speed := 1.0
+@export var shield_activation_speed := 8.0
 @export var shield_on_collide_mult := 0.2
 
+@export_subgroup("Power", "power_")
+@export var power_max_meter := 100.0
+@export var power_meter_regeneration := 5.0
+@export var power_meter_consumption_rate := 20.0
 
-var active := true
-var dead := false
 
 var arena_rect
+var active := true
+var dead := false
 
 var health: int:
 	set(value):
@@ -49,17 +55,76 @@ var shield_meter := 1.0:
 		shield_meter = clampf(value, 0.0, 1.0)
 		shield_meter_changed.emit(shield_meter)
 
+var power_meter: float:
+	set(value):
+		power_meter = clampf(value, 0, power_max_meter)
+		power_meter_changed.emit(power_meter)
+
+var is_power_meter_consuming := false
+
+class PowerProjectile:
+	var name: String
+	var unlocked := false
+	var packed_scene: PackedScene
+	var shooter: Node
+	var minimum_power: int
+	var info: Dictionary
+	
+	func _init(name_: String, info_: Dictionary, shooter_) -> void:
+		name = name_
+		packed_scene = Scenes.PROJECTILES[name]
+		shooter = shooter_
+		info = info_
+		minimum_power = info["minimum_power"]
+	
+	func handle_clicked() -> void:
+		shooter.handle_clicked()
+	
+	func handle_released() -> void:
+		shooter.handle_released()
+	
+	func start_process() -> void:
+		shooter.start_process()
+	
+	func cancel_process() -> void:
+		shooter.cancel_process()
+	
+	static func unlock(proj: PowerProjectile) -> void:
+		proj.unlocked = true
+
+@onready var power_projectiles := {
+	"charge": PowerProjectile.new("charge", Info.projectile_JSON["charge"], $Shooter/ChargeShooter),
+	"burst": PowerProjectile.new("burst", Info.projectile_JSON["burst"], $Shooter/ChargeShooter),
+	"bomb": PowerProjectile.new("bomb", Info.projectile_JSON["bomb"], $Shooter/ChargeShooter),
+	"cannon": PowerProjectile.new("cannon", Info.projectile_JSON["cannon"], $Shooter/ChargeShooter),
+	"emp": PowerProjectile.new("emp", Info.projectile_JSON["emp"], $Shooter/ChargeShooter),
+	"laser": PowerProjectile.new("laser", Info.projectile_JSON["laser"], $Shooter/ChargeShooter),
+}
+
+var current_power_projectile: PowerProjectile = null:
+	set(value):
+		current_power_projectile = value
+		if current_power_projectile:
+			power_minimum_meter_changed.emit(current_power_projectile.minimum_power)
+
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var camera: Camera2D = $Camera
-@onready var projectile_info := Info.projectile_JSON[projectile_info_index] as Dictionary
 @onready var shield: Sprite2D = $Shield
 @onready var shield_regeneration_delay: Timer = $Shield/RegenerationDelay
+@onready var projectile_info := Info.projectile_JSON["basic"] as Dictionary
 
 
 func _ready() -> void:
 	health = max_health
+	power_meter = power_max_meter
 	camera.position_smoothing_speed = max_speed * camera_smoothing_ratio
+	
+	# Testing
+	PowerProjectile.unlock(power_projectiles["charge"])
+	current_power_projectile = power_projectiles["charge"]
+	current_power_projectile.start_process()
+	#power_meter = 0
 
 
 func _process(delta: float) -> void:
@@ -87,6 +152,14 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_released("shield"):
 		try_disable_shield()
 	_update_shield(delta)
+	
+	if current_power_projectile:
+		if Input.is_action_just_pressed("special"):
+			current_power_projectile.handle_clicked()
+		elif Input.is_action_just_released("special"):
+			current_power_projectile.handle_released()
+	if not is_power_meter_consuming:
+		power_meter += power_meter_regeneration * delta
 
 
 func _update_velocity(delta: float) -> void:
@@ -117,8 +190,9 @@ func setup_camera_limits() -> void:
 
 func shoot() -> void:
 	var basic_shot := Scenes.PROJECTILES["basic"].instantiate() as BasicShot
+	basic_shot.projectile_image_dir = projectile_info["filename"]
 	Info.projectile_manager.add_child(basic_shot)
-	basic_shot.setup_from_node(self, projectile_info, 1.57)
+	basic_shot.setup_from_node(self, projectile_info, "red.png", 1.57)
 	basic_shot.add_to_group("player_owned")
 
 
@@ -144,6 +218,10 @@ func _update_shield(delta: float) -> void:
 		shield.modulate.a = lerpf(shield.modulate.a, 0.0, shield_activation_speed * delta)
 		if shield_regeneration_delay.is_stopped():
 			shield_meter += shield_regeneration_rate * delta
+
+
+func descrease_power_meter(delta: float, factor := 1.0) -> void:
+	power_meter -= factor * power_meter_consumption_rate * delta
 
 
 func take_damage(damage: int) -> void:

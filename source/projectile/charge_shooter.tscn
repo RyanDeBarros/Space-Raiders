@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5l44dc4ch0fp"]
+
+[ext_resource type="Script" path="res://source/projectile/charge_shooter.gd" id="1_mq1if"]
+
+[node name="ChargeShooter" type="Node"]
+script = ExtResource("1_mq1if")

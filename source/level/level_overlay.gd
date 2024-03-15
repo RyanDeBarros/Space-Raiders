@@ -99,6 +99,7 @@ func update_enemy_sensors() -> void:
 
 
 func set_health_bar_proportion(fraction: float) -> void:
+	fraction = clampf(fraction, 0.0, 1.0)
 	health_bar_head.position.x = fraction * health_bar_width - health_bar_head.size.x
 	if health_bar_head.position.x - health_bar_arrowhead_width <= 0:
 		health_bar_tail.position.x = health_bar_head.position.x - health_bar_arrowhead_width
@@ -107,6 +108,7 @@ func set_health_bar_proportion(fraction: float) -> void:
 
 
 func set_shield_bar_proportion(fraction: float) -> void:
+	fraction = clampf(fraction, 0.0, 1.0)
 	shield_bar_head.position.x = fraction * shield_bar_width - shield_bar_head.size.x
 	if shield_bar_head.position.x - shield_bar_arrowhead_width <= 0:
 		shield_bar_tail.position.x = shield_bar_head.position.x - shield_bar_arrowhead_width
@@ -118,6 +120,7 @@ func set_shield_bar_proportion(fraction: float) -> void:
 
 
 func set_power_bar_proportion(fraction: float) -> void:
+	fraction = clampf(fraction, 0.0, 1.0)
 	power_bar_head.position.x = fraction * power_bar_width - power_bar_head.size.x
 	if power_bar_head.position.x - power_bar_arrowhead_width <= 0:
 		power_bar_tail.position.x = power_bar_head.position.x - power_bar_arrowhead_width
@@ -129,14 +132,17 @@ func set_power_bar_proportion(fraction: float) -> void:
 
 
 func set_shield_bar_minimum(fraction: float) -> void:
+	fraction = clampf(fraction, 0.0, 1.0)
 	shield_bar_minimum.position.x = fraction * shield_bar_width - shield_bar_minimum.size.x
 
 
 func set_power_bar_minimum(fraction: float) -> void:
+	fraction = clampf(fraction, 0.0, 1.0)
 	power_bar_minimum.position.x = fraction * power_bar_width - power_bar_minimum.size.x
 
 
 func set_exp_bar_proportion(fraction: float) -> void:
+	fraction = clampf(fraction, 0.0, 1.0)
 	exp_bar.size.x = lerpf(exp_bar_min_size_x, exp_bar_max_size_x, fraction)
 
 

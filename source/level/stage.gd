@@ -23,8 +23,6 @@ var current_score: int:
 			if score_threshold_index < score_level_up_cap:
 				score_threshold_index += 1
 			current_score_threshold = compute_score_threshold()
-		
-		printt(current_score, "\t", current_score_threshold, "\t", fmod(current_score / current_score_threshold, 1))
 		level_overlay.set_exp_bar_proportion(fmod(current_score / current_score_threshold, 1))
 
 
@@ -47,7 +45,9 @@ func _ready() -> void:
 	
 	player.health_changed.connect(_on_player_health_changed)
 	player.shield_meter_changed.connect(_on_player_shield_meter_changed)
+	player.power_meter_changed.connect(_on_player_power_meter_changed)
 	level_overlay.set_shield_bar_minimum(player.shield_initiate_fraction)
+	player.power_minimum_meter_changed.connect(_on_player_power_minimum_meter_changed)
 	
 	if score_threshold_exponent < 0:
 		score_threshold_exponent = compute_score_threshold_exponent()
@@ -76,6 +76,15 @@ func _on_player_shield_meter_changed(shield_meter: float) -> void:
 	level_overlay.set_shield_bar_proportion(shield_meter)
 
 
+func _on_player_power_meter_changed(power_meter: int) -> void:
+	level_overlay.set_power_bar_proportion(power_meter / float(player.power_max_meter))
+
+
+func _on_player_power_minimum_meter_changed(power_minimum_meter: int) -> void:
+	print(power_minimum_meter / float(player.power_max_meter))
+	level_overlay.set_power_bar_minimum(power_minimum_meter / float(player.power_max_meter))
+
+
 func _on_enemy_destroyed(score: int) -> void:
 	current_score += score
 
@@ -85,8 +94,8 @@ func level_up() -> void:
 
 
 func compute_score_threshold() -> float:
-	return score_initial_threshold + (score_max_threshold - score_initial_threshold) *\
-			((score_threshold_index / score_level_up_cap) ** score_threshold_exponent)
+	return int(score_initial_threshold + (score_max_threshold - score_initial_threshold) *\
+			((score_threshold_index / score_level_up_cap) ** score_threshold_exponent))
 
 
 func compute_score_threshold_exponent() -> float:

@@ -69,8 +69,10 @@ func setup_info() -> void:
 
 func shoot():
 	var basic_shot := Scenes.PROJECTILES["basic"].instantiate() as BasicShot
+	basic_shot.projectile_image_dir = projectile_info["filename"]
 	Info.projectile_manager.add_child(basic_shot)
-	basic_shot.setup_from_node(self, projectile_info, 1.57)
+	basic_shot.setup_from_node(self, projectile_info,
+			minion_info["combat"]["projectile_colorpng"], 1.57)
 	basic_shot.add_to_group("enemy_owned")
 
 
