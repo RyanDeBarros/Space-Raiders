@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://0b4bvqijmfk4"]
+
+[ext_resource type="Script" path="res://source/projectile/basic_shot.gd" id="1_8ngve"]
+[ext_resource type="PackedScene" uid="uid://s0b3ai05ch2m" path="res://source/projectile/projectile_motion.tscn" id="2_8lnsr"]
+[ext_resource type="Texture2D" uid="uid://c7euj0rb8o040" path="res://assets/projectiles/spaceMissiles_05/red.png" id="3_nupml"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jaucp"]
+size = Vector2(12, 48)
+
+[node name="BasicShot" type="Area2D" groups=["projectile"]]
+script = ExtResource("1_8ngve")
+
+[node name="ProjectileMotion" parent="." node_paths=PackedStringArray("head") instance=ExtResource("2_8lnsr")]
+head = NodePath("..")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_nupml")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jaucp")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

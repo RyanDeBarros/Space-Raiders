@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnuto0c2ouck5"]
+[gd_scene load_steps=7 format=3 uid="uid://dnuto0c2ouck5"]
 
 [ext_resource type="Script" path="res://source/player/player.gd" id="1_evl4l"]
 [ext_resource type="Texture2D" uid="uid://dlylixhmdi3g0" path="res://assets/ships/players/spaceShips_008.png" id="1_uecug"]
 [ext_resource type="Texture2D" uid="uid://cg7kt7nop4mjo" path="res://assets/game_objects/shield.svg" id="2_3cogn"]
 [ext_resource type="PackedScene" uid="uid://5l44dc4ch0fp" path="res://source/projectile/charge_shooter.tscn" id="4_ssbnr"]
+[ext_resource type="PackedScene" uid="uid://chivi4auwtdjv" path="res://source/projectile/burst_shooter.tscn" id="5_cxq1a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3touy"]
 radius = 31.0644
@@ -38,4 +39,7 @@ one_shot = true
 [node name="Shooter" type="Node" parent="."]
 
 [node name="ChargeShooter" parent="Shooter" node_paths=PackedStringArray("player") instance=ExtResource("4_ssbnr")]
+player = NodePath("../..")
+
+[node name="BurstShooter" parent="Shooter" node_paths=PackedStringArray("player") instance=ExtResource("5_cxq1a")]
 player = NodePath("../..")

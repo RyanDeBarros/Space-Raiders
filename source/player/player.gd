@@ -94,7 +94,7 @@ class PowerProjectile:
 
 @onready var power_projectiles := {
 	"charge": PowerProjectile.new("charge", Info.projectile_JSON["charge"], $Shooter/ChargeShooter),
-	"burst": PowerProjectile.new("burst", Info.projectile_JSON["burst"], $Shooter/ChargeShooter),
+	"burst": PowerProjectile.new("burst", Info.projectile_JSON["burst"], $Shooter/BurstShooter),
 	"bomb": PowerProjectile.new("bomb", Info.projectile_JSON["bomb"], $Shooter/ChargeShooter),
 	"cannon": PowerProjectile.new("cannon", Info.projectile_JSON["cannon"], $Shooter/ChargeShooter),
 	"emp": PowerProjectile.new("emp", Info.projectile_JSON["emp"], $Shooter/ChargeShooter),
@@ -119,12 +119,15 @@ func _ready() -> void:
 	health = max_health
 	power_meter = power_max_meter
 	camera.position_smoothing_speed = max_speed * camera_smoothing_ratio
-	
+	call_deferred("first_frame")
+
+
+func first_frame() -> void:
 	# Testing
-	PowerProjectile.unlock(power_projectiles["charge"])
-	current_power_projectile = power_projectiles["charge"]
+	#PowerProjectile.unlock(power_projectiles["charge"])
+	PowerProjectile.unlock(power_projectiles["burst"])
+	current_power_projectile = power_projectiles["burst"]
 	current_power_projectile.start_process()
-	#power_meter = 0
 
 
 func _process(delta: float) -> void:

@@ -2,7 +2,7 @@ class_name BasicShot
 extends Area2D
 
 
-@export var projectile_image_dir := "spaceMissiles_01/"
+@export var projectile_image_dir := "spaceMissiles_05/"
 
 @onready var projectile_motion: ProjectileMotion = $ProjectileMotion
 @onready var sprite: Sprite2D = $Sprite

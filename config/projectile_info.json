@@ -12,19 +12,23 @@
 		"filename": "spaceMissiles_02/"
 	},
 	"charge": {
-		"initial_speed": 550.0,
-		"acceleration": 15.0,
-		"min_damage": 35,
+		"initial_speed": 580.0,
+		"acceleration": 18.0,
+		"min_damage": 45,
 		"damage_inc": 25,
 		"filename": "spaceMissiles_07/",
 		"minimum_power": 40
 	},
 	"burst": {
-		"initial_speed": 500.0,
-		"acceleration": 10.0,
-		"damage": 35,
-		"filename": "spaceMissiles_07/",
-		"minimum_power": 40
+		"num": {
+			"min": 2,
+			"med": 4,
+			"max": 5
+		},
+		"await_time": 0.05,
+		"reload_time": 0.3,
+		"filename": "spaceMissiles_05/",
+		"minimum_power": 30
 	},
 	"bomb": {
 		"initial_speed": 500.0,

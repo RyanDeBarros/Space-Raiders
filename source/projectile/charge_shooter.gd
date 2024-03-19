@@ -51,4 +51,4 @@ func cancel_process() -> void:
 	to_shoot = false
 	build_up = false
 	build_up_damage = 0.0
-	player.is_power_meter_consuming = true
+	player.is_power_meter_consuming = false
