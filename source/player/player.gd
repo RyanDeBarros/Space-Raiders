@@ -95,10 +95,10 @@ class PowerProjectile:
 @onready var power_projectiles := {
 	"charge": PowerProjectile.new("charge", Info.projectile_JSON["charge"], $Shooter/ChargeShooter),
 	"burst": PowerProjectile.new("burst", Info.projectile_JSON["burst"], $Shooter/BurstShooter),
-	"bomb": PowerProjectile.new("bomb", Info.projectile_JSON["bomb"], $Shooter/ChargeShooter),
-	"cannon": PowerProjectile.new("cannon", Info.projectile_JSON["cannon"], $Shooter/ChargeShooter),
-	"emp": PowerProjectile.new("emp", Info.projectile_JSON["emp"], $Shooter/ChargeShooter),
-	"laser": PowerProjectile.new("laser", Info.projectile_JSON["laser"], $Shooter/ChargeShooter),
+	#"bomb": PowerProjectile.new("bomb", Info.projectile_JSON["bomb"], $Shooter/ChargeShooter),
+	"cannon": PowerProjectile.new("cannon", Info.projectile_JSON["cannon"], $Shooter/CannonShooter),
+	#"emp": PowerProjectile.new("emp", Info.projectile_JSON["emp"], $Shooter/ChargeShooter),
+	#"laser": PowerProjectile.new("laser", Info.projectile_JSON["laser"], $Shooter/ChargeShooter),
 }
 
 var current_power_projectile: PowerProjectile = null:
@@ -125,8 +125,9 @@ func _ready() -> void:
 func first_frame() -> void:
 	# Testing
 	#PowerProjectile.unlock(power_projectiles["charge"])
-	PowerProjectile.unlock(power_projectiles["burst"])
-	current_power_projectile = power_projectiles["burst"]
+	#PowerProjectile.unlock(power_projectiles["burst"])
+	PowerProjectile.unlock(power_projectiles["cannon"])
+	current_power_projectile = power_projectiles["cannon"]
 	current_power_projectile.start_process()
 
 

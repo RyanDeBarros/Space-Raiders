@@ -7,8 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaucp"]
 size = Vector2(12, 48)
 
-[node name="BasicShot" type="Area2D" groups=["projectile"]]
+[node name="BurstShot" type="Area2D" groups=["projectile"]]
 script = ExtResource("1_8ngve")
+projectile_image_dir = "spaceMissiles_05/"
 
 [node name="ProjectileMotion" parent="." node_paths=PackedStringArray("head") instance=ExtResource("2_8lnsr")]
 head = NodePath("..")

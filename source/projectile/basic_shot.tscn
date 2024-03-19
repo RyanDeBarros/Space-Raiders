@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cjlwybd7uf5kc" path="res://assets/projectiles/spaceMissiles_01/red.png" id="3_teoru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaucp"]
-size = Vector2(12, 48)
+size = Vector2(26, 43)
 
 [node name="BasicShot" type="Area2D" groups=["projectile"]]
 script = ExtResource("1_ifm3m")

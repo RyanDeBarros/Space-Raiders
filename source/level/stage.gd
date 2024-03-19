@@ -81,7 +81,6 @@ func _on_player_power_meter_changed(power_meter: int) -> void:
 
 
 func _on_player_power_minimum_meter_changed(power_minimum_meter: int) -> void:
-	print(power_minimum_meter / float(player.power_max_meter))
 	level_overlay.set_power_bar_minimum(power_minimum_meter / float(player.power_max_meter))
 
 

@@ -28,34 +28,34 @@
 		"await_time": 0.05,
 		"reload_time": 0.3,
 		"filename": "spaceMissiles_05/",
-		"minimum_power": 30
+		"minimum_power": 40
 	},
 	"bomb": {
 		"initial_speed": 500.0,
 		"acceleration": 10.0,
 		"damage": 35,
-		"filename": "spaceMissiles_07/",
+		"filename": "spaceMissiles_08/",
 		"minimum_power": 40
 	},
 	"cannon": {
 		"initial_speed": 500.0,
 		"acceleration": 10.0,
 		"damage": 35,
-		"filename": "spaceMissiles_07/",
+		"durability": 3,
+		"filename": "spaceMissiles_06/",
 		"minimum_power": 40
 	},
 	"emp": {
 		"initial_speed": 500.0,
 		"acceleration": 10.0,
 		"damage": 35,
-		"filename": "spaceMissiles_07/",
+		"filename": "spaceMissiles_10/",
 		"minimum_power": 60
 	},
 	"laser": {
-		"initial_speed": 500.0,
-		"acceleration": 10.0,
-		"damage": 35,
-		"filename": "spaceMissiles_07/",
+		"speed": 500.0,
+		"range": 500.0,
+		"dps": 30,
 		"minimum_power": 80
 	},
 }

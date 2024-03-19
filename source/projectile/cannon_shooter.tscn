@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://beyyujbkwm1rt"]
+
+[ext_resource type="Script" path="res://source/projectile/cannon_shooter.gd" id="1_f3bs6"]
+
+[node name="CannonShooter" type="Node"]
+script = ExtResource("1_f3bs6")

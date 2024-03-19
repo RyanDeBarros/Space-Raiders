@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0mvnfv1dbxt6"]
+
+[ext_resource type="Script" path="res://source/projectile/cannon_shot.gd" id="1_mklw2"]
+[ext_resource type="PackedScene" uid="uid://s0b3ai05ch2m" path="res://source/projectile/projectile_motion.tscn" id="2_w0jgt"]
+[ext_resource type="Texture2D" uid="uid://bdthvttshloqi" path="res://assets/projectiles/spaceMissiles_06/red.png" id="3_dueq7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jaucp"]
+size = Vector2(26, 43)
+
+[node name="CannonShot" type="Area2D" groups=["projectile"]]
+script = ExtResource("1_mklw2")
+
+[node name="ProjectileMotion" parent="." node_paths=PackedStringArray("head") instance=ExtResource("2_w0jgt")]
+head = NodePath("..")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_dueq7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_jaucp")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -33,8 +33,8 @@ func cancel_process() -> void:
 
 
 func shoot_single() -> void:
-	var basic_shot := Scenes.PROJECTILES["basic"].instantiate() as BasicShot
-	basic_shot.projectile_image_dir = player.current_power_projectile.info["filename"]
-	Info.projectile_manager.add_child(basic_shot)
-	basic_shot.setup_from_node(player, player.projectile_info, "red.png", 1.57)
-	basic_shot.add_to_group("player_owned")
+	var burst_shot := player.current_power_projectile.packed_scene.instantiate() as BasicShot
+	burst_shot.projectile_image_dir = player.current_power_projectile.info["filename"]
+	Info.projectile_manager.add_child(burst_shot)
+	burst_shot.setup_from_node(player, player.current_power_projectile.info, "red.png", 1.57)
+	burst_shot.add_to_group("player_owned")
