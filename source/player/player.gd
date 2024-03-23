@@ -6,6 +6,7 @@ signal health_changed(new_health: int)
 signal shield_meter_changed(new_shield_meter: int)
 signal power_meter_changed(new_power_meter: float)
 signal power_minimum_meter_changed(new_power_minimum_meter: int)
+signal power_proj_icon_changed(name: String)
 
 
 @export_group("Movement")
@@ -92,6 +93,25 @@ class PowerProjectile:
 	static func unlock(proj: PowerProjectile) -> void:
 		proj.unlocked = true
 
+var pwp_list := ["charge", "burst", "cannon"]
+var pwp_index: int:
+	set(value):
+		pwp_index = value
+		current_power_projectile = power_projectiles[pwp_list[pwp_index]]
+
+var current_power_projectile: PowerProjectile = null:
+	set(value):
+		if current_power_projectile == value:
+			return
+		if current_power_projectile:
+			current_power_projectile.cancel_process()
+		current_power_projectile = value
+		if current_power_projectile:
+			current_power_projectile.start_process()
+			power_minimum_meter_changed.emit(current_power_projectile.minimum_power)
+			power_proj_icon_changed.emit(current_power_projectile.name)
+
+
 @onready var power_projectiles := {
 	"charge": PowerProjectile.new("charge", Info.projectile_JSON["charge"], $Shooter/ChargeShooter),
 	"burst": PowerProjectile.new("burst", Info.projectile_JSON["burst"], $Shooter/BurstShooter),
@@ -100,13 +120,6 @@ class PowerProjectile:
 	#"emp": PowerProjectile.new("emp", Info.projectile_JSON["emp"], $Shooter/ChargeShooter),
 	#"laser": PowerProjectile.new("laser", Info.projectile_JSON["laser"], $Shooter/ChargeShooter),
 }
-
-var current_power_projectile: PowerProjectile = null:
-	set(value):
-		current_power_projectile = value
-		if current_power_projectile:
-			power_minimum_meter_changed.emit(current_power_projectile.minimum_power)
-
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var camera: Camera2D = $Camera
@@ -124,38 +137,46 @@ func _ready() -> void:
 
 func first_frame() -> void:
 	# Testing
-	#PowerProjectile.unlock(power_projectiles["charge"])
-	#PowerProjectile.unlock(power_projectiles["burst"])
+	PowerProjectile.unlock(power_projectiles["charge"])
+	PowerProjectile.unlock(power_projectiles["burst"])
 	PowerProjectile.unlock(power_projectiles["cannon"])
-	current_power_projectile = power_projectiles["cannon"]
-	current_power_projectile.start_process()
+	pwp_index = 2
 
 
 func _process(delta: float) -> void:
 	if not active:
 		return
 	
+	# Movement
 	_update_velocity(delta)
-	
 	position += velocity * delta
 	position.x = clampf(position.x, arena_rect.position.x,
 			arena_rect.position.x + arena_rect.size.x)
 	position.y = clampf(position.y, arena_rect.position.y,
 			arena_rect.position.y + arena_rect.size.y)
 	
+	# Aiming
 	var mouse_pos_rel := get_global_mouse_position() - position
 	if mouse_pos_rel.length_squared() > 16:
 		rotation = mouse_pos_rel.angle() - 1.57
 	
+	# Primary shield
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 	
+	# Shield
 	shield.position = position
 	if Input.is_action_just_pressed("shield"):
 		try_enable_shield()
 	elif Input.is_action_just_released("shield"):
 		try_disable_shield()
 	_update_shield(delta)
+	
+	# Alternate fire
+	if Input.is_action_just_pressed("cycle_power_up"):
+		next_power_projectile()
+	elif Input.is_action_just_pressed("cycle_power_down"):
+		prev_power_projectile()
 	
 	if current_power_projectile:
 		if Input.is_action_just_pressed("special"):
@@ -259,3 +280,21 @@ func projectile_hit(projectile) -> void:
 
 func get_collide_damage() -> int:
 	return int(collide_damage * (1.0 if not shield_on else shield_on_collide_mult))
+
+
+func next_power_projectile() -> void:
+	var i := 1
+	while i < len(pwp_list):
+		if power_projectiles[pwp_list[(pwp_index + i) % len(pwp_list)]].unlocked:
+			pwp_index = (pwp_index + i) % len(pwp_list)
+			return
+		i += 1
+
+
+func prev_power_projectile() -> void:
+	var i := 1
+	while i < len(pwp_list):
+		if power_projectiles[pwp_list[(pwp_index - i) % len(pwp_list)]].unlocked:
+			pwp_index = (pwp_index - i) % len(pwp_list)
+			return
+		i += 1

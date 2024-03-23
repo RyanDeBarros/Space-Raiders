@@ -47,6 +47,7 @@ func _ready() -> void:
 	player.shield_meter_changed.connect(_on_player_shield_meter_changed)
 	player.power_meter_changed.connect(_on_player_power_meter_changed)
 	level_overlay.set_shield_bar_minimum(player.shield_initiate_fraction)
+	player.power_proj_icon_changed.connect(level_overlay.display_power_projectile_icon)
 	player.power_minimum_meter_changed.connect(_on_player_power_minimum_meter_changed)
 	
 	if score_threshold_exponent < 0:

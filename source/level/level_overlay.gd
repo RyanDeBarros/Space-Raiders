@@ -24,6 +24,8 @@ var power_bar_width: float
 var shield_bar_minimum_fraction := 0.0
 var power_bar_minimum_fraction := 0.0
 
+var enemy_sensors_update_index: float
+
 @onready var health_bar_head: TextureRect = $StatsBars/HealthBar/Head
 @onready var health_bar_tail: TextureRect = $StatsBars/HealthBar/Tail
 
@@ -35,13 +37,17 @@ var power_bar_minimum_fraction := 0.0
 @onready var power_bar_tail: TextureRect = $StatsBars/PowerBar/Tail
 @onready var power_bar_minimum: TextureRect = $StatsBars/PowerBar/Minimum
 
-@onready var minimap: MiniMap = $MiniMap
-@onready var exp_bar: NinePatchRect = $Exp/ExpBar
+@onready var minimap: MiniMap = %MiniMap
+@onready var exp_bar: NinePatchRect = $Exp/ExpRect/ExpBar
 
-@onready var enemy_sensors_update_index := minimap.enemy_sensors_update_rate
+@onready var charge_shot_icon: TextureRect = %ChargeShotIcon
+@onready var burst_shot_icon: Control = %BurstShotIcon
+@onready var cannon_shot_icon: TextureRect = %CannonShotIcon
+@onready var power_proj_icons = [charge_shot_icon, burst_shot_icon, cannon_shot_icon]
 
 
 func _ready() -> void:
+	enemy_sensors_update_index = minimap.enemy_sensors_update_rate
 	health_bar_width = health_bar_head.size.x + health_bar_tail.size.x
 	shield_bar_width = shield_bar_head.size.x + shield_bar_tail.size.x
 	power_bar_width = power_bar_head.size.x + power_bar_tail.size.x
@@ -152,3 +158,15 @@ func toggle_minimap() -> void:
 		enemy_sensors_update_index = minimap.enemy_sensors_update_rate
 	else:
 		enemy_sensors_update_index = -1
+
+
+func display_power_projectile_icon(name: String) -> void:
+	for icon in power_proj_icons:
+		icon.visible = false
+	match name:
+		"charge":
+			charge_shot_icon.visible = true
+		"burst":
+			burst_shot_icon.visible = true
+		"cannon":
+			cannon_shot_icon.visible = true

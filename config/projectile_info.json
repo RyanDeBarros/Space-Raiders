@@ -20,6 +20,9 @@
 		"minimum_power": 40
 	},
 	"burst": {
+		"initial_speed": 500.0,
+		"acceleration": 10.0,
+		"damage": 35,
 		"num": {
 			"min": 2,
 			"med": 4,
@@ -38,8 +41,8 @@
 		"minimum_power": 40
 	},
 	"cannon": {
-		"initial_speed": 500.0,
-		"acceleration": 10.0,
+		"initial_speed": 600.0,
+		"acceleration": 20.0,
 		"damage": 35,
 		"durability": 3,
 		"filename": "spaceMissiles_06/",
