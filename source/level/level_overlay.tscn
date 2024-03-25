@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://buomqsie1fp74"]
+[gd_scene load_steps=17 format=3 uid="uid://buomqsie1fp74"]
 
 [ext_resource type="Script" path="res://source/level/level_overlay.gd" id="1_0h2vc"]
 [ext_resource type="Texture2D" uid="uid://52xkiklkrwu6" path="res://assets/ui/bars/divider-005.png" id="1_pgffh"]
@@ -13,9 +13,17 @@
 [ext_resource type="PackedScene" uid="uid://dgn55qa4vv2dr" path="res://source/level/mini_map.tscn" id="8_ubpwb"]
 [ext_resource type="Texture2D" uid="uid://dakhacbvk0w8t" path="res://assets/ui/panels/panel-border-006.png" id="9_12ook"]
 [ext_resource type="Texture2D" uid="uid://c2ttr7tbome8o" path="res://assets/ui/bars/divider-fade-000.png" id="10_jyvmn"]
+[ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="14_4dkxu"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_msbv7"]
 load_path = "res://.godot/imported/divider-001.png-fbf33adc27cc3fafca8e09188e4d296a.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_ce2ei"]
+font = ExtResource("14_4dkxu")
+font_size = 28
+font_color = Color(1, 1, 0.9, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [node name="LevelOverlay" type="Control"]
 texture_filter = 1
@@ -105,6 +113,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="BurstShotIcon1" type="TextureRect" parent="StatsBars/Backdrop2/BurstShotIcon"]
+layout_mode = 0
 offset_left = -12.5213
 offset_top = 10.6888
 offset_right = 95.4787
@@ -115,6 +124,7 @@ texture = ExtResource("4_2rsnf")
 stretch_mode = 5
 
 [node name="BurstShotIcon3" type="TextureRect" parent="StatsBars/Backdrop2/BurstShotIcon"]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 16.0
 offset_right = 132.0
@@ -125,6 +135,7 @@ texture = ExtResource("4_2rsnf")
 stretch_mode = 5
 
 [node name="BurstShotIcon2" type="TextureRect" parent="StatsBars/Backdrop2/BurstShotIcon"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 6.0
 offset_right = 118.0
@@ -275,6 +286,15 @@ offset_bottom = 56.0
 texture = ExtResource("10_jyvmn")
 patch_margin_left = 28
 patch_margin_right = 28
+
+[node name="ScoreLabel" type="Label" parent="Exp"]
+offset_left = -58.0
+offset_right = 146.0
+offset_bottom = 39.0
+text = "9999"
+label_settings = SubResource("LabelSettings_ce2ei")
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="MiniMapControl" type="Control" parent="."]
 anchors_preset = 0

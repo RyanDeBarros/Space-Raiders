@@ -39,6 +39,7 @@ var enemy_sensors_update_index: float
 
 @onready var minimap: MiniMap = %MiniMap
 @onready var exp_bar: NinePatchRect = $Exp/ExpRect/ExpBar
+@onready var score_label: Label = $Exp/ScoreLabel
 
 @onready var charge_shot_icon: TextureRect = %ChargeShotIcon
 @onready var burst_shot_icon: Control = %BurstShotIcon
@@ -170,3 +171,7 @@ func display_power_projectile_icon(name: String) -> void:
 			burst_shot_icon.visible = true
 		"cannon":
 			cannon_shot_icon.visible = true
+
+
+func display_score(score: int) -> void:
+	score_label.text = str(score)

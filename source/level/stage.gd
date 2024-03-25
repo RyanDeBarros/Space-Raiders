@@ -17,6 +17,7 @@ var current_score_threshold: float
 var current_score: int:
 	set(value):
 		current_score = value
+		level_overlay.display_score(current_score)
 		if current_score > current_score_threshold:
 			current_score -= int(current_score_threshold)
 			level_up()
