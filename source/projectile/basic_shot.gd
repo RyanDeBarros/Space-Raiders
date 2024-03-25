@@ -3,6 +3,7 @@ extends Area2D
 
 
 @export var projectile_image_dir := "spaceMissiles_01/"
+@export var hit_cloud_scale_mult := 1.0
 
 @onready var projectile_motion: ProjectileMotion = $ProjectileMotion
 @onready var sprite: Sprite2D = $Sprite
@@ -36,3 +37,7 @@ func set_sprite_image(filename: String, asset_dir := "res://assets/projectiles")
 
 func hit():
 	queue_free()
+	var explosion = Scenes.HIT_CLOUD_SCENE.instantiate()
+	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
+	explosion.position = position
+	explosion.scale *= hit_cloud_scale_mult

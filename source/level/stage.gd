@@ -26,7 +26,6 @@ var current_score: int:
 			current_score_threshold = compute_score_threshold()
 		level_overlay.set_exp_bar_proportion(fmod(current_score / current_score_threshold, 1))
 
-
 @onready var player: Player = $Player
 @onready var arena_collision: CollisionShape2D = $Arena/CollisionShape2D
 @onready var projectile_manager: Node2D = $ProjectileManager

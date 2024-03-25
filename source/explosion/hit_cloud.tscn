@@ -1,15 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://df6svhes1dvjd"]
+[gd_scene load_steps=14 format=3 uid="uid://c8noiirdmh2fo"]
 
-[ext_resource type="Script" path="res://source/explosion/explosion.gd" id="1_u4n7m"]
-[ext_resource type="Texture2D" uid="uid://0nk8u5v336u5" path="res://assets/VFX/hit_cloud/whitePuff00.png" id="2_2y5em"]
-[ext_resource type="Texture2D" uid="uid://deq8usjwqflor" path="res://assets/VFX/hit_cloud/whitePuff01.png" id="3_fcu6i"]
-[ext_resource type="Texture2D" uid="uid://dli8le3l7ntux" path="res://assets/VFX/hit_cloud/whitePuff02.png" id="4_v3xm3"]
-[ext_resource type="Texture2D" uid="uid://dsrrec2gak26t" path="res://assets/VFX/hit_cloud/whitePuff03.png" id="5_8nawr"]
-[ext_resource type="Texture2D" uid="uid://b3ssmwxcanjfr" path="res://assets/VFX/hit_cloud/whitePuff04.png" id="6_kxk4l"]
-[ext_resource type="Texture2D" uid="uid://cxygq051y3g3e" path="res://assets/VFX/hit_cloud/whitePuff05.png" id="7_mql0g"]
-[ext_resource type="Texture2D" uid="uid://chotovw8rj6bu" path="res://assets/VFX/hit_cloud/whitePuff06.png" id="8_bobwi"]
-[ext_resource type="Texture2D" uid="uid://bv0b6xun1adyx" path="res://assets/VFX/hit_cloud/whitePuff07.png" id="9_rn7dv"]
-[ext_resource type="Texture2D" uid="uid://ddae47y7ytw6t" path="res://assets/VFX/hit_cloud/whitePuff08.png" id="10_r2cvm"]
+[ext_resource type="Script" path="res://source/explosion/explosion.gd" id="1_3c4lt"]
+[ext_resource type="Texture2D" uid="uid://0nk8u5v336u5" path="res://assets/VFX/hit_cloud/whitePuff00.png" id="2_i55iq"]
+[ext_resource type="Texture2D" uid="uid://deq8usjwqflor" path="res://assets/VFX/hit_cloud/whitePuff01.png" id="3_3i1ld"]
+[ext_resource type="Texture2D" uid="uid://dli8le3l7ntux" path="res://assets/VFX/hit_cloud/whitePuff02.png" id="4_g0in3"]
+[ext_resource type="Texture2D" uid="uid://dsrrec2gak26t" path="res://assets/VFX/hit_cloud/whitePuff03.png" id="5_xdmip"]
+[ext_resource type="Texture2D" uid="uid://b3ssmwxcanjfr" path="res://assets/VFX/hit_cloud/whitePuff04.png" id="6_gkl2u"]
+[ext_resource type="Texture2D" uid="uid://cxygq051y3g3e" path="res://assets/VFX/hit_cloud/whitePuff05.png" id="7_g3skb"]
+[ext_resource type="Texture2D" uid="uid://chotovw8rj6bu" path="res://assets/VFX/hit_cloud/whitePuff06.png" id="8_6v2kh"]
+[ext_resource type="Texture2D" uid="uid://bv0b6xun1adyx" path="res://assets/VFX/hit_cloud/whitePuff07.png" id="9_tteyc"]
+[ext_resource type="Texture2D" uid="uid://ddae47y7ytw6t" path="res://assets/VFX/hit_cloud/whitePuff08.png" id="10_fatae"]
 
 [sub_resource type="Animation" id="Animation_2d2u4"]
 length = 0.001
@@ -23,7 +23,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_2y5em")]
+"values": [ExtResource("2_i55iq")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -51,7 +51,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_2y5em"), ExtResource("3_fcu6i"), ExtResource("4_v3xm3"), ExtResource("5_8nawr"), ExtResource("6_kxk4l"), ExtResource("7_mql0g"), ExtResource("8_bobwi"), ExtResource("9_rn7dv"), ExtResource("10_r2cvm")]
+"values": [ExtResource("2_i55iq"), ExtResource("3_3i1ld"), ExtResource("4_g0in3"), ExtResource("5_xdmip"), ExtResource("6_gkl2u"), ExtResource("7_g3skb"), ExtResource("8_6v2kh"), ExtResource("9_tteyc"), ExtResource("10_fatae")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -72,14 +72,15 @@ _data = {
 "explode": SubResource("Animation_xfshu")
 }
 
-[node name="Explosion" type="Node2D"]
-script = ExtResource("1_u4n7m")
+[node name="HitCloud" type="Node2D"]
+script = ExtResource("1_3c4lt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_435i2")
 }
+speed_scale = 1.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.164179, 0.164179)
-texture = ExtResource("2_2y5em")
+texture = ExtResource("2_i55iq")

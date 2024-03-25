@@ -252,12 +252,6 @@ func descrease_power_meter(delta: float, factor := 1.0) -> void:
 func take_damage(damage: int) -> void:
 	if not shield_on:
 		health -= damage
-	play_hit()
-
-
-func play_hit() -> void:
-	#Scenes.play_explosion(Scenes.EXPLOSIONS["cloud"], position)
-	pass
 
 
 func die() -> void:
