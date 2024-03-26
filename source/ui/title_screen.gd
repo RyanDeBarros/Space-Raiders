@@ -3,11 +3,13 @@ extends Control
 
 
 @onready var modulator: Control = $Modulator
+@onready var high_score_label: Label = %HighScoreLabel
 @onready var settings: Control = $Settings
 
 
 func _ready() -> void:
 	settings.modulate.a = 0.9
+	high_score_label.text = "High Score: %s" % Info.high_score
 
 
 func _on_play_button_pressed() -> void:

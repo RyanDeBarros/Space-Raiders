@@ -9,6 +9,7 @@ extends Control
 @export var camera_smoothing_slider_exp := 3.0
 
 @onready var camera_smoothing_slider: HSlider = %CameraSmoothingSlider
+@onready var reset_save_data_confirm: Button = %ResetSaveDataConfirm
 
 
 func _ready() -> void:
@@ -37,3 +38,13 @@ func toggle(on: bool) -> void:
 	
 	visible = on
 	mouse_filter = Control.MOUSE_FILTER_STOP if on else Control.MOUSE_FILTER_IGNORE
+	reset_save_data_confirm.visible = false
+
+
+func _on_reset_save_data_button_pressed() -> void:
+	reset_save_data_confirm.visible = not reset_save_data_confirm.visible
+
+
+func _on_reset_save_data_confirm_pressed() -> void:
+	Info._reset_save_data()
+	get_tree().reload_current_scene()

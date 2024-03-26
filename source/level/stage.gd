@@ -49,6 +49,7 @@ func _ready() -> void:
 	level_overlay.set_shield_bar_minimum(player.shield_initiate_fraction)
 	player.power_proj_icon_changed.connect(level_overlay.display_power_projectile_icon)
 	player.power_minimum_meter_changed.connect(_on_player_power_minimum_meter_changed)
+	player.player_died.connect(_on_player_died)
 	
 	if score_threshold_exponent < 0:
 		score_threshold_exponent = compute_score_threshold_exponent()
@@ -58,13 +59,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_text_backspace"):
+		Info.try_new_highscore(current_score)
 		get_tree().change_scene_to_packed(Scenes.TITLE_SCREEN)
-	if event.is_action_pressed("quit"):
-		get_tree().quit()
-	if event.is_action_pressed("full_screen"):
-		var fullscreen = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN\
-				if not fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	if event.is_action_pressed("toggle_minimap"):
 		level_overlay.toggle_minimap()
 
@@ -102,3 +98,8 @@ func compute_score_threshold_exponent() -> float:
 	return log((score_intermediate_threshold - score_initial_threshold) /\
 			(score_max_threshold - score_initial_threshold)) /\
 			log(score_intermediate_level / score_level_up_cap)
+
+
+func _on_player_died() -> void:
+	Info.try_new_highscore(current_score)
+	get_tree().change_scene_to_packed(Scenes.TITLE_SCREEN)

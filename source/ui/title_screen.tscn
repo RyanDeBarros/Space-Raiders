@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://yko11tyxrroh"]
+[gd_scene load_steps=11 format=3 uid="uid://yko11tyxrroh"]
 
 [ext_resource type="Script" path="res://source/ui/title_screen.gd" id="1_10v7j"]
 [ext_resource type="Texture2D" uid="uid://5sw4yhbiqyy1" path="res://assets/bkgs/black.png" id="1_bmuqh"]
@@ -8,6 +8,10 @@
 [sub_resource type="LabelSettings" id="LabelSettings_igaod"]
 font = ExtResource("2_vtldn")
 font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_nn741"]
+font = ExtResource("2_vtldn")
+font_size = 48
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8so6u"]
 bg_color = Color(0.224, 0.224, 0.35, 1)
@@ -74,6 +78,25 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "SPACE RAIDERS"
 label_settings = SubResource("LabelSettings_igaod")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="Modulator"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.5
+offset_top = 96.0
+offset_right = 108.5
+offset_bottom = 138.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "High Score: 9999"
+label_settings = SubResource("LabelSettings_nn741")
 horizontal_alignment = 1
 vertical_alignment = 1
 

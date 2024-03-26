@@ -7,6 +7,7 @@ signal shield_meter_changed(new_shield_meter: int)
 signal power_meter_changed(new_power_meter: float)
 signal power_minimum_meter_changed(new_power_minimum_meter: int)
 signal power_proj_icon_changed(name: String)
+signal player_died()
 
 
 @export_group("Movement")
@@ -262,6 +263,9 @@ func die() -> void:
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
 	explosion.position = position
 	explosion.scale *= explosion_scale_mult
+	
+	await get_tree().create_timer(1.5).timeout
+	player_died.emit()
 
 
 func projectile_hit(projectile) -> void:
