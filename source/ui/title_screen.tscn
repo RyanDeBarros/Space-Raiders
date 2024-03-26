@@ -1,0 +1,130 @@
+[gd_scene load_steps=10 format=3 uid="uid://yko11tyxrroh"]
+
+[ext_resource type="Script" path="res://source/ui/title_screen.gd" id="1_10v7j"]
+[ext_resource type="Texture2D" uid="uid://5sw4yhbiqyy1" path="res://assets/bkgs/black.png" id="1_bmuqh"]
+[ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="2_vtldn"]
+[ext_resource type="PackedScene" uid="uid://4jckmklwusca" path="res://source/ui/settings_scene.tscn" id="4_vlexi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_igaod"]
+font = ExtResource("2_vtldn")
+font_size = 128
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8so6u"]
+bg_color = Color(0.224, 0.224, 0.35, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ykx5"]
+bg_color = Color(0.1875, 0.1875, 0.25, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ide0s"]
+bg_color = Color(0.096, 0.096, 0.15, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q8sja"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_10v7j")
+
+[node name="Modulator" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Modulator"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bmuqh")
+stretch_mode = 1
+
+[node name="TitleLabel" type="Label" parent="Modulator"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -402.0
+offset_top = -256.0
+offset_right = 402.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SPACE RAIDERS"
+label_settings = SubResource("LabelSettings_igaod")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="Modulator"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -41.0
+offset_right = 74.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_vtldn")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_8so6u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8ykx5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ide0s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q8sja")
+text = "PLAY"
+
+[node name="SettingsButton" type="Button" parent="Modulator"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = 209.0
+offset_right = 65.0
+offset_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_vtldn")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_8so6u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8ykx5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ide0s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q8sja")
+text = "SETTINGS"
+
+[node name="Settings" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_vlexi")]
+visible = false
+layout_mode = 1
+parent = NodePath("..")
+
+[connection signal="pressed" from="Modulator/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Modulator/SettingsButton" to="." method="_on_settings_button_pressed"]

@@ -15,7 +15,7 @@
 		"initial_speed": 580.0,
 		"acceleration": 18.0,
 		"min_damage": 45,
-		"damage_inc": 25,
+		"damage_inc": 35,
 		"filename": "spaceMissiles_07/",
 		"minimum_power": 40
 	},

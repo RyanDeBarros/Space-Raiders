@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://4jckmklwusca"]
+
+[ext_resource type="Script" path="res://source/ui/settings_scene.gd" id="1_t3ot3"]
+[ext_resource type="Texture2D" uid="uid://8glifn4havtt" path="res://assets/ui/controls/button.png" id="2_pybp3"]
+[ext_resource type="Texture2D" uid="uid://s8a470pskcxj" path="res://assets/ui/controls/button_hover.png" id="3_1orq8"]
+[ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="4_11pch"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x30j"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_p03o4"]
+font = ExtResource("4_11pch")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_fmr27"]
+font = ExtResource("4_11pch")
+font_size = 24
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t3ot3")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = 63.0
+offset_right = -112.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2x30j")
+
+[node name="CloseButton" type="TextureButton" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -46.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 46.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_pybp3")
+texture_hover = ExtResource("3_1orq8")
+stretch_mode = 0
+
+[node name="SettingsLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 53.0
+offset_right = 20.0
+offset_bottom = 76.0
+grow_horizontal = 2
+text = "SETTINGS"
+label_settings = SubResource("LabelSettings_p03o4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CameraSmoothingSlider" type="HSlider" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -8.0
+offset_right = 101.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 246.0
+offset_right = 323.0
+offset_bottom = 275.0
+text = "Camera Smoothing"
+label_settings = SubResource("LabelSettings_fmr27")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="Panel/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="value_changed" from="Panel/CameraSmoothingSlider" to="." method="_on_camera_smoothing_slider_value_changed"]

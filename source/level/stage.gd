@@ -58,7 +58,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_text_backspace"):
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_packed(Scenes.TITLE_SCREEN)
 	if event.is_action_pressed("quit"):
 		get_tree().quit()
 	if event.is_action_pressed("full_screen"):

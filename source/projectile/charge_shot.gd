@@ -38,7 +38,7 @@ func set_sprite_image(filename: String, asset_dir := "res://assets/projectiles")
 
 func hit():
 	queue_free()
-	var explosion = Scenes.HIT_CLOUD_SCENE.instantiate()
+	var explosion = Scenes.HIT_CLOUD.instantiate()
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
 	explosion.position = position
 	explosion.scale *= hit_cloud_scale_mult

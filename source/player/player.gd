@@ -14,9 +14,6 @@ signal power_proj_icon_changed(name: String)
 @export var acceleration := 700
 @export var deceleration := 700
 
-@export_group("Camera")
-@export var camera_smoothing_ratio := 0.01
-
 @export_group("Combat")
 @export var max_health := 100
 @export var collide_damage := 50
@@ -34,7 +31,6 @@ signal power_proj_icon_changed(name: String)
 @export var power_max_meter := 100.0
 @export var power_meter_regeneration := 5.0
 @export var power_meter_consumption_rate := 20.0
-
 
 var arena_rect
 var active := true
@@ -131,7 +127,7 @@ var current_power_projectile: PowerProjectile = null:
 func _ready() -> void:
 	health = max_health
 	power_meter = power_max_meter
-	camera.position_smoothing_speed = max_speed * camera_smoothing_ratio
+	camera.position_smoothing_speed = max_speed * Settings.player_camera_smoothing
 	call_deferred("first_frame")
 
 
@@ -262,7 +258,7 @@ func die() -> void:
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.disable()
 	
-	var explosion = Scenes.EXPLOSION_SCENE.instantiate()
+	var explosion = Scenes.EXPLOSION.instantiate()
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
 	explosion.position = position
 	explosion.scale *= explosion_scale_mult

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Space Raiders"
-run/main_scene="res://source/level/sandbox.tscn"
+run/main_scene="res://source/ui/title_screen.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ Math="*res://source/autoloads/math.gd"
 Scenes="*res://source/autoloads/scenes.gd"
 Info="*res://source/autoloads/info.gd"
 Utility="*res://source/autoloads/utility.gd"
+Settings="*res://source/autoloads/settings.gd"
 
 [display]
 

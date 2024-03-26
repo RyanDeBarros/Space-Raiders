@@ -69,7 +69,7 @@ func projectile_hit(projectile: Area2D) -> void:
 
 
 func die() -> void:
-	var explosion = Scenes.EXPLOSION_SCENE.instantiate()
+	var explosion = Scenes.EXPLOSION.instantiate()
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
 	explosion.position = position
 	explosion.scale *= ufo_info["appearance"]["explosion_scale_mult"]
