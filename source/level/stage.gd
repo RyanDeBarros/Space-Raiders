@@ -30,6 +30,7 @@ var current_score: int:
 @onready var arena_collision: CollisionShape2D = $Arena/CollisionShape2D
 @onready var projectile_manager: Node2D = $ProjectileManager
 @onready var level_overlay: LevelOverlay = $Overlay/LevelOverlay
+@onready var is_game_over := false
 
 
 func _ready() -> void:
@@ -61,7 +62,8 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_text_backspace"):
 		quit_to_title_screen()
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause") and not is_game_over\
+			and not event.is_action_pressed("quit"):
 		level_overlay.display_pause_screen()
 	if event.is_action_pressed("toggle_minimap"):
 		level_overlay.toggle_minimap()
@@ -108,5 +110,7 @@ func compute_score_threshold_exponent() -> float:
 
 
 func _on_player_died() -> void:
+	is_game_over = true
 	Info.try_new_highscore(current_score)
-	get_tree().change_scene_to_packed(Scenes.TITLE_SCREEN)
+	await get_tree().create_timer(1.5).timeout
+	level_overlay.game_over()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://buomqsie1fp74"]
+[gd_scene load_steps=19 format=3 uid="uid://buomqsie1fp74"]
 
 [ext_resource type="Script" path="res://source/level/level_overlay.gd" id="1_0h2vc"]
 [ext_resource type="Texture2D" uid="uid://52xkiklkrwu6" path="res://assets/ui/bars/divider-005.png" id="1_pgffh"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://c2ttr7tbome8o" path="res://assets/ui/bars/divider-fade-000.png" id="10_jyvmn"]
 [ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="14_4dkxu"]
 [ext_resource type="PackedScene" uid="uid://itcna8l2tpq7" path="res://source/ui/pause_screen.tscn" id="15_34ixn"]
+[ext_resource type="PackedScene" uid="uid://c3fuli6qvfxfs" path="res://source/ui/game_over_screen.tscn" id="16_4tf0e"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_msbv7"]
 load_path = "res://.godot/imported/divider-001.png-fbf33adc27cc3fafca8e09188e4d296a.ctex"
@@ -339,3 +340,7 @@ visible = false
 layout_mode = 1
 mouse_filter = 2
 parent = NodePath("..")
+
+[node name="GameOverScreen" parent="." instance=ExtResource("16_4tf0e")]
+visible = false
+layout_mode = 1

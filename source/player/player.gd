@@ -120,6 +120,7 @@ var current_power_projectile: PowerProjectile = null:
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var camera: Camera2D = $Camera
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var shield: Sprite2D = $Shield
 @onready var shield_regeneration_delay: Timer = $Shield/RegenerationDelay
 @onready var projectile_info := Info.projectile_JSON["basic"] as Dictionary
@@ -253,7 +254,9 @@ func take_damage(damage: int) -> void:
 
 func die() -> void:
 	dead = true
+	player_died.emit()
 	sprite.queue_free()
+	collision_shape_2d.queue_free()
 	shield.queue_free()
 	active = false
 	for enemy in get_tree().get_nodes_in_group("enemy"):
@@ -263,9 +266,6 @@ func die() -> void:
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
 	explosion.position = position
 	explosion.scale *= explosion_scale_mult
-	
-	await get_tree().create_timer(1.5).timeout
-	player_died.emit()
 
 
 func projectile_hit(projectile) -> void:

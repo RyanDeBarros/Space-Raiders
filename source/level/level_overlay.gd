@@ -45,6 +45,7 @@ var enemy_sensors_update_index: float
 @onready var exp_bar: NinePatchRect = %ExpBar
 @onready var score_label: Label = %ScoreLabel
 @onready var pause_screen: Control = $PauseScreen
+@onready var game_over_screen: GameOverScreen = $GameOverScreen
 
 @onready var charge_shot_icon: TextureRect = %ChargeShotIcon
 @onready var burst_shot_icon: Control = %BurstShotIcon
@@ -201,3 +202,10 @@ func undisplay_pause_screen() -> void:
 func return_to_title_screen() -> void:
 	get_tree().paused = false
 	quit_to_title_screen.emit()
+
+
+func game_over() -> void:
+	game_over_screen.update_scores()
+	game_over_screen.visible = true
+	Utility.propogate_mouse_filter(game_over_screen, Control.MOUSE_FILTER_STOP)
+	modulator.modulate.a = 0.0

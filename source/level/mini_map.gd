@@ -25,7 +25,6 @@ extends Control
 @onready var se: ColorRect = $BG/SE
 
 
-
 func _process(_delta: float) -> void:
 	if visible:
 		var arena_rect_inv := Info.level_data["arena_rect_inv"] as Rect2
