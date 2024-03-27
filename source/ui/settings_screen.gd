@@ -1,4 +1,4 @@
-class_name SettingsScene
+class_name SettingsScreen
 extends Control
 
 
@@ -31,10 +31,11 @@ func _on_camera_smoothing_slider_value_changed(value: float) -> void:
 
 
 func toggle(on: bool) -> void:
-	var value := 100 * (((Settings.player_camera_smoothing - camera_smoothing_min_value)\
-			/ (camera_smoothing_max_value - camera_smoothing_min_value))\
-			** (1 / camera_smoothing_slider_exp))
-	camera_smoothing_slider.value = value
+	if on:
+		var value := 100 * (((Settings.player_camera_smoothing - camera_smoothing_min_value)\
+				/ (camera_smoothing_max_value - camera_smoothing_min_value))\
+				** (1 / camera_smoothing_slider_exp))
+		camera_smoothing_slider.value = value
 	
 	visible = on
 	mouse_filter = Control.MOUSE_FILTER_STOP if on else Control.MOUSE_FILTER_IGNORE
@@ -47,4 +48,4 @@ func _on_reset_save_data_button_pressed() -> void:
 
 func _on_reset_save_data_confirm_pressed() -> void:
 	Info._reset_save_data()
-	get_tree().reload_current_scene()
+	parent.respond_to_data_reset()

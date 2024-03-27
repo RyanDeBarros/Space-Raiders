@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://4jckmklwusca"]
 
-[ext_resource type="Script" path="res://source/ui/settings_scene.gd" id="1_t3ot3"]
-[ext_resource type="Texture2D" uid="uid://8glifn4havtt" path="res://assets/ui/controls/button.png" id="2_pybp3"]
-[ext_resource type="Texture2D" uid="uid://s8a470pskcxj" path="res://assets/ui/controls/button_hover.png" id="3_1orq8"]
-[ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="4_11pch"]
+[ext_resource type="Script" path="res://source/ui/settings_screen.gd" id="1_3gh3u"]
+[ext_resource type="Texture2D" uid="uid://8glifn4havtt" path="res://assets/ui/controls/button.png" id="2_28xed"]
+[ext_resource type="Texture2D" uid="uid://s8a470pskcxj" path="res://assets/ui/controls/button_hover.png" id="3_papfo"]
+[ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="4_nhbkk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x30j"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -13,23 +13,23 @@ corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_p03o4"]
-font = ExtResource("4_11pch")
+font = ExtResource("4_nhbkk")
 font_size = 64
 
 [sub_resource type="LabelSettings" id="LabelSettings_fmr27"]
-font = ExtResource("4_11pch")
+font = ExtResource("4_nhbkk")
 font_size = 24
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hhht"]
 
-[node name="Settings" type="Control"]
+[node name="SettingsScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_t3ot3")
+script = ExtResource("1_3gh3u")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -55,8 +55,8 @@ offset_right = -10.0
 offset_bottom = 46.0
 grow_horizontal = 0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("2_pybp3")
-texture_hover = ExtResource("3_1orq8")
+texture_normal = ExtResource("2_28xed")
+texture_hover = ExtResource("3_papfo")
 stretch_mode = 0
 
 [node name="SettingsLabel" type="Label" parent="Panel"]

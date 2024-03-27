@@ -2,6 +2,9 @@ class_name LevelOverlay
 extends Control
 
 
+signal quit_to_title_screen()
+
+
 @export var enemy_manager: EnemyManager
 
 @export_group("Health Bar", "health_bar_")
@@ -26,20 +29,22 @@ var power_bar_minimum_fraction := 0.0
 
 var enemy_sensors_update_index: float
 
-@onready var health_bar_head: TextureRect = $StatsBars/HealthBar/Head
-@onready var health_bar_tail: TextureRect = $StatsBars/HealthBar/Tail
+@onready var health_bar_head: TextureRect = $Modulator/StatsBars/HealthBar/Head
+@onready var health_bar_tail: TextureRect = $Modulator/StatsBars/HealthBar/Tail
 
-@onready var shield_bar_head: TextureRect = $StatsBars/ShieldBar/Head
-@onready var shield_bar_tail: TextureRect = $StatsBars/ShieldBar/Tail
-@onready var shield_bar_minimum: TextureRect = $StatsBars/ShieldBar/Minimum
+@onready var shield_bar_head: TextureRect = $Modulator/StatsBars/ShieldBar/Head
+@onready var shield_bar_tail: TextureRect = $Modulator/StatsBars/ShieldBar/Tail
+@onready var shield_bar_minimum: TextureRect = $Modulator/StatsBars/ShieldBar/Minimum
 
-@onready var power_bar_head: TextureRect = $StatsBars/PowerBar/Head
-@onready var power_bar_tail: TextureRect = $StatsBars/PowerBar/Tail
-@onready var power_bar_minimum: TextureRect = $StatsBars/PowerBar/Minimum
+@onready var power_bar_head: TextureRect = $Modulator/StatsBars/PowerBar/Head
+@onready var power_bar_tail: TextureRect = $Modulator/StatsBars/PowerBar/Tail
+@onready var power_bar_minimum: TextureRect = $Modulator/StatsBars/PowerBar/Minimum
 
+@onready var modulator: Control = $Modulator
 @onready var minimap: MiniMap = %MiniMap
-@onready var exp_bar: NinePatchRect = $Exp/ExpRect/ExpBar
-@onready var score_label: Label = $Exp/ScoreLabel
+@onready var exp_bar: NinePatchRect = %ExpBar
+@onready var score_label: Label = %ScoreLabel
+@onready var pause_screen: Control = $PauseScreen
 
 @onready var charge_shot_icon: TextureRect = %ChargeShotIcon
 @onready var burst_shot_icon: Control = %BurstShotIcon
@@ -161,10 +166,10 @@ func toggle_minimap() -> void:
 		enemy_sensors_update_index = -1
 
 
-func display_power_projectile_icon(name: String) -> void:
+func display_power_projectile_icon(name_: String) -> void:
 	for icon in power_proj_icons:
 		icon.visible = false
-	match name:
+	match name_:
 		"charge":
 			charge_shot_icon.visible = true
 		"burst":
@@ -175,3 +180,22 @@ func display_power_projectile_icon(name: String) -> void:
 
 func display_score(score: int) -> void:
 	score_label.text = str(score)
+
+
+func display_pause_screen() -> void:
+	get_tree().paused = true
+	pause_screen.visible = true
+	pause_screen.mouse_filter = Control.MOUSE_FILTER_STOP
+	modulator.modulate.a = 0.0
+
+
+func undisplay_pause_screen() -> void:
+	pause_screen.visible = false
+	modulator.modulate.a = 1.0
+	pause_screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	get_tree().paused = false
+
+
+func return_to_title_screen() -> void:
+	get_tree().paused = false
+	quit_to_title_screen.emit()

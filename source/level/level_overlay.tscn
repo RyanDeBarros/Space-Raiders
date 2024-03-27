@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://buomqsie1fp74"]
+[gd_scene load_steps=18 format=3 uid="uid://buomqsie1fp74"]
 
 [ext_resource type="Script" path="res://source/level/level_overlay.gd" id="1_0h2vc"]
 [ext_resource type="Texture2D" uid="uid://52xkiklkrwu6" path="res://assets/ui/bars/divider-005.png" id="1_pgffh"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dakhacbvk0w8t" path="res://assets/ui/panels/panel-border-006.png" id="9_12ook"]
 [ext_resource type="Texture2D" uid="uid://c2ttr7tbome8o" path="res://assets/ui/bars/divider-fade-000.png" id="10_jyvmn"]
 [ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="14_4dkxu"]
+[ext_resource type="PackedScene" uid="uid://itcna8l2tpq7" path="res://source/ui/pause_screen.tscn" id="15_34ixn"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_msbv7"]
 load_path = "res://.godot/imported/divider-001.png-fbf33adc27cc3fafca8e09188e4d296a.ctex"
@@ -41,21 +42,29 @@ power_bar_arrowhead_width = 52
 exp_bar_min_size_x = 48
 exp_bar_max_size_x = 2824
 
-[node name="StatsBars" type="Control" parent="."]
+[node name="Modulator" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatsBars" type="Control" parent="Modulator"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
 offset_top = -75.0
-offset_right = 219.0
+offset_right = 297.0
 offset_bottom = -5.0
 grow_vertical = 0
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(0, 70)
 mouse_filter = 2
 
-[node name="Backdrop" type="NinePatchRect" parent="StatsBars"]
+[node name="Backdrop" type="NinePatchRect" parent="Modulator/StatsBars"]
 modulate = Color(1, 1, 1, 0.352941)
 layout_mode = 0
 offset_right = 428.0
@@ -67,7 +76,7 @@ patch_margin_top = 32
 patch_margin_right = 32
 patch_margin_bottom = 32
 
-[node name="Backdrop2" type="NinePatchRect" parent="StatsBars"]
+[node name="Backdrop2" type="NinePatchRect" parent="Modulator/StatsBars"]
 self_modulate = Color(1, 1, 1, 0.352941)
 layout_mode = 0
 offset_left = 222.0
@@ -80,7 +89,7 @@ patch_margin_top = 32
 patch_margin_right = 32
 patch_margin_bottom = 32
 
-[node name="ChargeShotIcon" type="TextureRect" parent="StatsBars/Backdrop2"]
+[node name="ChargeShotIcon" type="TextureRect" parent="Modulator/StatsBars/Backdrop2"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
@@ -93,7 +102,7 @@ pivot_offset = Vector2(54, 54)
 texture = ExtResource("3_8p843")
 stretch_mode = 5
 
-[node name="CannonShotIcon" type="TextureRect" parent="StatsBars/Backdrop2"]
+[node name="CannonShotIcon" type="TextureRect" parent="Modulator/StatsBars/Backdrop2"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 12.0
@@ -105,14 +114,14 @@ pivot_offset = Vector2(54, 54)
 texture = ExtResource("5_anx4v")
 stretch_mode = 5
 
-[node name="BurstShotIcon" type="Control" parent="StatsBars/Backdrop2"]
+[node name="BurstShotIcon" type="Control" parent="Modulator/StatsBars/Backdrop2"]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BurstShotIcon1" type="TextureRect" parent="StatsBars/Backdrop2/BurstShotIcon"]
+[node name="BurstShotIcon1" type="TextureRect" parent="Modulator/StatsBars/Backdrop2/BurstShotIcon"]
 layout_mode = 0
 offset_left = -12.5213
 offset_top = 10.6888
@@ -123,7 +132,7 @@ pivot_offset = Vector2(54, 54)
 texture = ExtResource("4_2rsnf")
 stretch_mode = 5
 
-[node name="BurstShotIcon3" type="TextureRect" parent="StatsBars/Backdrop2/BurstShotIcon"]
+[node name="BurstShotIcon3" type="TextureRect" parent="Modulator/StatsBars/Backdrop2/BurstShotIcon"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 16.0
@@ -134,7 +143,7 @@ pivot_offset = Vector2(54, 54)
 texture = ExtResource("4_2rsnf")
 stretch_mode = 5
 
-[node name="BurstShotIcon2" type="TextureRect" parent="StatsBars/Backdrop2/BurstShotIcon"]
+[node name="BurstShotIcon2" type="TextureRect" parent="Modulator/StatsBars/Backdrop2/BurstShotIcon"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 6.0
@@ -145,7 +154,7 @@ pivot_offset = Vector2(54, 54)
 texture = ExtResource("4_2rsnf")
 stretch_mode = 5
 
-[node name="HealthBar" type="ColorRect" parent="StatsBars"]
+[node name="HealthBar" type="ColorRect" parent="Modulator/StatsBars"]
 modulate = Color(0, 1, 0.333333, 1)
 clip_contents = true
 layout_mode = 0
@@ -158,7 +167,7 @@ pivot_offset = Vector2(0, 24)
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Head" type="TextureRect" parent="StatsBars/HealthBar"]
+[node name="Head" type="TextureRect" parent="Modulator/StatsBars/HealthBar"]
 layout_mode = 2
 offset_left = 192.0
 offset_top = 6.0
@@ -167,7 +176,7 @@ offset_bottom = 42.0
 mouse_filter = 2
 texture = ExtResource("1_pgffh")
 
-[node name="Tail" type="TextureRect" parent="StatsBars/HealthBar"]
+[node name="Tail" type="TextureRect" parent="Modulator/StatsBars/HealthBar"]
 layout_mode = 2
 offset_top = 14.0
 offset_right = 192.0
@@ -175,7 +184,7 @@ offset_bottom = 34.0
 mouse_filter = 2
 texture = ExtResource("2_wmn45")
 
-[node name="ShieldBar" type="ColorRect" parent="StatsBars"]
+[node name="ShieldBar" type="ColorRect" parent="Modulator/StatsBars"]
 modulate = Color(0, 0.666667, 1, 1)
 clip_contents = true
 layout_mode = 0
@@ -188,7 +197,7 @@ pivot_offset = Vector2(0, 24)
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Head" type="TextureRect" parent="StatsBars/ShieldBar"]
+[node name="Head" type="TextureRect" parent="Modulator/StatsBars/ShieldBar"]
 layout_mode = 2
 offset_left = 192.0
 offset_top = 4.0
@@ -197,7 +206,7 @@ offset_bottom = 32.0
 mouse_filter = 2
 texture = ExtResource("4_f3s56")
 
-[node name="Tail" type="TextureRect" parent="StatsBars/ShieldBar"]
+[node name="Tail" type="TextureRect" parent="Modulator/StatsBars/ShieldBar"]
 layout_mode = 2
 offset_top = 8.0
 offset_right = 192.0
@@ -205,7 +214,7 @@ offset_bottom = 28.0
 mouse_filter = 2
 texture = ExtResource("2_wmn45")
 
-[node name="Minimum" type="TextureRect" parent="StatsBars/ShieldBar"]
+[node name="Minimum" type="TextureRect" parent="Modulator/StatsBars/ShieldBar"]
 layout_mode = 2
 offset_left = -94.0
 offset_top = -4.0
@@ -215,7 +224,7 @@ pivot_offset = Vector2(0, 22)
 mouse_filter = 2
 texture = SubResource("CompressedTexture2D_msbv7")
 
-[node name="PowerBar" type="ColorRect" parent="StatsBars"]
+[node name="PowerBar" type="ColorRect" parent="Modulator/StatsBars"]
 modulate = Color(0.916667, 0, 1, 1)
 clip_contents = true
 layout_mode = 0
@@ -228,7 +237,7 @@ pivot_offset = Vector2(0, 24)
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Head" type="TextureRect" parent="StatsBars/PowerBar"]
+[node name="Head" type="TextureRect" parent="Modulator/StatsBars/PowerBar"]
 layout_mode = 2
 offset_left = 192.0
 offset_right = 384.0
@@ -236,7 +245,7 @@ offset_bottom = 36.0
 mouse_filter = 2
 texture = ExtResource("5_apoye")
 
-[node name="Tail" type="TextureRect" parent="StatsBars/PowerBar"]
+[node name="Tail" type="TextureRect" parent="Modulator/StatsBars/PowerBar"]
 layout_mode = 2
 offset_top = 8.0
 offset_right = 192.0
@@ -244,7 +253,7 @@ offset_bottom = 28.0
 mouse_filter = 2
 texture = ExtResource("2_wmn45")
 
-[node name="Minimum" type="TextureRect" parent="StatsBars/PowerBar"]
+[node name="Minimum" type="TextureRect" parent="Modulator/StatsBars/PowerBar"]
 layout_mode = 2
 offset_left = -54.0
 offset_top = -4.0
@@ -254,16 +263,19 @@ pivot_offset = Vector2(0, 22)
 mouse_filter = 2
 texture = ExtResource("6_7a2av")
 
-[node name="Exp" type="Control" parent="."]
+[node name="Exp" type="Control" parent="Modulator"]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 39.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 704.0
+offset_bottom = 42.0
 grow_horizontal = 2
 scale = Vector2(0.9, 0.9)
 pivot_offset = Vector2(576, 0)
 
-[node name="ExpRect" type="NinePatchRect" parent="Exp"]
+[node name="ExpRect" type="NinePatchRect" parent="Modulator/Exp"]
 clip_contents = true
 layout_mode = 0
 offset_left = 152.4
@@ -277,7 +289,8 @@ patch_margin_top = 32
 patch_margin_right = 32
 patch_margin_bottom = 32
 
-[node name="ExpBar" type="NinePatchRect" parent="Exp/ExpRect"]
+[node name="ExpBar" type="NinePatchRect" parent="Modulator/Exp/ExpRect"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 0, 1)
 layout_mode = 0
 offset_top = 12.0
@@ -287,7 +300,9 @@ texture = ExtResource("10_jyvmn")
 patch_margin_left = 28
 patch_margin_right = 28
 
-[node name="ScoreLabel" type="Label" parent="Exp"]
+[node name="ScoreLabel" type="Label" parent="Modulator/Exp"]
+unique_name_in_owner = true
+layout_mode = 0
 offset_left = -58.0
 offset_right = 146.0
 offset_bottom = 39.0
@@ -296,18 +311,31 @@ label_settings = SubResource("LabelSettings_ce2ei")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MiniMapControl" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 937.0
-offset_top = 524.0
-offset_right = 1146.0
-offset_bottom = 642.0
+[node name="MiniMapControl" type="Control" parent="Modulator"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -214.0
+offset_top = -123.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
 scale = Vector2(0.9, 0.9)
 pivot_offset = Vector2(209, 118)
 
-[node name="MiniMap" parent="MiniMapControl" instance=ExtResource("8_ubpwb")]
+[node name="MiniMap" parent="Modulator/MiniMapControl" instance=ExtResource("8_ubpwb")]
 unique_name_in_owner = true
 layout_mode = 1
 offset_right = 946.0
 offset_bottom = 534.0
 scale = Vector2(0.181, 0.181)
+
+[node name="PauseScreen" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("15_34ixn")]
+visible = false
+layout_mode = 1
+mouse_filter = 2
+parent = NodePath("..")

@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sewky"]
 size = Vector2(3000, 3000)
 
-[node name="Sandbox" type="Node2D"]
+[node name="Sandbox" type="Node2D" groups=["main_stage"]]
 script = ExtResource("1_8a0rs")
 
 [node name="BKGLayer" type="ParallaxBackground" parent="."]

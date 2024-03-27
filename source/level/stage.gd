@@ -50,6 +50,7 @@ func _ready() -> void:
 	player.power_proj_icon_changed.connect(level_overlay.display_power_projectile_icon)
 	player.power_minimum_meter_changed.connect(_on_player_power_minimum_meter_changed)
 	player.player_died.connect(_on_player_died)
+	level_overlay.quit_to_title_screen.connect(quit_to_title_screen)
 	
 	if score_threshold_exponent < 0:
 		score_threshold_exponent = compute_score_threshold_exponent()
@@ -59,8 +60,9 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_text_backspace"):
-		Info.try_new_highscore(current_score)
-		get_tree().change_scene_to_packed(Scenes.TITLE_SCREEN)
+		quit_to_title_screen()
+	if event.is_action_pressed("pause"):
+		level_overlay.display_pause_screen()
 	if event.is_action_pressed("toggle_minimap"):
 		level_overlay.toggle_minimap()
 
@@ -83,6 +85,11 @@ func _on_player_power_minimum_meter_changed(power_minimum_meter: int) -> void:
 
 func _on_enemy_destroyed(score: int) -> void:
 	current_score += score
+
+
+func quit_to_title_screen() -> void:
+	Info.try_new_highscore(current_score)
+	get_tree().change_scene_to_packed(Scenes.TITLE_SCREEN)
 
 
 func level_up() -> void:

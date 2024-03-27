@@ -1,0 +1,209 @@
+[gd_scene load_steps=11 format=3 uid="uid://itcna8l2tpq7"]
+
+[ext_resource type="Script" path="res://source/ui/pause_screen.gd" id="1_1cx3f"]
+[ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="1_3aomv"]
+[ext_resource type="Texture2D" uid="uid://5sw4yhbiqyy1" path="res://assets/bkgs/black.png" id="2_r3j14"]
+[ext_resource type="Theme" uid="uid://ckikyjvdx5afj" path="res://resources/themes/pause_screen_button.tres" id="3_jdgve"]
+[ext_resource type="FontFile" uid="uid://dhv3bbigdjiw5" path="res://assets/fonts/Asap-Italic-VariableFont_wdth,wght.ttf" id="4_spmwj"]
+[ext_resource type="PackedScene" uid="uid://4jckmklwusca" path="res://source/ui/settings_screen.tscn" id="6_d7h45"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ca5lq"]
+bg_color = Color(0.12549, 0.12549, 0.203922, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_cn4ch"]
+font = ExtResource("1_3aomv")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_adgg0"]
+font = ExtResource("4_spmwj")
+
+[sub_resource type="LabelSettings" id="LabelSettings_45y23"]
+font = ExtResource("1_3aomv")
+font_size = 24
+
+[node name="PauseScreen" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1cx3f")
+
+[node name="BG" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r3j14")
+stretch_mode = 1
+
+[node name="PausePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 108.0
+offset_top = 61.0
+offset_right = -109.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ca5lq")
+
+[node name="PauseLabel" type="Label" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -261.5
+offset_top = 42.0
+offset_right = 262.5
+offset_bottom = 116.0
+grow_horizontal = 2
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_cn4ch")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ESCLabel" type="Label" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -261.5
+offset_top = 117.0
+offset_right = 262.5
+offset_bottom = 191.0
+grow_horizontal = 2
+text = "Press ESC to resume"
+label_settings = SubResource("LabelSettings_adgg0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -18.0
+offset_right = 69.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_jdgve")
+text = "RESUME GAME"
+
+[node name="QuitButton" type="Button" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.5
+offset_top = 57.0
+offset_right = 95.5
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_jdgve")
+text = "QUIT TO MAIN MENU"
+
+[node name="SettingsButton" type="Button" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.5
+offset_top = 132.0
+offset_right = 74.5
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_jdgve")
+text = "OPEN SETTINGS"
+
+[node name="ScoreTitleLabel" type="Label" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 117.0
+offset_top = -82.0
+offset_right = 259.0
+offset_bottom = -44.0
+grow_vertical = 2
+text = "SCORE"
+label_settings = SubResource("LabelSettings_45y23")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ScoreLabel" type="Label" parent="PausePanel/ScoreTitleLabel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 19.0
+offset_right = 142.0
+offset_bottom = 57.0
+grow_vertical = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_45y23")
+horizontal_alignment = 1
+
+[node name="HighScoreTitleLabel" type="Label" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 676.0
+offset_top = -82.0
+offset_right = 818.0
+offset_bottom = -44.0
+grow_vertical = 2
+text = "HIGH SCORE"
+label_settings = SubResource("LabelSettings_45y23")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HighScoreLabel" type="Label" parent="PausePanel/HighScoreTitleLabel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 19.0
+offset_right = 142.0
+offset_bottom = 57.0
+grow_vertical = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_45y23")
+horizontal_alignment = 1
+
+[node name="SettingsScreen" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("6_d7h45")]
+visible = false
+layout_mode = 1
+parent = NodePath("..")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="PausePanel/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PausePanel/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PausePanel/SettingsButton" to="." method="_on_settings_button_pressed"]

@@ -128,7 +128,7 @@ var current_power_projectile: PowerProjectile = null:
 func _ready() -> void:
 	health = max_health
 	power_meter = power_max_meter
-	camera.position_smoothing_speed = max_speed * Settings.player_camera_smoothing
+	update_camera_smoothing()
 	call_deferred("first_frame")
 
 
@@ -292,3 +292,8 @@ func prev_power_projectile() -> void:
 			pwp_index = (pwp_index - i) % len(pwp_list)
 			return
 		i += 1
+
+
+func update_camera_smoothing() -> void:
+	if camera:
+		camera.position_smoothing_speed = max_speed * Settings.player_camera_smoothing

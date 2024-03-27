@@ -68,3 +68,12 @@ func try_new_highscore(score: int) -> bool:
 		return true
 	else:
 		return false
+
+
+func update_score() -> int:
+	var stage := get_tree().get_first_node_in_group("main_stage") as Stage
+	return stage.current_score
+
+func update_high_score() -> int:
+	try_new_highscore(update_score())
+	return high_score
