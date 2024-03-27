@@ -17,6 +17,7 @@ func _ready() -> void:
 			/ (camera_smoothing_max_value - camera_smoothing_min_value))\
 			** (1 / camera_smoothing_slider_exp))
 	camera_smoothing_slider.value = value
+	Utility.propogate_mouse_filter(self, Control.MOUSE_FILTER_IGNORE)
 
 
 func _on_close_button_pressed() -> void:
@@ -38,7 +39,11 @@ func toggle(on: bool) -> void:
 		camera_smoothing_slider.value = value
 	
 	visible = on
-	mouse_filter = Control.MOUSE_FILTER_STOP if on else Control.MOUSE_FILTER_IGNORE
+	
+	if on:
+		Utility.propogate_mouse_filter(self, Control.MOUSE_FILTER_STOP)
+	else:
+		Utility.propogate_mouse_filter(self, Control.MOUSE_FILTER_IGNORE)
 	reset_save_data_confirm.visible = false
 
 

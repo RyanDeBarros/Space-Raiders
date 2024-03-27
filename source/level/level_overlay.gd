@@ -62,6 +62,8 @@ func _ready() -> void:
 			/ shield_bar_width
 	power_bar_minimum_fraction = (power_bar_minimum.position.x + power_bar_minimum.size.x)\
 			/ power_bar_width
+	
+	Utility.propogate_mouse_filter(self, Control.MOUSE_FILTER_IGNORE)
 
 
 func _process(delta: float) -> void:
@@ -185,14 +187,14 @@ func display_score(score: int) -> void:
 func display_pause_screen() -> void:
 	get_tree().paused = true
 	pause_screen.visible = true
-	pause_screen.mouse_filter = Control.MOUSE_FILTER_STOP
+	Utility.propogate_mouse_filter(pause_screen, Control.MOUSE_FILTER_STOP)
 	modulator.modulate.a = 0.0
 
 
 func undisplay_pause_screen() -> void:
 	pause_screen.visible = false
 	modulator.modulate.a = 1.0
-	pause_screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	Utility.propogate_mouse_filter(pause_screen, Control.MOUSE_FILTER_IGNORE)
 	get_tree().paused = false
 
 

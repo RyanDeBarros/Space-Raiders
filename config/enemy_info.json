@@ -33,7 +33,7 @@
 			"appearance": {
 				"explosion_scale_mult": 1.0
 			},
-			"max_health": 200,
+			"max_health": 175,
 			"collide": {
 				"wait_time": 1.0,
 				"damage": 50
