@@ -20,6 +20,8 @@ func _on_area_entered(area: Area2D) -> void:
 		if area is Player:
 			area.projectile_hit(self)
 			hit()
+	if area.is_in_group("asteroid"):
+		hit()
 
 
 func setup_from_node(node: Node2D, projectile_info: Dictionary, colorpng: String, rotation_offset := 1.57):

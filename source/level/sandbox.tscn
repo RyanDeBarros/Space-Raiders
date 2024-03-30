@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctxltwcj5mpeg"]
+[gd_scene load_steps=8 format=3 uid="uid://ctxltwcj5mpeg"]
 
 [ext_resource type="Script" path="res://source/level/stage.gd" id="1_8a0rs"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://source/player/player.tscn" id="2_1vmdd"]
 [ext_resource type="Texture2D" uid="uid://eahqm3cqwbbd" path="res://assets/bkgs/blue.png" id="2_lejju"]
 [ext_resource type="PackedScene" uid="uid://buomqsie1fp74" path="res://source/level/level_overlay.tscn" id="3_ecdyn"]
 [ext_resource type="PackedScene" uid="uid://rxoyafmcr1jm" path="res://source/enemy/manager/enemy_manager.tscn" id="5_fhh1b"]
+[ext_resource type="PackedScene" uid="uid://bxj524etu84et" path="res://source/asteroid/asteroid_1.tscn" id="6_0aojm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sewky"]
 size = Vector2(3000, 3000)
@@ -50,6 +51,14 @@ grow_vertical = 2
 mouse_filter = 2
 border_color = Color(0.027451, 0.831373, 0, 1)
 border_width = 20.0
+
+[node name="AsteroidManager" type="Node2D" parent="."]
+z_index = -20
+
+[node name="Asteroid1" parent="AsteroidManager" instance=ExtResource("6_0aojm")]
+position = Vector2(-176, -187)
+linear_velocity = Vector2(20, -10)
+angular_velocity = -0.2
 
 [node name="ExplosionManager" type="Node2D" parent="." groups=["explosion_manager"]]
 z_index = -40

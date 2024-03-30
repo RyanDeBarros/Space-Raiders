@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuqahkk3nq521"]
+
+[ext_resource type="Script" path="res://source/asteroid/asteroid_base.gd" id="1_uccwu"]
+[ext_resource type="PackedScene" uid="uid://6gjbgm3xmmt8" path="res://source/components/overlap_component.tscn" id="2_mf86k"]
+
+[node name="AsteroidBase" type="Area2D" groups=["asteroid"]]
+script = ExtResource("1_uccwu")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="OverlapComponent" parent="." node_paths=PackedStringArray("instance") instance=ExtResource("2_mf86k")]
+instance = NodePath("..")
+callback = "collide_player"
+target_groups = Array[String](["player"])

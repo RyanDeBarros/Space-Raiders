@@ -5,8 +5,9 @@ extends Node
 @export var instance: Area2D
 @export var callback: String
 @export var target_groups: Array[String]
+@export var collide_wait_time := 1.0
 
-var wait_time := 1.0:
+var wait_time:
 	set(value):
 		wait_time = value
 		timer.wait_time = wait_time
@@ -17,6 +18,7 @@ var target: Area2D = null
 
 
 func _ready() -> void:
+	wait_time = collide_wait_time
 	timer.timeout.connect(_delegate)
 	instance.area_entered.connect(_activate)
 	instance.area_exited.connect(_deactivate)
