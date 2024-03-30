@@ -15,3 +15,11 @@ var PROJECTILES = {
 	#"emp": preload("res://source/projectile/charge_shot.tscn"),
 	#"laser": preload("res://source/projectile/charge_shot.tscn"),
 }
+
+var ASTEROIDS = {
+	1: preload("res://source/asteroid/asteroid_1.tscn"),
+	2: preload("res://source/asteroid/asteroid_2.tscn"),
+	3: preload("res://source/asteroid/asteroid_3.tscn"),
+	4: preload("res://source/asteroid/asteroid_4.tscn"),
+	5: preload("res://source/asteroid/asteroid_5.tscn"),
+}
