@@ -33,6 +33,9 @@ signal player_died()
 @export var power_meter_regeneration := 5.0
 @export var power_meter_consumption_rate := 20.0
 
+@export_subgroup("Audio", "audio_")
+@export var audio_hit_db := -1.0
+
 var arena_rect
 var active := true
 var dead := false
@@ -138,7 +141,7 @@ func first_frame() -> void:
 	PowerProjectile.unlock(power_projectiles["charge"])
 	PowerProjectile.unlock(power_projectiles["burst"])
 	PowerProjectile.unlock(power_projectiles["cannon"])
-	pwp_index = 2
+	pwp_index = 0
 
 
 func _process(delta: float) -> void:
@@ -217,18 +220,21 @@ func shoot() -> void:
 	Info.projectile_manager.add_child(basic_shot)
 	basic_shot.setup_from_node(self, projectile_info, "red.png", 1.57)
 	basic_shot.add_to_group("player_owned")
+	AudioManager.play_sfx(AudioManager.SFX.laser_1)
 
 
 func try_enable_shield() -> void:
 	if shield_meter > shield_initiate_fraction:
 		shield_on = true
 		shield_meter -= shield_initiate_fraction
+		AudioManager.play_sfx(AudioManager.SFX.shield_up)
 
 
 func try_disable_shield() -> void:
 	if not shield_on: return
 	shield_on = false
 	shield_regeneration_delay.start()
+	AudioManager.play_sfx(AudioManager.SFX.shield_down)
 
 
 func _update_shield(delta: float) -> void:
@@ -250,6 +256,8 @@ func descrease_power_meter(delta: float, factor := 1.0) -> void:
 func take_damage(damage: int) -> void:
 	if not shield_on:
 		health -= damage
+		AudioManager.play_sfx(AudioManager.SFX.low_freq_explosion,\
+				false, Vector2.ZERO, audio_hit_db)
 
 
 func die() -> void:
@@ -266,6 +274,7 @@ func die() -> void:
 	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
 	explosion.position = position
 	explosion.scale *= explosion_scale_mult
+	AudioManager.play_sfx(AudioManager.SFX.explosion)
 
 
 func projectile_hit(projectile) -> void:
@@ -297,3 +306,7 @@ func prev_power_projectile() -> void:
 func update_camera_smoothing() -> void:
 	if camera:
 		camera.position_smoothing_speed = max_speed * Settings.player_camera_smoothing
+
+
+func camera_pos() -> Vector2:
+	return camera.global_position

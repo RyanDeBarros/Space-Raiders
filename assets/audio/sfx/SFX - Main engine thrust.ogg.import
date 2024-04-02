@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://pbhagvha7l34"
+path="res://.godot/imported/SFX - Main engine thrust.ogg-3e913ab40e2c6a67b2f1f40974efeedc.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/SFX - Main engine thrust.ogg"
+dest_files=["res://.godot/imported/SFX - Main engine thrust.ogg-3e913ab40e2c6a67b2f1f40974efeedc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -11,7 +11,7 @@ func get_all_children(node: Node, arr := [] as Array[Node]) -> Array[Node]:
 
 
 func propogate_mouse_filter(control: Control, mouse_filter: int) -> void:
-	control.mouse_filter = mouse_filter
+	control.mouse_filter = mouse_filter as Control.MouseFilter
 	for child in get_all_children(control):
 		if child is Control:
 			child.mouse_filter = mouse_filter

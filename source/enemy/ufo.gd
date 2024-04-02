@@ -7,6 +7,8 @@ signal enemy_destroyed(score: int)
 
 @export var level := 1
 @export var score := 50
+@export var audio_rel_pos_multiplier := 2.0
+@export var hit_volume_db := 20.0
 
 var ufo_info: Dictionary
 
@@ -61,11 +63,17 @@ func setup_info() -> void:
 func collide_player(player: Area2D) -> void:
 	if player:
 		player.take_damage(ufo_info["collide"]["damage"])
-		health_component.health -= player.get_collide_damage()
+		take_damage(player.get_collide_damage())
 
 
 func projectile_hit(projectile: Area2D) -> void:
-	health_component.health -= projectile.damage
+	take_damage(projectile.damage)
+
+
+func take_damage(damage: int) -> void:
+	health_component.health -= damage
+	AudioManager.play_relative_sound(AudioManager.SFX.impact_metal_1,\
+			global_position, audio_rel_pos_multiplier, hit_volume_db)
 
 
 func die() -> void:
@@ -75,6 +83,8 @@ func die() -> void:
 	explosion.scale *= ufo_info["appearance"]["explosion_scale_mult"]
 	enemy_destroyed.emit(score)
 	queue_free()
+	AudioManager.play_sfx(AudioManager.SFX.explosion, true,\
+			audio_rel_pos_multiplier * (global_position - Info.player.camera_pos()))
 
 
 func disable() -> void:

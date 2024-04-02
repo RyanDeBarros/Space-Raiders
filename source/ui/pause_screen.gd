@@ -12,8 +12,9 @@ var first_frame := true
 @onready var high_score_label: Label = %HighScoreLabel
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and not first_frame:
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause") and not first_frame\
+			and not Input.is_action_pressed("quit"):
 		if settings_screen.visible:
 			close_settings()
 		parent.undisplay_pause_screen()

@@ -7,6 +7,9 @@ signal enemy_destroyed(score: int)
 
 @export var level := 1
 @export var score := 100
+@export var audio_rel_pos_multiplier := 2.0
+@export var hit_volume_db := 10.0
+@export var shoot_volume_db := 10.0
 
 var minion_info: Dictionary
 
@@ -74,16 +77,24 @@ func shoot():
 	basic_shot.setup_from_node(self, projectile_info,
 			minion_info["combat"]["projectile_colorpng"], 1.57)
 	basic_shot.add_to_group("enemy_owned")
+	AudioManager.play_relative_sound(AudioManager.SFX.laser_2, global_position,\
+			audio_rel_pos_multiplier, shoot_volume_db)
 
 
 func collide_player(player: Area2D) -> void:
 	if player:
 		player.take_damage(minion_info["collide"]["damage"])
-		health_component.health -= player.get_collide_damage()
+		take_damage(player.get_collide_damage())
 
 
 func projectile_hit(projectile: Area2D) -> void:
-	health_component.health -= projectile.damage
+	take_damage(projectile.damage)
+
+
+func take_damage(damage: int) -> void:
+	health_component.health -= damage
+	AudioManager.play_relative_sound(AudioManager.SFX.impact_metal_1,\
+			global_position, audio_rel_pos_multiplier, hit_volume_db)
 
 
 func die() -> void:
@@ -92,6 +103,8 @@ func die() -> void:
 	explosion.position = position
 	explosion.scale *= minion_info["appearance"]["explosion_scale_mult"]
 	enemy_destroyed.emit(score)
+	AudioManager.play_relative_sound(AudioManager.SFX.explosion, global_position,\
+			audio_rel_pos_multiplier)
 	queue_free()
 
 

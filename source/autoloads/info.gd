@@ -8,13 +8,14 @@ var level_data = {
 var projectile_JSON: Dictionary
 var enemy_JSON: Dictionary
 
-var player: Area2D
+var player: Player
 var projectile_manager: Node
 
 var high_score := 0
 
 
 func _init() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	# Load projectile info
 	var file = FileAccess.open("res://config/projectile_info.json", FileAccess.READ)
 	projectile_JSON = JSON.parse_string(file.get_as_text())
