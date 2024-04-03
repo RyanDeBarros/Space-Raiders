@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dao1o3rospre7"]
+
+[ext_resource type="Script" path="res://source/components/carrier_component.gd" id="1_epmgd"]
+
+[node name="CarrierComponent" type="Node"]
+script = ExtResource("1_epmgd")

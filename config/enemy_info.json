@@ -4,6 +4,11 @@
 			"appearance": {
 				"explosion_scale_mult": 1.0
 			},
+			"score": {
+				"min": 40,
+				"median": 50,
+				"max": 70
+			},
 			"max_health": 100,
 			"collide": {
 				"wait_time": 1.0,
@@ -32,6 +37,11 @@
 		"1": {
 			"appearance": {
 				"explosion_scale_mult": 1.0
+			},
+			"score": {
+				"min": 100,
+				"median": 120,
+				"max": 150
 			},
 			"max_health": 175,
 			"collide": {

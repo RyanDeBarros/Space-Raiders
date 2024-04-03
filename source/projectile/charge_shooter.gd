@@ -58,5 +58,5 @@ func cancel_process() -> void:
 	to_shoot = false
 	build_up = false
 	build_up_damage = 0.0
-	AudioManager.play_sfx(audio_id)
+	AudioManager.cancel_stream(audio_id)
 	player.is_power_meter_consuming = false

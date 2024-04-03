@@ -27,14 +27,13 @@ var current_score: int:
 		level_overlay.set_exp_bar_proportion(fmod(current_score / current_score_threshold, 1))
 
 @onready var player: Player = $Player
-@onready var arena_collision: CollisionShape2D = $Arena/CollisionShape2D
+@onready var arena_rect: Rect2 = $Arena/ReferenceRect.get_rect()
 @onready var projectile_manager: Node2D = $ProjectileManager
 @onready var level_overlay: LevelOverlay = $Overlay/LevelOverlay
 @onready var is_game_over := false
 
 
 func _ready() -> void:
-	var arena_rect := arena_collision.shape.get_rect()
 	Info.level_data["arena_rect"] = arena_rect
 	Info.level_data["arena_rect_inv"] = Rect2(arena_rect.position.x, arena_rect.position.y,\
 			1 / arena_rect.size.x, 1 / arena_rect.size.y)

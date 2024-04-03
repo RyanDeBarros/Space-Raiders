@@ -3,7 +3,7 @@ extends Node
 
 enum SFX {
 	explosion,
-	#thrust,
+	thrust,
 	success,
 	laser_1,
 	laser_2,
@@ -23,7 +23,7 @@ enum SFX_stream {
 
 const _SFX_list = [
 	preload("res://assets/audio/sfx/SFX - Death Explosion.ogg"),
-	#preload("res://assets/audio/sfx/SFX - Main engine thrust.ogg"),
+	preload("res://assets/audio/sfx/SFX - Main engine thrust.ogg"),
 	preload("res://assets/audio/sfx/SFX - Success.ogg"),
 	preload("res://assets/audio/sfx/sfx_laser1.ogg"),
 	preload("res://assets/audio/sfx/sfx_laser2.ogg"),

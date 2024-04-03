@@ -46,16 +46,15 @@ func _process(delta: float) -> void:
 
 
 func _on_move_interval_end() -> void:
-	max_speed = Math.rand_mediani(ufo_info["speed"]["min"], ufo_info["speed"]["median"],
-			ufo_info["speed"]["max"])
-	move_interval = Math.rand_medianf(ufo_info["move_interval"]["min"],\
-			ufo_info["move_interval"]["median"], ufo_info["move_interval"]["max"])
+	max_speed = Math.rand_mediani_dict(ufo_info["speed"])
+	move_interval = Math.rand_medianf_dict(ufo_info["move_interval"])
 	move_interval_timer.start(move_interval)
 	direction = position.direction_to(Info.player.position).rotated(randf() * ufo_info["follow_spread"])
 
 
 func setup_info() -> void:
 	ufo_info = Info.enemy_JSON["ufo"][str(level)]
+	score = Math.rand_mediani_dict(ufo_info["score"])
 	overlap_component.wait_time = ufo_info["collide"]["wait_time"]
 	health_component.initial_health = ufo_info["max_health"]
 	aggro_range_squared = ufo_info["aggro_range"] ** 2

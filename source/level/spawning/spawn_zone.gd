@@ -8,10 +8,9 @@ extends Node2D
 @onready var target: ReferenceRect = $Target
 
 
-func random_spawn_state() -> Transform2D:
-	var state := Transform2D.IDENTITY
-	var origin_proportion := Vector2(randf(), randf())
-	state.origin = zone.position + zone.size * origin_proportion
-	var target_pos := target.position + target.size * origin_proportion
-	state.y = (target_pos - state.origin).normalized()
+func random_spawn_state() -> Array[Vector2]:
+	var state := [] as Array[Vector2]
+	var rect_proportion := Vector2(randf(), randf())
+	state.push_back(zone.position + zone.size * rect_proportion)
+	state.push_back(target.position + target.size * rect_proportion)
 	return state

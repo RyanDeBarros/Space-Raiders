@@ -13,8 +13,8 @@ func _ready() -> void:
 			weight_sum += spawn_zone.weight
 
 
-func random_spawn_state() -> Transform2D:
-	if weight_sum == 0: return Transform2D.IDENTITY.scaled(Vector2.ZERO)
+func random_spawn_state() -> Array[Vector2]:
+	if weight_sum == 0: return []
 	var random_weight := randi_range(1, weight_sum)
 	var i := 0
 	while spawn_zones[i].weight < random_weight:

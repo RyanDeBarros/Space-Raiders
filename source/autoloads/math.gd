@@ -17,5 +17,13 @@ func rand_medianf(min_: float, median_: float, max_: float) -> float:
 		return randf_range(median_, max_)
 
 
+func rand_mediani_dict(dict: Dictionary) -> int:
+	return rand_mediani(dict["min"], dict["median"], dict["max"])
+
+
+func rand_medianf_dict(dict: Dictionary) -> float:
+	return rand_medianf(dict["min"], dict["median"], dict["max"])
+
+
 func pm_randf(center: float, pm: float) -> float:
 	return randf_range(center - pm, center + pm)

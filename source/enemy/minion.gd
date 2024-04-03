@@ -61,6 +61,7 @@ func _on_cooldown_end():
 
 func setup_info() -> void:
 	minion_info = Info.enemy_JSON["minion"][str(level)]
+	score = Math.rand_mediani_dict(minion_info["score"])
 	overlap_component.wait_time = minion_info["collide"]["wait_time"]
 	health_component.initial_health = minion_info["max_health"]
 	range_shoot_squared = minion_info["combat"]["range"] ** 2
