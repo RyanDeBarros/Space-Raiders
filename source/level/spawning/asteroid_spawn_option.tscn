@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbt7hwp1xr7dc"]
+
+[ext_resource type="Script" path="res://source/level/spawning/asteroid_spawn_option.gd" id="1_i83no"]
+
+[node name="AsteroidSpawnOption" type="Node"]
+script = ExtResource("1_i83no")

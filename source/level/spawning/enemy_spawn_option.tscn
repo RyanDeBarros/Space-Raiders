@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://hewe37yonych"]
+
+[ext_resource type="Script" path="res://source/level/spawning/enemy_spawn_option.gd" id="1_11l60"]
+
+[node name="EnemySpawnOption" type="Node"]
+script = ExtResource("1_11l60")

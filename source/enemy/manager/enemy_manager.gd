@@ -38,5 +38,4 @@ func spawn_carried_enemy(type: BASIC_ENEMY, state: Array[Vector2], level) -> voi
 	carrier.origin = state[0]
 	carrier.target = state[1]
 	carrier.to_carry = enemy
-	carrier.max_weight_speed = 1.0
 	enemy.add_child(carrier)

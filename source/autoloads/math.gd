@@ -27,3 +27,18 @@ func rand_medianf_dict(dict: Dictionary) -> float:
 
 func pm_randf(center: float, pm: float) -> float:
 	return randf_range(center - pm, center + pm)
+
+
+func select(list: Array[Variant], caller, weight_fn) -> Variant:
+	var total_weight := 0.0
+	var weights = []
+	for v in list:
+		var weight = weight_fn.call(v)
+		weights.push_back(weight)
+		total_weight += weight
+	var r := total_weight * randf()
+	var i = 0
+	while r > weights[i]:
+		r -= weights[i]
+		i += 1
+	return list[i]

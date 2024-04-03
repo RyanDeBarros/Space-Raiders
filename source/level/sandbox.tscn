@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctxltwcj5mpeg"]
+[gd_scene load_steps=25 format=3 uid="uid://ctxltwcj5mpeg"]
 
 [ext_resource type="Script" path="res://source/level/stage.gd" id="1_8a0rs"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://source/player/player.tscn" id="2_1vmdd"]
@@ -9,6 +9,54 @@
 [ext_resource type="PackedScene" uid="uid://ckxgjeir2r1kn" path="res://source/level/spawning/spawn_zone.tscn" id="5_dn4au"]
 [ext_resource type="PackedScene" uid="uid://rxoyafmcr1jm" path="res://source/enemy/manager/enemy_manager.tscn" id="5_fhh1b"]
 [ext_resource type="Script" path="res://source/level/spawning/infinite_level_generator.gd" id="5_g3e2d"]
+[ext_resource type="PackedScene" uid="uid://hewe37yonych" path="res://source/level/spawning/enemy_spawn_option.tscn" id="7_rvv5r"]
+[ext_resource type="PackedScene" uid="uid://cbt7hwp1xr7dc" path="res://source/level/spawning/asteroid_spawn_option.tscn" id="8_6yif3"]
+[ext_resource type="PackedScene" uid="uid://bxj524etu84et" path="res://source/asteroid/asteroid_1.tscn" id="9_amwmh"]
+[ext_resource type="PackedScene" uid="uid://bh4ufhtjduh0a" path="res://source/asteroid/asteroid_2.tscn" id="10_llhlx"]
+[ext_resource type="PackedScene" uid="uid://bqfnjbr3v2t13" path="res://source/asteroid/asteroid_3.tscn" id="11_k1vdl"]
+[ext_resource type="PackedScene" uid="uid://b0y5seq02bsq0" path="res://source/asteroid/asteroid_4.tscn" id="12_qhtd5"]
+[ext_resource type="PackedScene" uid="uid://bxson2p650pnl" path="res://source/asteroid/asteroid_5.tscn" id="13_4ks03"]
+
+[sub_resource type="Curve" id="Curve_2e2gt"]
+_data = [Vector2(0, 0), 0.0, 1.5, 0, 1, Vector2(0.5, 0.75), 1.5, 0.5, 1, 1, Vector2(1, 1), 0.5, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_5p1ki"]
+min_value = 1.0
+max_value = 3.0
+_data = [Vector2(0, 3), 0.0, -2.0, 0, 1, Vector2(1, 1), -2.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_22pv4"]
+min_value = 1.0
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 2.0, 0, 1, Vector2(1, 3), 2.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_2lu2f"]
+max_value = 5.0
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_cvprs"]
+max_value = 5.0
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_yrghl"]
+max_value = 5.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_2bjef"]
+max_value = 5.0
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3skih"]
+max_value = 5.0
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Sandbox" type="Node2D" groups=["main_stage"]]
 script = ExtResource("1_8a0rs")
@@ -326,7 +374,7 @@ mouse_filter = 2
 border_color = Color(0, 0.83, 0.83, 1)
 border_width = 20.0
 
-[node name="LevelGenerator" type="Node" parent="." node_paths=PackedStringArray("arena_shape", "enemy_spawn_zone", "asteroid_spawn_zone", "enemy_manager", "asteroid_manager")]
+[node name="LevelGenerator" type="Node" parent="." node_paths=PackedStringArray("arena_shape", "enemy_spawn_zone", "asteroid_spawn_zone", "enemy_manager", "asteroid_manager", "eg_type_distribution", "ag_type_distribution")]
 script = ExtResource("5_g3e2d")
 arena_shape = NodePath("../Arena/ReferenceRect")
 enemy_spawn_zone = NodePath("../Arena/EnemySpawnZone")
@@ -334,6 +382,41 @@ asteroid_spawn_zone = NodePath("../Arena/AsteroidSpawnZone")
 enemy_manager = NodePath("../EnemyManager")
 asteroid_manager = NodePath("../AsteroidManager")
 initial_layout = "res://config/levels/sandbox/layout.json"
+pg_progression = SubResource("Curve_2e2gt")
+eg_type_distribution = [NodePath("EnemySpawnOptions/OptionUFO"), NodePath("EnemySpawnOptions/OptionMinion")]
+ag_type_distribution = [NodePath("AsteroidSpawnOptions/OptionAsteroid1"), NodePath("AsteroidSpawnOptions/OptionAsteroid2"), NodePath("AsteroidSpawnOptions/OptionAsteroid3"), NodePath("AsteroidSpawnOptions/OptionAsteroid4"), NodePath("AsteroidSpawnOptions/OptionAsteroid5")]
+
+[node name="EnemySpawnOptions" type="Node" parent="LevelGenerator"]
+
+[node name="OptionUFO" parent="LevelGenerator/EnemySpawnOptions" instance=ExtResource("7_rvv5r")]
+type_index = 0
+weight_distribution = SubResource("Curve_5p1ki")
+
+[node name="OptionMinion" parent="LevelGenerator/EnemySpawnOptions" instance=ExtResource("7_rvv5r")]
+type_index = 1
+weight_distribution = SubResource("Curve_22pv4")
+
+[node name="AsteroidSpawnOptions" type="Node" parent="LevelGenerator"]
+
+[node name="OptionAsteroid1" parent="LevelGenerator/AsteroidSpawnOptions" instance=ExtResource("8_6yif3")]
+scene = ExtResource("9_amwmh")
+weight_distribution = SubResource("Curve_2lu2f")
+
+[node name="OptionAsteroid2" parent="LevelGenerator/AsteroidSpawnOptions" instance=ExtResource("8_6yif3")]
+scene = ExtResource("10_llhlx")
+weight_distribution = SubResource("Curve_cvprs")
+
+[node name="OptionAsteroid3" parent="LevelGenerator/AsteroidSpawnOptions" instance=ExtResource("8_6yif3")]
+scene = ExtResource("11_k1vdl")
+weight_distribution = SubResource("Curve_yrghl")
+
+[node name="OptionAsteroid4" parent="LevelGenerator/AsteroidSpawnOptions" instance=ExtResource("8_6yif3")]
+scene = ExtResource("12_qhtd5")
+weight_distribution = SubResource("Curve_2bjef")
+
+[node name="OptionAsteroid5" parent="LevelGenerator/AsteroidSpawnOptions" instance=ExtResource("8_6yif3")]
+scene = ExtResource("13_4ks03")
+weight_distribution = SubResource("Curve_3skih")
 
 [node name="AsteroidManager" type="Node2D" parent="."]
 z_index = -20

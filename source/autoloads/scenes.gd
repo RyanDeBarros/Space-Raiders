@@ -7,7 +7,7 @@ const EXPLOSION := preload("res://source/explosion/explosion.tscn")
 const HIT_CLOUD := preload("res://source/explosion/hit_cloud.tscn")
 const CARRIER_COMPONENT := preload("res://source/components/carrier_component.tscn")
 
-var PROJECTILES = {
+const PROJECTILES = {
 	"basic": preload("res://source/projectile/basic_shot.tscn"),
 	"charge": preload("res://source/projectile/charge_shot.tscn"),
 	"burst": preload("res://source/projectile/basic_shot.tscn"),
@@ -17,7 +17,7 @@ var PROJECTILES = {
 	#"laser": preload("res://source/projectile/charge_shot.tscn"),
 }
 
-var ASTEROIDS = {
+const ASTEROIDS = {
 	1: preload("res://source/asteroid/asteroid_1.tscn"),
 	2: preload("res://source/asteroid/asteroid_2.tscn"),
 	3: preload("res://source/asteroid/asteroid_3.tscn"),

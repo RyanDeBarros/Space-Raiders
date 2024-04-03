@@ -12,12 +12,16 @@ func _random_asteroid_scene() -> PackedScene:
 	return Scenes.ASTEROIDS[randi_range(1, len(Scenes.ASTEROIDS))]
 
 
-func _random_basic_asteroid() -> AsteroidBase:
-	var asteroid := _random_asteroid_scene().instantiate() as AsteroidBase
+func _basic_asteroid(scene: PackedScene) -> AsteroidBase:
+	var asteroid := scene.instantiate() as AsteroidBase
 	asteroid.angular_velocity = randf_range(-max_angular_velocity, max_angular_velocity)
 	asteroid.scale = Vector2.ONE * randf_range(min_scale, max_scale)
 	add_child(asteroid)
 	return asteroid
+
+
+func _random_basic_asteroid() -> AsteroidBase:
+	return _basic_asteroid(_random_asteroid_scene())
 
 
 func spawn_random_asteroid(pos: Vector2) -> void:
@@ -35,5 +39,15 @@ func spawn_carried_random_asteroid(state: Array[Vector2]) -> void:
 	carrier.origin = state[0]
 	carrier.target = state[1]
 	carrier.to_carry = asteroid
-	carrier.max_weight_speed = 1.0
+	asteroid.add_child(carrier)
+
+
+func spawn_carried_specific_asteroid(state: Array[Vector2], scene: PackedScene):
+	var asteroid := _basic_asteroid(scene)
+	asteroid.linear_velocity = max_linear_velocity * (state[1] - state[0]).normalized().\
+			rotated(randf_range(-0.8, 0.8))
+	var carrier := Scenes.CARRIER_COMPONENT.instantiate() as CarrierComponent
+	carrier.origin = state[0]
+	carrier.target = state[1]
+	carrier.to_carry = asteroid
 	asteroid.add_child(carrier)

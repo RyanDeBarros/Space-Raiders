@@ -2,12 +2,35 @@ class_name InfiniteLevelGenerator
 extends Node
 
 
+@export_group("Exports")
 @export var arena_shape: ReferenceRect
 @export var enemy_spawn_zone: SpawnZoneAggregate
 @export var asteroid_spawn_zone: SpawnZoneAggregate
 @export var enemy_manager: EnemyManager
 @export var asteroid_manager: AsteroidManager
 @export_file("*.json") var initial_layout: String
+
+@export_group("Progress Generation", "pg_")
+@export var pg_max_progress := 100.0
+@export var pg_progression: Curve
+
+@export_group("Enemy Generation", "eg_")
+@export var eg_spawn_rate := 3.0
+@export var eg_type_distribution: Array[EnemySpawnOption]
+
+@export_group("Asteroid Generation", "ag_")
+@export var ag_spawn_rate := 4.0
+@export var ag_type_distribution: Array[AsteroidSpawnOption]
+
+var progress := 0.0
+var pg_time_index := 0.0
+var eg_spawn_index := 0.0
+var ag_spawn_index := 0.0
+
+@onready var pg_max_progress_inv := 1 / pg_max_progress
+
+@onready var enemy_spawn_options: Node = $EnemySpawnOptions
+@onready var asteroid_spawn_options: Node = $AsteroidSpawnOptions
 
 
 func _ready() -> void:
@@ -19,10 +42,6 @@ func _ready() -> void:
 
 func _first_frame(initial_layout_json) -> void:
 	_spawn_initial_layout(initial_layout_json)
-	
-	for i in range(10):
-		spawn_asteroid()
-		spawn_enemy()
 
 
 func _spawn_initial_layout(initial_layout_json) -> void:
@@ -34,13 +53,36 @@ func _spawn_initial_layout(initial_layout_json) -> void:
 
 
 func _process(delta: float) -> void:
-	pass
+	pg_time_index = minf(pg_time_index + delta, pg_max_progress)
+	progress = pg_max_progress * pg_progression.sample(pg_time_index * pg_max_progress_inv)
+	
+	eg_spawn_index += delta
+	if eg_spawn_index > eg_spawn_rate:
+		eg_spawn_index = fmod(eg_spawn_index, eg_spawn_rate)
+		spawn_enemy()
+	
+	ag_spawn_index += delta
+	if ag_spawn_index > ag_spawn_rate:
+		ag_spawn_index = fmod(ag_spawn_index, ag_spawn_rate)
+		spawn_asteroid()
 
 
 func spawn_enemy() -> void:
-	enemy_manager.spawn_carried_enemy(EnemyManager.BASIC_ENEMY.values().pick_random(),
-			enemy_spawn_zone.random_spawn_state(), 1)
+	var enemy_option := choose_option(enemy_spawn_options) as EnemySpawnOption
+	enemy_manager.spawn_carried_enemy(enemy_option.type_index,\
+			enemy_spawn_zone.random_spawn_state(),\
+			enemy_option.difficulty_distribution.sample(progress * pg_max_progress_inv))
 
 
 func spawn_asteroid() -> void:
-	asteroid_manager.spawn_carried_random_asteroid(asteroid_spawn_zone.random_spawn_state())
+	var asteroid_option := choose_option(asteroid_spawn_options) as AsteroidSpawnOption
+	asteroid_manager.spawn_carried_specific_asteroid(asteroid_spawn_zone.random_spawn_state(),\
+			asteroid_option.scene)
+
+
+func choose_option(options: Node) -> Node:
+	return Math.select(options.get_children(), self, weight_fn)
+
+
+func weight_fn(option: Node) -> float:
+	return option.weight_distribution.sample(progress * pg_max_progress_inv)

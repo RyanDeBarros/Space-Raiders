@@ -5,7 +5,7 @@ extends Node
 @export var origin: Vector2
 @export var target: Vector2
 @export var to_carry: Node2D
-@export var max_weight_speed: float
+@export var max_weight_speed := 0.3
 
 @onready var weight := 0.0
 
