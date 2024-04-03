@@ -95,6 +95,7 @@ func quit_to_title_screen() -> void:
 
 
 func level_up() -> void:
+	AudioManager.play_sfx(AudioManager.SFX.success)
 	print('level up!')
 
 

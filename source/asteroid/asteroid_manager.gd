@@ -8,19 +8,12 @@ extends Node2D
 @export var min_scale := 0.95
 
 
-func _ready() -> void:
-	spawn_random_asteroid(Vector2(-200, -200))
-	spawn_random_asteroid(Vector2(200, -200))
-	spawn_random_asteroid(Vector2(-200, 200))
-	spawn_random_asteroid(Vector2(200, 200))
-
-
-func random_asteroid_scene() -> PackedScene:
+func _random_asteroid_scene() -> PackedScene:
 	return Scenes.ASTEROIDS[randi_range(1, len(Scenes.ASTEROIDS))]
 
 
 func spawn_random_asteroid(pos: Vector2) -> void:
-	var asteroid := random_asteroid_scene().instantiate() as AsteroidBase
+	var asteroid := _random_asteroid_scene().instantiate() as AsteroidBase
 	asteroid.linear_velocity = Vector2(randf_range(-max_linear_velocity, max_linear_velocity),
 			randf_range(-max_linear_velocity, max_linear_velocity))
 	asteroid.angular_velocity = randf_range(-max_angular_velocity, max_angular_velocity)

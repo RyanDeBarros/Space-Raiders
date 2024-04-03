@@ -7,8 +7,9 @@ signal enemy_destroyed(score: int)
 
 @export var level := 1
 @export var score := 100
-@export var audio_rel_pos_multiplier := 2.0
+@export var audio_rel_pos_multiplier := 1.5
 @export var hit_volume_db := 10.0
+@export var explode_volume_db := 2.0
 @export var shoot_volume_db := 10.0
 
 var minion_info: Dictionary
@@ -104,7 +105,7 @@ func die() -> void:
 	explosion.scale *= minion_info["appearance"]["explosion_scale_mult"]
 	enemy_destroyed.emit(score)
 	AudioManager.play_relative_sound(AudioManager.SFX.explosion, global_position,\
-			audio_rel_pos_multiplier)
+			audio_rel_pos_multiplier, explode_volume_db)
 	queue_free()
 
 

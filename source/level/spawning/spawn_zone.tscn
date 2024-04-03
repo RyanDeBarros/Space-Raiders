@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckxgjeir2r1kn"]
+
+[ext_resource type="Script" path="res://source/level/spawning/spawn_zone.gd" id="1_a3f1h"]
+
+[node name="SpawnZone" type="Node2D"]
+script = ExtResource("1_a3f1h")
+
+[node name="Zone" type="ReferenceRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Target" type="ReferenceRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

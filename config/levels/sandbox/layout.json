@@ -1,0 +1,85 @@
+{
+	"enemy": [
+		{
+			"type": "ufo",
+			"x": -470,
+			"y": -200,
+			"score": 50,
+			"level": 1
+		},
+		{
+			"type": "ufo",
+			"x": -160,
+			"y": -310,
+			"score": 50,
+			"level": 1
+		},
+		{
+			"type": "ufo",
+			"x": 560,
+			"y": -300,
+			"score": 50,
+			"level": 1
+		},
+		{
+			"type": "ufo",
+			"x": 400,
+			"y": -470,
+			"score": 50,
+			"level": 1
+		},
+		{
+			"type": "ufo",
+			"x": -880,
+			"y": 345,
+			"score": 50,
+			"level": 1
+		},
+		{
+			"type": "minion",
+			"x": -590,
+			"y": 290,
+			"score": 120,
+			"level": 1
+		},
+		{
+			"type": "minion",
+			"x": -200,
+			"y": 560,
+			"score": 120,
+			"level": 1
+		},
+		{
+			"type": "minion",
+			"x": 300,
+			"y": -490,
+			"score": 120,
+			"level": 1
+		},
+		{
+			"type": "minion",
+			"x": 700,
+			"y": 0,
+			"score": 120,
+			"level": 1
+		}
+	],
+	"random_asteroid": [
+		{
+			"x": -300,
+			"y": -300
+		},
+		{
+			"x": 300,
+			"y": -300
+		},
+		{
+			"x": -300,
+			"y": 300
+		},
+		{
+			"x": 300,
+			"y": 300
+		}
+	]
+}

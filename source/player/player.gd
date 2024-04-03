@@ -228,6 +228,8 @@ func try_enable_shield() -> void:
 		shield_on = true
 		shield_meter -= shield_initiate_fraction
 		AudioManager.play_sfx(AudioManager.SFX.shield_up)
+	else:
+		AudioManager.play_sfx(AudioManager.SFX.two_tone)
 
 
 func try_disable_shield() -> void:

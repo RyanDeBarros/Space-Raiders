@@ -3,7 +3,7 @@ extends Node
 
 enum SFX {
 	explosion,
-	thrust,
+	#thrust,
 	success,
 	laser_1,
 	laser_2,
@@ -23,7 +23,7 @@ enum SFX_stream {
 
 const _SFX_list = [
 	preload("res://assets/audio/sfx/SFX - Death Explosion.ogg"),
-	preload("res://assets/audio/sfx/SFX - Main engine thrust.ogg"),
+	#preload("res://assets/audio/sfx/SFX - Main engine thrust.ogg"),
 	preload("res://assets/audio/sfx/SFX - Success.ogg"),
 	preload("res://assets/audio/sfx/sfx_laser1.ogg"),
 	preload("res://assets/audio/sfx/sfx_laser2.ogg"),
@@ -55,11 +55,13 @@ func _ready() -> void:
 	add_child(sfx_stream_dir_node)
 
 
+@warning_ignore("incompatible_ternary")
 func play_sfx(sfx: SFX, _2d := false, pos := Vector2.ZERO, vol_db := 0.0) -> void:
 	var audio = AudioStreamPlayer2D.new() if _2d else AudioStreamPlayer.new()
 	if _2d:
 		audio.position = pos
 	sfx_dir_node.add_child(audio)
+	audio.name = "SFX[%s]" % SFX.keys()[sfx]
 	audio.finished.connect(audio.queue_free)
 	audio.stream = _SFX_list[sfx]
 	audio.volume_db = vol_db
@@ -70,6 +72,7 @@ func play_relative_sound(sfx: SFX, pos: Vector2, pos_mult := 1.0, vol_db := 0.0)
 	play_sfx(sfx, true, pos_mult * (pos - Info.player.camera_pos()), vol_db)
 
 
+@warning_ignore("incompatible_ternary")
 func begin_stream(sfx_stream: SFX_stream, _2d := false, pos := Vector2.ZERO, vol_db := 0.0) -> int:
 	var audio = AudioStreamPlayer2D.new() if _2d else AudioStreamPlayer.new()
 	if _2d:
