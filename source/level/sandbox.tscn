@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ctxltwcj5mpeg"]
+[gd_scene load_steps=31 format=3 uid="uid://ctxltwcj5mpeg"]
 
 [ext_resource type="Script" path="res://source/level/stage.gd" id="1_8a0rs"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://source/player/player.tscn" id="2_1vmdd"]
@@ -27,11 +27,47 @@ max_value = 3.0
 _data = [Vector2(0, 3), 0.0, -2.0, 0, 1, Vector2(1, 1), -2.0, 0.0, 1, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_vbw5m"]
+min_value = 1.0
+max_value = 4.0
+_data = [Vector2(1e-05, 1), 0.0, 0.666676, 0, 1, Vector2(0.75, 1.5), 0.666676, 2.0, 1, 1, Vector2(1, 2), 2.0, 2.82003, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_exgie"]
+min_value = 1.0
+max_value = 4.0
+_data = [Vector2(1e-05, 1), 0.0, 3.00003, 0, 1, Vector2(1, 4), 3.00003, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0j5iq"]
+min_value = 1.0
+max_value = 4.0
+_data = [Vector2(1e-05, 1), 0.0, 5.60011, 0, 1, Vector2(0.5, 3.8), 5.60011, 0.4, 1, 1, Vector2(1, 4), 0.4, 0.0, 1, 0]
+point_count = 3
+
 [sub_resource type="Curve" id="Curve_22pv4"]
 min_value = 1.0
 max_value = 3.0
 _data = [Vector2(0, 1), 0.0, 2.0, 0, 1, Vector2(1, 3), 2.0, 0.0, 1, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_wwkp5"]
+min_value = 1.0
+max_value = 4.0
+_data = [Vector2(1e-05, 1), 0.0, 0.666676, 0, 1, Vector2(0.75, 1.5), 0.666676, 2.0, 1, 1, Vector2(1, 2), 2.0, 2.82003, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_kwgn6"]
+min_value = 1.0
+max_value = 4.0
+_data = [Vector2(1e-05, 1), 0.0, 3.00003, 0, 1, Vector2(1, 4), 3.00003, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ain7f"]
+min_value = 1.0
+max_value = 4.0
+_data = [Vector2(1e-05, 1), 0.0, 5.60011, 0, 1, Vector2(0.5, 3.8), 5.60011, 0.4, 1, 1, Vector2(1, 4), 0.4, 0.0, 1, 0]
+point_count = 3
 
 [sub_resource type="Curve" id="Curve_2lu2f"]
 max_value = 5.0
@@ -60,6 +96,12 @@ point_count = 2
 
 [node name="Sandbox" type="Node2D" groups=["main_stage"]]
 script = ExtResource("1_8a0rs")
+score_initial_threshold = null
+score_max_threshold = null
+score_level_up_cap = null
+score_threshold_exponent = null
+score_intermediate_level = null
+score_intermediate_threshold = null
 
 [node name="BKGLayer" type="ParallaxBackground" parent="."]
 
@@ -391,10 +433,16 @@ ag_type_distribution = [NodePath("AsteroidSpawnOptions/OptionAsteroid1"), NodePa
 [node name="OptionUFO" parent="LevelGenerator/EnemySpawnOptions" instance=ExtResource("7_rvv5r")]
 type_index = 0
 weight_distribution = SubResource("Curve_5p1ki")
+difficulty_lower_distribution = SubResource("Curve_vbw5m")
+difficulty_peak_distribution = SubResource("Curve_exgie")
+difficulty_upper_distribution = SubResource("Curve_0j5iq")
 
 [node name="OptionMinion" parent="LevelGenerator/EnemySpawnOptions" instance=ExtResource("7_rvv5r")]
 type_index = 1
 weight_distribution = SubResource("Curve_22pv4")
+difficulty_lower_distribution = SubResource("Curve_wwkp5")
+difficulty_peak_distribution = SubResource("Curve_kwgn6")
+difficulty_upper_distribution = SubResource("Curve_ain7f")
 
 [node name="AsteroidSpawnOptions" type="Node" parent="LevelGenerator"]
 

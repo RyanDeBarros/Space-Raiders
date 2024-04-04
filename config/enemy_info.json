@@ -2,6 +2,7 @@
 	"ufo": {
 		"1": {
 			"appearance": {
+				"texture": "ufoBlue",
 				"explosion_scale_mult": 1.0
 			},
 			"score": {
@@ -31,7 +32,106 @@
 			},
 			"aggro_range": 900,
 			"follow_spread": 0.7
-		}
+		},
+		"2": {
+			"appearance": {
+				"texture": "ufoGreen",
+				"explosion_scale_mult": 1.0
+			},
+			"score": {
+				"min": 40,
+				"median": 50,
+				"max": 70
+			},
+			"max_health": 100,
+			"collide": {
+				"wait_time": 1.0,
+				"damage": 50
+			},
+			"speed": {
+				"min": 100,
+				"median": 130,
+				"max": 160
+			},
+			"move_interval": {
+				"min": 0.5,
+				"median": 1.0,
+				"max": 2.0
+			},
+			"movement": {
+				"angular_speed": 1.0,
+				"acceleration": 20.0,
+				"deceleration": 20.0
+			},
+			"aggro_range": 900,
+			"follow_spread": 0.7
+		},
+		"3": {
+			"appearance": {
+				"texture": "ufoYellow",
+				"explosion_scale_mult": 1.0
+			},
+			"score": {
+				"min": 40,
+				"median": 50,
+				"max": 70
+			},
+			"max_health": 100,
+			"collide": {
+				"wait_time": 1.0,
+				"damage": 50
+			},
+			"speed": {
+				"min": 100,
+				"median": 130,
+				"max": 160
+			},
+			"move_interval": {
+				"min": 0.5,
+				"median": 1.0,
+				"max": 2.0
+			},
+			"movement": {
+				"angular_speed": 1.0,
+				"acceleration": 20.0,
+				"deceleration": 20.0
+			},
+			"aggro_range": 900,
+			"follow_spread": 0.7
+		},
+		"4": {
+			"appearance": {
+				"texture": "ufoRed",
+				"explosion_scale_mult": 1.0
+			},
+			"score": {
+				"min": 40,
+				"median": 50,
+				"max": 70
+			},
+			"max_health": 100,
+			"collide": {
+				"wait_time": 1.0,
+				"damage": 50
+			},
+			"speed": {
+				"min": 100,
+				"median": 130,
+				"max": 160
+			},
+			"move_interval": {
+				"min": 0.5,
+				"median": 1.0,
+				"max": 2.0
+			},
+			"movement": {
+				"angular_speed": 1.0,
+				"acceleration": 20.0,
+				"deceleration": 20.0
+			},
+			"aggro_range": 900,
+			"follow_spread": 0.7
+		},
 	},
 	"minion": {
 		"1": {
@@ -64,16 +164,103 @@
 				"projectile_info_index": "basic_slow",
 				"projectile_colorpng": "blue.png"
 			}
-		}
+		},
+		"2": {
+			"appearance": {
+				"explosion_scale_mult": 1.0
+			},
+			"score": {
+				"min": 100,
+				"median": 120,
+				"max": 150
+			},
+			"max_health": 175,
+			"collide": {
+				"wait_time": 1.0,
+				"damage": 50
+			},
+			"range": {
+				"detect": 1000,
+				"middle": 350
+			},
+			"movement": {
+				"speed_mult": 0.009,
+				"orbiting_speed": 120.0,
+				"orbital_speed_pm": 20.0
+			},
+			"combat": {
+				"cooldown": 2.0,
+				"cooldown_pm": 0.5,
+				"range": 900,
+				"projectile_info_index": "basic_slow",
+				"projectile_colorpng": "blue.png"
+			}
+		},
+		"3": {
+			"appearance": {
+				"explosion_scale_mult": 1.0
+			},
+			"score": {
+				"min": 100,
+				"median": 120,
+				"max": 150
+			},
+			"max_health": 175,
+			"collide": {
+				"wait_time": 1.0,
+				"damage": 50
+			},
+			"range": {
+				"detect": 1000,
+				"middle": 350
+			},
+			"movement": {
+				"speed_mult": 0.009,
+				"orbiting_speed": 120.0,
+				"orbital_speed_pm": 20.0
+			},
+			"combat": {
+				"cooldown": 2.0,
+				"cooldown_pm": 0.5,
+				"range": 900,
+				"projectile_info_index": "basic_slow",
+				"projectile_colorpng": "blue.png"
+			}
+		},
+		"4": {
+			"appearance": {
+				"explosion_scale_mult": 1.0
+			},
+			"score": {
+				"min": 100,
+				"median": 120,
+				"max": 150
+			},
+			"max_health": 175,
+			"collide": {
+				"wait_time": 1.0,
+				"damage": 50
+			},
+			"range": {
+				"detect": 1000,
+				"middle": 350
+			},
+			"movement": {
+				"speed_mult": 0.009,
+				"orbiting_speed": 120.0,
+				"orbital_speed_pm": 20.0
+			},
+			"combat": {
+				"cooldown": 2.0,
+				"cooldown_pm": 0.5,
+				"range": 900,
+				"projectile_info_index": "basic_slow",
+				"projectile_colorpng": "blue.png"
+			}
+		},
 	},
 	"heavy": {
-		"1": {
-			
-		}
 	},
 	"interceptor": {
-		"1": {
-			
-		}
 	}
 }

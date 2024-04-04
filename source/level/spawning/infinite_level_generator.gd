@@ -69,9 +69,12 @@ func _process(delta: float) -> void:
 
 func spawn_enemy() -> void:
 	var enemy_option := choose_option(enemy_spawn_options) as EnemySpawnOption
+	var prog := progress * pg_max_progress_inv
+	var difficulty := Math.rand_medianf(enemy_option.difficulty_lower_distribution.sample(prog),\
+			enemy_option.difficulty_peak_distribution.sample(prog),\
+			enemy_option.difficulty_upper_distribution.sample(prog))
 	enemy_manager.spawn_carried_enemy(enemy_option.type_index,\
-			enemy_spawn_zone.random_spawn_state(),\
-			enemy_option.difficulty_distribution.sample(progress * pg_max_progress_inv))
+			enemy_spawn_zone.random_spawn_state(), roundf(difficulty))
 
 
 func spawn_asteroid() -> void:

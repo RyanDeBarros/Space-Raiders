@@ -21,6 +21,7 @@ var max_speed: float
 var move_interval: float
 var aggro_range_squared: float
 
+@onready var sprite: Sprite2D = $Sprite
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var overlap_component: OverlapComponent = $OverlapComponent
 @onready var move_interval_timer: Timer = $MoveIntervalTimer
@@ -58,6 +59,7 @@ func setup_info() -> void:
 	overlap_component.wait_time = ufo_info["collide"]["wait_time"]
 	health_component.initial_health = ufo_info["max_health"]
 	aggro_range_squared = ufo_info["aggro_range"] ** 2
+	sprite.texture = load("res://assets/ships/ufos/%s.png" % ufo_info["appearance"]["texture"])
 
 
 func collide_player(player: Area2D) -> void:

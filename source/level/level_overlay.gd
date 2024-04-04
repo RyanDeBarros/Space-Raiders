@@ -181,8 +181,8 @@ func display_power_projectile_icon(name_: String) -> void:
 			cannon_shot_icon.visible = true
 
 
-func display_score(score: int) -> void:
-	score_label.text = str(score)
+func display_score(score: int, next_level_score: int) -> void:
+	score_label.text = "%s / %s" % [str(score), str(next_level_score)]
 
 
 func display_pause_screen() -> void:

@@ -14,17 +14,22 @@ extends Node2D
 
 var score_threshold_index := 0
 var current_score_threshold: float
+var modular_score := 0
 var current_score: int:
 	set(value):
+		modular_score += value - current_score
 		current_score = value
-		level_overlay.display_score(current_score)
-		if current_score > current_score_threshold:
-			current_score -= int(current_score_threshold)
+		level_overlay.display_score(current_score,\
+				current_score - modular_score + current_score_threshold)
+		while modular_score > current_score_threshold:
+			modular_score -= int(current_score_threshold)
 			level_up()
 			if score_threshold_index < score_level_up_cap:
 				score_threshold_index += 1
 			current_score_threshold = compute_score_threshold()
-		level_overlay.set_exp_bar_proportion(fmod(current_score / current_score_threshold, 1))
+			level_overlay.display_score(current_score,\
+					current_score - modular_score + current_score_threshold)
+		level_overlay.set_exp_bar_proportion(fmod(modular_score / current_score_threshold, 1))
 
 @onready var player: Player = $Player
 @onready var arena_rect: Rect2 = $Arena/ReferenceRect.get_rect()
