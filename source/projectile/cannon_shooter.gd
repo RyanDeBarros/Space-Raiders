@@ -13,7 +13,7 @@ func handle_clicked() -> void:
 		cannon_shot.projectile_image_dir = player.current_power_projectile.info["filename"]
 		Info.projectile_manager.add_child(cannon_shot)
 		cannon_shot.setup_from_node(player, player.current_power_projectile.info, "red.png", 1.57)
-		cannon_shot.add_to_group("player_owned")
+		cannon_shot.add_to_group(Groups.PLAYER_OWNED)
 		AudioManager.play_sfx(AudioManager.SFX.laser_2)
 	else:
 		AudioManager.play_sfx(AudioManager.SFX.two_tone)

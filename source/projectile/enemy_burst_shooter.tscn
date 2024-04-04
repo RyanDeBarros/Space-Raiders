@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2n8xo0fauseu"]
+
+[ext_resource type="Script" path="res://source/projectile/enemy_burst_shooter.gd" id="1_8ulg5"]
+
+[node name="EnemyBurstShooter" type="Node"]
+script = ExtResource("1_8ulg5")

@@ -42,7 +42,7 @@ func handle_released() -> void:
 		Info.projectile_manager.add_child(charge_shot)
 		charge_shot.setup_from_node(player, player.current_power_projectile.info,
 				"red.png", int(build_up_damage))
-		charge_shot.add_to_group("player_owned")
+		charge_shot.add_to_group(Groups.PLAYER_OWNED)
 		AudioManager.play_sfx(AudioManager.SFX.laser_2)
 		build_up = false
 		build_up_damage = 0.0

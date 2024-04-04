@@ -13,15 +13,15 @@ var damage: int
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if is_in_group("player_owned"):
-		if area.is_in_group("enemy"):
+	if is_in_group(Groups.PLAYER_OWNED):
+		if area.is_in_group(Groups.ENEMY):
 			area.projectile_hit(self)
 			hit()
-	elif is_in_group("enemy_owned"):
+	elif is_in_group(Groups.ENEMY_OWNED):
 		if area is Player:
 			area.projectile_hit(self)
 			hit()
-	if area.is_in_group("asteroid"):
+	if area.is_in_group(Groups.ASTEROID):
 		hit()
 
 
@@ -41,6 +41,6 @@ func set_sprite_image(filename: String, asset_dir := "res://assets/projectiles")
 func hit():
 	queue_free()
 	var explosion = Scenes.HIT_CLOUD.instantiate()
-	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
+	get_tree().get_first_node_in_group(Groups.EXPLOSION_MANAGER).add_child(explosion)
 	explosion.position = position
 	explosion.scale *= hit_cloud_scale_mult

@@ -72,7 +72,7 @@ func try_new_highscore(score: int) -> bool:
 
 
 func update_score() -> int:
-	var stage := get_tree().get_first_node_in_group("main_stage") as Stage
+	var stage := get_tree().get_first_node_in_group(Groups.MAIN_STAGE) as Stage
 	return stage.current_score
 
 

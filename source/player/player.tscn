@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlylixhmdi3g0" path="res://assets/ships/players/spaceShips_008.png" id="1_uecug"]
 [ext_resource type="Texture2D" uid="uid://cg7kt7nop4mjo" path="res://assets/game_objects/shield.svg" id="2_3cogn"]
 [ext_resource type="PackedScene" uid="uid://5l44dc4ch0fp" path="res://source/projectile/charge_shooter.tscn" id="4_ssbnr"]
-[ext_resource type="PackedScene" uid="uid://chivi4auwtdjv" path="res://source/projectile/burst_shooter.tscn" id="5_cxq1a"]
+[ext_resource type="PackedScene" uid="uid://chivi4auwtdjv" path="res://source/projectile/player_burst_shooter.tscn" id="5_xjj84"]
 [ext_resource type="PackedScene" uid="uid://beyyujbkwm1rt" path="res://source/projectile/cannon_shooter.tscn" id="6_yds1s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3touy"]
@@ -42,7 +42,7 @@ one_shot = true
 [node name="ChargeShooter" parent="Shooter" node_paths=PackedStringArray("player") instance=ExtResource("4_ssbnr")]
 player = NodePath("../..")
 
-[node name="BurstShooter" parent="Shooter" node_paths=PackedStringArray("player") instance=ExtResource("5_cxq1a")]
+[node name="BurstShooter" parent="Shooter" node_paths=PackedStringArray("player") instance=ExtResource("5_xjj84")]
 player = NodePath("../..")
 
 [node name="CannonShooter" parent="Shooter" node_paths=PackedStringArray("player") instance=ExtResource("6_yds1s")]

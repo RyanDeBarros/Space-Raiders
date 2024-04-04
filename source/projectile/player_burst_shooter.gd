@@ -1,4 +1,4 @@
-class_name BurstShooter
+class_name PlayerBurstShooter
 extends Node
 
 
@@ -22,6 +22,10 @@ func handle_clicked() -> void:
 		AudioManager.play_sfx(AudioManager.SFX.two_tone)
 
 
+func shoot() -> void:
+	pass
+
+
 func handle_released() -> void:
 	pass # Nothing on release
 
@@ -38,6 +42,6 @@ func shoot_single() -> void:
 	var burst_shot := player.current_power_projectile.packed_scene.instantiate() as BasicShot
 	burst_shot.projectile_image_dir = player.current_power_projectile.info["filename"]
 	Info.projectile_manager.add_child(burst_shot)
-	burst_shot.setup_from_node(player, player.current_power_projectile.info, "red.png", 1.57)
-	burst_shot.add_to_group("player_owned")
+	burst_shot.setup_from_node(player, player.current_power_projectile.info, "red.png")
+	burst_shot.add_to_group(Groups.PLAYER_OWNED)
 	AudioManager.play_sfx(AudioManager.SFX.laser_2)

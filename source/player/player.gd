@@ -219,7 +219,7 @@ func shoot() -> void:
 	basic_shot.projectile_image_dir = projectile_info["filename"]
 	Info.projectile_manager.add_child(basic_shot)
 	basic_shot.setup_from_node(self, projectile_info, "red.png", 1.57)
-	basic_shot.add_to_group("player_owned")
+	basic_shot.add_to_group(Groups.PLAYER_OWNED)
 	AudioManager.play_sfx(AudioManager.SFX.laser_1)
 
 
@@ -269,11 +269,11 @@ func die() -> void:
 	collision_shape_2d.queue_free()
 	shield.queue_free()
 	active = false
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	for enemy in get_tree().get_nodes_in_group(Groups.ENEMY):
 		enemy.disable()
 	
 	var explosion = Scenes.EXPLOSION.instantiate()
-	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
+	get_tree().get_first_node_in_group(Groups.EXPLOSION_MANAGER).add_child(explosion)
 	explosion.position = position
 	explosion.scale *= explosion_scale_mult
 	AudioManager.play_sfx(AudioManager.SFX.explosion)

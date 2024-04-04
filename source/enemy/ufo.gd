@@ -9,7 +9,7 @@ signal enemy_destroyed(score: int)
 @export var score := 50
 @export var audio_rel_pos_multiplier := 2.0
 @export var hit_volume_db := 20.0
-@export var explode_volume_db := 2.0
+@export var explode_volume_db := 10.0
 
 var ufo_info: Dictionary
 
@@ -28,7 +28,7 @@ var aggro_range_squared: float
 
 
 func _ready():
-	add_to_group("enemy")
+	add_to_group(Groups.ENEMY)
 	setup_info()
 	move_interval_timer.timeout.connect(_on_move_interval_end)
 	angular_dir = randi_range(0, 1) * 2 - 1
@@ -80,7 +80,7 @@ func take_damage(damage: int) -> void:
 
 func die() -> void:
 	var explosion = Scenes.EXPLOSION.instantiate()
-	get_tree().get_first_node_in_group("explosion_manager").add_child(explosion)
+	get_tree().get_first_node_in_group(Groups.EXPLOSION_MANAGER).add_child(explosion)
 	explosion.position = position
 	explosion.scale *= ufo_info["appearance"]["explosion_scale_mult"]
 	enemy_destroyed.emit(score)

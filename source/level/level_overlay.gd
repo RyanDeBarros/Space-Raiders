@@ -88,7 +88,7 @@ func update_enemy_sensors() -> void:
 	var sector_s := 0
 	
 	for child in enemy_list:
-		if child.is_in_group("enemy"):
+		if child.is_in_group(Groups.ENEMY):
 			if child.position.x > Info.player.position.x:
 				sector_e += 1
 				if child.position.y > Info.player.position.y:

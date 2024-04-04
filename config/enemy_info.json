@@ -39,19 +39,19 @@
 				"explosion_scale_mult": 1.0
 			},
 			"score": {
-				"min": 40,
-				"median": 50,
-				"max": 70
+				"min": 50,
+				"median": 65,
+				"max": 95
 			},
-			"max_health": 100,
+			"max_health": 120,
 			"collide": {
 				"wait_time": 1.0,
-				"damage": 50
+				"damage": 55
 			},
 			"speed": {
-				"min": 100,
-				"median": 130,
-				"max": 160
+				"min": 110,
+				"median": 140,
+				"max": 170
 			},
 			"move_interval": {
 				"min": 0.5,
@@ -63,8 +63,8 @@
 				"acceleration": 20.0,
 				"deceleration": 20.0
 			},
-			"aggro_range": 900,
-			"follow_spread": 0.7
+			"aggro_range": 950,
+			"follow_spread": 0.65
 		},
 		"3": {
 			"appearance": {
@@ -72,19 +72,19 @@
 				"explosion_scale_mult": 1.0
 			},
 			"score": {
-				"min": 40,
-				"median": 50,
-				"max": 70
+				"min": 80,
+				"median": 100,
+				"max": 120
 			},
-			"max_health": 100,
+			"max_health": 150,
 			"collide": {
 				"wait_time": 1.0,
-				"damage": 50
+				"damage": 60
 			},
 			"speed": {
-				"min": 100,
-				"median": 130,
-				"max": 160
+				"min": 120,
+				"median": 150,
+				"max": 180
 			},
 			"move_interval": {
 				"min": 0.5,
@@ -96,8 +96,8 @@
 				"acceleration": 20.0,
 				"deceleration": 20.0
 			},
-			"aggro_range": 900,
-			"follow_spread": 0.7
+			"aggro_range": 1000,
+			"follow_spread": 0.6
 		},
 		"4": {
 			"appearance": {
@@ -105,19 +105,19 @@
 				"explosion_scale_mult": 1.0
 			},
 			"score": {
-				"min": 40,
-				"median": 50,
-				"max": 70
-			},
-			"max_health": 100,
-			"collide": {
-				"wait_time": 1.0,
-				"damage": 50
-			},
-			"speed": {
 				"min": 100,
 				"median": 130,
-				"max": 160
+				"max": 165
+			},
+			"max_health": 200,
+			"collide": {
+				"wait_time": 1.0,
+				"damage": 65
+			},
+			"speed": {
+				"min": 130,
+				"median": 160,
+				"max": 190
 			},
 			"move_interval": {
 				"min": 0.5,
@@ -129,13 +129,14 @@
 				"acceleration": 20.0,
 				"deceleration": 20.0
 			},
-			"aggro_range": 900,
-			"follow_spread": 0.7
+			"aggro_range": 1050,
+			"follow_spread": 0.55
 		},
 	},
 	"minion": {
 		"1": {
 			"appearance": {
+				"texture": "enemyGreen3",
 				"explosion_scale_mult": 1.0
 			},
 			"score": {
@@ -154,7 +155,7 @@
 			},
 			"movement": {
 				"speed_mult": 0.009,
-				"orbiting_speed": 120.0,
+				"orbiting_speed": 124.0,
 				"orbital_speed_pm": 20.0
 			},
 			"combat": {
@@ -162,100 +163,119 @@
 				"cooldown_pm": 0.5,
 				"range": 900,
 				"projectile_info_index": "basic_slow",
-				"projectile_colorpng": "blue.png"
+				"projectile_colorpng": "blue.png",
+				"projectile_damage": 35
 			}
 		},
 		"2": {
 			"appearance": {
+				"texture": "enemyBlue3",
 				"explosion_scale_mult": 1.0
 			},
 			"score": {
-				"min": 100,
-				"median": 120,
-				"max": 150
+				"min": 120,
+				"median": 150,
+				"max": 180
 			},
-			"max_health": 175,
+			"max_health": 220,
 			"collide": {
 				"wait_time": 1.0,
-				"damage": 50
+				"damage": 55
 			},
 			"range": {
 				"detect": 1000,
 				"middle": 350
 			},
 			"movement": {
-				"speed_mult": 0.009,
-				"orbiting_speed": 120.0,
+				"speed_mult": 0.0095,
+				"orbiting_speed": 128.0,
 				"orbital_speed_pm": 20.0
 			},
 			"combat": {
-				"cooldown": 2.0,
+				"cooldown": 1.94,
 				"cooldown_pm": 0.5,
-				"range": 900,
+				"range": 940,
 				"projectile_info_index": "basic_slow",
-				"projectile_colorpng": "blue.png"
+				"projectile_colorpng": "blue.png",
+				"projectile_damage": 40
 			}
 		},
 		"3": {
 			"appearance": {
+				"texture": "enemyRed3",
 				"explosion_scale_mult": 1.0
 			},
 			"score": {
-				"min": 100,
-				"median": 120,
-				"max": 150
+				"min": 180,
+				"median": 210,
+				"max": 250
 			},
-			"max_health": 175,
+			"max_health": 260,
 			"collide": {
 				"wait_time": 1.0,
-				"damage": 50
+				"damage": 60
 			},
 			"range": {
 				"detect": 1000,
 				"middle": 350
 			},
 			"movement": {
-				"speed_mult": 0.009,
-				"orbiting_speed": 120.0,
+				"speed_mult": 0.01,
+				"orbiting_speed": 132.0,
 				"orbital_speed_pm": 20.0
 			},
 			"combat": {
-				"cooldown": 2.0,
+				"cooldown": 1.88,
 				"cooldown_pm": 0.5,
-				"range": 900,
+				"range": 980,
 				"projectile_info_index": "basic_slow",
-				"projectile_colorpng": "blue.png"
+				"projectile_colorpng": "blue.png",
+				"projectile_damage": 45
 			}
 		},
 		"4": {
 			"appearance": {
+				"texture": "enemyBlack3",
 				"explosion_scale_mult": 1.0
 			},
 			"score": {
-				"min": 100,
-				"median": 120,
-				"max": 150
+				"min": 240,
+				"median": 270,
+				"max": 310
 			},
-			"max_health": 175,
+			"max_health": 300,
 			"collide": {
 				"wait_time": 1.0,
-				"damage": 50
+				"damage": 65
 			},
 			"range": {
 				"detect": 1000,
 				"middle": 350
 			},
 			"movement": {
-				"speed_mult": 0.009,
-				"orbiting_speed": 120.0,
+				"speed_mult": 0.0105,
+				"orbiting_speed": 136.0,
 				"orbital_speed_pm": 20.0
 			},
 			"combat": {
-				"cooldown": 2.0,
+				"cooldown": 1.9,
 				"cooldown_pm": 0.5,
-				"range": 900,
-				"projectile_info_index": "basic_slow",
-				"projectile_colorpng": "blue.png"
+				"range": 1020,
+				"projectile_info_index": "burst",
+				"burst_info": {
+					"initial_speed": 500.0,
+					"acceleration": 10.0,
+					"damage": 50,
+					"num": {
+						"min": 2,
+						"med": 4,
+						"max": 5
+					},
+					"await_time": 0.05,
+					"reload_time": 0.3,
+					"filename": "spaceMissiles_05/",
+					"colorpng": "green.png",
+				}
 			}
 		},
 	},
