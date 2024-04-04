@@ -21,6 +21,14 @@ enum SFX_stream {
 	charge_up
 }
 
+enum SONGS {
+	The_Benjerman,
+	Overall_Control,
+	Spaceman,
+	Nightfall,
+	The_Maze
+}
+
 const _SFX_list = [
 	preload("res://assets/audio/sfx/SFX - Death Explosion.ogg"),
 	preload("res://assets/audio/sfx/SFX - Main engine thrust.ogg"),
@@ -41,9 +49,21 @@ const _SFX_stream_list = [
 	preload("res://assets/audio/sfx/spaceEngine_002.ogg"),
 ]
 
+const _SONGS_list = [
+	preload("res://assets/audio/soundtrack/Enigmatic Legend - The Benjerman.mp3"),
+	preload("res://assets/audio/soundtrack/Fionn Hodgson - Overall Control (DJDroidFreak Promotion).mp3"),
+	preload("res://assets/audio/soundtrack/NIGHTkilla - Spaceman.mp3"),
+	preload("res://assets/audio/soundtrack/Nightkilla-Nightfall.mp3"),
+	preload("res://assets/audio/soundtrack/Rukkus - The Maze.mp3")
+]
+
 var sfx_dir_node: Node
 var sfx_stream_dir_node: Node
 var _stream_id := 0
+
+var soundtrack_player: AudioStreamPlayer
+var playlist: Array
+var _playlist_id := 0
 
 
 func _ready() -> void:
@@ -51,8 +71,20 @@ func _ready() -> void:
 	sfx_dir_node.name = "SFX Directory"
 	sfx_stream_dir_node = Node.new()
 	sfx_stream_dir_node.name = "SFX Stream Directory"
+	soundtrack_player = AudioStreamPlayer.new()
+	soundtrack_player.name = "Soundtrack Player"
+	soundtrack_player.finished.connect(_on_song_end)
 	add_child(sfx_dir_node)
 	add_child(sfx_stream_dir_node)
+	add_child(soundtrack_player)
+	
+	setup_playlist([SONGS.The_Benjerman, SONGS.Nightfall])
+
+
+func _on_song_end() -> void:
+	_playlist_id = (_playlist_id + 1) % len(playlist)
+	soundtrack_player.stream = playlist[_playlist_id]
+	soundtrack_player.play()
 
 
 @warning_ignore("incompatible_ternary")
@@ -98,3 +130,14 @@ func cancel_stream(id: int) -> bool:
 
 func stream_name(id: int) -> String:
 	return "AudioStream#%s" % str(id)
+
+
+func setup_playlist(songs: Array[SONGS], starting_id := 0, start_playing := true) -> void:
+	playlist.clear()
+	for song in songs:
+		playlist.push_back(_SONGS_list[song])
+	_playlist_id = starting_id
+	if start_playing:
+		soundtrack_player.stream = playlist[_playlist_id]
+		soundtrack_player.play()
+

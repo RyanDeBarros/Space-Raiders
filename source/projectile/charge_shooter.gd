@@ -15,7 +15,7 @@ var audio_id := -1
 
 func _process(delta: float) -> void:
 	if active and build_up:
-		player.descrease_power_meter(delta)
+		player.descrease_power_meter(delta * player.current_power_projectile.info["consume_rate"])
 		if player.power_meter == 0.0:
 			build_up = false
 		build_up_damage += player.current_power_projectile.info["damage_inc"] * delta
