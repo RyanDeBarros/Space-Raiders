@@ -22,6 +22,9 @@ var angular_velocity: float
 var proj_dict: Dictionary
 var projectile_info: Dictionary
 
+var patrol_target_rect: Rect2
+var patrol_target_point: Vector2
+
 @onready var sprite: Sprite2D = $Sprite
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var overlap_component: OverlapComponent = $OverlapComponent
@@ -36,6 +39,12 @@ func _ready() -> void:
 	angular_velocity = Math.pm_randf(minion_info["movement"]["orbiting_speed"][level_index],
 			minion_info["movement"]["orbital_speed_pm"]) * (randi_range(0, 1) * 2 - 1)
 	cooldown_timer.timeout.connect(_on_cooldown_end)
+	
+	call_deferred("_first_frame")
+
+
+func _first_frame() -> void:
+	next_patrol_target()
 
 
 func _process(delta: float) -> void:
@@ -50,6 +59,16 @@ func _process(delta: float) -> void:
 		var orbital_velocity := direction.rotated(1.57) * angular_velocity * delta
 		position += range_velocity + orbital_velocity
 		rotation = direction.angle() + 1.57
+	else:
+		# Move to patrol target zone
+		var delta_angle := Math.angle_diff(rotation + 1.57,\
+				(patrol_target_point - position).angle())
+		rotation += minf(delta * minion_info["patrol"]["turn_rate"], delta_angle)
+		var delta_move := patrol_target_point - position
+		position += minf(delta * minion_info["patrol"]["move_rate_qdr"],\
+				delta_move.length_squared()) * delta_move.normalized()
+		if delta_move.length_squared() < minion_info["patrol"]["threshold_qdr"]:
+			next_patrol_target()
 	
 	# Combat
 	if active and quadrance <= range_shoot_squared:
@@ -74,7 +93,7 @@ func setup_info() -> void:
 	overlap_component.wait_time = minion_info["collide"]["wait_time"]
 	health_component.initial_health = minion_info["max_health"][level_index]
 	range_shoot_squared = minion_info["combat"]["range"][level_index] ** 2
-	range_squared_detect = minion_info["range"]["detect"] ** 2
+	range_squared_detect = minion_info["range"]["detect"][level_index] ** 2
 	
 	cooldown_timer.wait_time = Math.pm_randf(minion_info["combat"]["cooldown"][level_index],
 			minion_info["combat"]["cooldown_pm"])
@@ -141,3 +160,11 @@ func disable() -> void:
 	overlap_component.disable()
 	active = false
 	cooldown_timer.stop()
+
+
+func next_patrol_target() -> void:
+	var target_rects := Info.main_stage.patrol_target_rects.duplicate() as Array[Rect2]
+	target_rects.erase(patrol_target_rect)
+	patrol_target_rect = target_rects.pick_random()
+	patrol_target_point.x = patrol_target_rect.position.x + patrol_target_rect.size.x * randf()
+	patrol_target_point.y = patrol_target_rect.position.y + patrol_target_rect.size.y * randf()

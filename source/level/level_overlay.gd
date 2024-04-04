@@ -29,6 +29,8 @@ var power_bar_minimum_fraction := 0.0
 
 var enemy_sensors_update_index: float
 
+var leveling_up := false
+
 @onready var health_bar_head: TextureRect = $Modulator/StatsBars/HealthBar/Head
 @onready var health_bar_tail: TextureRect = $Modulator/StatsBars/HealthBar/Tail
 
@@ -196,7 +198,8 @@ func undisplay_pause_screen() -> void:
 	pause_screen.visible = false
 	modulator.modulate.a = 1.0
 	Utility.propogate_mouse_filter(pause_screen, Control.MOUSE_FILTER_IGNORE)
-	get_tree().paused = false
+	if not leveling_up:
+		get_tree().paused = false
 
 
 func return_to_title_screen() -> void:

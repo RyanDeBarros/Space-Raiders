@@ -78,7 +78,8 @@ func _ready() -> void:
 	add_child(sfx_stream_dir_node)
 	add_child(soundtrack_player)
 	
-	setup_playlist([SONGS.The_Benjerman, SONGS.Nightfall])
+	if Debug.SOUNDTRACK_ON_START:
+		setup_playlist([SONGS.The_Benjerman, SONGS.Nightfall])
 
 
 func _on_song_end() -> void:

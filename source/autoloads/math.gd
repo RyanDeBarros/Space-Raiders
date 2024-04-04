@@ -1,6 +1,14 @@
 extends Node
 
 
+# Geometry
+
+## Signed difference between two radian angles each on [0, 2 * PI], in the interval [-pi, pi]
+func angle_diff(from: float, to: float) -> float:
+	var zero_to_2pi := to - from
+	return zero_to_2pi if zero_to_2pi < PI else zero_to_2pi - 2 * PI
+
+
 # RNG
 
 func rand_mediani(min_: int, median_: int, max_: int) -> int:

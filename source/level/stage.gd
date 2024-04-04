@@ -2,6 +2,8 @@ class_name Stage
 extends Node2D
 
 
+@export var patrol_target_zones: Node2D
+
 @export_group("Score", "score_")
 @export var score_initial_threshold := 500.0
 @export var score_max_threshold := 5000.0
@@ -31,6 +33,8 @@ var current_score: int:
 					int(current_score - modular_score + current_score_threshold))
 		level_overlay.set_exp_bar_proportion(fmod(modular_score / current_score_threshold, 1))
 
+var patrol_target_rects: Array[Rect2]
+
 @onready var player: Player = $Player
 @onready var arena_rect: Rect2 = $Arena/ReferenceRect.get_rect()
 @onready var projectile_manager: Node2D = $ProjectileManager
@@ -44,6 +48,7 @@ func _ready() -> void:
 			1 / arena_rect.size.x, 1 / arena_rect.size.y)
 	Info.player = player
 	Info.projectile_manager = projectile_manager
+	Info.main_stage = self
 	
 	Input.set_default_cursor_shape(Input.CURSOR_CROSS)
 	player.setup_camera_limits()
@@ -61,6 +66,10 @@ func _ready() -> void:
 		score_threshold_exponent = compute_score_threshold_exponent()
 	current_score_threshold = compute_score_threshold()
 	current_score = 0
+	
+	for refrect in patrol_target_zones.get_children():
+		if refrect is ReferenceRect:
+			patrol_target_rects.push_back(refrect.get_rect())
 
 
 func _input(event: InputEvent) -> void:

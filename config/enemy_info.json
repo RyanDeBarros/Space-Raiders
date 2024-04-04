@@ -48,13 +48,18 @@
 			"damage": [50, 55, 60, 65]
 		},
 		"range": {
-			"detect": 1000,
+			"detect": [900, 940, 980, 1020],
 			"middle": [350, 360, 370, 380]
 		},
 		"movement": {
 			"speed_mult": [0.009, 0.0095, 0.01, 0.0105],
 			"orbiting_speed": [124, 128, 132, 136],
 			"orbital_speed_pm": 20
+		},
+		"patrol": {
+			"turn_rate": 0.3,
+			"move_rate_qdr": 100.0,
+			"threshold_qdr": 50.0
 		},
 		"combat": {
 			"cooldown": [2.0, 1.94, 1.88, 1.9],

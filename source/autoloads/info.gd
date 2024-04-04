@@ -8,6 +8,7 @@ var level_data = {
 var projectile_JSON: Dictionary
 var enemy_JSON: Dictionary
 
+var main_stage: Stage
 var player: Player
 var projectile_manager: Node
 

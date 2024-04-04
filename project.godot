@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Debug="*res://source/autoloads/debug.gd"
 Math="*res://source/autoloads/math.gd"
 Scenes="*res://source/autoloads/scenes.gd"
 Info="*res://source/autoloads/info.gd"

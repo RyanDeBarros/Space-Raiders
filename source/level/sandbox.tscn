@@ -94,8 +94,9 @@ max_value = 5.0
 _data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Sandbox" type="Node2D" groups=["main_stage"]]
+[node name="Sandbox" type="Node2D" node_paths=PackedStringArray("patrol_target_zones") groups=["main_stage"]]
 script = ExtResource("1_8a0rs")
+patrol_target_zones = NodePath("Arena/PatrolTargetZones")
 
 [node name="BKGLayer" type="ParallaxBackground" parent="."]
 
@@ -159,9 +160,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1400.0
+offset_left = -1510.0
 offset_top = -1400.0
-offset_right = -1300.0
+offset_right = -1410.0
 offset_bottom = 1400.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -194,9 +195,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -1400.0
-offset_top = -1400.0
+offset_top = -1510.0
 offset_right = 1400.0
-offset_bottom = -1300.0
+offset_bottom = -1410.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -227,9 +228,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1300.0
+offset_left = 1410.0
 offset_top = -1400.0
-offset_right = 1400.0
+offset_right = 1510.0
 offset_bottom = 1400.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -262,9 +263,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -1400.0
-offset_top = 1300.0
+offset_top = 1410.0
 offset_right = 1400.0
-offset_bottom = 1400.0
+offset_bottom = 1510.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -410,6 +411,44 @@ mouse_filter = 2
 border_color = Color(0, 0.83, 0.83, 1)
 border_width = 20.0
 
+[node name="PatrolTargetZones" type="Node2D" parent="Arena"]
+
+[node name="PatrolTargetZone1" type="ReferenceRect" parent="Arena/PatrolTargetZones"]
+offset_left = -1000.0
+offset_top = -1000.0
+offset_right = -500.0
+offset_bottom = -500.0
+pivot_offset = Vector2(250, 250)
+border_color = Color(1, 0.666667, 0, 1)
+border_width = 20.0
+
+[node name="PatrolTargetZone2" type="ReferenceRect" parent="Arena/PatrolTargetZones"]
+offset_left = 500.0
+offset_top = -1000.0
+offset_right = 1000.0
+offset_bottom = -500.0
+pivot_offset = Vector2(250, 250)
+border_color = Color(1, 0.666667, 0, 1)
+border_width = 20.0
+
+[node name="PatrolTargetZone3" type="ReferenceRect" parent="Arena/PatrolTargetZones"]
+offset_left = -1000.0
+offset_top = 500.0
+offset_right = -500.0
+offset_bottom = 1000.0
+pivot_offset = Vector2(250, 250)
+border_color = Color(1, 0.666667, 0, 1)
+border_width = 20.0
+
+[node name="PatrolTargetZone4" type="ReferenceRect" parent="Arena/PatrolTargetZones"]
+offset_left = 500.0
+offset_top = 500.0
+offset_right = 1000.0
+offset_bottom = 1000.0
+pivot_offset = Vector2(250, 250)
+border_color = Color(1, 0.666667, 0, 1)
+border_width = 20.0
+
 [node name="LevelGenerator" type="Node" parent="." node_paths=PackedStringArray("arena_shape", "enemy_spawn_zone", "asteroid_spawn_zone", "enemy_manager", "asteroid_manager", "eg_type_distribution", "ag_type_distribution")]
 script = ExtResource("5_g3e2d")
 arena_shape = NodePath("../Arena/ReferenceRect")
@@ -420,7 +459,9 @@ asteroid_manager = NodePath("../AsteroidManager")
 initial_layout = "res://config/levels/sandbox/layout.json"
 pg_max_progress = 200.0
 pg_progression = SubResource("Curve_2e2gt")
+eg_spawn_rate = 2.5
 eg_type_distribution = [NodePath("EnemySpawnOptions/OptionUFO"), NodePath("EnemySpawnOptions/OptionMinion")]
+ag_spawn_rate = 3.5
 ag_type_distribution = [NodePath("AsteroidSpawnOptions/OptionAsteroid1"), NodePath("AsteroidSpawnOptions/OptionAsteroid2"), NodePath("AsteroidSpawnOptions/OptionAsteroid3"), NodePath("AsteroidSpawnOptions/OptionAsteroid4"), NodePath("AsteroidSpawnOptions/OptionAsteroid5")]
 
 [node name="EnemySpawnOptions" type="Node" parent="LevelGenerator"]
