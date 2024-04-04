@@ -4,17 +4,19 @@ extends Node
 # RNG
 
 func rand_mediani(min_: int, median_: int, max_: int) -> int:
-	if randf() < 0.5:
-		return randi_range(min_, median_)
+	var r = randf()
+	if r < 0.5:
+		return int(2 * (median_ - min_) * r + min_)
 	else:
-		return randi_range(median_, max_)
+		return int(2 * (max_ - median_) * r + 2 * median_ - max_)
 
 
 func rand_medianf(min_: float, median_: float, max_: float) -> float:
-	if randf() < 0.5:
-		return randf_range(min_, median_)
+	var r = randf()
+	if r < 0.5:
+		return 2 * (median_ - min_) * r + min_
 	else:
-		return randf_range(median_, max_)
+		return 2 * (max_ - median_) * r + 2 * median_ - max_
 
 
 func rand_mediani_dict(dict: Dictionary) -> int:

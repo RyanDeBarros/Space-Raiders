@@ -5,7 +5,7 @@ extends Area2D
 signal enemy_destroyed(score: int)
 
 
-@export var level := 1
+@export var level := 0
 @export var score := 50
 @export var audio_rel_pos_multiplier := 2.0
 @export var hit_volume_db := 20.0
@@ -14,6 +14,7 @@ signal enemy_destroyed(score: int)
 var ufo_info: Dictionary
 
 var active := true
+var level_index: int
 var angular_dir: int
 var direction := Vector2.ZERO
 var speed: float
@@ -28,6 +29,7 @@ var aggro_range_squared: float
 
 
 func _ready():
+	level_index = level - 1
 	add_to_group(Groups.ENEMY)
 	setup_info()
 	move_interval_timer.timeout.connect(_on_move_interval_end)
@@ -47,24 +49,28 @@ func _process(delta: float) -> void:
 
 
 func _on_move_interval_end() -> void:
-	max_speed = Math.rand_mediani_dict(ufo_info["speed"])
+	max_speed = Math.rand_mediani(ufo_info["speed"]["min"][level_index],\
+			ufo_info["speed"]["median"][level_index], ufo_info["speed"]["max"][level_index])
 	move_interval = Math.rand_medianf_dict(ufo_info["move_interval"])
 	move_interval_timer.start(move_interval)
-	direction = position.direction_to(Info.player.position).rotated(randf() * ufo_info["follow_spread"])
+	direction = position.direction_to(Info.player.position).\
+			rotated(randf() * ufo_info["follow_spread"][level_index])
 
 
 func setup_info() -> void:
-	ufo_info = Info.enemy_JSON["ufo"][str(level)]
-	score = Math.rand_mediani_dict(ufo_info["score"])
+	ufo_info = Info.enemy_JSON["ufo"]
+	score = Math.rand_mediani(ufo_info["score"]["min"][level_index],\
+			ufo_info["score"]["median"][level_index], ufo_info["score"]["max"][level_index])
 	overlap_component.wait_time = ufo_info["collide"]["wait_time"]
-	health_component.initial_health = ufo_info["max_health"]
-	aggro_range_squared = ufo_info["aggro_range"] ** 2
-	sprite.texture = load("res://assets/ships/ufos/%s.png" % ufo_info["appearance"]["texture"])
+	health_component.initial_health = ufo_info["max_health"][level_index]
+	aggro_range_squared = ufo_info["aggro_range"][level_index] ** 2
+	sprite.texture = load("res://assets/ships/ufos/%s.png"\
+			% ufo_info["appearance"]["texture"][level_index])
 
 
 func collide_player(player: Area2D) -> void:
 	if player:
-		player.take_damage(ufo_info["collide"]["damage"])
+		player.take_damage(ufo_info["collide"]["damage"][level_index])
 		take_damage(player.get_collide_damage())
 
 

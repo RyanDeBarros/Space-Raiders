@@ -12,6 +12,7 @@ extends Node
 @export var initial_speed: float
 @export var acceleration: float
 @export var damage: int
+@export var max_spread: float
 
 var shooting := false
 
@@ -22,6 +23,9 @@ func _shoot_single() -> void:
 	Info.projectile_manager.add_child(burst_shot)
 	burst_shot.setup_from_node_nodict(enemy, initial_speed, acceleration, damage, colorpng)
 	burst_shot.add_to_group(Groups.ENEMY_OWNED)
+	var spread := Math.rand_medianf(-max_spread, 0, max_spread)
+	burst_shot.projectile_motion.sync_velocity(burst_shot.projectile_motion.velocity *\
+			burst_shot.projectile_motion.velocity_dir.rotated(spread))
 	AudioManager.play_sfx(AudioManager.SFX.laser_2)
 
 

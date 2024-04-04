@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dhefhl260jl66" path="res://assets/asteroids/meteorGrey_med1.png" id="2_wv3aj"]
 
 [node name="Asteroid4" instance=ExtResource("1_j3jok")]
+damage = 10.0
 collision_rect_bounds = Rect2(0, 0, 43, 42)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]

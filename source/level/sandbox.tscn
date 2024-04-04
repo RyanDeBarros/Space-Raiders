@@ -418,6 +418,7 @@ asteroid_spawn_zone = NodePath("../Arena/AsteroidSpawnZone")
 enemy_manager = NodePath("../EnemyManager")
 asteroid_manager = NodePath("../AsteroidManager")
 initial_layout = "res://config/levels/sandbox/layout.json"
+pg_max_progress = 200.0
 pg_progression = SubResource("Curve_2e2gt")
 eg_type_distribution = [NodePath("EnemySpawnOptions/OptionUFO"), NodePath("EnemySpawnOptions/OptionMinion")]
 ag_type_distribution = [NodePath("AsteroidSpawnOptions/OptionAsteroid1"), NodePath("AsteroidSpawnOptions/OptionAsteroid2"), NodePath("AsteroidSpawnOptions/OptionAsteroid3"), NodePath("AsteroidSpawnOptions/OptionAsteroid4"), NodePath("AsteroidSpawnOptions/OptionAsteroid5")]
