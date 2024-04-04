@@ -312,3 +312,11 @@ func update_camera_smoothing() -> void:
 
 func camera_pos() -> Vector2:
 	return camera.global_position
+
+
+func rigid_camera_bounds(rel_margin: float, lin_margin: float) -> Rect2:
+	var bounds := camera.get_viewport_rect()
+	bounds.size.x = bounds.size.x * rel_margin / camera.zoom.x + lin_margin
+	bounds.size.y = bounds.size.y * rel_margin / camera.zoom.y + lin_margin
+	bounds.position += position - 0.5 * bounds.size
+	return bounds

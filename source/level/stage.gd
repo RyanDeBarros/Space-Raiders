@@ -20,7 +20,7 @@ var current_score: int:
 		modular_score += value - current_score
 		current_score = value
 		level_overlay.display_score(current_score,\
-				current_score - modular_score + current_score_threshold)
+				int(current_score - modular_score + current_score_threshold))
 		while modular_score > current_score_threshold:
 			modular_score -= int(current_score_threshold)
 			level_up()
@@ -28,7 +28,7 @@ var current_score: int:
 				score_threshold_index += 1
 			current_score_threshold = compute_score_threshold()
 			level_overlay.display_score(current_score,\
-					current_score - modular_score + current_score_threshold)
+					int(current_score - modular_score + current_score_threshold))
 		level_overlay.set_exp_bar_proportion(fmod(modular_score / current_score_threshold, 1))
 
 @onready var player: Player = $Player

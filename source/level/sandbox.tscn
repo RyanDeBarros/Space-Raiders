@@ -96,12 +96,6 @@ point_count = 2
 
 [node name="Sandbox" type="Node2D" groups=["main_stage"]]
 script = ExtResource("1_8a0rs")
-score_initial_threshold = null
-score_max_threshold = null
-score_level_up_cap = null
-score_threshold_exponent = null
-score_intermediate_level = null
-score_intermediate_threshold = null
 
 [node name="BKGLayer" type="ParallaxBackground" parent="."]
 

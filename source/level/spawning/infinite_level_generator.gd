@@ -84,7 +84,7 @@ func spawn_asteroid() -> void:
 
 
 func choose_option(options: Node) -> Node:
-	return Math.select(options.get_children(), self, weight_fn)
+	return Math.select(options.get_children(), weight_fn)
 
 
 func weight_fn(option: Node) -> float:

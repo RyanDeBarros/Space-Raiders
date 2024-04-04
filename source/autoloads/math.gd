@@ -29,7 +29,7 @@ func pm_randf(center: float, pm: float) -> float:
 	return randf_range(center - pm, center + pm)
 
 
-func select(list: Array[Variant], caller, weight_fn) -> Variant:
+func select(list: Array[Variant], weight_fn) -> Variant:
 	var total_weight := 0.0
 	var weights = []
 	for v in list:

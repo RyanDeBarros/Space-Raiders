@@ -79,6 +79,7 @@ func shoot():
 	basic_shot.setup_from_node(self, projectile_info,
 			minion_info["combat"]["projectile_colorpng"], 1.57)
 	basic_shot.add_to_group("enemy_owned")
+	basic_shot.projectile_motion.camera_indep = true
 	AudioManager.play_relative_sound(AudioManager.SFX.laser_2, global_position,\
 			audio_rel_pos_multiplier, shoot_volume_db)
 
