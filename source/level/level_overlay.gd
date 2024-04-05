@@ -46,6 +46,7 @@ var leveling_up := false
 @onready var minimap: MiniMap = %MiniMap
 @onready var exp_bar: NinePatchRect = %ExpBar
 @onready var score_label: Label = %ScoreLabel
+@onready var healable_icon: TextureRect = %HealableIcon
 @onready var pause_screen: Control = $PauseScreen
 @onready var game_over_screen: GameOverScreen = $GameOverScreen
 
@@ -212,3 +213,7 @@ func game_over() -> void:
 	game_over_screen.visible = true
 	Utility.propogate_mouse_filter(game_over_screen, Control.MOUSE_FILTER_STOP)
 	modulator.modulate.a = 0.0
+
+
+func display_health_icon(healable: bool) -> void:
+	healable_icon.modulate.v = 1 if healable else 0

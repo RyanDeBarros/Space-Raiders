@@ -32,8 +32,12 @@ var current_score: int:
 			level_overlay.display_score(current_score,\
 					int(current_score - modular_score + current_score_threshold))
 		level_overlay.set_exp_bar_proportion(fmod(modular_score / current_score_threshold, 1))
+		can_heal = modular_score >= 0.5 * current_score_threshold
+		level_overlay.display_health_icon(can_heal)
 
 var patrol_target_rects: Array[Rect2]
+
+var can_heal := false
 
 @onready var player: Player = $Player
 @onready var arena_rect: Rect2 = $Arena/ReferenceRect.get_rect()
@@ -128,3 +132,7 @@ func _on_player_died() -> void:
 	Info.try_new_highscore(current_score)
 	await get_tree().create_timer(1.5).timeout
 	level_overlay.game_over()
+
+
+func consume_half_exp() -> void:
+	current_score -= 0.5 * current_score_threshold

@@ -21,6 +21,10 @@ signal player_died()
 @export var explosion_scale_mult := 1.0
 @export var projectile_info_color := "red"
 
+@export_subgroup("Healing", "healing_")
+@export var healing_rate := 6.0
+@export var healing_length := 8.0
+
 @export_subgroup("Shield", "shield_")
 @export var shield_regeneration_rate := 0.02
 @export var shield_consumption_rate := 0.08
@@ -33,19 +37,22 @@ signal player_died()
 @export var power_meter_regeneration := 5.0
 @export var power_meter_consumption_rate := 20.0
 
-@export_subgroup("Audio", "audio_")
+@export_group("Audio", "audio_")
 @export var audio_hit_db := -1.0
 
 var arena_rect
 var active := true
 var dead := false
 
-var health: int:
+var health: float:
 	set(value):
-		health = clampi(value, 0, max_health)
+		health = clampf(value, 0, max_health)
 		health_changed.emit(health)
 		if health == 0 and not dead:
 			die()
+
+var healing := false
+var current_healing_time := 0.0
 
 var velocity := Vector2.ZERO
 
@@ -172,6 +179,20 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_released("shield"):
 		try_disable_shield()
 	_update_shield(delta)
+	
+	# Healing
+	if Input.is_action_just_pressed("heal"):
+		if not healing and Info.main_stage.can_heal:
+			Info.main_stage.consume_half_exp()
+			healing = true
+		else:
+			AudioManager.play_sfx(AudioManager.SFX.two_tone)
+	if healing:
+		health += healing_rate * delta
+		current_healing_time += delta
+		if current_healing_time > healing_length:
+			current_healing_time = 0.0
+			healing = false
 	
 	# Alternate fire
 	if Input.is_action_just_pressed("cycle_power_up"):

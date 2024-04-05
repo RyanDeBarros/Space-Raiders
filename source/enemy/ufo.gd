@@ -11,8 +11,6 @@ signal enemy_destroyed(score: int)
 @export var hit_volume_db := 20.0
 @export var explode_volume_db := 10.0
 
-var ufo_info: Dictionary
-
 var active := true
 var level_index: int
 var angular_dir: int
@@ -38,39 +36,39 @@ func _ready():
 
 func _process(delta: float) -> void:
 	if active and position.distance_squared_to(Info.player.position) <= aggro_range_squared:
-		speed = minf(speed + ufo_info["movement"]["acceleration"] * delta, max_speed)
+		speed = minf(speed + Info.ufo_info["movement"]["acceleration"] * delta, max_speed)
 		if not direction:
 			_on_move_interval_end()
 	else:
 		direction = Vector2.ZERO
-		speed = maxf(speed - ufo_info["movement"]["deceleration"] * delta, 0)
+		speed = maxf(speed - Info.ufo_info["movement"]["deceleration"] * delta, 0)
 	position += direction * delta * speed
-	rotation += ufo_info["movement"]["angular_speed"] * angular_dir * delta
+	rotation += Info.ufo_info["movement"]["angular_speed"] * angular_dir * delta
 
 
 func _on_move_interval_end() -> void:
-	max_speed = Math.rand_mediani(ufo_info["speed"]["min"][level_index],\
-			ufo_info["speed"]["median"][level_index], ufo_info["speed"]["max"][level_index])
-	move_interval = Math.rand_medianf_dict(ufo_info["move_interval"])
+	max_speed = Math.rand_mediani(Info.ufo_info["speed"]["min"][level_index],\
+			Info.ufo_info["speed"]["median"][level_index],\
+			Info.ufo_info["speed"]["max"][level_index])
+	move_interval = Math.rand_medianf_dict(Info.ufo_info["move_interval"])
 	move_interval_timer.start(move_interval)
 	direction = position.direction_to(Info.player.position).\
-			rotated(randf() * ufo_info["follow_spread"][level_index])
+			rotated(randf() * Info.ufo_info["follow_spread"][level_index])
 
 
 func setup_info() -> void:
-	ufo_info = Info.enemy_JSON["ufo"]
-	score = Math.rand_mediani(ufo_info["score"]["min"][level_index],\
-			ufo_info["score"]["median"][level_index], ufo_info["score"]["max"][level_index])
-	overlap_component.wait_time = ufo_info["collide"]["wait_time"]
-	health_component.initial_health = ufo_info["max_health"][level_index]
-	aggro_range_squared = ufo_info["aggro_range"][level_index] ** 2
+	score = Math.rand_mediani(Info.ufo_info["score"]["min"][level_index],\
+			Info.ufo_info["score"]["median"][level_index], Info.ufo_info["score"]["max"][level_index])
+	overlap_component.wait_time = Info.ufo_info["collide"]["wait_time"]
+	health_component.initial_health = Info.ufo_info["max_health"][level_index]
+	aggro_range_squared = Info.ufo_info["aggro_range"][level_index] ** 2
 	sprite.texture = load("res://assets/ships/ufos/%s.png"\
-			% ufo_info["appearance"]["texture"][level_index])
+			% Info.ufo_info["appearance"]["texture"][level_index])
 
 
 func collide_player(player: Area2D) -> void:
 	if player:
-		player.take_damage(ufo_info["collide"]["damage"][level_index])
+		player.take_damage(Info.ufo_info["collide"]["damage"][level_index])
 		take_damage(player.get_collide_damage())
 
 
@@ -88,7 +86,7 @@ func die() -> void:
 	var explosion = Scenes.EXPLOSION.instantiate()
 	get_tree().get_first_node_in_group(Groups.EXPLOSION_MANAGER).add_child(explosion)
 	explosion.position = position
-	explosion.scale *= ufo_info["appearance"]["explosion_scale_mult"]
+	explosion.scale *= Info.ufo_info["appearance"]["explosion_scale_mult"]
 	enemy_destroyed.emit(score)
 	queue_free()
 	AudioManager.play_relative_sound(AudioManager.SFX.explosion, global_position,\

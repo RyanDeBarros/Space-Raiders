@@ -7,6 +7,8 @@ var level_data = {
 
 var projectile_JSON: Dictionary
 var enemy_JSON: Dictionary
+var ufo_info: Dictionary
+var minion_info: Dictionary
 
 var main_stage: Stage
 var player: Player
@@ -25,6 +27,8 @@ func _init() -> void:
 	file = FileAccess.open("res://config/enemy_info.json", FileAccess.READ)
 	enemy_JSON = JSON.parse_string(file.get_as_text())
 	file.close()
+	ufo_info = enemy_JSON["ufo"]
+	minion_info = enemy_JSON["minion"]
 	_unload_save_data()
 
 
