@@ -24,7 +24,7 @@ point_count = 3
 [sub_resource type="Curve" id="Curve_5p1ki"]
 min_value = 1.0
 max_value = 3.0
-_data = [Vector2(0, 3), 0.0, -2.0, 0, 1, Vector2(1, 1), -2.0, 0.0, 1, 0]
+_data = [Vector2(0, 3), 0.0, -1.67574e-06, 0, 0, Vector2(1, 1), -2.0, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_vbw5m"]
@@ -48,7 +48,7 @@ point_count = 3
 [sub_resource type="Curve" id="Curve_22pv4"]
 min_value = 1.0
 max_value = 3.0
-_data = [Vector2(0, 1), 0.0, 2.0, 0, 1, Vector2(1, 3), 2.0, 0.0, 1, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 1.0, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_wwkp5"]
@@ -458,7 +458,7 @@ asteroid_spawn_zone = NodePath("../Arena/AsteroidSpawnZone")
 enemy_manager = NodePath("../Modulator/EnemyManager")
 asteroid_manager = NodePath("../Modulator/AsteroidManager")
 initial_layout = "res://config/levels/sandbox/layout.json"
-pg_max_progress = 200.0
+pg_max_progress = 250.0
 pg_progression = SubResource("Curve_2e2gt")
 eg_spawn_rate = 2.5
 eg_type_distribution = [NodePath("EnemySpawnOptions/OptionUFO"), NodePath("EnemySpawnOptions/OptionMinion")]

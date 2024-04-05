@@ -4,6 +4,13 @@
 [ext_resource type="Script" path="res://source/ui/level_up_screen.gd" id="1_ia1o3"]
 [ext_resource type="FontFile" uid="uid://jxaiecxsp3mk" path="res://assets/fonts/kenvector_future_thin.ttf" id="3_vfb85"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_skwy2"]
+font = ExtResource("3_vfb85")
+font_size = 96
+font_color = Color(1, 1, 0.85, 1)
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w02ak"]
 bg_color = Color(0.0705882, 0.639216, 0.109804, 1)
 shadow_color = Color(0.0705882, 0.639216, 0.109804, 1)
@@ -16,13 +23,6 @@ shadow_size = 8
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gn6eh"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_skwy2"]
-font = ExtResource("3_vfb85")
-font_size = 96
-font_color = Color(1, 1, 0.85, 1)
-outline_size = 24
-outline_color = Color(0, 0, 0, 1)
-
 [node name="LevelUpScreen" type="Control"]
 process_mode = 2
 layout_mode = 3
@@ -33,6 +33,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ia1o3")
 
+[node name="LevelUpLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 43.0
+offset_right = 1152.0
+offset_bottom = 151.0
+text = "Level Up!"
+label_settings = SubResource("LabelSettings_skwy2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="RepairButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -41,9 +51,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -154.0
-offset_top = 169.0
+offset_top = 198.0
 offset_right = 154.0
-offset_bottom = 231.0
+offset_bottom = 260.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
@@ -61,14 +71,18 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_31l04")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gn6eh")
 text = "Repair (+30 HP)"
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_top = 43.0
-offset_right = 1152.0
-offset_bottom = 151.0
-text = "Level Up!"
-label_settings = SubResource("LabelSettings_skwy2")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="PanelsContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -412.0
+offset_top = -135.0
+offset_right = 412.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="RepairButton" to="." method="_on_repair_button_pressed"]

@@ -200,10 +200,10 @@ func display_pause_screen() -> void:
 
 func undisplay_pause_screen() -> void:
 	pause_screen.visible = false
-	modulator.modulate.a = 1.0
-	dim.emit(1.0)
 	Utility.propogate_mouse_filter(pause_screen, Control.MOUSE_FILTER_IGNORE)
 	if not leveling_up:
+		dim.emit(1.0)
+		modulator.modulate.a = 1.0
 		get_tree().paused = false
 
 
@@ -226,9 +226,10 @@ func display_health_icon(healable: bool) -> void:
 func display_level_up_screen() -> void:
 	get_tree().paused = true
 	leveling_up = true
+	level_up_screen.set_repair_amount(Info.player.healing_repair_amount)
 	level_up_screen.visible = true
 	Utility.propogate_mouse_filter(level_up_screen, Control.MOUSE_FILTER_STOP)
-	modulator.modulate.a = 0.0
+	modulator.modulate.a = 0.6
 	dim.emit(0.3)
 
 

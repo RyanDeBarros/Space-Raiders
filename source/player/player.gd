@@ -25,6 +25,7 @@ signal player_died()
 @export var healing_rate := 6.0
 @export var healing_length := 8.0
 @export var healing_repair_amount := 30.0
+@export var healing_repair_increase := 3.0
 
 @export_subgroup("Shield", "shield_")
 @export var shield_regeneration_rate := 0.02
@@ -141,10 +142,10 @@ func _ready() -> void:
 	health = max_health
 	power_meter = power_max_meter
 	update_camera_smoothing()
-	call_deferred("first_frame")
+	call_deferred("_first_frame")
 
 
-func first_frame() -> void:
+func _first_frame() -> void:
 	# Testing
 	PowerProjectile.unlock(power_projectiles["charge"])
 	PowerProjectile.unlock(power_projectiles["burst"])
@@ -342,3 +343,7 @@ func rigid_camera_bounds(rel_margin: float, lin_margin: float) -> Rect2:
 	bounds.size.y = bounds.size.y * rel_margin / camera.zoom.y + lin_margin
 	bounds.position += position - 0.5 * bounds.size
 	return bounds
+
+
+func next_repair_amount() -> void:
+	healing_repair_amount += healing_repair_increase

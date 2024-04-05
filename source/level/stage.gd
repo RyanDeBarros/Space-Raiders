@@ -118,6 +118,7 @@ func _on_player_died() -> void:
 
 func _on_repair() -> void:
 	player.health += player.healing_repair_amount
+	player.next_repair_amount()
 
 
 func _on_dim(dim_level) -> void:
