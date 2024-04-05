@@ -39,9 +39,10 @@ var patrol_target_rects: Array[Rect2]
 
 var can_heal := false
 
-@onready var player: Player = $Player
+@onready var modulator: Node2D = $Modulator
+@onready var player: Player = $Modulator/Player
 @onready var arena_rect: Rect2 = $Arena/ReferenceRect.get_rect()
-@onready var projectile_manager: Node2D = $ProjectileManager
+@onready var projectile_manager: Node2D = $Modulator/ProjectileManager
 @onready var level_overlay: LevelOverlay = $Overlay/LevelOverlay
 @onready var is_game_over := false
 
@@ -65,6 +66,8 @@ func _ready() -> void:
 	player.power_minimum_meter_changed.connect(_on_player_power_minimum_meter_changed)
 	player.player_died.connect(_on_player_died)
 	level_overlay.quit_to_title_screen.connect(quit_to_title_screen)
+	level_overlay.level_up_screen.repair.connect(_on_repair)
+	level_overlay.dim.connect(_on_dim)
 	
 	if score_threshold_exponent < 0:
 		score_threshold_exponent = compute_score_threshold_exponent()
@@ -106,6 +109,21 @@ func _on_enemy_destroyed(score: int) -> void:
 	current_score += score
 
 
+func _on_player_died() -> void:
+	is_game_over = true
+	Info.try_new_highscore(current_score)
+	await get_tree().create_timer(1.5).timeout
+	level_overlay.game_over()
+
+
+func _on_repair() -> void:
+	player.health += player.healing_repair_amount
+
+
+func _on_dim(dim_level) -> void:
+	modulator.modulate.a = dim_level
+
+
 func quit_to_title_screen() -> void:
 	Info.try_new_highscore(current_score)
 	get_tree().change_scene_to_packed(Scenes.TITLE_SCREEN)
@@ -113,7 +131,7 @@ func quit_to_title_screen() -> void:
 
 func level_up() -> void:
 	AudioManager.play_sfx(AudioManager.SFX.success)
-	print('level up!')
+	level_overlay.display_level_up_screen()
 
 
 func compute_score_threshold() -> float:
@@ -127,12 +145,5 @@ func compute_score_threshold_exponent() -> float:
 			log(score_intermediate_level / score_level_up_cap)
 
 
-func _on_player_died() -> void:
-	is_game_over = true
-	Info.try_new_highscore(current_score)
-	await get_tree().create_timer(1.5).timeout
-	level_overlay.game_over()
-
-
 func consume_half_exp() -> void:
-	current_score -= 0.5 * current_score_threshold
+	current_score -= int(0.5 * current_score_threshold)

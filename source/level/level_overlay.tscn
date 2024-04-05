@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://buomqsie1fp74"]
+[gd_scene load_steps=21 format=3 uid="uid://buomqsie1fp74"]
 
 [ext_resource type="Script" path="res://source/level/level_overlay.gd" id="1_0h2vc"]
 [ext_resource type="Texture2D" uid="uid://52xkiklkrwu6" path="res://assets/ui/bars/divider-005.png" id="1_pgffh"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://xx3c1rbee5ve" path="res://assets/ui/temp_repair.png" id="14_l63eq"]
 [ext_resource type="PackedScene" uid="uid://itcna8l2tpq7" path="res://source/ui/pause_screen.tscn" id="15_34ixn"]
 [ext_resource type="PackedScene" uid="uid://c3fuli6qvfxfs" path="res://source/ui/game_over_screen.tscn" id="16_4tf0e"]
+[ext_resource type="PackedScene" uid="uid://dyyqxlnd70hja" path="res://source/ui/level_up_screen.tscn" id="16_lutcf"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_msbv7"]
 load_path = "res://.godot/imported/divider-001.png-fbf33adc27cc3fafca8e09188e4d296a.ctex"
@@ -316,9 +317,9 @@ unique_name_in_owner = true
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 1063.33
-offset_top = -12.2222
+offset_top = -10.0
 offset_right = 1127.33
-offset_bottom = 51.7778
+offset_bottom = 54.0
 texture = ExtResource("14_l63eq")
 
 [node name="MiniMapControl" type="Control" parent="Modulator"]
@@ -343,6 +344,11 @@ layout_mode = 1
 offset_right = 946.0
 offset_bottom = 534.0
 scale = Vector2(0.181, 0.181)
+
+[node name="LevelUpScreen" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("16_lutcf")]
+visible = false
+layout_mode = 1
+parent = NodePath("..")
 
 [node name="PauseScreen" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("15_34ixn")]
 visible = false

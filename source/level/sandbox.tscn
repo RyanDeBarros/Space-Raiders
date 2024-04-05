@@ -97,6 +97,7 @@ point_count = 2
 [node name="Sandbox" type="Node2D" node_paths=PackedStringArray("patrol_target_zones") groups=["main_stage"]]
 script = ExtResource("1_8a0rs")
 patrol_target_zones = NodePath("Arena/PatrolTargetZones")
+score_initial_threshold = 100.0
 
 [node name="BKGLayer" type="ParallaxBackground" parent="."]
 
@@ -113,7 +114,7 @@ stretch_mode = 1
 [node name="Overlay" type="CanvasLayer" parent="."]
 
 [node name="LevelOverlay" parent="Overlay" node_paths=PackedStringArray("enemy_manager") instance=ExtResource("3_ecdyn")]
-enemy_manager = NodePath("../../EnemyManager")
+enemy_manager = NodePath("../../Modulator/EnemyManager")
 
 [node name="Arena" type="Node2D" parent="."]
 
@@ -454,8 +455,8 @@ script = ExtResource("5_g3e2d")
 arena_shape = NodePath("../Arena/ReferenceRect")
 enemy_spawn_zone = NodePath("../Arena/EnemySpawnZone")
 asteroid_spawn_zone = NodePath("../Arena/AsteroidSpawnZone")
-enemy_manager = NodePath("../EnemyManager")
-asteroid_manager = NodePath("../AsteroidManager")
+enemy_manager = NodePath("../Modulator/EnemyManager")
+asteroid_manager = NodePath("../Modulator/AsteroidManager")
 initial_layout = "res://config/levels/sandbox/layout.json"
 pg_max_progress = 200.0
 pg_progression = SubResource("Curve_2e2gt")
@@ -502,21 +503,23 @@ weight_distribution = SubResource("Curve_2bjef")
 scene = ExtResource("13_4ks03")
 weight_distribution = SubResource("Curve_3skih")
 
-[node name="AsteroidManager" type="Node2D" parent="."]
+[node name="Modulator" type="Node2D" parent="."]
+
+[node name="AsteroidManager" type="Node2D" parent="Modulator"]
 z_index = -20
 script = ExtResource("4_nbygh")
 
-[node name="ExplosionManager" type="Node2D" parent="." groups=["explosion_manager"]]
+[node name="ExplosionManager" type="Node2D" parent="Modulator" groups=["explosion_manager"]]
 z_index = -40
 
-[node name="ProjectileManager" type="Node2D" parent="." groups=["projectile_manager"]]
+[node name="ProjectileManager" type="Node2D" parent="Modulator" groups=["projectile_manager"]]
 z_index = -20
 
-[node name="Player" parent="." instance=ExtResource("2_1vmdd")]
+[node name="Player" parent="Modulator" instance=ExtResource("2_1vmdd")]
 max_health = 300
 
-[node name="EnemyManager" parent="." node_paths=PackedStringArray("stage") instance=ExtResource("5_fhh1b")]
-stage = NodePath("..")
+[node name="EnemyManager" parent="Modulator" node_paths=PackedStringArray("stage") instance=ExtResource("5_fhh1b")]
+stage = NodePath("../..")
 
 [editable path="Arena/EnemySpawnZone/SpawnZone"]
 [editable path="Arena/EnemySpawnZone/SpawnZone2"]

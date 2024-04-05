@@ -24,6 +24,7 @@ signal player_died()
 @export_subgroup("Healing", "healing_")
 @export var healing_rate := 6.0
 @export var healing_length := 8.0
+@export var healing_repair_amount := 30.0
 
 @export_subgroup("Shield", "shield_")
 @export var shield_regeneration_rate := 0.02

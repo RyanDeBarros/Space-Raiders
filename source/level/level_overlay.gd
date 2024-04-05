@@ -3,6 +3,7 @@ extends Control
 
 
 signal quit_to_title_screen()
+signal dim(dim_level)
 
 
 @export var enemy_manager: EnemyManager
@@ -47,6 +48,7 @@ var leveling_up := false
 @onready var exp_bar: NinePatchRect = %ExpBar
 @onready var score_label: Label = %ScoreLabel
 @onready var healable_icon: TextureRect = %HealableIcon
+@onready var level_up_screen: Control = $LevelUpScreen
 @onready var pause_screen: Control = $PauseScreen
 @onready var game_over_screen: GameOverScreen = $GameOverScreen
 
@@ -193,11 +195,13 @@ func display_pause_screen() -> void:
 	pause_screen.visible = true
 	Utility.propogate_mouse_filter(pause_screen, Control.MOUSE_FILTER_STOP)
 	modulator.modulate.a = 0.0
+	dim.emit(0.3)
 
 
 func undisplay_pause_screen() -> void:
 	pause_screen.visible = false
 	modulator.modulate.a = 1.0
+	dim.emit(1.0)
 	Utility.propogate_mouse_filter(pause_screen, Control.MOUSE_FILTER_IGNORE)
 	if not leveling_up:
 		get_tree().paused = false
@@ -217,3 +221,21 @@ func game_over() -> void:
 
 func display_health_icon(healable: bool) -> void:
 	healable_icon.modulate.v = 1 if healable else 0
+
+
+func display_level_up_screen() -> void:
+	get_tree().paused = true
+	leveling_up = true
+	level_up_screen.visible = true
+	Utility.propogate_mouse_filter(level_up_screen, Control.MOUSE_FILTER_STOP)
+	modulator.modulate.a = 0.0
+	dim.emit(0.3)
+
+
+func undisplay_level_up_screen() -> void:
+	get_tree().paused = false
+	leveling_up = false
+	level_up_screen.visible = false
+	Utility.propogate_mouse_filter(level_up_screen, Control.MOUSE_FILTER_IGNORE)
+	modulator.modulate.a = 1.0
+	dim.emit(1.0)
