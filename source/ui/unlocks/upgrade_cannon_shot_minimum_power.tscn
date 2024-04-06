@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxhlumt7q4t7b"]
+
+[ext_resource type="PackedScene" uid="uid://c561y7sifm7lo" path="res://source/ui/unlocks/unlock_cannon_shot.tscn" id="1_yf3yt"]
+[ext_resource type="Texture2D" uid="uid://bdvt16txyns0c" path="res://assets/ui/icons/upgrade icon 02.png" id="2_wkiqu"]
+
+[node name="UpgradeCannonShotMinimumPower" instance=ExtResource("1_yf3yt")]
+
+[node name="Title" parent="." index="2"]
+text = "POWER UPGRADE"
+
+[node name="Details2" parent="." index="4"]
+text = "Reduce minimum power by %s%"
+
+[node name="UpgradeIcon" parent="." index="6"]
+texture = ExtResource("2_wkiqu")

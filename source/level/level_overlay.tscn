@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dakhacbvk0w8t" path="res://assets/ui/panels/panel-border-006.png" id="9_12ook"]
 [ext_resource type="Texture2D" uid="uid://c2ttr7tbome8o" path="res://assets/ui/bars/divider-fade-000.png" id="10_jyvmn"]
 [ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="14_4dkxu"]
-[ext_resource type="Texture2D" uid="uid://cfj6wxfwdv11l" path="res://assets/ui/icons/healing icon.png" id="14_082mv"]
+[ext_resource type="Texture2D" uid="uid://cl1t1ev4m7p63" path="res://assets/ui/icons/healing icon.png" id="14_082mv"]
 [ext_resource type="PackedScene" uid="uid://itcna8l2tpq7" path="res://source/ui/pause_screen.tscn" id="15_34ixn"]
 [ext_resource type="PackedScene" uid="uid://c3fuli6qvfxfs" path="res://source/ui/game_over_screen.tscn" id="16_4tf0e"]
 [ext_resource type="PackedScene" uid="uid://dyyqxlnd70hja" path="res://source/ui/level_up_screen.tscn" id="16_lutcf"]
@@ -107,6 +107,7 @@ stretch_mode = 5
 
 [node name="CannonShotIcon" type="TextureRect" parent="Modulator/StatsBars/Backdrop2"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 12.0
 offset_top = 12.0

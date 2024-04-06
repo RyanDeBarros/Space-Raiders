@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cqejgu7xahs8c"]
+
+[ext_resource type="FontFile" uid="uid://cevblovqhas67" path="res://assets/fonts/Asap-SemiBoldItalic.ttf" id="1_bbd8d"]
+
+[resource]
+font = ExtResource("1_bbd8d")
+font_size = 14
+font_color = Color(0, 0, 0, 1)

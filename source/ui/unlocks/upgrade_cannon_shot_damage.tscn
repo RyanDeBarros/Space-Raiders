@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://du3y3m43rj3no"]
+
+[ext_resource type="PackedScene" uid="uid://bxhlumt7q4t7b" path="res://source/ui/unlocks/upgrade_cannon_shot_minimum_power.tscn" id="1_2piru"]
+
+[node name="UpgradeCannonShotDamage" instance=ExtResource("1_2piru")]
+
+[node name="Details2" parent="." index="4"]
+text = "Increase missile damage by %sDP"

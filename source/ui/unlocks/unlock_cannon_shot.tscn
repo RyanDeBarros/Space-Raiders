@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://c561y7sifm7lo"]
+
+[ext_resource type="PackedScene" uid="uid://jr64remqfwlp" path="res://source/ui/unlocks/upgrade_max_power_meter.tscn" id="1_8h1nm"]
+[ext_resource type="Texture2D" uid="uid://dc4qd2vdq8485" path="res://assets/ui/icons/unlock icon 02.png" id="2_kwhsw"]
+[ext_resource type="LabelSettings" uid="uid://cqejgu7xahs8c" path="res://resources/label_settings/unlock_panel_details_2.tres" id="2_vmfaw"]
+[ext_resource type="Texture2D" uid="uid://dkhiq8fnmi817" path="res://assets/ui/icons/star 00.png" id="3_emgom"]
+[ext_resource type="Texture2D" uid="uid://bgwusneakkoxt" path="res://assets/ui/panels/panel-transparent-center-005.png" id="4_bdrfr"]
+[ext_resource type="Texture2D" uid="uid://bdthvttshloqi" path="res://assets/projectiles/spaceMissiles_06/red.png" id="5_unqu6"]
+
+[node name="UnlockCannonShot" instance=ExtResource("1_8h1nm")]
+
+[node name="Title" parent="." index="2"]
+text = "POWER UNLOCK"
+
+[node name="Details" parent="." index="3"]
+offset_top = -40.0
+offset_bottom = 22.0
+text = "CANNON SHOT"
+
+[node name="Details2" type="Label" parent="." index="4"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = 1.0
+offset_right = 107.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Shoot a powerful missile that can punch through %s enemies"
+label_settings = ExtResource("2_vmfaw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="UpgradeIcon" parent="." index="6"]
+texture = ExtResource("2_kwhsw")
+
+[node name="TextureRect" parent="StarsContainer" index="0"]
+texture = ExtResource("3_emgom")
+
+[node name="Backdrop" type="NinePatchRect" parent="." index="8"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 53.0
+offset_top = 183.0
+offset_right = 193.0
+offset_bottom = 323.0
+scale = Vector2(0.4, 0.4)
+pivot_offset = Vector2(70, 70)
+texture = ExtResource("4_bdrfr")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="CannonShotIcon" type="TextureRect" parent="Backdrop" index="0"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 120.0
+offset_bottom = 120.0
+rotation = -0.241937
+pivot_offset = Vector2(54, 54)
+texture = ExtResource("5_unqu6")
+stretch_mode = 5

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://00scsf2srftp"]
+
+[ext_resource type="PackedScene" uid="uid://bxhlumt7q4t7b" path="res://source/ui/unlocks/upgrade_cannon_shot_minimum_power.tscn" id="1_ytoa5"]
+[ext_resource type="Texture2D" uid="uid://clpj7in2qqg8f" path="res://assets/ui/icons/star 01.png" id="2_ebren"]
+
+[node name="UpgradeCannonShotDurability" instance=ExtResource("1_ytoa5")]
+
+[node name="Details2" parent="." index="4"]
+text = "Increase durability of missile to %s"
+
+[node name="TextureRect" parent="StarsContainer" index="0"]
+texture = ExtResource("2_ebren")

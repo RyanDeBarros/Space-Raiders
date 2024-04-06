@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://burlxtk3lxwja"]
+
+[ext_resource type="PackedScene" uid="uid://dsqwmnb1ipk6m" path="res://source/ui/unlocks/upgrade_charge_shot_minimum_power.tscn" id="1_xwutt"]
+
+[node name="UpgradeChargeShotMinimumDamage" instance=ExtResource("1_xwutt")]
+
+[node name="Details2" parent="." index="4"]
+text = "Increase initial damage by %sDP"

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjaiwwkdha081"]
+
+[ext_resource type="PackedScene" uid="uid://du3y3m43rj3no" path="res://source/ui/unlocks/upgrade_cannon_shot_damage.tscn" id="1_b76m0"]
+[ext_resource type="Texture2D" uid="uid://clpj7in2qqg8f" path="res://assets/ui/icons/star 01.png" id="2_vkfda"]
+
+[node name="UpgradeCannonShotSpeed" instance=ExtResource("1_b76m0")]
+
+[node name="Details2" parent="." index="4"]
+text = "Increase missile speed by %s"
+
+[node name="TextureRect" parent="StarsContainer" index="0"]
+texture = ExtResource("2_vkfda")

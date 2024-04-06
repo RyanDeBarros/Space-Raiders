@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl60bn87f032p"]
+
+[ext_resource type="PackedScene" uid="uid://bsi0y6vds6hkc" path="res://source/ui/unlocks/upgrade_burst_shot_minimum_power.tscn" id="1_alcim"]
+
+[node name="UpgradeBurstShotDamage" instance=ExtResource("1_alcim")]
+
+[node name="Details2" parent="." index="4"]
+text = "Increase missile damage by %sDP"

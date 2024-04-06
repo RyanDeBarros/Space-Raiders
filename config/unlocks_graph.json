@@ -77,6 +77,7 @@
 	},
 	"unlock_burst_shot": {
 		"scene": "res://source/ui/unlocks/unlock_burst_shot.tscn",
+		"amount": [2, 3, 4],
 		"recursive": false,
 		"next": [
 			{
@@ -102,6 +103,7 @@
 	},
 	"unlock_cannon_shot": {
 		"scene": "res://source/ui/unlocks/unlock_cannon_shot.tscn",
+		"amount": 3,
 		"recursive": false,
 		"next": [
 			{
@@ -110,14 +112,14 @@
 				"recursive": true
 			},
 			{
-				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_min_damage.tscn",
+				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_damage.tscn",
 				"increase": 5,
 				"recursive": true
 			},
 			{
 				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_durability.tscn",
-				"range_amount": [4, 5, 6, 7],
-				"recursive": 4
+				"range_amount": [4, 5, 6, 7, 8, 9, 10],
+				"recursive": 7
 			},
 			{
 				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_speed.tscn",

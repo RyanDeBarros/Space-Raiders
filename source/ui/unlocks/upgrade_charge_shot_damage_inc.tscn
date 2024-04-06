@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://csgiqe678xdyv"]
+
+[ext_resource type="PackedScene" uid="uid://burlxtk3lxwja" path="res://source/ui/unlocks/upgrade_charge_shot_min_damage.tscn" id="1_qjgsw"]
+
+[node name="UpgradeChargeShotDamageInc" instance=ExtResource("1_qjgsw")]
+
+[node name="Details2" parent="." index="4"]
+text = "Increase charge-up damage rate by %sDP"

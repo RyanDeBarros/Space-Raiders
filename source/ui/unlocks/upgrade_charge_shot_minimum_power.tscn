@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsqwmnb1ipk6m"]
+
+[ext_resource type="PackedScene" uid="uid://cth4nt4loty33" path="res://source/ui/unlocks/unlock_charge_shot.tscn" id="1_6imri"]
+[ext_resource type="Texture2D" uid="uid://bdvt16txyns0c" path="res://assets/ui/icons/upgrade icon 02.png" id="2_j0dg0"]
+
+[node name="UpgradeChargeShotMinimumPower" instance=ExtResource("1_6imri")]
+
+[node name="Title" parent="." index="2"]
+text = "POWER UPGRADE"
+
+[node name="Details2" parent="." index="4"]
+text = "Reduce minimum power by %s%"
+
+[node name="UpgradeIcon" parent="." index="6"]
+texture = ExtResource("2_j0dg0")
+
+[node name="ChargeShotIcon" parent="Backdrop" index="0"]
+layout_mode = 0

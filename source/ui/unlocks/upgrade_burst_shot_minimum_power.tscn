@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsi0y6vds6hkc"]
+
+[ext_resource type="PackedScene" uid="uid://bgpd0gg1hsmsc" path="res://source/ui/unlocks/unlock_burst_shot.tscn" id="1_d2up7"]
+[ext_resource type="Texture2D" uid="uid://bdvt16txyns0c" path="res://assets/ui/icons/upgrade icon 02.png" id="2_w0y5s"]
+
+[node name="UpgradeBurstShotMinimumPower" instance=ExtResource("1_d2up7")]
+
+[node name="Title" parent="." index="2"]
+text = "POWER UPGRADE"
+
+[node name="Details2" parent="." index="4"]
+text = "Reduce minimum power by %s%"
+
+[node name="UpgradeIcon" parent="." index="6"]
+texture = ExtResource("2_w0y5s")

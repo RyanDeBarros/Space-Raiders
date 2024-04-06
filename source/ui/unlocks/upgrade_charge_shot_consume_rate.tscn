@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://8tuhletevdsl"]
+
+[ext_resource type="PackedScene" uid="uid://csgiqe678xdyv" path="res://source/ui/unlocks/upgrade_charge_shot_damage_inc.tscn" id="1_734s4"]
+
+[node name="UpgradeChargeShotConsumeRate" instance=ExtResource("1_734s4")]
+
+[node name="Details2" parent="." index="4"]
+text = "Reduce charge-up power consumption by %s%"
