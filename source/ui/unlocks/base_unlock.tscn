@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://casvhb0htvpn5"]
+[gd_scene load_steps=5 format=3 uid="uid://casvhb0htvpn5"]
 
 [ext_resource type="Script" path="res://source/ui/unlocks/base_unlock.gd" id="1_7k68s"]
 [ext_resource type="Theme" uid="uid://c612ck3l4wgk" path="res://resources/themes/unlock_panel_select_button.tres" id="1_m56ek"]
+[ext_resource type="LabelSettings" uid="uid://e7pxjj7ry6i3" path="res://resources/label_settings/unlock_header.tres" id="4_fb02t"]
+[ext_resource type="LabelSettings" uid="uid://dypxvlngirsw0" path="res://resources/label_settings/unlock_panel_details.tres" id="6_ypdm8"]
 
 [node name="BaseUnlock" type="Control"]
 process_mode = 2
@@ -27,5 +29,92 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("1_m56ek")
+
+[node name="BackPanel" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="Title" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 242.0
+offset_bottom = 28.0
+text = "INSERT TITLE"
+label_settings = ExtResource("4_fb02t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Details" type="Label" parent="."]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -33.0
+offset_right = 107.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "INSERT %s DETAILS"
+label_settings = ExtResource("6_ypdm8")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CategoryIcon" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -89.0
+offset_right = 20.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.65388, 1.65388)
+pivot_offset = Vector2(20, 20)
+
+[node name="UpgradeIcon" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 87.0
+offset_right = -60.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StarsContainer" type="HBoxContainer" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 107.0
+offset_top = 237.0
+offset_right = 223.0
+offset_bottom = 277.0
+pivot_offset = Vector2(116, 40)
+alignment = 2
 
 [connection signal="pressed" from="SelectButton" to="." method="_on_select_button_pressed"]

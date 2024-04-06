@@ -1,74 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://coqau7y6u28ks"]
+[gd_scene load_steps=6 format=3 uid="uid://coqau7y6u28ks"]
 
 [ext_resource type="PackedScene" uid="uid://casvhb0htvpn5" path="res://source/ui/unlocks/base_unlock.tscn" id="1_l1s0o"]
-[ext_resource type="Script" path="res://source/ui/unlocks/upgrade_max_health.gd" id="2_cl7g5"]
 [ext_resource type="Texture2D" uid="uid://x4ys5vyu3y6d" path="res://assets/ui/panels/metalPanel_green.png" id="2_u8r8y"]
-[ext_resource type="LabelSettings" uid="uid://e7pxjj7ry6i3" path="res://resources/label_settings/unlock_header.tres" id="3_t2c7r"]
-[ext_resource type="Texture2D" uid="uid://bnq4i563y8qvo" path="res://assets/ui/icons/upgrade icon 01.png" id="4_dte84"]
-[ext_resource type="LabelSettings" uid="uid://dypxvlngirsw0" path="res://resources/label_settings/unlock_panel_details.tres" id="5_0biha"]
+[ext_resource type="Texture2D" uid="uid://cojvp4isrncw6" path="res://assets/ui/icons/upgrade icon 00.png" id="5_q4y71"]
+[ext_resource type="Texture2D" uid="uid://dry4paotlhwvn" path="res://assets/ui/icons/star 02.png" id="6_v7tjf"]
+[ext_resource type="Texture2D" uid="uid://di5n6r1105cd0" path="res://assets/ui/icons/health icon.png" id="7_tb211"]
 
 [node name="UpgradeMaxHealth" instance=ExtResource("1_l1s0o")]
-script = ExtResource("2_cl7g5")
-increase = 0
-method_name = "upgrade_max_health"
 
-[node name="BackPanel" type="NinePatchRect" parent="." index="1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BackPanel" parent="." index="1"]
 texture = ExtResource("2_u8r8y")
-patch_margin_left = 32
-patch_margin_top = 32
-patch_margin_right = 32
-patch_margin_bottom = 32
 
-[node name="Title" type="Label" parent="." index="2"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 242.0
-offset_bottom = 28.0
-text = "Upgrade Max Health"
-label_settings = ExtResource("3_t2c7r")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Title" parent="." index="2"]
+text = "HEALTH UPGRADE"
 
-[node name="TextureRect" type="TextureRect" parent="." index="3"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = 57.0
-offset_right = 20.0
-offset_bottom = 97.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_dte84")
-
-[node name="Details" type="Label" parent="." index="4"]
-texture_filter = 2
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -107.0
-offset_top = -54.0
-offset_right = 107.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Details" parent="." index="3"]
 text = "Increase maximum health by %sHP"
-label_settings = ExtResource("5_0biha")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
+
+[node name="CategoryIcon" parent="." index="4"]
+texture = ExtResource("7_tb211")
+
+[node name="UpgradeIcon" parent="." index="5"]
+texture = ExtResource("5_q4y71")
+
+[node name="TextureRect" type="TextureRect" parent="StarsContainer" index="0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_v7tjf")
+stretch_mode = 5

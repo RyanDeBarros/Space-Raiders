@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj8tvjlngn8uy"]
+
+[ext_resource type="PackedScene" uid="uid://cbcrffjkvjs0i" path="res://source/ui/unlocks/upgrade_power_consumption.tscn" id="1_nlrvg"]
+
+[node name="UpgradePowerRegeneration" instance=ExtResource("1_nlrvg")]
+
+[node name="Details" parent="." index="3"]
+text = "Increase Power Regeneration
+by %s%"

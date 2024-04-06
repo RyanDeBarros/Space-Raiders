@@ -26,8 +26,8 @@
 		"damage": 35,
 		"num": {
 			"min": 2,
-			"med": 4,
-			"max": 5
+			"med": 3,
+			"max": 4
 		},
 		"await_time": 0.05,
 		"reload_time": 0.3,

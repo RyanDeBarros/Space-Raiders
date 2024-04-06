@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://baswe278o231i"]
+
+[ext_resource type="PackedScene" uid="uid://w7cu20rnceey" path="res://source/ui/unlocks/upgrade_healing_length.tscn" id="1_6iuwa"]
+[ext_resource type="Texture2D" uid="uid://cikw3n2ek4clq" path="res://assets/ui/panels/metalPanel_yellow.png" id="2_0k4m1"]
+[ext_resource type="Texture2D" uid="uid://cfpoi4lx5p8hc" path="res://assets/ui/icons/wrench icon.png" id="3_0lb0c"]
+[ext_resource type="Texture2D" uid="uid://cnf257pj61tmj" path="res://assets/ui/icons/upgrade icon 03.png" id="3_ijptv"]
+
+[node name="UpgradeDefense" instance=ExtResource("1_6iuwa")]
+
+[node name="BackPanel" parent="." index="1"]
+texture = ExtResource("2_0k4m1")
+
+[node name="Title" parent="." index="2"]
+text = "DEFENSE UPGRADE"
+
+[node name="Details" parent="." index="3"]
+text = "Improve defense
+by %s%"
+
+[node name="CategoryIcon" parent="." index="4"]
+offset_top = -83.0
+offset_bottom = -43.0
+texture = ExtResource("3_0lb0c")
+
+[node name="UpgradeIcon" parent="." index="5"]
+texture = ExtResource("3_ijptv")

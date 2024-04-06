@@ -20,6 +20,7 @@ signal player_died()
 @export var collide_damage := 50
 @export var explosion_scale_mult := 1.0
 @export var projectile_info_color := "red"
+@export var defense := 1.0
 
 @export_subgroup("Healing", "healing_")
 @export var healing_rate := 6.0
@@ -280,7 +281,7 @@ func descrease_power_meter(delta: float, factor := 1.0) -> void:
 
 func take_damage(damage: int) -> void:
 	if not shield_on:
-		health -= damage
+		health -= defense * damage
 		AudioManager.play_sfx(AudioManager.SFX.low_freq_explosion,\
 				false, Vector2.ZERO, audio_hit_db)
 

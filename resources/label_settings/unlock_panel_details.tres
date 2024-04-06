@@ -1,8 +1,8 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dypxvlngirsw0"]
 
-[ext_resource type="FontFile" uid="uid://dhv3bbigdjiw5" path="res://assets/fonts/Asap-Italic-VariableFont_wdth,wght.ttf" id="1_payf0"]
+[ext_resource type="FontFile" uid="uid://cevblovqhas67" path="res://assets/fonts/Asap-SemiBoldItalic.ttf" id="1_dlg7g"]
 
 [resource]
-font = ExtResource("1_payf0")
+font = ExtResource("1_dlg7g")
 font_size = 24
 font_color = Color(0, 0, 0, 1)

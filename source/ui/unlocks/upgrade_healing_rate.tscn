@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://blmvobqkwhts7"]
+
+[ext_resource type="PackedScene" uid="uid://casvhb0htvpn5" path="res://source/ui/unlocks/base_unlock.tscn" id="1_wofx0"]
+[ext_resource type="Texture2D" uid="uid://x4ys5vyu3y6d" path="res://assets/ui/panels/metalPanel_green.png" id="2_vxr6b"]
+[ext_resource type="Texture2D" uid="uid://dry4paotlhwvn" path="res://assets/ui/icons/star 02.png" id="2_wxd42"]
+[ext_resource type="Texture2D" uid="uid://di5n6r1105cd0" path="res://assets/ui/icons/health icon.png" id="3_w0nsd"]
+[ext_resource type="Texture2D" uid="uid://cojvp4isrncw6" path="res://assets/ui/icons/upgrade icon 00.png" id="4_impw7"]
+
+[node name="UpgradeHealingRate" instance=ExtResource("1_wofx0")]
+
+[node name="BackPanel" parent="." index="1"]
+texture = ExtResource("2_vxr6b")
+
+[node name="Title" parent="." index="2"]
+text = "HEALTH UPGRADE"
+
+[node name="Details" parent="." index="3"]
+text = "Increase repair rate by %s%"
+
+[node name="CategoryIcon" parent="." index="4"]
+texture = ExtResource("3_w0nsd")
+
+[node name="UpgradeIcon" parent="." index="5"]
+texture = ExtResource("4_impw7")
+
+[node name="TextureRect" type="TextureRect" parent="StarsContainer" index="0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_wxd42")
+stretch_mode = 5

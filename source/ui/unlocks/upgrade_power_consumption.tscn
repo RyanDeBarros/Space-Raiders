@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbcrffjkvjs0i"]
+
+[ext_resource type="PackedScene" uid="uid://jr64remqfwlp" path="res://source/ui/unlocks/upgrade_max_power_meter.tscn" id="1_3ekil"]
+
+[node name="UpgradePowerConsumption" instance=ExtResource("1_3ekil")]
+
+[node name="Details" parent="." index="3"]
+text = "Reduce power consumption
+by %s%"

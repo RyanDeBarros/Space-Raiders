@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1xsowjqeghd6"]
+
+[ext_resource type="PackedScene" uid="uid://baswe278o231i" path="res://source/ui/unlocks/upgrade_defense.tscn" id="1_osvo0"]
+[ext_resource type="Texture2D" uid="uid://cvp0tvark2cvc" path="res://assets/ui/panels/metalPanel_blue.png" id="2_a1dag"]
+[ext_resource type="Texture2D" uid="uid://bnr6acb4fu573" path="res://assets/ui/icons/shield icon.png" id="3_gyjb3"]
+[ext_resource type="Texture2D" uid="uid://bnq4i563y8qvo" path="res://assets/ui/icons/upgrade icon 01.png" id="3_qhafp"]
+
+[node name="UpgradeShieldConsumption" instance=ExtResource("1_osvo0")]
+
+[node name="BackPanel" parent="." index="1"]
+texture = ExtResource("2_a1dag")
+
+[node name="Title" parent="." index="2"]
+text = "SHIELD UPGRADE"
+
+[node name="Details" parent="." index="3"]
+text = "Reduce shield consumption
+by %s%"
+
+[node name="CategoryIcon" parent="." index="4"]
+offset_left = -22.0
+offset_top = -91.0
+offset_right = 22.0
+offset_bottom = -47.0
+texture = ExtResource("3_gyjb3")
+
+[node name="UpgradeIcon" parent="." index="5"]
+texture = ExtResource("3_qhafp")

@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dakhacbvk0w8t" path="res://assets/ui/panels/panel-border-006.png" id="9_12ook"]
 [ext_resource type="Texture2D" uid="uid://c2ttr7tbome8o" path="res://assets/ui/bars/divider-fade-000.png" id="10_jyvmn"]
 [ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="14_4dkxu"]
-[ext_resource type="Texture2D" uid="uid://xx3c1rbee5ve" path="res://assets/ui/icons/temp_repair.png" id="14_7xhwx"]
+[ext_resource type="Texture2D" uid="uid://cfj6wxfwdv11l" path="res://assets/ui/icons/healing icon.png" id="14_082mv"]
 [ext_resource type="PackedScene" uid="uid://itcna8l2tpq7" path="res://source/ui/pause_screen.tscn" id="15_34ixn"]
 [ext_resource type="PackedScene" uid="uid://c3fuli6qvfxfs" path="res://source/ui/game_over_screen.tscn" id="16_4tf0e"]
 [ext_resource type="PackedScene" uid="uid://dyyqxlnd70hja" path="res://source/ui/level_up_screen.tscn" id="16_lutcf"]
@@ -316,11 +316,11 @@ vertical_alignment = 1
 unique_name_in_owner = true
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 1063.33
-offset_top = -10.0
-offset_right = 1127.33
-offset_bottom = 54.0
-texture = ExtResource("14_7xhwx")
+offset_left = 1072.22
+offset_top = -4.44444
+offset_right = 1136.22
+offset_bottom = 59.5556
+texture = ExtResource("14_082mv")
 
 [node name="MiniMapControl" type="Control" parent="Modulator"]
 layout_mode = 1

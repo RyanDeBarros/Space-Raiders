@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvc2vqte7h23x"]
+
+[ext_resource type="PackedScene" uid="uid://d1xsowjqeghd6" path="res://source/ui/unlocks/upgrade_shield_consumption.tscn" id="1_2c0qh"]
+
+[node name="UpgradeShieldRegeneration" instance=ExtResource("1_2c0qh")]
+
+[node name="Details" parent="." index="3"]
+text = "Increase shield regeneration
+by %s%"

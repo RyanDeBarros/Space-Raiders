@@ -1,0 +1,129 @@
+{
+	"upgrade_max_health": {
+		"scene": "res://source/ui/unlocks/upgrade_max_health.tscn",
+		"increase": 30,
+		"recursive": true
+	},
+	"upgrade_healing_rate": {
+		"scene": "res://source/ui/unlocks/upgrade_healing_rate.tscn",
+		"factor": 1.25,
+		"recursive": true
+	},
+	"upgrade_healing_length": {
+		"scene": "res://source/ui/unlocks/upgrade_healing_length.tscn",
+		"factor": 1.25,
+		"recursive": true
+	},
+	"upgrade_defense": {
+		"scene": "res://source/ui/unlocks/upgrade_defense.tscn",
+		"factor": 0.9,
+		"recursive": true
+	},
+	"upgrade_shield_consumption": {
+		"scene": "res://source/ui/unlocks/upgrade_shield_consumption.tscn",
+		"factor": 0.6,
+		"recursive": true
+	},
+	"upgrade_shield_regeneration": {
+		"scene": "res://source/ui/unlocks/upgrade_shield_regeneration.tscn",
+		"factor": 1.5,
+		"recursive": true
+	},
+	"upgrade_damage": {
+		"scene": "res://source/ui/unlocks/upgrade_damage.tscn",
+		"increase": 5,
+		"recursive": true
+	},
+	"upgrade_max_power_meter": {
+		"scene": "res://source/ui/unlocks/upgrade_max_power_meter.tscn",
+		"increase": 10,
+		"recursive": true
+	},
+	"upgrade_power_consumption": {
+		"scene": "res://source/ui/unlocks/upgrade_power_consumption.tscn",
+		"factor": 0.6,
+		"recursive": true
+	},
+	"upgrade_power_regeneration": {
+		"scene": "res://source/ui/unlocks/upgrade_power_regeneration.tscn",
+		"factor": 1.5,
+		"recursive": true
+	},
+	"unlock_charge_shot": {
+		"scene": "res://source/ui/unlocks/unlock_charge_shot.tscn",
+		"recursive": false,
+		"next": [
+			{
+				"scene": "res://source/ui/unlocks/upgrade_charge_shot_minimum_power.tscn",
+				"factor": 0.9,
+				"recursive": true
+			},
+			{
+				"scene": "res://source/ui/unlocks/upgrade_charge_shot_min_damage.tscn",
+				"increase": 5,
+				"recursive": true
+			},
+			{
+				"scene": "res://source/ui/unlocks/upgrade_charge_shot_damage_inc.tscn",
+				"increase": 5,
+				"recursive": true
+			},
+			{
+				"scene": "res://source/ui/unlocks/upgrade_charge_shot_consume_rate.tscn",
+				"factor": 0.9,
+				"recursive": true
+			}
+		]
+	},
+	"unlock_burst_shot": {
+		"scene": "res://source/ui/unlocks/unlock_burst_shot.tscn",
+		"recursive": false,
+		"next": [
+			{
+				"scene": "res://source/ui/unlocks/upgrade_burst_shot_minimum_power.tscn",
+				"factor": 0.9,
+				"recursive": true
+			},
+			{
+				"scene": "res://source/ui/unlocks/upgrade_burst_shot_damage.tscn",
+				"increase": 5,
+				"recursive": true
+			},
+			{
+				"scene": "res://source/ui/unlocks/upgrade_burst_shot_num.tscn",
+				"range_amount": {
+					"min": [2, 3, 3, 4],
+					"med": [4, 4, 5, 6],
+					"max": [5, 6, 7, 8]
+				},
+				"recursive": 4
+			}
+		]
+	},
+	"unlock_cannon_shot": {
+		"scene": "res://source/ui/unlocks/unlock_cannon_shot.tscn",
+		"recursive": false,
+		"next": [
+			{
+				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_minimum_power.tscn",
+				"factor": 0.9,
+				"recursive": true
+			},
+			{
+				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_min_damage.tscn",
+				"increase": 5,
+				"recursive": true
+			},
+			{
+				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_durability.tscn",
+				"range_amount": [4, 5, 6, 7],
+				"recursive": 4
+			},
+			{
+				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_speed.tscn",
+				"increase": 50,
+				"recursive": 4
+			}
+		]
+	},
+}

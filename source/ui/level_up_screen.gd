@@ -25,10 +25,10 @@ func open() -> void:
 	for i in range(3):
 		# TODO poll available unlocks
 		var scene := load("res://source/ui/unlocks/upgrade_max_health.tscn")
-		var inst := scene.instantiate() as UpgradeMaxHealth
+		var inst := scene.instantiate() as BaseUnlock
 		inst.stage = Info.main_stage
 		inst.overlay = parent
-		inst.increase = 30
+		inst.data = 30
 		panels_container.add_child(inst)
 	
 	Utility.propogate_mouse_filter(self, Control.MOUSE_FILTER_IGNORE)
