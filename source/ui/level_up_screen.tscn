@@ -71,7 +71,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_31l04")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gn6eh")
 text = "Repair (+30 HP)"
 
-[node name="PanelsContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -84,5 +84,9 @@ offset_right = 412.0
 offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PanelsContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 48
 
 [connection signal="pressed" from="RepairButton" to="." method="_on_repair_button_pressed"]

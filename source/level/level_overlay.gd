@@ -200,6 +200,7 @@ func display_pause_screen() -> void:
 
 func undisplay_pause_screen() -> void:
 	pause_screen.visible = false
+	Info.player.unpause()
 	Utility.propogate_mouse_filter(pause_screen, Control.MOUSE_FILTER_IGNORE)
 	if not leveling_up:
 		dim.emit(1.0)
@@ -231,10 +232,12 @@ func display_level_up_screen() -> void:
 	Utility.propogate_mouse_filter(level_up_screen, Control.MOUSE_FILTER_STOP)
 	modulator.modulate.a = 0.6
 	dim.emit(0.3)
+	level_up_screen.open()
 
 
 func undisplay_level_up_screen() -> void:
 	get_tree().paused = false
+	Info.player.unpause()
 	leveling_up = false
 	level_up_screen.visible = false
 	Utility.propogate_mouse_filter(level_up_screen, Control.MOUSE_FILTER_IGNORE)

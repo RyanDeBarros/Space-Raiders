@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://casvhb0htvpn5"]
+
+[ext_resource type="Script" path="res://source/ui/unlocks/base_unlock.gd" id="1_7k68s"]
+[ext_resource type="Theme" uid="uid://c612ck3l4wgk" path="res://resources/themes/unlock_panel_select_button.tres" id="1_m56ek"]
+
+[node name="BaseUnlock" type="Control"]
+process_mode = 2
+custom_minimum_size = Vector2(246, 300)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 453.0
+offset_top = 174.0
+offset_right = -453.0
+offset_bottom = -174.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7k68s")
+
+[node name="SelectButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_m56ek")
+
+[connection signal="pressed" from="SelectButton" to="." method="_on_select_button_pressed"]

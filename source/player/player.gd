@@ -16,7 +16,7 @@ signal player_died()
 @export var deceleration := 700
 
 @export_group("Combat")
-@export var max_health := 100
+@export var max_health := 150
 @export var collide_damage := 50
 @export var explosion_scale_mult := 1.0
 @export var projectile_info_color := "red"
@@ -343,6 +343,11 @@ func rigid_camera_bounds(rel_margin: float, lin_margin: float) -> Rect2:
 	bounds.size.y = bounds.size.y * rel_margin / camera.zoom.y + lin_margin
 	bounds.position += position - 0.5 * bounds.size
 	return bounds
+
+
+func unpause() -> void:
+	if not Input.is_action_pressed("shield"):
+		try_disable_shield()
 
 
 func next_repair_amount() -> void:

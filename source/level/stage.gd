@@ -148,3 +148,9 @@ func compute_score_threshold_exponent() -> float:
 
 func consume_half_exp() -> void:
 	current_score -= int(0.5 * current_score_threshold)
+
+
+func upgrade_max_health(amount: int) -> void:
+	var increase_health := player.health == player.max_health
+	player.max_health += amount
+	player.health = player.max_health if increase_health else player.health

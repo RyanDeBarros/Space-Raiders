@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xx3c1rbee5ve"
-path="res://.godot/imported/temp_repair.png-e4a60290151026285e8d541638878c19.ctex"
+uid="uid://c323ed7a7sw"
+path="res://.godot/imported/metalPanel_red.png-d0a3f252870bcc9045c48e63245a741c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/temp_repair.png"
-dest_files=["res://.godot/imported/temp_repair.png-e4a60290151026285e8d541638878c19.ctex"]
+source_file="res://assets/ui/panels/metalPanel_red.png"
+dest_files=["res://.godot/imported/metalPanel_red.png-d0a3f252870bcc9045c48e63245a741c.ctex"]
 
 [params]
 

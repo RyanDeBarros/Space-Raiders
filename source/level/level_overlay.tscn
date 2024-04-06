@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dakhacbvk0w8t" path="res://assets/ui/panels/panel-border-006.png" id="9_12ook"]
 [ext_resource type="Texture2D" uid="uid://c2ttr7tbome8o" path="res://assets/ui/bars/divider-fade-000.png" id="10_jyvmn"]
 [ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="14_4dkxu"]
-[ext_resource type="Texture2D" uid="uid://xx3c1rbee5ve" path="res://assets/ui/temp_repair.png" id="14_l63eq"]
+[ext_resource type="Texture2D" uid="uid://xx3c1rbee5ve" path="res://assets/ui/icons/temp_repair.png" id="14_7xhwx"]
 [ext_resource type="PackedScene" uid="uid://itcna8l2tpq7" path="res://source/ui/pause_screen.tscn" id="15_34ixn"]
 [ext_resource type="PackedScene" uid="uid://c3fuli6qvfxfs" path="res://source/ui/game_over_screen.tscn" id="16_4tf0e"]
 [ext_resource type="PackedScene" uid="uid://dyyqxlnd70hja" path="res://source/ui/level_up_screen.tscn" id="16_lutcf"]
@@ -320,7 +320,7 @@ offset_left = 1063.33
 offset_top = -10.0
 offset_right = 1127.33
 offset_bottom = 54.0
-texture = ExtResource("14_l63eq")
+texture = ExtResource("14_7xhwx")
 
 [node name="MiniMapControl" type="Control" parent="Modulator"]
 layout_mode = 1
