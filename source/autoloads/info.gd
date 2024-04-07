@@ -5,6 +5,7 @@ var level_data = {
 	"arena_rect_inv": Rect2(0, 0, 0, 0)
 }
 
+var unlocks_graph: Array
 var projectile_JSON: Dictionary
 var enemy_JSON: Dictionary
 var ufo_info: Dictionary
@@ -19,8 +20,12 @@ var high_score := 0
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	# Load unlocks graph
+	var file = FileAccess.open("res://config/unlocks_graph.json", FileAccess.READ)
+	unlocks_graph = JSON.parse_string(file.get_as_text())
+	file.close()
 	# Load projectile info
-	var file = FileAccess.open("res://config/projectile_info.json", FileAccess.READ)
+	file = FileAccess.open("res://config/projectile_info.json", FileAccess.READ)
 	projectile_JSON = JSON.parse_string(file.get_as_text())
 	file.close()
 	# Load enemy info

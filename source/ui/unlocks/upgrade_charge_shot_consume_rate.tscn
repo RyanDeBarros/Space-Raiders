@@ -5,4 +5,4 @@
 [node name="UpgradeChargeShotConsumeRate" instance=ExtResource("1_734s4")]
 
 [node name="Details2" parent="." index="4"]
-text = "Reduce charge-up power consumption by %s%"
+text = "Reduce charge-up power consumption by {s}%"

@@ -15,7 +15,7 @@ text = "SHIELD UPGRADE"
 
 [node name="Details" parent="." index="3"]
 text = "Reduce shield consumption
-by %s%"
+by {s}%"
 
 [node name="CategoryIcon" parent="." index="4"]
 offset_left = -22.0

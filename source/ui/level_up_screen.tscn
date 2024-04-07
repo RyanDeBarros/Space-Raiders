@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyyqxlnd70hja"]
+[gd_scene load_steps=9 format=3 uid="uid://dyyqxlnd70hja"]
 
 [ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="1_0anj4"]
 [ext_resource type="Script" path="res://source/ui/level_up_screen.gd" id="1_ia1o3"]
@@ -14,12 +14,15 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w02ak"]
 bg_color = Color(0.0705882, 0.639216, 0.109804, 1)
 shadow_color = Color(0.0705882, 0.639216, 0.109804, 1)
-shadow_size = 8
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwg0r"]
+bg_color = Color(0.0705882, 0.639216, 0.109804, 1)
+shadow_color = Color(0.0705882, 0.639216, 0.109804, 1)
+shadow_size = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31l04"]
 bg_color = Color(0.0470588, 0.439216, 0.0745098, 1)
-shadow_color = Color(0.0484, 0.44, 0.0745066, 1)
-shadow_size = 8
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gn6eh"]
 
@@ -58,15 +61,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0.75, 0.75, 0.75, 1)
-theme_override_colors/font_hover_color = Color(0.75, 0.75, 0.75, 1)
+theme_override_colors/font_pressed_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_colors/font_hover_color = Color(0.4, 0.4, 0.4, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("1_0anj4")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_w02ak")
-theme_override_styles/hover = SubResource("StyleBoxFlat_w02ak")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qwg0r")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_31l04")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gn6eh")
 text = "Repair (+30 HP)"

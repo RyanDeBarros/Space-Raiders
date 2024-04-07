@@ -59,6 +59,7 @@ patch_margin_right = 32
 patch_margin_bottom = 32
 
 [node name="ChargeShotIcon" type="TextureRect" parent="Backdrop" index="0"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 14.0
 offset_right = 124.0

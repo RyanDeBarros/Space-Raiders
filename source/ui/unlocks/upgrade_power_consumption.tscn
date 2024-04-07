@@ -6,4 +6,4 @@
 
 [node name="Details" parent="." index="3"]
 text = "Reduce power consumption
-by %s%"
+by {s}%"

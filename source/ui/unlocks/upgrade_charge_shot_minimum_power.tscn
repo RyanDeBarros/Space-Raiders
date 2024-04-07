@@ -9,10 +9,7 @@
 text = "POWER UPGRADE"
 
 [node name="Details2" parent="." index="4"]
-text = "Reduce minimum power by %s%"
+text = "Reduce minimum power by {s}%"
 
 [node name="UpgradeIcon" parent="." index="6"]
 texture = ExtResource("2_j0dg0")
-
-[node name="ChargeShotIcon" parent="Backdrop" index="0"]
-layout_mode = 0

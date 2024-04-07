@@ -22,14 +22,11 @@ func set_repair_amount(amount: int) -> void:
 func open() -> void:
 	for child in panels_container.get_children():
 		child.queue_free()
-	for i in range(3):
-		# TODO poll available unlocks
-		var scene := load("res://source/ui/unlocks/upgrade_max_health.tscn")
-		var inst := scene.instantiate() as BaseUnlock
-		inst.stage = Info.main_stage
-		inst.overlay = parent
-		inst.data = 30
-		panels_container.add_child(inst)
+	
+	var unlocks := Info.main_stage.unlocker.unlocks_graph.poll_unlock() as Array[BaseUnlock]
+	for unlock in unlocks:
+		unlock.overlay = parent
+		panels_container.add_child(unlock)
 	
 	Utility.propogate_mouse_filter(self, Control.MOUSE_FILTER_IGNORE)
 	mouse_filter = Control.MOUSE_FILTER_STOP

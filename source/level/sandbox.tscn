@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ctxltwcj5mpeg"]
+[gd_scene load_steps=33 format=3 uid="uid://ctxltwcj5mpeg"]
 
 [ext_resource type="Script" path="res://source/level/stage.gd" id="1_8a0rs"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://source/player/player.tscn" id="2_1vmdd"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://bqfnjbr3v2t13" path="res://source/asteroid/asteroid_3.tscn" id="11_k1vdl"]
 [ext_resource type="PackedScene" uid="uid://b0y5seq02bsq0" path="res://source/asteroid/asteroid_4.tscn" id="12_qhtd5"]
 [ext_resource type="PackedScene" uid="uid://bxson2p650pnl" path="res://source/asteroid/asteroid_5.tscn" id="13_4ks03"]
+[ext_resource type="Script" path="res://source/level/unlocker.gd" id="17_bplxm"]
+[ext_resource type="Script" path="res://source/level/unlocks_graph.gd" id="18_bpo64"]
 
 [sub_resource type="Curve" id="Curve_2e2gt"]
 _data = [Vector2(0, 0), 0.0, 1.5, 0, 1, Vector2(0.5, 0.75), 1.5, 0.5, 1, 1, Vector2(1, 1), 0.5, 0.0, 1, 0]
@@ -520,6 +522,12 @@ max_health = 300
 
 [node name="EnemyManager" parent="Modulator" node_paths=PackedStringArray("stage") instance=ExtResource("5_fhh1b")]
 stage = NodePath("../..")
+
+[node name="Unlocker" type="Node" parent="."]
+script = ExtResource("17_bplxm")
+
+[node name="UnlocksGraph" type="Node" parent="Unlocker"]
+script = ExtResource("18_bpo64")
 
 [editable path="Arena/EnemySpawnZone/SpawnZone"]
 [editable path="Arena/EnemySpawnZone/SpawnZone2"]

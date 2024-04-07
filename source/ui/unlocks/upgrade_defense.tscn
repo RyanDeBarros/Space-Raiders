@@ -15,7 +15,7 @@ text = "DEFENSE UPGRADE"
 
 [node name="Details" parent="." index="3"]
 text = "Improve defense
-by %s%"
+by {s}%"
 
 [node name="CategoryIcon" parent="." index="4"]
 offset_top = -83.0

@@ -15,7 +15,7 @@ texture = ExtResource("2_vxr6b")
 text = "HEALTH UPGRADE"
 
 [node name="Details" parent="." index="3"]
-text = "Increase repair rate by %s%"
+text = "Increase repair rate by {s}%"
 
 [node name="CategoryIcon" parent="." index="4"]
 texture = ExtResource("3_w0nsd")

@@ -9,7 +9,7 @@
 text = "POWER UPGRADE"
 
 [node name="Details2" parent="." index="4"]
-text = "Reduce minimum power by %s%"
+text = "Reduce minimum power by {s}%"
 
 [node name="UpgradeIcon" parent="." index="6"]
 texture = ExtResource("2_wkiqu")

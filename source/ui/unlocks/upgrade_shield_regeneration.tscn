@@ -6,4 +6,4 @@
 
 [node name="Details" parent="." index="3"]
 text = "Increase shield regeneration
-by %s%"
+by {s}%"
