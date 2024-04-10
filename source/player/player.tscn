@@ -12,8 +12,6 @@ radius = 31.0644
 
 [node name="Player" type="Area2D" groups=["player"]]
 script = ExtResource("1_evl4l")
-healing_rate = 5.0
-healing_length = 6.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)

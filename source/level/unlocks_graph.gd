@@ -96,8 +96,8 @@ class U_finite_amount extends Unlock:
 	
 	func instance() -> BaseUnlock:
 		var inst := super.instance()
-		inst.data = data[num]
-		inst.find_child("Details2").text %= str(data[num])
+		inst.data = data[index]
+		inst.find_child("Details2").text %= str(data[index])
 		return inst
 
 class U_finite_add extends Unlock:
@@ -128,8 +128,8 @@ class U_finite_mmm extends Unlock:
 	
 	func instance() -> BaseUnlock:
 		var inst := super.instance()
-		inst.data = [data["min"][num], data["med"][num], data["max"][num]]
-		inst.find_child("Details2").text %= [str(data["min"][num]), str(data["max"][num])]
+		inst.data = [data["min"][index], data["med"][index], data["max"][index]]
+		inst.find_child("Details2").text %= [str(data["min"][index]), str(data["max"][index])]
 		return inst
 
 
@@ -175,6 +175,14 @@ func poll_unlock(num := 3) -> Array[BaseUnlock]:
 	return instances
 
 
-#TODO
 func use(name_: String) -> void:
-	pass
+	var unlock := available_unlocks[name_] as Unlock
+	match unlock.type:
+		"prereq", "prereq_mmm", "prereq_amount":
+			for key in unlock.next.keys():
+				available_unlocks[key] = unlock.next[key]
+			available_unlocks.erase(name_)
+		"finite_amount", "finite_add", "finite_mmm":
+			unlock.index += 1
+			if unlock.index == unlock.num:
+				available_unlocks.erase(name_)

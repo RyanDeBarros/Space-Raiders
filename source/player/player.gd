@@ -1,5 +1,5 @@
-class_name Player
-extends Area2D
+@icon("res://assets/ships/players/spaceShips_008.png")
+class_name Player extends Area2D
 
 
 signal health_changed(new_health: int)
