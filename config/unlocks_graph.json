@@ -20,19 +20,19 @@
 	{
 		"name": "UpgradeDefense",
 		"scene": "res://source/ui/unlocks/upgrade_defense.tscn",
-		"factor": 0.9,
+		"factor": 1.15,
 		"type": "recurring_mul",
 	},
 	{
 		"name": "UpgradeShieldConsumption",
 		"scene": "res://source/ui/unlocks/upgrade_shield_consumption.tscn",
-		"factor": 0.6,
+		"factor": 0.9,
 		"type": "recurring_mul",
 	},
 	{
 		"name": "UpgradeShieldRegeneration",
 		"scene": "res://source/ui/unlocks/upgrade_shield_regeneration.tscn",
-		"factor": 1.5,
+		"factor": 1.25,
 		"type": "recurring_mul",
 	},
 	{
@@ -50,13 +50,13 @@
 	{
 		"name": "UpgradePowerConsumption",
 		"scene": "res://source/ui/unlocks/upgrade_power_consumption.tscn",
-		"factor": 0.6,
+		"factor": 0.9,
 		"type": "recurring_mul",
 	},
 	{
 		"name": "UpgradePowerRegeneration",
 		"scene": "res://source/ui/unlocks/upgrade_power_regeneration.tscn",
-		"factor": 1.5,
+		"factor": 1.25,
 		"type": "recurring_mul",
 	},
 	{

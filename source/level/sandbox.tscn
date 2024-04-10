@@ -518,7 +518,6 @@ z_index = -40
 z_index = -20
 
 [node name="Player" parent="Modulator" instance=ExtResource("2_1vmdd")]
-max_health = 300
 
 [node name="EnemyManager" parent="Modulator" node_paths=PackedStringArray("stage") instance=ExtResource("5_fhh1b")]
 stage = NodePath("../..")

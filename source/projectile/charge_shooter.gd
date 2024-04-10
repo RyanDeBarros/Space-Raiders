@@ -6,28 +6,33 @@ extends Node
 @export var charge_up_vol_db := -5.0
 
 
-var active := false
 var to_shoot := false
 var build_up := false
 var build_up_damage := 0.0
 var audio_id := -1
 
 
+func _ready() -> void:
+	set_process(false)
+
+
 func _process(delta: float) -> void:
-	if active and build_up:
-		player.descrease_power_meter(delta * player.current_power_projectile.info["consume_rate"])
+	if build_up:
+		var info = player.pps[player.current_power_projectile]["info"]
+		player.descrease_power_meter(delta * info["consume_rate"])
 		if player.power_meter == 0.0:
 			build_up = false
-		build_up_damage += player.current_power_projectile.info["damage_inc"] * delta
+		build_up_damage += info["damage_inc"] * delta
 
 
 func handle_clicked() -> void:
-	if player.power_meter > player.current_power_projectile.minimum_power:
-		player.power_meter -= player.current_power_projectile.minimum_power
+	var power_proj = player.pps[player.current_power_projectile]
+	if player.power_meter > power_proj["minimum_power"]:
+		player.power_meter -= power_proj["minimum_power"]
 		player.is_power_meter_consuming = true
 		to_shoot = true
 		build_up = true
-		build_up_damage = player.current_power_projectile.info["min_damage"]
+		build_up_damage = power_proj["info"]["min_damage"]
 		audio_id = AudioManager.begin_stream(AudioManager.SFX_stream.charge_up,\
 				false, Vector2.ZERO, charge_up_vol_db)
 	else:
@@ -38,9 +43,10 @@ func handle_released() -> void:
 	if to_shoot:
 		to_shoot = false
 		player.is_power_meter_consuming = false
-		var charge_shot := player.current_power_projectile.packed_scene.instantiate() as ChargeShot
+		var power_proj = player.pps[player.current_power_projectile]
+		var charge_shot := power_proj["packed_scene"].instantiate() as ChargeShot
 		Info.projectile_manager.add_child(charge_shot)
-		charge_shot.setup_from_node(player, player.current_power_projectile.info,
+		charge_shot.setup_from_node(player, power_proj["info"],
 				"red.png", int(build_up_damage))
 		charge_shot.add_to_group(Groups.PLAYER_OWNED)
 		AudioManager.play_sfx(AudioManager.SFX.laser_2)
@@ -50,11 +56,11 @@ func handle_released() -> void:
 
 
 func start_process() -> void:
-	active = true
+	set_process(true)
 
 
 func cancel_process() -> void:
-	active = false
+	set_process(false)
 	to_shoot = false
 	build_up = false
 	build_up_damage = 0.0

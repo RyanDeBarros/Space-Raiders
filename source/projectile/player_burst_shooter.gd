@@ -9,10 +9,11 @@ var shooting := false
 
 
 func handle_clicked() -> void:
-	if not shooting and player.power_meter > player.current_power_projectile.minimum_power:
-		player.power_meter -= player.current_power_projectile.minimum_power
+	if not shooting and player.power_meter > player.pps[player.current_power_projectile]\
+			["info"]["minimum_power"]:
+		var info = player.pps[player.current_power_projectile]["info"]
+		player.power_meter -= info["minimum_power"]
 		shooting = true
-		var info = player.current_power_projectile.info
 		for i in range(Math.rand_mediani(info["num"]["min"], info["num"]["med"],
 				info["num"]["max"])):
 			shoot_single()
@@ -20,10 +21,6 @@ func handle_clicked() -> void:
 		shooting = false
 	else:
 		AudioManager.play_sfx(AudioManager.SFX.two_tone)
-
-
-func shoot() -> void:
-	pass
 
 
 func handle_released() -> void:
@@ -39,9 +36,10 @@ func cancel_process() -> void:
 
 
 func shoot_single() -> void:
-	var burst_shot := player.current_power_projectile.packed_scene.instantiate() as BasicShot
-	burst_shot.projectile_image_dir = player.current_power_projectile.info["filename"]
+	var power_proj = player.pps[player.current_power_projectile]
+	var burst_shot := power_proj["packed_scene"].instantiate() as BasicShot
+	burst_shot.projectile_image_dir = power_proj["info"]["filename"]
 	Info.projectile_manager.add_child(burst_shot)
-	burst_shot.setup_from_node(player, player.current_power_projectile.info, "red.png")
+	burst_shot.setup_from_node(player, power_proj["info"], "red.png")
 	burst_shot.add_to_group(Groups.PLAYER_OWNED)
 	AudioManager.play_sfx(AudioManager.SFX.laser_2)

@@ -16,11 +16,12 @@ signal player_died()
 @export var deceleration := 700
 
 @export_group("Combat")
-@export var max_health := 150
+@export var max_health := 150.0
 @export var collide_damage := 50
 @export var explosion_scale_mult := 1.0
 @export var projectile_info_color := "red"
-@export var defense := 1.0
+@export var net_defense := 1.0
+@export var projectile_damage := 35
 
 @export_subgroup("Healing", "healing_")
 @export var healing_rate := 6.0
@@ -73,63 +74,24 @@ var power_meter: float:
 
 var is_power_meter_consuming := false
 
-class PowerProjectile:
-	var name: String
-	var unlocked := false
-	var packed_scene: PackedScene
-	var shooter: Node
-	var minimum_power: int
-	var info: Dictionary
-	
-	func _init(name_: String, info_: Dictionary, shooter_) -> void:
-		name = name_
-		packed_scene = Scenes.PROJECTILES[name]
-		shooter = shooter_
-		info = info_
-		minimum_power = info["minimum_power"]
-	
-	func handle_clicked() -> void:
-		shooter.handle_clicked()
-	
-	func handle_released() -> void:
-		shooter.handle_released()
-	
-	func start_process() -> void:
-		shooter.start_process()
-	
-	func cancel_process() -> void:
-		shooter.cancel_process()
-	
-	static func unlock(proj: PowerProjectile) -> void:
-		proj.unlocked = true
 
-var pwp_list := ["charge", "burst", "cannon"]
-var pwp_index: int:
-	set(value):
-		pwp_index = value
-		current_power_projectile = power_projectiles[pwp_list[pwp_index]]
-
-var current_power_projectile: PowerProjectile = null:
+var current_power_projectile: int = -1:
 	set(value):
 		if current_power_projectile == value:
 			return
-		if current_power_projectile:
-			current_power_projectile.cancel_process()
+		if current_power_projectile != -1:
+			pps[current_power_projectile]["shooter"].cancel_process()
 		current_power_projectile = value
-		if current_power_projectile:
-			current_power_projectile.start_process()
-			power_minimum_meter_changed.emit(current_power_projectile.minimum_power)
-			power_proj_icon_changed.emit(current_power_projectile.name)
+		if current_power_projectile != -1:
+			pps[current_power_projectile]["shooter"].start_process()
+			power_minimum_meter_changed.emit(pps[current_power_projectile]["info"]["minimum_power"])
+			power_proj_icon_changed.emit(pps[current_power_projectile]["name"])
 
-
-@onready var power_projectiles := {
-	"charge": PowerProjectile.new("charge", Info.projectile_JSON["charge"], $Shooter/ChargeShooter),
-	"burst": PowerProjectile.new("burst", Info.projectile_JSON["burst"], $Shooter/BurstShooter),
-	#"bomb": PowerProjectile.new("bomb", Info.projectile_JSON["bomb"], $Shooter/ChargeShooter),
-	"cannon": PowerProjectile.new("cannon", Info.projectile_JSON["cannon"], $Shooter/CannonShooter),
-	#"emp": PowerProjectile.new("emp", Info.projectile_JSON["emp"], $Shooter/ChargeShooter),
-	#"laser": PowerProjectile.new("laser", Info.projectile_JSON["laser"], $Shooter/ChargeShooter),
-}
+@onready var pps := [
+	_new_power_projectile("charge", $Shooter/ChargeShooter, 0),
+	_new_power_projectile("burst", $Shooter/BurstShooter, 1),
+	_new_power_projectile("cannon", $Shooter/CannonShooter, 2),
+]
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var camera: Camera2D = $Camera
@@ -143,15 +105,17 @@ func _ready() -> void:
 	health = max_health
 	power_meter = power_max_meter
 	update_camera_smoothing()
-	call_deferred("_first_frame")
 
 
-func _first_frame() -> void:
-	# Testing
-	PowerProjectile.unlock(power_projectiles["charge"])
-	PowerProjectile.unlock(power_projectiles["burst"])
-	PowerProjectile.unlock(power_projectiles["cannon"])
-	pwp_index = 0
+func _new_power_projectile(name_: String, shooter, index: int) -> Dictionary:
+	return {
+		"name" = name_,
+		"unlocked" = false,
+		"packed_scene" = Scenes.PROJECTILES[name_],
+		"shooter" = shooter,
+		"info" = Info.projectile_JSON[name_],
+		"index" = index
+	}
 
 
 func _process(delta: float) -> void:
@@ -203,11 +167,11 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_pressed("cycle_power_down"):
 		prev_power_projectile()
 	
-	if current_power_projectile:
+	if current_power_projectile != -1:
 		if Input.is_action_just_pressed("special"):
-			current_power_projectile.handle_clicked()
+			pps[current_power_projectile]["shooter"].handle_clicked()
 		elif Input.is_action_just_released("special"):
-			current_power_projectile.handle_released()
+			pps[current_power_projectile]["shooter"].handle_released()
 	if not is_power_meter_consuming:
 		power_meter += power_meter_regeneration * delta
 
@@ -230,6 +194,18 @@ func _update_velocity(delta: float) -> void:
 		velocity.y = min(velocity.y + deceleration * delta, 0)
 
 
+func _update_shield(delta: float) -> void:
+	if shield_on:
+		shield.modulate.a = lerpf(shield.modulate.a, 1.0, shield_activation_speed * delta)
+		shield_meter -= shield_consumption_rate * delta
+		if shield_meter == 0.0:
+			try_disable_shield()
+	else:
+		shield.modulate.a = lerpf(shield.modulate.a, 0.0, shield_activation_speed * delta)
+		if shield_regeneration_delay.is_stopped():
+			shield_meter += shield_regeneration_rate * delta
+
+
 func setup_camera_limits() -> void:
 	arena_rect = Info.level_data["arena_rect"]
 	camera.limit_left = arena_rect.position.x
@@ -244,6 +220,7 @@ func shoot() -> void:
 	Info.projectile_manager.add_child(basic_shot)
 	basic_shot.setup_from_node(self, projectile_info, "red.png", 1.57)
 	basic_shot.add_to_group(Groups.PLAYER_OWNED)
+	basic_shot.damage = projectile_damage
 	AudioManager.play_sfx(AudioManager.SFX.laser_1)
 
 
@@ -263,25 +240,13 @@ func try_disable_shield() -> void:
 	AudioManager.play_sfx(AudioManager.SFX.shield_down)
 
 
-func _update_shield(delta: float) -> void:
-	if shield_on:
-		shield.modulate.a = lerpf(shield.modulate.a, 1.0, shield_activation_speed * delta)
-		shield_meter -= shield_consumption_rate * delta
-		if shield_meter == 0.0:
-			try_disable_shield()
-	else:
-		shield.modulate.a = lerpf(shield.modulate.a, 0.0, shield_activation_speed * delta)
-		if shield_regeneration_delay.is_stopped():
-			shield_meter += shield_regeneration_rate * delta
-
-
 func descrease_power_meter(delta: float, factor := 1.0) -> void:
 	power_meter -= factor * power_meter_consumption_rate * delta
 
 
 func take_damage(damage: int) -> void:
 	if not shield_on:
-		health -= defense * damage
+		health -= net_defense * damage
 		AudioManager.play_sfx(AudioManager.SFX.low_freq_explosion,\
 				false, Vector2.ZERO, audio_hit_db)
 
@@ -313,18 +278,18 @@ func get_collide_damage() -> int:
 
 func next_power_projectile() -> void:
 	var i := 1
-	while i < len(pwp_list):
-		if power_projectiles[pwp_list[(pwp_index + i) % len(pwp_list)]].unlocked:
-			pwp_index = (pwp_index + i) % len(pwp_list)
+	while i < len(pps):
+		if pps[(current_power_projectile + i) % len(pps)].unlocked:
+			current_power_projectile = (current_power_projectile + i) % len(pps)
 			return
 		i += 1
 
 
 func prev_power_projectile() -> void:
 	var i := 1
-	while i < len(pwp_list):
-		if power_projectiles[pwp_list[(pwp_index - i) % len(pwp_list)]].unlocked:
-			pwp_index = (pwp_index - i) % len(pwp_list)
+	while i < len(pps):
+		if pps[(current_power_projectile - i) % len(pps)].unlocked:
+			current_power_projectile = (current_power_projectile - i) % len(pps)
 			return
 		i += 1
 
