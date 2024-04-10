@@ -34,19 +34,19 @@
 		"filename": "spaceMissiles_05/",
 		"minimum_power": 40
 	},
-	"bomb": {
-		"initial_speed": 500.0,
-		"acceleration": 10.0,
-		"damage": 35,
-		"filename": "spaceMissiles_08/",
-		"minimum_power": 40
-	},
 	"cannon": {
 		"initial_speed": 600.0,
 		"acceleration": 20.0,
 		"damage": 35,
 		"durability": 3,
 		"filename": "spaceMissiles_06/",
+		"minimum_power": 40
+	},
+	"bomb": {
+		"initial_speed": 500.0,
+		"acceleration": 10.0,
+		"damage": 35,
+		"filename": "spaceMissiles_08/",
 		"minimum_power": 40
 	},
 	"emp": {

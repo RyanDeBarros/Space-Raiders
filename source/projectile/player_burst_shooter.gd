@@ -9,9 +9,9 @@ var shooting := false
 
 
 func handle_clicked() -> void:
-	if not shooting and player.power_meter > player.pps[player.current_power_projectile]\
+	if not shooting and player.power_meter > player.pps[Player.PowerProjectile.BURST]\
 			["info"]["minimum_power"]:
-		var info = player.pps[player.current_power_projectile]["info"]
+		var info = player.pps[Player.PowerProjectile.BURST]["info"]
 		player.power_meter -= info["minimum_power"]
 		shooting = true
 		for i in range(Math.rand_mediani(info["num"]["min"], info["num"]["med"],
@@ -36,7 +36,7 @@ func cancel_process() -> void:
 
 
 func shoot_single() -> void:
-	var power_proj = player.pps[player.current_power_projectile]
+	var power_proj = player.pps[Player.PowerProjectile.BURST]
 	var burst_shot := power_proj["packed_scene"].instantiate() as BasicShot
 	burst_shot.projectile_image_dir = power_proj["info"]["filename"]
 	Info.projectile_manager.add_child(burst_shot)

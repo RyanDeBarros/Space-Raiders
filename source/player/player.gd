@@ -10,6 +10,13 @@ signal power_proj_icon_changed(name: String)
 signal player_died()
 
 
+enum PowerProjectile {
+	CHARGE = 0,
+	BURST = 1,
+	CANNON = 2,
+}
+
+
 @export_group("Movement")
 @export var max_speed := 350
 @export var acceleration := 700
@@ -21,7 +28,6 @@ signal player_died()
 @export var explosion_scale_mult := 1.0
 @export var projectile_info_color := "red"
 @export var net_defense := 1.0
-@export var projectile_damage := 35
 
 @export_subgroup("Healing", "healing_")
 @export var healing_rate := 6.0
@@ -88,9 +94,9 @@ var current_power_projectile: int = -1:
 			power_proj_icon_changed.emit(pps[current_power_projectile]["name"])
 
 @onready var pps := [
-	_new_power_projectile("charge", $Shooter/ChargeShooter, 0),
-	_new_power_projectile("burst", $Shooter/BurstShooter, 1),
-	_new_power_projectile("cannon", $Shooter/CannonShooter, 2),
+	_new_power_projectile("charge", $Shooter/ChargeShooter),
+	_new_power_projectile("burst", $Shooter/BurstShooter),
+	_new_power_projectile("cannon", $Shooter/CannonShooter),
 ]
 
 @onready var sprite: Sprite2D = $Sprite
@@ -107,14 +113,13 @@ func _ready() -> void:
 	update_camera_smoothing()
 
 
-func _new_power_projectile(name_: String, shooter, index: int) -> Dictionary:
+func _new_power_projectile(name_: String, shooter) -> Dictionary:
 	return {
 		"name" = name_,
 		"unlocked" = false,
 		"packed_scene" = Scenes.PROJECTILES[name_],
 		"shooter" = shooter,
 		"info" = Info.projectile_JSON[name_],
-		"index" = index
 	}
 
 
@@ -220,7 +225,6 @@ func shoot() -> void:
 	Info.projectile_manager.add_child(basic_shot)
 	basic_shot.setup_from_node(self, projectile_info, "red.png", 1.57)
 	basic_shot.add_to_group(Groups.PLAYER_OWNED)
-	basic_shot.damage = projectile_damage
 	AudioManager.play_sfx(AudioManager.SFX.laser_1)
 
 

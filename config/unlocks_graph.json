@@ -46,18 +46,21 @@
 		"scene": "res://source/ui/unlocks/upgrade_max_power_meter.tscn",
 		"increase": 10,
 		"type": "recurring_add",
+		"req": "exists_power_projectile",
 	},
 	{
 		"name": "UpgradePowerConsumption",
 		"scene": "res://source/ui/unlocks/upgrade_power_consumption.tscn",
 		"factor": 0.9,
 		"type": "recurring_mul",
+		"req": "exists_power_projectile",
 	},
 	{
 		"name": "UpgradePowerRegeneration",
 		"scene": "res://source/ui/unlocks/upgrade_power_regeneration.tscn",
 		"factor": 1.25,
 		"type": "recurring_mul",
+		"req": "exists_power_projectile",
 	},
 	{
 		"name": "UnlockChargeShot",

@@ -6,11 +6,13 @@ class Unlock:
 	var name: String
 	var scene: PackedScene
 	var type: String
+	var req: String
 	
 	func _init(node: Dictionary) -> void:
 		name = node["name"]
 		scene = load(node["scene"])
 		type = node["type"]
+		req = node["req"] if node.has("req") else null
 	
 	func instance() -> BaseUnlock:
 		var inst := scene.instantiate() as BaseUnlock
@@ -166,8 +168,11 @@ static func _load_graph(graph: Array) -> Dictionary:
 
 
 func poll_unlock(num := 3) -> Array[BaseUnlock]:
-	var unlocks = available_unlocks.values().duplicate()
+	var unlocks := available_unlocks.values().duplicate() as Array[Unlock]
 	var instances = [] as Array[BaseUnlock]
+	for unlock in unlocks:
+		if unlock.req and not call(unlock.req):
+			unlocks.erase(unlock)
 	for i in range(num):
 		var unlock := unlocks.pick_random() as Unlock
 		unlocks.erase(unlock)
@@ -186,3 +191,10 @@ func use(name_: String) -> void:
 			unlock.index += 1
 			if unlock.index == unlock.num:
 				available_unlocks.erase(name_)
+
+
+func exists_power_projectile() -> bool:
+	for pp in Info.player.pps:
+		if pp["unlocked"]:
+			return true
+	return false

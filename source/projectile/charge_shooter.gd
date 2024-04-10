@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if build_up:
-		var info = player.pps[player.current_power_projectile]["info"]
+		var info = player.pps[Player.PowerProjectile.CHARGE]["info"]
 		player.descrease_power_meter(delta * info["consume_rate"])
 		if player.power_meter == 0.0:
 			build_up = false
@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 
 
 func handle_clicked() -> void:
-	var power_proj = player.pps[player.current_power_projectile]
+	var power_proj = player.pps[Player.PowerProjectile.CHARGE]
 	if player.power_meter > power_proj["minimum_power"]:
 		player.power_meter -= power_proj["minimum_power"]
 		player.is_power_meter_consuming = true
@@ -43,7 +43,7 @@ func handle_released() -> void:
 	if to_shoot:
 		to_shoot = false
 		player.is_power_meter_consuming = false
-		var power_proj = player.pps[player.current_power_projectile]
+		var power_proj = player.pps[Player.PowerProjectile.CHARGE]
 		var charge_shot := power_proj["packed_scene"].instantiate() as ChargeShot
 		Info.projectile_manager.add_child(charge_shot)
 		charge_shot.setup_from_node(player, power_proj["info"],

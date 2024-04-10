@@ -6,7 +6,7 @@ extends Node
 
 
 func handle_clicked() -> void:
-	var power_proj = player.pps[player.current_power_projectile]
+	var power_proj = player.pps[Player.PowerProjectile.CANNON]
 	if player.power_meter > power_proj["minimum_power"]:
 		player.power_meter -= power_proj["minimum_power"]
 		

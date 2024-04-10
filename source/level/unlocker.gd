@@ -2,9 +2,19 @@ class_name Unlocker
 extends Node
 
 
+var stage: Stage
+var player: Player
+
 @onready var unlocks_graph := $UnlocksGraph as UnlocksGraph
-@onready var stage := Info.main_stage
-@onready var player := Info.player
+
+
+func _ready() -> void:
+	call_deferred("_first_frame")
+
+
+func _first_frame() -> void:
+	stage = Info.main_stage
+	player = Info.player
 
 
 func call_unlock(name_: String, data: Variant) -> void:
@@ -24,7 +34,7 @@ func call_unlock(name_: String, data: Variant) -> void:
 		"UpgradeShieldRegeneration":
 			player.shield_regeneration_rate *= data
 		"UpgradeDamage":
-			player.projectile_damage += data
+			player.projectile_info["damage"] += data
 		"UpgradeMaxPowerMeter":
 			player.power_max_meter += data
 			player.power_meter_changed.emit(player.power_meter)
@@ -33,28 +43,45 @@ func call_unlock(name_: String, data: Variant) -> void:
 		"UpgradePowerRegeneration":
 			player.power_meter_regeneration *= data
 		"UnlockChargeShot":
-			pass
+			player.pps[Player.PowerProjectile.CHARGE]["unlocked"] = true
+			player.current_power_projectile = Player.PowerProjectile.CHARGE
 		"UpgradeChargeShotMinimumPower":
-			pass
+			player.pps[Player.PowerProjectile.CHARGE]["info"]["minimum_power"] *= data
+		"UpgradeChargeShotMinDamage":
+			player.pps[Player.PowerProjectile.CHARGE]["info"]["min_damage"] += data
 		"UpgradeChargeShotDamageInc":
-			pass
+			player.pps[Player.PowerProjectile.CHARGE]["info"]["damage_inc"] += data
 		"UpgradeChargeShotConsumeRate":
-			pass
+			player.pps[Player.PowerProjectile.CHARGE]["info"]["consume_rate"] *= data
 		"UnlockBurstShot":
-			pass
+			player.pps[Player.PowerProjectile.BURST]["unlocked"] = true
+			player.pps[Player.PowerProjectile.BURST]["num"] = {
+				"min" = data[0],
+				"med" = data[1],
+				"max" = data[2]
+			}
+			player.current_power_projectile = Player.PowerProjectile.BURST
 		"UpgradeBurstShotMinimumPower":
-			pass
+			player.pps[Player.PowerProjectile.BURST]["info"]["minimum_power"] *= data
 		"UpgradeBurstShotDamage":
-			pass
+			player.pps[Player.PowerProjectile.BURST]["info"]["damage"] += data
 		"UpgradeBurstShotNum":
-			pass
+			player.pps[Player.PowerProjectile.BURST]["num"] = {
+				"min" = data[0],
+				"med" = data[1],
+				"max" = data[2]
+			}
 		"UnlockCannonShot":
-			pass
+			player.pps[Player.PowerProjectile.CANNON]["unlocked"] = true
+			player.pps[Player.PowerProjectile.CANNON]["info"]["durability"] = data
+			player.current_power_projectile = Player.PowerProjectile.CANNON
 		"UpgradeCannonShotMinimumPower":
-			pass
+			player.pps[Player.PowerProjectile.CANNON]["info"]["minimum_power"] *= data
 		"UpgradeCannonShotDamage":
-			pass
+			player.pps[Player.PowerProjectile.CANNON]["info"]["damage"] += data
 		"UpgradeCannonShotDurability":
-			pass
+			player.pps[Player.PowerProjectile.CANNON]["info"]["durability"] = data
 		"UpgradeCannonShotSpeed":
-			pass
+			player.pps[Player.PowerProjectile.CANNON]["info"]["initial_speed"] += data
+		_:
+			push_error("%s is not a valid unlock name" % name_)
