@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://source/level/mini_map.gd" id="1_78356"]
 [ext_resource type="Texture2D" uid="uid://dlylixhmdi3g0" path="res://assets/ships/players/spaceShips_008.png" id="2_0c7mf"]
 [ext_resource type="Texture2D" uid="uid://dmwxtpc2fpf5m" path="res://assets/ui/panels/panel-empty-center-000.png" id="2_ad14u"]
-[ext_resource type="Texture2D" uid="uid://dte1kj2sgvhdk" path="res://assets/ui/panels/panel-transparent-center-001.png" id="3_ivnq2"]
+[ext_resource type="Texture2D" uid="uid://7tacglm6c116" path="res://assets/ui/panels/panel-cutout-center-001.png" id="2_xt5jc"]
 
 [node name="MiniMap" type="Control"]
 texture_filter = 1
@@ -22,7 +22,7 @@ layout_mode = 0
 offset_right = 576.0
 offset_bottom = 324.0
 scale = Vector2(2, 2)
-texture = ExtResource("3_ivnq2")
+texture = ExtResource("2_xt5jc")
 patch_margin_left = 32
 patch_margin_top = 32
 patch_margin_right = 32

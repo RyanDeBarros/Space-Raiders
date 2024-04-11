@@ -52,13 +52,15 @@ func _input(event: InputEvent) -> void:
 
 
 func _store_save_data() -> void:
-	var file = FileAccess.open("user://space_raiders.save", FileAccess.WRITE)
+	var file = FileAccess.open("user://space_raiders_%s.save" % Debug.PROJECT_VERSION,\
+			FileAccess.WRITE)
 	file.store_64(high_score)
 	file.close()
 
 
 func _unload_save_data() -> void:
-	var file = FileAccess.open("user://space_raiders.save", FileAccess.READ)
+	var file = FileAccess.open("user://space_raiders_%s.save"  % Debug.PROJECT_VERSION,\
+			FileAccess.READ)
 	if file:
 		high_score = file.get_64()
 		file.close()
