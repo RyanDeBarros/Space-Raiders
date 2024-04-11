@@ -100,6 +100,7 @@ point_count = 2
 script = ExtResource("1_8a0rs")
 patrol_target_zones = NodePath("Arena/PatrolTargetZones")
 score_initial_threshold = 100.0
+score_intermediate_threshold = 800.0
 
 [node name="BKGLayer" type="ParallaxBackground" parent="."]
 
