@@ -29,6 +29,8 @@ func call_unlock(name_: String, data: Variant) -> void:
 			player.healing_length *= data
 		"UpgradeDefense":
 			player.net_defense /= data
+		"UpgradeShieldMinEnergy":
+			player.shield_initiate_fraction *= data
 		"UpgradeShieldConsumption":
 			player.shield_consumption_rate *= data
 		"UpgradeShieldRegeneration":

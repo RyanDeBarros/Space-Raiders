@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://buomqsie1fp74"]
+[gd_scene load_steps=27 format=3 uid="uid://buomqsie1fp74"]
 
 [ext_resource type="Script" path="res://source/level/level_overlay.gd" id="1_0h2vc"]
 [ext_resource type="Texture2D" uid="uid://52xkiklkrwu6" path="res://assets/ui/bars/divider-005.png" id="1_pgffh"]
@@ -18,9 +18,35 @@
 [ext_resource type="PackedScene" uid="uid://itcna8l2tpq7" path="res://source/ui/pause_screen.tscn" id="15_34ixn"]
 [ext_resource type="PackedScene" uid="uid://c3fuli6qvfxfs" path="res://source/ui/game_over_screen.tscn" id="16_4tf0e"]
 [ext_resource type="PackedScene" uid="uid://dyyqxlnd70hja" path="res://source/ui/level_up_screen.tscn" id="16_lutcf"]
+[ext_resource type="Shader" path="res://resources/shaders/stats_bar.gdshader" id="19_xdcu4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tj0bf"]
+shader = ExtResource("19_xdcu4")
+shader_parameter/intersecting_x = null
+shader_parameter/intersecting_y = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64ywx"]
+shader = ExtResource("19_xdcu4")
+shader_parameter/intersecting_x = null
+shader_parameter/intersecting_y = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fygb5"]
+shader = ExtResource("19_xdcu4")
+shader_parameter/intersecting_x = Vector2(0, 1)
+shader_parameter/intersecting_y = Vector2(0.364, 0.636)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_msbv7"]
 load_path = "res://.godot/imported/divider-001.png-fbf33adc27cc3fafca8e09188e4d296a.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ttnk8"]
+shader = ExtResource("19_xdcu4")
+shader_parameter/intersecting_x = null
+shader_parameter/intersecting_y = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prkys"]
+shader = ExtResource("19_xdcu4")
+shader_parameter/intersecting_x = Vector2(0, 1)
+shader_parameter/intersecting_y = Vector2(0.364, 0.636)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ce2ei"]
 font = ExtResource("14_4dkxu")
@@ -52,6 +78,49 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Border" type="Control" parent="Modulator"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Modulator/Border"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Modulator/Border"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -1148.0
+offset_bottom = 648.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Modulator/Border"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 644.0
+offset_bottom = 648.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Modulator/Border"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1148.0
+offset_bottom = 648.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
 
 [node name="StatsBars" type="Control" parent="Modulator"]
 layout_mode = 1
@@ -172,6 +241,7 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="Head" type="TextureRect" parent="Modulator/StatsBars/HealthBar"]
+material = SubResource("ShaderMaterial_tj0bf")
 layout_mode = 2
 offset_left = 192.0
 offset_top = 6.0
@@ -202,6 +272,7 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="Head" type="TextureRect" parent="Modulator/StatsBars/ShieldBar"]
+material = SubResource("ShaderMaterial_64ywx")
 layout_mode = 2
 offset_left = 192.0
 offset_top = 4.0
@@ -219,6 +290,7 @@ mouse_filter = 2
 texture = ExtResource("2_wmn45")
 
 [node name="Minimum" type="TextureRect" parent="Modulator/StatsBars/ShieldBar"]
+material = SubResource("ShaderMaterial_fygb5")
 layout_mode = 2
 offset_left = -94.0
 offset_top = -4.0
@@ -242,6 +314,7 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="Head" type="TextureRect" parent="Modulator/StatsBars/PowerBar"]
+material = SubResource("ShaderMaterial_ttnk8")
 layout_mode = 2
 offset_left = 192.0
 offset_right = 384.0
@@ -258,6 +331,7 @@ mouse_filter = 2
 texture = ExtResource("2_wmn45")
 
 [node name="Minimum" type="TextureRect" parent="Modulator/StatsBars/PowerBar"]
+material = SubResource("ShaderMaterial_prkys")
 layout_mode = 2
 offset_left = -54.0
 offset_top = -4.0
@@ -318,9 +392,9 @@ unique_name_in_owner = true
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 1072.22
-offset_top = -4.44444
-offset_right = 1136.22
-offset_bottom = 59.5556
+offset_top = 1.11111
+offset_right = 1112.22
+offset_bottom = 41.1111
 texture = ExtResource("14_082mv")
 
 [node name="MiniMapControl" type="Control" parent="Modulator"]

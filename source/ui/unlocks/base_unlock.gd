@@ -3,6 +3,7 @@ extends Control
 
 @export var stage: Stage
 @export var overlay: LevelOverlay
+@export var unlock_name: String
 
 var data
 
@@ -10,8 +11,8 @@ var data
 
 
 func _on_select_button_pressed() -> void:
-	stage.unlocker.call_unlock(name, data)
-	stage.unlocker.unlocks_graph.use(name)
+	stage.unlocker.call_unlock(unlock_name, data)
+	stage.unlocker.unlocks_graph.use(unlock_name)
 	overlay.undisplay_level_up_screen()
 
 

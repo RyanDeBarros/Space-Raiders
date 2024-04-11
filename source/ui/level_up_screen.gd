@@ -23,14 +23,19 @@ func open() -> void:
 	for child in panels_container.get_children():
 		child.queue_free()
 	
+	# delay on open
+	await get_tree().create_timer(0.15).timeout
+	
 	var unlocks := Info.main_stage.unlocker.unlocks_graph.poll_unlock() as Array[BaseUnlock]
 	for unlock in unlocks:
 		unlock.overlay = parent
 		panels_container.add_child(unlock)
-	
 	Utility.propogate_mouse_filter(self, Control.MOUSE_FILTER_IGNORE)
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	await get_tree().create_timer(1.0).timeout
+	
+	# delay on open
+	await get_tree().create_timer(0.5).timeout
+	
 	repair_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	for inst in panels_container.get_children():
 		inst.callibrate_mouse_filter()

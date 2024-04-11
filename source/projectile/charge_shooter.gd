@@ -26,13 +26,13 @@ func _process(delta: float) -> void:
 
 
 func handle_clicked() -> void:
-	var power_proj = player.pps[Player.PowerProjectile.CHARGE]
+	var power_proj = player.pps[Player.PowerProjectile.CHARGE]["info"]
 	if player.power_meter > power_proj["minimum_power"]:
 		player.power_meter -= power_proj["minimum_power"]
 		player.is_power_meter_consuming = true
 		to_shoot = true
 		build_up = true
-		build_up_damage = power_proj["info"]["min_damage"]
+		build_up_damage = power_proj["min_damage"]
 		audio_id = AudioManager.begin_stream(AudioManager.SFX_stream.charge_up,\
 				false, Vector2.ZERO, charge_up_vol_db)
 	else:
@@ -47,7 +47,7 @@ func handle_released() -> void:
 		var charge_shot := power_proj["packed_scene"].instantiate() as ChargeShot
 		Info.projectile_manager.add_child(charge_shot)
 		charge_shot.setup_from_node(player, power_proj["info"],
-				"red.png", int(build_up_damage))
+				"red.png", roundi(build_up_damage))
 		charge_shot.add_to_group(Groups.PLAYER_OWNED)
 		AudioManager.play_sfx(AudioManager.SFX.laser_2)
 		build_up = false

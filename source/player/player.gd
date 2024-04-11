@@ -277,7 +277,7 @@ func projectile_hit(projectile) -> void:
 
 
 func get_collide_damage() -> int:
-	return int(collide_damage * (1.0 if not shield_on else shield_on_collide_mult))
+	return roundi(collide_damage * (1.0 if not shield_on else shield_on_collide_mult))
 
 
 func next_power_projectile() -> void:

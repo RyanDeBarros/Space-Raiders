@@ -24,6 +24,12 @@
 		"type": "recurring_mul",
 	},
 	{
+		"name": "UpgradeShieldMinEnergy",
+		"scene": "res://source/ui/unlocks/upgrade_shield_min_energy.tscn",
+		"factor": 0.9,
+		"type": "recurring_mul",
+	},
+	{
 		"name": "UpgradeShieldConsumption",
 		"scene": "res://source/ui/unlocks/upgrade_shield_consumption.tscn",
 		"factor": 0.9,
@@ -72,24 +78,28 @@
 				"scene": "res://source/ui/unlocks/upgrade_charge_shot_minimum_power.tscn",
 				"factor": 0.9,
 				"type": "recurring_mul",
+				"details_node": "Details2",
 			},
 			{
 				"name": "UpgradeChargeShotMinDamage",
 				"scene": "res://source/ui/unlocks/upgrade_charge_shot_min_damage.tscn",
 				"increase": 5,
 				"type": "recurring_add",
+				"details_node": "Details2",
 			},
 			{
 				"name": "UpgradeChargeShotDamageInc",
 				"scene": "res://source/ui/unlocks/upgrade_charge_shot_damage_inc.tscn",
 				"increase": 5,
 				"type": "recurring_add",
+				"details_node": "Details2",
 			},
 			{
 				"name": "UpgradeChargeShotConsumeRate",
 				"scene": "res://source/ui/unlocks/upgrade_charge_shot_consume_rate.tscn",
 				"factor": 0.9,
 				"type": "recurring_mul",
+				"details_node": "Details2",
 			}
 		]
 	},
@@ -98,18 +108,21 @@
 		"scene": "res://source/ui/unlocks/unlock_burst_shot.tscn",
 		"mmm": [2, 3, 4],
 		"type": "prereq_mmm",
+		"details_node": "Details2",
 		"next": [
 			{
 				"name": "UpgradeBurstShotMinimumPower",
 				"scene": "res://source/ui/unlocks/upgrade_burst_shot_minimum_power.tscn",
 				"factor": 0.9,
 				"type": "recurring_mul",
+				"details_node": "Details2",
 			},
 			{
 				"name": "UpgradeBurstShotDamage",
 				"scene": "res://source/ui/unlocks/upgrade_burst_shot_damage.tscn",
 				"increase": 5,
 				"type": "recurring_add",
+				"details_node": "Details2",
 			},
 			{
 				"name": "UpgradeBurstShotNum",
@@ -121,6 +134,7 @@
 				},
 				"num": 4,
 				"type": "finite_mmm",
+				"details_node": "Details2",
 			}
 		]
 	},
@@ -129,18 +143,21 @@
 		"scene": "res://source/ui/unlocks/unlock_cannon_shot.tscn",
 		"amount": 3,
 		"type": "prereq_amount",
+		"details_node": "Details2",
 		"next": [
 			{
 				"name": "UpgradeCannonShotMinimumPower",
 				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_minimum_power.tscn",
 				"factor": 0.9,
 				"type": "recurring_mul",
+				"details_node": "Details2",
 			},
 			{
 				"name": "UpgradeCannonShotDamage",
 				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_damage.tscn",
 				"increase": 5,
 				"type": "recurring_add",
+				"details_node": "Details2",
 			},
 			{
 				"name": "UpgradeCannonShotDurability",
@@ -148,13 +165,15 @@
 				"range_amount": [4, 5, 6, 7, 8, 9, 10],
 				"num": 7,
 				"type": "finite_amount",
+				"details_node": "Details2",
 			},
 			{
 				"name": "UpgradeCannonShotSpeed",
 				"scene": "res://source/ui/unlocks/upgrade_cannon_shot_speed.tscn",
 				"increase": 50,
 				"num": 4,
-				"type": "finite_add"
+				"type": "finite_add",
+				"details_node": "Details2",
 			}
 		]
 	},

@@ -57,7 +57,7 @@
 			"orbital_speed_pm": 20
 		},
 		"patrol": {
-			"turn_rate": 0.3,
+			"turn_rate": 0.1,
 			"move_rate_qdr": 100.0,
 			"threshold_qdr": 50.0
 		},

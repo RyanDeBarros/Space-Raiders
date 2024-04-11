@@ -1,3 +1,4 @@
 {
-	"SOUNDTRACK_ON_START": false
+	"SOUNDTRACK_ON_START": false,
+	"OVERLAY_BORDER_VISIBLE": true,
 }

@@ -7,16 +7,19 @@ class Unlock:
 	var scene: PackedScene
 	var type: String
 	var req: String
+	var details_node: String
 	
 	func _init(node: Dictionary) -> void:
 		name = node["name"]
 		scene = load(node["scene"])
 		type = node["type"]
-		req = node["req"] if node.has("req") else null
+		req = node["req"] if node.has("req") else ""
+		details_node = node["details_node"] if node.has("details_node") else "Details"
 	
 	func instance() -> BaseUnlock:
 		var inst := scene.instantiate() as BaseUnlock
 		inst.stage = Info.main_stage
+		inst.unlock_name = name
 		return inst
 
 class U_recurring_add extends Unlock:
@@ -29,7 +32,7 @@ class U_recurring_add extends Unlock:
 	func instance() -> BaseUnlock:
 		var inst := super.instance()
 		inst.data = data
-		inst.find_child("Details").text %= str(data)
+		inst.find_child(details_node).text %= str(data)
 		return inst
 
 class U_recurring_mul extends Unlock:
@@ -42,8 +45,8 @@ class U_recurring_mul extends Unlock:
 	func instance() -> BaseUnlock:
 		var inst := super.instance()
 		inst.data = data
-		inst.find_child("Details").text = \
-				inst.find_child("Details").text.format({"s": str(int(data * 100))})
+		inst.find_child(details_node).text = \
+				inst.find_child(details_node).text.format({"s": str(roundi(data * 100))})
 		return inst
 
 class U_prereq extends Unlock:
@@ -68,7 +71,7 @@ class U_prereq_mmm extends Unlock:
 	func instance() -> BaseUnlock:
 		var inst := super.instance()
 		inst.data = data
-		inst.find_child("Details2").text %= [str(data[0]), str(data[2])]
+		inst.find_child(details_node).text %= [str(data[0]), str(data[2])]
 		return inst
 
 class U_prereq_amount extends Unlock:
@@ -83,7 +86,7 @@ class U_prereq_amount extends Unlock:
 	func instance() -> BaseUnlock:
 		var inst := super.instance()
 		inst.data = data
-		inst.find_child("Details2").text %= str(data)
+		inst.find_child(details_node).text %= str(data)
 		return inst
 
 class U_finite_amount extends Unlock:
@@ -99,7 +102,7 @@ class U_finite_amount extends Unlock:
 	func instance() -> BaseUnlock:
 		var inst := super.instance()
 		inst.data = data[index]
-		inst.find_child("Details2").text %= str(data[index])
+		inst.find_child(details_node).text %= str(data[index])
 		return inst
 
 class U_finite_add extends Unlock:
@@ -115,7 +118,7 @@ class U_finite_add extends Unlock:
 	func instance() -> BaseUnlock:
 		var inst := super.instance()
 		inst.data = data
-		inst.find_child("Details2").text %= str(data)
+		inst.find_child(details_node).text %= str(data)
 		return inst
 
 class U_finite_mmm extends Unlock:
@@ -131,7 +134,7 @@ class U_finite_mmm extends Unlock:
 	func instance() -> BaseUnlock:
 		var inst := super.instance()
 		inst.data = [data["min"][index], data["med"][index], data["max"][index]]
-		inst.find_child("Details2").text %= [str(data["min"][index]), str(data["max"][index])]
+		inst.find_child(details_node).text %= [str(data["min"][index]), str(data["max"][index])]
 		return inst
 
 
@@ -168,10 +171,10 @@ static func _load_graph(graph: Array) -> Dictionary:
 
 
 func poll_unlock(num := 3) -> Array[BaseUnlock]:
-	var unlocks := available_unlocks.values().duplicate() as Array[Unlock]
+	var unlocks := available_unlocks.values().duplicate() as Array
 	var instances = [] as Array[BaseUnlock]
 	for unlock in unlocks:
-		if unlock.req and not call(unlock.req):
+		if not unlock.req.is_empty() and not call(unlock.req):
 			unlocks.erase(unlock)
 	for i in range(num):
 		var unlock := unlocks.pick_random() as Unlock

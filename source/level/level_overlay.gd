@@ -32,6 +32,8 @@ var enemy_sensors_update_index: float
 
 var leveling_up := false
 
+@onready var border: Control = $Modulator/Border
+
 @onready var health_bar_head: TextureRect = $Modulator/StatsBars/HealthBar/Head
 @onready var health_bar_tail: TextureRect = $Modulator/StatsBars/HealthBar/Tail
 
@@ -59,6 +61,7 @@ var leveling_up := false
 
 
 func _ready() -> void:
+	border.visible = Debug.OVERLAY_BORDER_VISIBLE
 	enemy_sensors_update_index = minimap.enemy_sensors_update_rate
 	health_bar_width = health_bar_head.size.x + health_bar_tail.size.x
 	shield_bar_width = shield_bar_head.size.x + shield_bar_tail.size.x
@@ -78,6 +81,23 @@ func _process(delta: float) -> void:
 	if enemy_sensors_update_index >= minimap.enemy_sensors_update_rate:
 		enemy_sensors_update_index = 0.0
 		update_enemy_sensors()
+
+
+func sync_stats_bar_shaders(cutout: bool) -> void:
+	if cutout:
+		health_bar_head.material.set_shader_parameter("intersecting_x", Vector2(0,\
+				(health_bar_tail.position.x + health_bar_tail.size.x - health_bar_head.position.x)\
+				/ health_bar_head.size.x))
+		shield_bar_head.material.set_shader_parameter("intersecting_x", Vector2(0,\
+				(shield_bar_tail.position.x + shield_bar_tail.size.x - shield_bar_head.position.x)\
+				/ shield_bar_head.size.x))
+		power_bar_head.material.set_shader_parameter("intersecting_x", Vector2(0,\
+				(power_bar_tail.position.x + power_bar_tail.size.x - power_bar_head.position.x)\
+				/ power_bar_head.size.x))
+	else:
+		health_bar_head.material.set_shader_parameter("intersecting_x", Vector2(0, 0))
+		shield_bar_head.material.set_shader_parameter("intersecting_x", Vector2(0, 0))
+		power_bar_head.material.set_shader_parameter("intersecting_x", Vector2(0, 0))
 
 
 func update_enemy_sensors() -> void:
@@ -196,6 +216,7 @@ func display_pause_screen() -> void:
 	Utility.propogate_mouse_filter(pause_screen, Control.MOUSE_FILTER_STOP)
 	modulator.modulate.a = 0.0
 	dim.emit(0.3)
+	sync_stats_bar_shaders(true)
 
 
 func undisplay_pause_screen() -> void:
@@ -206,6 +227,7 @@ func undisplay_pause_screen() -> void:
 		dim.emit(1.0)
 		modulator.modulate.a = 1.0
 		get_tree().paused = false
+		sync_stats_bar_shaders(false)
 
 
 func return_to_title_screen() -> void:
@@ -232,6 +254,7 @@ func display_level_up_screen() -> void:
 	Utility.propogate_mouse_filter(level_up_screen, Control.MOUSE_FILTER_STOP)
 	modulator.modulate.a = 0.6
 	dim.emit(0.3)
+	sync_stats_bar_shaders(true)
 	level_up_screen.open()
 
 
@@ -243,3 +266,4 @@ func undisplay_level_up_screen() -> void:
 	Utility.propogate_mouse_filter(level_up_screen, Control.MOUSE_FILTER_IGNORE)
 	modulator.modulate.a = 1.0
 	dim.emit(1.0)
+	sync_stats_bar_shaders(false)

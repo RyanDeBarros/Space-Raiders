@@ -14,9 +14,9 @@ func angle_diff(from: float, to: float) -> float:
 func rand_mediani(min_: int, median_: int, max_: int) -> int:
 	var r = randf()
 	if r < 0.5:
-		return int(2 * (median_ - min_) * r + min_)
+		return roundi(2 * (median_ - min_) * r + min_)
 	else:
-		return int(2 * (max_ - median_) * r + 2 * median_ - max_)
+		return roundi(2 * (max_ - median_) * r + 2 * median_ - max_)
 
 
 func rand_medianf(min_: float, median_: float, max_: float) -> float:

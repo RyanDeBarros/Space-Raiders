@@ -22,15 +22,15 @@ var current_score: int:
 		modular_score += value - current_score
 		current_score = value
 		level_overlay.display_score(current_score,\
-				int(current_score - modular_score + current_score_threshold))
+				roundi(current_score - modular_score + current_score_threshold))
 		while modular_score > current_score_threshold:
-			modular_score -= int(current_score_threshold)
+			modular_score -= roundi(current_score_threshold)
 			level_up()
 			if score_threshold_index < score_level_up_cap:
 				score_threshold_index += 1
 			current_score_threshold = compute_score_threshold()
 			level_overlay.display_score(current_score,\
-					int(current_score - modular_score + current_score_threshold))
+					roundi(current_score - modular_score + current_score_threshold))
 		level_overlay.set_exp_bar_proportion(fmod(modular_score / current_score_threshold, 1))
 		can_heal = modular_score >= 0.5 * current_score_threshold
 		level_overlay.display_health_icon(can_heal)
@@ -137,7 +137,7 @@ func level_up() -> void:
 
 
 func compute_score_threshold() -> float:
-	return int(score_initial_threshold + (score_max_threshold - score_initial_threshold) *\
+	return roundi(score_initial_threshold + (score_max_threshold - score_initial_threshold) *\
 			((score_threshold_index / score_level_up_cap) ** score_threshold_exponent))
 
 
@@ -148,4 +148,4 @@ func compute_score_threshold_exponent() -> float:
 
 
 func consume_half_exp() -> void:
-	current_score -= int(0.5 * current_score_threshold)
+	current_score -= roundi(0.5 * current_score_threshold)
