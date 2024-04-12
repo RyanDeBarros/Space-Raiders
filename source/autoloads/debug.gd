@@ -1,7 +1,7 @@
 extends Node
 
 
-var PROJECT_VERSION := "v1.0.0"
+var PROJECT_VERSION := "v1.1.0"
 
 var SOUNDTRACK_ON_START: bool
 var OVERLAY_BORDER_VISIBLE: bool

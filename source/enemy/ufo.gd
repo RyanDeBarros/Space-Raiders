@@ -1,5 +1,5 @@
-class_name Ufo
-extends Area2D
+@icon("res://assets/ships/ufos/ufoBlue.png")
+class_name Ufo extends Area2D
 
 
 signal enemy_destroyed(score: int)
@@ -13,12 +13,15 @@ signal enemy_destroyed(score: int)
 
 var active := true
 var level_index: int
+var range_squared_detect: float
+var patrol_target_rect: Rect2
+var patrol_target_point: Vector2
+
 var angular_dir: int
 var direction := Vector2.ZERO
 var speed: float
 var max_speed: float
 var move_interval: float
-var aggro_range_squared: float
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var health_component: HealthComponent = $HealthComponent
@@ -29,20 +32,37 @@ var aggro_range_squared: float
 func _ready():
 	level_index = level - 1
 	add_to_group(Groups.ENEMY)
-	setup_info()
+	_setup_info()
 	move_interval_timer.timeout.connect(_on_move_interval_end)
 	angular_dir = randi_range(0, 1) * 2 - 1
+	call_deferred("_first_frame")
+
+
+func _first_frame() -> void:
+	next_patrol_target()
+	_on_move_interval_end()
 
 
 func _process(delta: float) -> void:
-	if active and position.distance_squared_to(Info.player.position) <= aggro_range_squared:
-		speed = minf(speed + Info.ufo_info["movement"]["acceleration"] * delta, max_speed)
-		if not direction:
-			_on_move_interval_end()
+	if active:
+		if position.distance_squared_to(Info.player.position) <= range_squared_detect:
+			speed = minf(speed + Info.ufo_info["movement"]["acceleration"] * delta, max_speed)
+			if not direction:
+				_on_move_interval_end()
+			position += direction * delta * speed
+		else:
+			# Move to patrol target zone
+			var delta_move := patrol_target_point - position
+			direction = delta_move.normalized()
+			position += minf(delta * Info.ufo_info["patrol"]["move_rate_qdr"],\
+					delta_move.length_squared()) * direction
+			if delta_move.length_squared() < Info.ufo_info["patrol"]["threshold_qdr"]:
+				next_patrol_target()
 	else:
 		direction = Vector2.ZERO
 		speed = maxf(speed - Info.ufo_info["movement"]["deceleration"] * delta, 0)
-	position += direction * delta * speed
+		position += direction * delta * speed
+	
 	rotation += Info.ufo_info["movement"]["angular_speed"] * angular_dir * delta
 
 
@@ -56,12 +76,12 @@ func _on_move_interval_end() -> void:
 			rotated(randf() * Info.ufo_info["follow_spread"][level_index])
 
 
-func setup_info() -> void:
+func _setup_info() -> void:
 	score = Math.rand_mediani(Info.ufo_info["score"]["min"][level_index],\
 			Info.ufo_info["score"]["median"][level_index], Info.ufo_info["score"]["max"][level_index])
 	overlap_component.wait_time = Info.ufo_info["collide"]["wait_time"]
 	health_component.initial_health = Info.ufo_info["max_health"][level_index]
-	aggro_range_squared = Info.ufo_info["aggro_range"][level_index] ** 2
+	range_squared_detect = Info.ufo_info["aggro_range"][level_index] ** 2
 	sprite.texture = load("res://assets/ships/ufos/%s.png"\
 			% Info.ufo_info["appearance"]["texture"][level_index])
 
@@ -97,3 +117,11 @@ func disable() -> void:
 	overlap_component.disable()
 	active = false
 	move_interval_timer.stop()
+
+
+func next_patrol_target() -> void:
+	var target_rects := Info.main_stage.patrol_target_rects.duplicate() as Array[Rect2]
+	target_rects.erase(patrol_target_rect)
+	patrol_target_rect = target_rects.pick_random()
+	patrol_target_point.x = patrol_target_rect.position.x + patrol_target_rect.size.x * randf()
+	patrol_target_point.y = patrol_target_rect.position.y + patrol_target_rect.size.y * randf()

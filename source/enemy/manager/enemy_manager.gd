@@ -5,13 +5,14 @@ extends Node2D
 enum BASIC_ENEMY {
 	ufo,
 	minion,
+	interceptor,
 	#heavy,
-	#interceptor
 }
 
 const _BASIC_ENEMY_list = [
 	preload("res://source/enemy/ufo.tscn"),
 	preload("res://source/enemy/minion.tscn"),
+	preload("res://source/enemy/interceptor.tscn"),
 ]
 
 @export var stage: Stage

@@ -12,7 +12,7 @@
 		"max_health": [100, 120, 150, 200],
 		"collide": {
 			"wait_time": 1.0,
-			"damage": [50, 55, 60, 65]
+			"damage": [65, 70, 75, 80]
 		},
 		"speed": {
 			"min": [100, 110, 120, 130],
@@ -30,7 +30,11 @@
 			"deceleration": 20.0
 		},
 		"aggro_range": [900, 950, 1000, 1050],
-		"follow_spread": [0.7, 0.65, 0.6, 0.55]
+		"follow_spread": [0.7, 0.65, 0.6, 0.55],
+		"patrol": {
+			"move_rate_qdr": 100.0,
+			"threshold_qdr": 50.0
+		},
 	},
 	"minion": {
 		"appearance": {
@@ -64,7 +68,6 @@
 		"combat": {
 			"cooldown": [2.0, 1.94, 1.88, 1.9],
 			"cooldown_pm": 0.5,
-			"range": [900, 940, 980, 1020],
 			"projectile": [
 				{
 					"info_index": "basic_slow",
@@ -100,8 +103,65 @@
 			]
 		}
 	},
+	"interceptor": {
+		"appearance": {
+			"texture": ["enemyRed1", "enemyGreen1", "enemyBlue1", "enemyBlack1"],
+			"explosion_scale_mult": 1.0
+		},
+		"score": {
+			"min": [110, 130, 180, 240],
+			"median": [120, 150, 200, 270],
+			"max": [140, 170, 230, 300]
+		},
+		"max_health": [125, 170, 210, 250],
+		"collide": {
+			"wait_time": 1.0,
+			"damage": [60, 65, 70, 75]
+		},
+		"range_detect": [900, 940, 980, 1020],
+		"patrol": {
+			"turn_rate": 0.1,
+			"move_rate_qdr": 100.0,
+			"threshold_qdr": 50.0
+		},
+		"combat": {
+			"cooldown": [2.0, 1.94, 1.88, 1.9],
+			"cooldown_pm": 0.5,
+			"projectile": [
+				{
+					"info_index": "basic_slow",
+					"colorpng": "green.png",
+					"damage": 30
+				},
+				{
+					"info_index": "basic_slow",
+					"colorpng": "green.png",
+					"damage": 35
+				},
+				{
+					"info_index": "basic_slow",
+					"colorpng": "green.png",
+					"damage": 40
+				},
+				{
+					"info_index": "burst",
+					"initial_speed": 500.0,
+					"acceleration": 10.0,
+					"damage": 45,
+					"num": {
+						"min": 2,
+						"med": 4,
+						"max": 5
+					},
+					"await_time": 0.05,
+					"reload_time": 0.3,
+					"filename": "spaceMissiles_05/",
+					"colorpng": "blue.png",
+					"max_spread": 0.15
+				}
+			]
+		}
+	},
 	"heavy": {
 	},
-	"interceptor": {
-	}
 }

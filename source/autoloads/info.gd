@@ -10,6 +10,7 @@ var projectile_JSON: Dictionary
 var enemy_JSON: Dictionary
 var ufo_info: Dictionary
 var minion_info: Dictionary
+var interceptor_info: Dictionary
 
 var main_stage: Stage
 var player: Player
@@ -34,6 +35,7 @@ func _init() -> void:
 	file.close()
 	ufo_info = enemy_JSON["ufo"]
 	minion_info = enemy_JSON["minion"]
+	interceptor_info = enemy_JSON["interceptor"]
 	_unload_save_data()
 
 

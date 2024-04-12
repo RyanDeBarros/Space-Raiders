@@ -253,6 +253,8 @@ func take_damage(damage: int) -> void:
 		health -= net_defense * damage
 		AudioManager.play_sfx(AudioManager.SFX.low_freq_explosion,\
 				false, Vector2.ZERO, audio_hit_db)
+	else:
+		_update_shield(get_process_delta_time())
 
 
 func die() -> void:
