@@ -14,7 +14,7 @@ config/name="Space Raiders"
 config/version="v1.1.0"
 run/main_scene="res://source/ui/title_screen.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/ships/players/spaceShips_008.png"
 
 [autoload]
 

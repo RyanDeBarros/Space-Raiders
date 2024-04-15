@@ -11,7 +11,7 @@ var bounds: Rect2
 
 
 func _ready() -> void:
-	bounds = Info.level_data["arena_rect"]
+	bounds = Info.arena_rect
 	bounds = bounds.grow(10 + collision_rect_bounds.size.length_squared() * max(scale.x, scale.y))
 
 

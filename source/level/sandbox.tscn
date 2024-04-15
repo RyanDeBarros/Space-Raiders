@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ctxltwcj5mpeg"]
+[gd_scene load_steps=37 format=3 uid="uid://ctxltwcj5mpeg"]
 
 [ext_resource type="Script" path="res://source/level/stage.gd" id="1_8a0rs"]
 [ext_resource type="PackedScene" uid="uid://dnuto0c2ouck5" path="res://source/player/player.tscn" id="2_1vmdd"]
@@ -71,6 +71,30 @@ max_value = 4.0
 _data = [Vector2(1e-05, 1), 0.0, 5.60011, 0, 1, Vector2(0.5, 3.8), 5.60011, 0.4, 1, 1, Vector2(1, 4), 0.4, 0.0, 1, 0]
 point_count = 3
 
+[sub_resource type="Curve" id="Curve_yda6s"]
+min_value = 0.5
+max_value = 3.0
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 2), 1.5, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_jrqyh"]
+min_value = 1.0
+max_value = 4.0
+_data = [Vector2(1e-05, 1), 0.0, 0.666676, 0, 1, Vector2(0.75, 1.5), 0.666676, 2.0, 1, 1, Vector2(1, 2), 2.0, 2.82003, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_nhb6q"]
+min_value = 1.0
+max_value = 4.0
+_data = [Vector2(1e-05, 1), 0.0, 3.00003, 0, 1, Vector2(1, 4), 3.00003, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_p3syg"]
+min_value = 1.0
+max_value = 4.0
+_data = [Vector2(1e-05, 1), 0.0, 5.60011, 0, 1, Vector2(0.5, 3.8), 5.60011, 0.4, 1, 1, Vector2(1, 4), 0.4, 0.0, 1, 0]
+point_count = 3
+
 [sub_resource type="Curve" id="Curve_2lu2f"]
 max_value = 5.0
 _data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
@@ -100,7 +124,8 @@ point_count = 2
 script = ExtResource("1_8a0rs")
 patrol_target_zones = NodePath("Arena/PatrolTargetZones")
 score_initial_threshold = 100.0
-score_intermediate_threshold = 800.0
+score_intermediate_level = 15.0
+score_intermediate_threshold = 700.0
 
 [node name="BKGLayer" type="ParallaxBackground" parent="."]
 
@@ -464,7 +489,7 @@ initial_layout = "res://config/levels/sandbox/layout.json"
 pg_max_progress = 300.0
 pg_progression = SubResource("Curve_2e2gt")
 eg_spawn_rate = 2.5
-eg_type_distribution = [NodePath("EnemySpawnOptions/OptionUFO"), NodePath("EnemySpawnOptions/OptionMinion")]
+eg_type_distribution = [NodePath("EnemySpawnOptions/OptionUFO"), NodePath("EnemySpawnOptions/OptionMinion"), NodePath("EnemySpawnOptions/OptionInterceptor")]
 ag_spawn_rate = 3.5
 ag_type_distribution = [NodePath("AsteroidSpawnOptions/OptionAsteroid1"), NodePath("AsteroidSpawnOptions/OptionAsteroid2"), NodePath("AsteroidSpawnOptions/OptionAsteroid3"), NodePath("AsteroidSpawnOptions/OptionAsteroid4"), NodePath("AsteroidSpawnOptions/OptionAsteroid5")]
 
@@ -483,6 +508,13 @@ weight_distribution = SubResource("Curve_22pv4")
 difficulty_lower_distribution = SubResource("Curve_wwkp5")
 difficulty_peak_distribution = SubResource("Curve_kwgn6")
 difficulty_upper_distribution = SubResource("Curve_ain7f")
+
+[node name="OptionInterceptor" parent="LevelGenerator/EnemySpawnOptions" instance=ExtResource("7_rvv5r")]
+type_index = 2
+weight_distribution = SubResource("Curve_yda6s")
+difficulty_lower_distribution = SubResource("Curve_jrqyh")
+difficulty_peak_distribution = SubResource("Curve_nhb6q")
+difficulty_upper_distribution = SubResource("Curve_p3syg")
 
 [node name="AsteroidSpawnOptions" type="Node" parent="LevelGenerator"]
 

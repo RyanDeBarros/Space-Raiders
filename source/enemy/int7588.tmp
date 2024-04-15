@@ -26,12 +26,13 @@ shape = SubResource("CircleShape2D_uhvgn")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("die_object") instance=ExtResource("2_hi87r")]
 die_object = NodePath("..")
-die_callback = "die"
 
 [node name="OverlapComponent" parent="." node_paths=PackedStringArray("instance") instance=ExtResource("3_7cti7")]
 instance = NodePath("..")
 callback = "collide_player"
 target_groups = Array[String](["player"])
+
+[node name="CooldownTimer" type="Timer" parent="."]
 
 [node name="EnemyBurstShooter" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("4_jcaoc")]
 enemy = NodePath("..")

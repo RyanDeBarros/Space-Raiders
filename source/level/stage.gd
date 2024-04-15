@@ -49,8 +49,8 @@ var can_heal := false
 
 
 func _ready() -> void:
-	Info.level_data["arena_rect"] = arena_rect
-	Info.level_data["arena_rect_inv"] = Rect2(arena_rect.position.x, arena_rect.position.y,\
+	Info.arena_rect = arena_rect
+	Info.arena_rect_inv = Rect2(arena_rect.position.x, arena_rect.position.y,\
 			1 / arena_rect.size.x, 1 / arena_rect.size.y)
 	Info.player = player
 	Info.projectile_manager = projectile_manager

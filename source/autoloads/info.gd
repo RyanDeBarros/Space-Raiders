@@ -1,9 +1,7 @@
 extends Node
 
-var level_data = {
-	"arena_rect": Rect2(0, 0, 0, 0),
-	"arena_rect_inv": Rect2(0, 0, 0, 0)
-}
+var arena_rect := Rect2(0, 0, 0, 0)
+var arena_rect_inv := Rect2(0, 0, 0, 0)
 
 var unlocks_graph: Array
 var projectile_JSON: Dictionary
@@ -93,3 +91,15 @@ func update_score() -> int:
 func update_high_score() -> int:
 	try_new_highscore(update_score())
 	return high_score
+
+
+func is_valid_movement(position: Vector2, direction: Vector2, margin := 0.0) -> bool:
+	if position.x < arena_rect.position.x - margin and direction.x < 0:
+		return false
+	if position.x > arena_rect.position.x + arena_rect.size.x + margin and direction.x > 0:
+		return false
+	if position.y < arena_rect.position.y - margin and direction.y < 0:
+		return false
+	if position.y > arena_rect.position.y + arena_rect.size.y + margin and direction.y > 0:
+		return false
+	return true

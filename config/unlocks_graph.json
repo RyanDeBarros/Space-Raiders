@@ -44,7 +44,7 @@
 	{
 		"name": "UpgradeDamage",
 		"scene": "res://source/ui/unlocks/upgrade_damage.tscn",
-		"increase": 5,
+		"increase": 8,
 		"type": "recurring_add",
 	},
 	{

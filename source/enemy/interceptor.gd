@@ -11,20 +11,30 @@ signal enemy_destroyed(score: int)
 @export var hit_volume_db := 10.0
 @export var explode_volume_db := 10.0
 @export var shoot_volume_db := 10.0
+@export var overshoot_curve: Curve
+@export var offscreen_margin := 100.0
 
 var active := true
 var level_index: int
-var range_squared_detect: float
+var intercept_range_squared: float
+var stalking_range_squared: float
 var patrol_target_rect: Rect2
 var patrol_target_point: Vector2
 
 var proj_dict: Dictionary
 var projectile_info: Dictionary
 
+var can_shoot := false
+var movement_info: Dictionary
+var overshoot_curve_area_inv: float
+var overshoot_max_weight: float
+var overshoot_weight: float
+var overshoot_direction: Vector2
+var overshoot_distance: float
+
 @onready var sprite: Sprite2D = $Sprite
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var overlap_component: OverlapComponent = $OverlapComponent
-@onready var cooldown_timer: Timer = $CooldownTimer
 @onready var burst_shooter: EnemyBurstShooter = $EnemyBurstShooter
 
 
@@ -32,7 +42,9 @@ func _ready() -> void:
 	level_index = level - 1
 	add_to_group(Groups.ENEMY)
 	_setup_info()
-	cooldown_timer.timeout.connect(_on_cooldown_end)
+	overshoot_max_weight = movement_info["max_weight"][level_index]
+	overshoot_weight = overshoot_max_weight
+	overshoot_curve_area_inv = 1.25
 	call_deferred("_first_frame")
 
 
@@ -44,9 +56,31 @@ func _process(delta: float) -> void:
 	var quadrance := position.distance_squared_to(Info.player.position)
 	
 	# Movement
-	if quadrance < range_squared_detect:
-		pass
+	if quadrance < intercept_range_squared or (quadrance < stalking_range_squared and\
+			overshoot_weight < overshoot_max_weight + movement_info["rest_weight"][level_index]):
+		if overshoot_weight < overshoot_max_weight:
+			if Info.is_valid_movement(position, overshoot_direction, offscreen_margin):
+				position += overshoot_direction * delta * overshoot_distance * overshoot_curve_area_inv\
+						* overshoot_curve.sample(overshoot_weight / overshoot_max_weight)\
+						* movement_info["overshoot_mult"] / overshoot_max_weight
+			overshoot_weight += delta
+		elif overshoot_weight < overshoot_max_weight + movement_info["rest_weight"][level_index]:
+			if can_shoot:
+				shoot()
+				can_shoot = false
+			overshoot_weight += delta
+		else:
+			overshoot_distance = position.distance_to(Info.player.position)
+			overshoot_direction = (Info.player.position - position).normalized()
+			overshoot_weight = 0.0
+			can_shoot = true
+		rotation = (Info.player.position - position).angle() - 1.57
+	elif quadrance < stalking_range_squared:
+		position += (Info.player.position - position).normalized()\
+				* movement_info["stalking_speed"] * delta
+		overshoot_weight = overshoot_max_weight
 	else:
+		overshoot_weight = overshoot_max_weight
 		var delta_angle := Math.angle_diff(rotation + 1.57,\
 				(patrol_target_point - position).angle())
 		rotation += minf(delta * Info.interceptor_info["patrol"]["turn_rate"], delta_angle)
@@ -55,13 +89,6 @@ func _process(delta: float) -> void:
 				delta_move.length_squared()) * delta_move.normalized()
 		if delta_move.length_squared() < Info.interceptor_info["patrol"]["threshold_qdr"]:
 			next_patrol_target()
-	
-	# Combat
-	if active and quadrance <= range_squared_detect:
-		if cooldown_timer.is_stopped():
-			cooldown_timer.start()
-	else:
-		cooldown_timer.stop()
 
 
 func _setup_info() -> void:
@@ -72,10 +99,9 @@ func _setup_info() -> void:
 			% Info.interceptor_info["appearance"]["texture"][level_index])
 	overlap_component.wait_time = Info.interceptor_info["collide"]["wait_time"]
 	health_component.initial_health = Info.interceptor_info["max_health"][level_index]
-	range_squared_detect = Info.interceptor_info["range_detect"][level_index] ** 2
-	
-	cooldown_timer.wait_time = Math.pm_randf(Info.interceptor_info["combat"]["cooldown"][level_index],
-			Info.interceptor_info["combat"]["cooldown_pm"])
+	intercept_range_squared = Info.interceptor_info["intercept_range"][level_index] ** 2
+	stalking_range_squared = Info.interceptor_info["stalking_range"][level_index] ** 2
+	movement_info = Info.interceptor_info["movement"]
 	
 	proj_dict = Info.interceptor_info["combat"]["projectile"][level_index]
 	projectile_info = Info.projectile_JSON[proj_dict["info_index"]]
@@ -91,12 +117,7 @@ func _setup_info() -> void:
 		burst_shooter.acceleration = proj_dict["acceleration"]
 		burst_shooter.damage = proj_dict["damage"]
 		burst_shooter.max_spread = proj_dict["max_spread"]
-
-
-func _on_cooldown_end():
-	cooldown_timer.wait_time = Math.pm_randf(Info.interceptor_info["combat"]["cooldown"][level_index],
-			Info.interceptor_info["combat"]["cooldown_pm"])
-	shoot()
+		burst_shooter.scale_mult = proj_dict["scale_mult"]
 
 
 func shoot():
@@ -108,6 +129,8 @@ func shoot():
 		basic_shot.add_to_group(Groups.ENEMY_OWNED)
 		basic_shot.damage = proj_dict["damage"]
 		basic_shot.projectile_motion.camera_indep = true
+		basic_shot.projectile_motion.velocity = proj_dict["initial_speed"]
+		basic_shot.scale *= proj_dict["scale_mult"]
 		AudioManager.play_relative_sound(AudioManager.SFX.laser_2, global_position,\
 				audio_rel_pos_multiplier, shoot_volume_db)
 	elif proj_dict["info_index"] == "burst":
@@ -144,7 +167,6 @@ func die() -> void:
 func disable() -> void:
 	overlap_component.disable()
 	active = false
-	cooldown_timer.stop()
 
 
 func next_patrol_target() -> void:

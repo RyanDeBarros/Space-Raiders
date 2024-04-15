@@ -32,8 +32,8 @@ enum PowerProjectile {
 @export_subgroup("Healing", "healing_")
 @export var healing_rate := 6.0
 @export var healing_length := 8.0
-@export var healing_repair_amount := 30.0
-@export var healing_repair_increase := 3.0
+@export var healing_repair_amount := 40.0
+@export var healing_repair_increase := 5.0
 
 @export_subgroup("Shield", "shield_")
 @export var shield_regeneration_rate := 0.02
@@ -212,7 +212,7 @@ func _update_shield(delta: float) -> void:
 
 
 func setup_camera_limits() -> void:
-	arena_rect = Info.level_data["arena_rect"]
+	arena_rect = Info.arena_rect
 	camera.limit_left = arena_rect.position.x
 	camera.limit_right = arena_rect.position.x + arena_rect.size.x
 	camera.limit_top = arena_rect.position.y

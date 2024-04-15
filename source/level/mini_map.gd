@@ -27,7 +27,7 @@ extends Control
 
 func _process(_delta: float) -> void:
 	if visible:
-		var arena_rect_inv := Info.level_data["arena_rect_inv"] as Rect2
+		var arena_rect_inv := Info.arena_rect_inv
 		var rel_x := (Info.player.position.x - arena_rect_inv.position.x) * arena_rect_inv.size.x
 		var rel_y := (Info.player.position.y - arena_rect_inv.position.y) * arena_rect_inv.size.y
 		player.position.x = rel_x * back.size.x - 0.5 * player.size.x

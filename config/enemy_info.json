@@ -86,7 +86,7 @@
 				},
 				{
 					"info_index": "burst",
-					"initial_speed": 500.0,
+					"initial_speed": 475.0,
 					"acceleration": 10.0,
 					"damage": 50,
 					"num": {
@@ -118,34 +118,45 @@
 			"wait_time": 1.0,
 			"damage": [60, 65, 70, 75]
 		},
-		"range_detect": [900, 940, 980, 1020],
+		"intercept_range": [550, 590, 630, 670],
+		"stalking_range": [900, 940, 980, 1020],
+		"movement": {
+			"overshoot_mult": 1.5,
+			"rest_weight": [0.5, 0.3, 0.15, 0.05],
+			"max_weight": [2.1, 1.9, 1.7, 1.5],
+			"stalking_speed": 75.0
+		},
 		"patrol": {
 			"turn_rate": 0.1,
 			"move_rate_qdr": 100.0,
 			"threshold_qdr": 50.0
 		},
 		"combat": {
-			"cooldown": [2.0, 1.94, 1.88, 1.9],
-			"cooldown_pm": 0.5,
 			"projectile": [
 				{
 					"info_index": "basic_slow",
 					"colorpng": "green.png",
-					"damage": 30
+					"damage": 30,
+					"initial_speed": 430.0,
+					"scale_mult": 1.5
 				},
 				{
 					"info_index": "basic_slow",
 					"colorpng": "green.png",
-					"damage": 35
+					"damage": 35,
+					"initial_speed": 440.0,
+					"scale_mult": 1.5
 				},
 				{
 					"info_index": "basic_slow",
 					"colorpng": "green.png",
-					"damage": 40
+					"damage": 40,
+					"initial_speed": 450.0,
+					"scale_mult": 1.5
 				},
 				{
 					"info_index": "burst",
-					"initial_speed": 500.0,
+					"initial_speed": 475.0,
 					"acceleration": 10.0,
 					"damage": 45,
 					"num": {
@@ -157,7 +168,8 @@
 					"reload_time": 0.3,
 					"filename": "spaceMissiles_05/",
 					"colorpng": "blue.png",
-					"max_spread": 0.15
+					"max_spread": 0.15,
+					"scale_mult": 1.5
 				}
 			]
 		}

@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	velocity += acceleration * delta
 	if (not camera_indep and not Info.player.rigid_camera_bounds(rel_margin, lin_margin)\
 			.has_point(head.position))\
-			or (camera_indep and not Info.level_data["arena_rect"].has_point(head.position)):
+			or (camera_indep and not Info.arena_rect.has_point(head.position)):
 		head.queue_free()
 
 
