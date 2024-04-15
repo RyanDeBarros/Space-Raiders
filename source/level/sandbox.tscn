@@ -74,25 +74,25 @@ point_count = 3
 [sub_resource type="Curve" id="Curve_yda6s"]
 min_value = 0.5
 max_value = 3.0
-_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 2), 1.5, 0.0, 1, 0]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1.5), 1.0, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_jrqyh"]
 min_value = 1.0
 max_value = 4.0
-_data = [Vector2(1e-05, 1), 0.0, 0.666676, 0, 1, Vector2(0.75, 1.5), 0.666676, 2.0, 1, 1, Vector2(1, 2), 2.0, 2.82003, 1, 0]
+_data = [Vector2(1e-05, 1), 0.0, 0.666676, 0, 1, Vector2(0.75, 1.5), 0.666676, 1.2, 1, 1, Vector2(1, 1.8), 1.2, 2.82003, 1, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_nhb6q"]
 min_value = 1.0
 max_value = 4.0
-_data = [Vector2(1e-05, 1), 0.0, 3.00003, 0, 1, Vector2(1, 4), 3.00003, 0.0, 1, 0]
-point_count = 2
+_data = [Vector2(1e-05, 1), 0.0, 1.33335, 0, 1, Vector2(0.75, 2), 1.33335, 8.0, 1, 1, Vector2(1, 4), 8.0, 0.0, 1, 0]
+point_count = 3
 
 [sub_resource type="Curve" id="Curve_p3syg"]
 min_value = 1.0
 max_value = 4.0
-_data = [Vector2(1e-05, 1), 0.0, 5.60011, 0, 1, Vector2(0.5, 3.8), 5.60011, 0.4, 1, 1, Vector2(1, 4), 0.4, 0.0, 1, 0]
+_data = [Vector2(1e-05, 1), 0.0, 4.00008, 0, 1, Vector2(0.5, 3), 4.00008, 2.0, 1, 1, Vector2(1, 4), 2.0, 0.0, 1, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_2lu2f"]

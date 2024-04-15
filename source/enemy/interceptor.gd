@@ -26,6 +26,7 @@ var projectile_info: Dictionary
 
 var can_shoot := false
 var movement_info: Dictionary
+var overshooting := false
 var overshoot_curve_area_inv: float
 var overshoot_max_weight: float
 var overshoot_weight: float
@@ -43,7 +44,7 @@ func _ready() -> void:
 	add_to_group(Groups.ENEMY)
 	_setup_info()
 	overshoot_max_weight = movement_info["max_weight"][level_index]
-	overshoot_weight = overshoot_max_weight
+	overshoot_weight = overshoot_max_weight + movement_info["rest_weight"][level_index]
 	overshoot_curve_area_inv = 1.25
 	call_deferred("_first_frame")
 
@@ -56,9 +57,9 @@ func _process(delta: float) -> void:
 	var quadrance := position.distance_squared_to(Info.player.position)
 	
 	# Movement
-	if quadrance < intercept_range_squared or (quadrance < stalking_range_squared and\
-			overshoot_weight < overshoot_max_weight + movement_info["rest_weight"][level_index]):
+	if quadrance < intercept_range_squared or overshooting:
 		if overshoot_weight < overshoot_max_weight:
+			overshooting = true
 			if Info.is_valid_movement(position, overshoot_direction, offscreen_margin):
 				position += overshoot_direction * delta * overshoot_distance * overshoot_curve_area_inv\
 						* overshoot_curve.sample(overshoot_weight / overshoot_max_weight)\
@@ -70,6 +71,7 @@ func _process(delta: float) -> void:
 				can_shoot = false
 			overshoot_weight += delta
 		else:
+			overshooting = false
 			overshoot_distance = position.distance_to(Info.player.position)
 			overshoot_direction = (Info.player.position - position).normalized()
 			overshoot_weight = 0.0
@@ -79,6 +81,7 @@ func _process(delta: float) -> void:
 		position += (Info.player.position - position).normalized()\
 				* movement_info["stalking_speed"] * delta
 		overshoot_weight = overshoot_max_weight
+		rotation = (Info.player.position - position).angle() - 1.57
 	else:
 		overshoot_weight = overshoot_max_weight
 		var delta_angle := Math.angle_diff(rotation + 1.57,\
