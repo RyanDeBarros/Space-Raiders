@@ -168,6 +168,7 @@ mouse_default_cursor_shape = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0hhht")
 text = "CONFIRM?"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Panel/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="value_changed" from="Panel/CameraSmoothing/CameraSmoothingSlider" to="." method="_on_camera_smoothing_slider_value_changed"]
 [connection signal="toggled" from="Panel/ScreenBorder/ScreenBorderCheckBox" to="." method="_on_screen_border_check_box_toggled"]

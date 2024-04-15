@@ -302,7 +302,7 @@ func prev_power_projectile() -> void:
 
 func update_camera_smoothing() -> void:
 	if camera:
-		camera.position_smoothing_speed = max_speed * Settings.player_camera_smoothing
+		camera.position_smoothing_speed = max_speed * Info.player_camera_smoothing
 
 
 func camera_pos() -> Vector2:

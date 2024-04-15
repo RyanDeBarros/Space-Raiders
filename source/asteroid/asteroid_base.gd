@@ -23,5 +23,5 @@ func _process(delta: float) -> void:
 
 
 func collide_player(player: Area2D) -> void:
-	if player:
+	if is_instance_valid(player):
 		player.take_damage(damage)

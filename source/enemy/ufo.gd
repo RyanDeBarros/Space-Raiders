@@ -87,7 +87,7 @@ func _setup_info() -> void:
 
 
 func collide_player(player: Area2D) -> void:
-	if player:
+	if is_instance_valid(player):
 		player.take_damage(Info.ufo_info["collide"]["damage"][level_index])
 		take_damage(player.get_collide_damage())
 

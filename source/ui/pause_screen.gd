@@ -13,8 +13,8 @@ var first_frame := true
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and not first_frame\
-			and not Input.is_action_pressed("quit"):
+	if Input.is_action_just_pressed("pause") and not Input.is_action_just_released("pause")\
+			and not first_frame:
 		if settings_screen.visible:
 			close_settings()
 		parent.undisplay_pause_screen()
@@ -25,6 +25,9 @@ func _on_visibility_changed() -> void:
 	first_frame = true
 	if visible:
 		update_scores()
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
+	else:
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
 
 
 func _on_resume_button_pressed() -> void:

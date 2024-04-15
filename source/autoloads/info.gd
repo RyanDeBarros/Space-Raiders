@@ -16,6 +16,12 @@ var projectile_manager: Node
 
 var high_score := 0
 
+var player_camera_smoothing := 0.01:
+	set(value):
+		player_camera_smoothing = value
+		if is_instance_valid(player):
+			player.update_camera_smoothing()
+
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -52,18 +58,33 @@ func _input(event: InputEvent) -> void:
 
 
 func _store_save_data() -> void:
-	var file = FileAccess.open("user://space_raiders_%s.save" % Debug.PROJECT_VERSION,\
+	var file = FileAccess.open("user://score_%s.save" % Debug.PROJECT_VERSION,\
 			FileAccess.WRITE)
 	file.store_64(high_score)
+	file.close()
+	file = FileAccess.open("user://settings_%s.save" % Debug.PROJECT_VERSION,\
+			FileAccess.WRITE)
+	file.store_float(player_camera_smoothing)
+	file.store_var(Debug.OVERLAY_BORDER_VISIBLE)
 	file.close()
 
 
 func _unload_save_data() -> void:
-	var file = FileAccess.open("user://space_raiders_%s.save"  % Debug.PROJECT_VERSION,\
+	var file = FileAccess.open("user://score_%s.save"  % Debug.PROJECT_VERSION,\
 			FileAccess.READ)
 	if file:
-		high_score = file.get_64()
+		var v = file.get_64()
+		high_score = v if v else high_score
 		file.close()
+	file = FileAccess.open("user://settings_%s.save" % Debug.PROJECT_VERSION,\
+			FileAccess.READ)
+	if file:
+		var v = file.get_float()
+		player_camera_smoothing = v if v else player_camera_smoothing
+		v = file.get_var()
+		Debug.OVERLAY_BORDER_VISIBLE = v if v else Debug.OVERLAY_BORDER_VISIBLE
+		file.close()
+
 
 
 func _reset_save_data() -> void:
