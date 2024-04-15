@@ -61,7 +61,7 @@ var leveling_up := false
 
 
 func _ready() -> void:
-	border.visible = Debug.OVERLAY_BORDER_VISIBLE
+	sync_screen_border_visibility()
 	enemy_sensors_update_index = minimap.enemy_sensors_update_rate
 	health_bar_width = health_bar_head.size.x + health_bar_tail.size.x
 	shield_bar_width = shield_bar_head.size.x + shield_bar_tail.size.x
@@ -267,3 +267,7 @@ func undisplay_level_up_screen() -> void:
 	modulator.modulate.a = 1.0
 	dim.emit(1.0)
 	sync_stats_bar_shaders(false)
+
+
+func sync_screen_border_visibility() -> void:
+	border.visible = Debug.OVERLAY_BORDER_VISIBLE

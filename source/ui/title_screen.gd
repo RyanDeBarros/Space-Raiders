@@ -10,18 +10,20 @@ extends Control
 func _ready() -> void:
 	settings_screen.modulate.a = 0.9
 	high_score_label.text = "High Score: %s" % Info.high_score
+	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
 
 
 func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_packed(Scenes.SANDBOX)
+	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
 
 
-func _on_settings_screen_button_pressed() -> void:
+func _on_settings_button_pressed() -> void:
 	settings_screen.toggle(true)
 	modulator.modulate.a = 0.5
 
 
-func close_settings_screen() -> void:
+func close_settings() -> void:
 	settings_screen.toggle(false)
 	modulator.modulate.a = 1.0
 

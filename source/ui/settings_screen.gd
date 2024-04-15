@@ -9,6 +9,7 @@ extends Control
 @export var camera_smoothing_slider_exp := 3.0
 
 @onready var camera_smoothing_slider: HSlider = %CameraSmoothingSlider
+@onready var screen_border_check_box: CheckBox = %ScreenBorderCheckBox
 @onready var reset_save_data_confirm: Button = %ResetSaveDataConfirm
 
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 			** (1 / camera_smoothing_slider_exp))
 	camera_smoothing_slider.value = value
 	Utility.propogate_mouse_filter(self, Control.MOUSE_FILTER_IGNORE)
+	screen_border_check_box.button_pressed = Debug.OVERLAY_BORDER_VISIBLE
 
 
 func _on_close_button_pressed() -> void:
@@ -54,3 +56,9 @@ func _on_reset_save_data_button_pressed() -> void:
 func _on_reset_save_data_confirm_pressed() -> void:
 	Info._reset_save_data()
 	parent.respond_to_data_reset()
+
+
+func _on_screen_border_check_box_toggled(toggled_on: bool) -> void:
+	Debug.OVERLAY_BORDER_VISIBLE = screen_border_check_box.button_pressed
+	if is_instance_valid(Info.main_stage):
+		Info.main_stage.level_overlay.sync_screen_border_visibility()

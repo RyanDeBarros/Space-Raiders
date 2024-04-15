@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://4jckmklwusca"]
+[gd_scene load_steps=11 format=3 uid="uid://4jckmklwusca"]
 
 [ext_resource type="Script" path="res://source/ui/settings_screen.gd" id="1_3gh3u"]
 [ext_resource type="Texture2D" uid="uid://8glifn4havtt" path="res://assets/ui/controls/button.png" id="2_28xed"]
@@ -19,6 +19,16 @@ font_size = 64
 [sub_resource type="LabelSettings" id="LabelSettings_fmr27"]
 font = ExtResource("4_nhbkk")
 font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1tras"]
+content_margin_left = 4.0
+bg_color = Color(0.901961, 0.901961, 0.901961, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4d31"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hhht"]
 
@@ -76,10 +86,10 @@ vertical_alignment = 1
 
 [node name="CameraSmoothing" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 137.0
+offset_left = 74.0
 offset_top = 246.0
-offset_right = 323.0
-offset_bottom = 275.0
+offset_right = 374.0
+offset_bottom = 276.0
 text = "Camera Smoothing"
 label_settings = SubResource("LabelSettings_fmr27")
 horizontal_alignment = 2
@@ -93,14 +103,39 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 133.0
-offset_top = -7.5
-offset_right = 335.0
-offset_bottom = 8.5
+offset_left = 217.0
+offset_top = -8.0
+offset_right = 419.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 10
 value = 50.0
+
+[node name="ScreenBorder" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 284.0
+offset_right = 374.0
+offset_bottom = 314.0
+text = "Display Screen Border"
+label_settings = SubResource("LabelSettings_fmr27")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ScreenBorderCheckBox" type="CheckBox" parent="Panel/ScreenBorder"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 363.0
+offset_top = 3.0
+offset_right = 387.0
+offset_bottom = 27.0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1tras")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1tras")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1tras")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_1tras")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s4d31")
 
 [node name="ResetSaveData" type="Label" parent="Panel"]
 layout_mode = 0
@@ -135,5 +170,6 @@ text = "CONFIRM?"
 
 [connection signal="pressed" from="Panel/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="value_changed" from="Panel/CameraSmoothing/CameraSmoothingSlider" to="." method="_on_camera_smoothing_slider_value_changed"]
+[connection signal="toggled" from="Panel/ScreenBorder/ScreenBorderCheckBox" to="." method="_on_screen_border_check_box_toggled"]
 [connection signal="pressed" from="Panel/ResetSaveData/ResetSaveDataButton" to="." method="_on_reset_save_data_button_pressed"]
 [connection signal="pressed" from="Panel/ResetSaveData/ResetSaveDataConfirm" to="." method="_on_reset_save_data_confirm_pressed"]
