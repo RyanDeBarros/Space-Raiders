@@ -84,12 +84,70 @@ label_settings = SubResource("LabelSettings_p03o4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="MusicVolume" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 192.0
+offset_right = 374.0
+offset_bottom = 222.0
+text = "Music Volume"
+label_settings = SubResource("LabelSettings_fmr27")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="Panel/MusicVolume"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 217.0
+offset_top = -8.0
+offset_right = 419.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 10
+max_value = 1.0
+step = 0.1
+
+[node name="SFXVolume" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 230.0
+offset_right = 374.0
+offset_bottom = 260.0
+text = "SFX Volume"
+label_settings = SubResource("LabelSettings_fmr27")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SFXVolumeSlider" type="HSlider" parent="Panel/SFXVolume"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 217.0
+offset_top = -8.0
+offset_right = 419.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 10
+max_value = 1.0
+step = 0.1
+
 [node name="CameraSmoothing" type="Label" parent="Panel"]
 layout_mode = 0
 offset_left = 74.0
-offset_top = 246.0
+offset_top = 268.0
 offset_right = 374.0
-offset_bottom = 276.0
+offset_bottom = 298.0
 text = "Camera Smoothing"
 label_settings = SubResource("LabelSettings_fmr27")
 horizontal_alignment = 2
@@ -115,9 +173,9 @@ value = 50.0
 [node name="ScreenBorder" type="Label" parent="Panel"]
 layout_mode = 0
 offset_left = 74.0
-offset_top = 284.0
+offset_top = 306.0
 offset_right = 374.0
-offset_bottom = 314.0
+offset_bottom = 336.0
 text = "Display Screen Border"
 label_settings = SubResource("LabelSettings_fmr27")
 horizontal_alignment = 2
@@ -170,6 +228,8 @@ text = "CONFIRM?"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Panel/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="value_changed" from="Panel/MusicVolume/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="Panel/SFXVolume/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
 [connection signal="value_changed" from="Panel/CameraSmoothing/CameraSmoothingSlider" to="." method="_on_camera_smoothing_slider_value_changed"]
 [connection signal="toggled" from="Panel/ScreenBorder/ScreenBorderCheckBox" to="." method="_on_screen_border_check_box_toggled"]
 [connection signal="pressed" from="Panel/ResetSaveData/ResetSaveDataButton" to="." method="_on_reset_save_data_button_pressed"]

@@ -1,6 +1,11 @@
 extends Node
 
 
+enum AUDIO_BUSES {
+	MUSIC = 1,
+	SFX = 2
+}
+
 enum SFX {
 	explosion,
 	thrust,
@@ -27,6 +32,11 @@ enum SONGS {
 	Spaceman,
 	Nightfall,
 	The_Maze
+}
+
+const _AUDIO_BUSES_list = {
+	1: &"music",
+	2: &"sfx"
 }
 
 const _SFX_list = [
@@ -65,21 +75,50 @@ var soundtrack_player: AudioStreamPlayer
 var playlist: Array
 var _playlist_id := 0
 
+var volume_db_music:
+	get:
+		return AudioServer.get_bus_volume_db(AUDIO_BUSES.MUSIC)
+	set(db):
+		AudioServer.set_bus_volume_db(AUDIO_BUSES.MUSIC, db)
+
+var volume_db_sfx:
+	get:
+		return AudioServer.get_bus_volume_db(AUDIO_BUSES.SFX)
+	set(db):
+		AudioServer.set_bus_volume_db(AUDIO_BUSES.SFX, db)
+
+var mute_music:
+	get:
+		return AudioServer.is_bus_mute(AUDIO_BUSES.MUSIC)
+	set(mute):
+		AudioServer.set_bus_mute(AUDIO_BUSES.MUSIC, mute)
+
+var mute_sfx:
+	get:
+		return AudioServer.is_bus_mute(AUDIO_BUSES.SFX)
+	set(mute):
+		AudioServer.set_bus_mute(AUDIO_BUSES.SFX, mute)
+
 
 func _ready() -> void:
 	sfx_dir_node = Node.new()
 	sfx_dir_node.name = "SFX Directory"
+	AudioServer.add_bus()
+	AudioServer.add_bus()
+	AudioServer.set_bus_name(1, _AUDIO_BUSES_list[AUDIO_BUSES.MUSIC])
+	AudioServer.set_bus_name(2, _AUDIO_BUSES_list[AUDIO_BUSES.SFX])
 	sfx_stream_dir_node = Node.new()
 	sfx_stream_dir_node.name = "SFX Stream Directory"
 	soundtrack_player = AudioStreamPlayer.new()
 	soundtrack_player.name = "Soundtrack Player"
+	soundtrack_player.bus = _AUDIO_BUSES_list[AUDIO_BUSES.MUSIC]
 	soundtrack_player.finished.connect(_on_song_end)
 	add_child(sfx_dir_node)
 	add_child(sfx_stream_dir_node)
 	add_child(soundtrack_player)
 	
-	if Debug.SOUNDTRACK_ON_START:
-		setup_playlist([SONGS.The_Benjerman, SONGS.Nightfall])
+	setup_playlist([SONGS.The_Benjerman, SONGS.Nightfall])
+	mute_music = not Debug.SOUNDTRACK_ON_START
 	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -100,6 +139,7 @@ func play_sfx(sfx: SFX, _2d := false, pos := Vector2.ZERO, vol_db := 0.0) -> voi
 	audio.finished.connect(audio.queue_free)
 	audio.stream = _SFX_list[sfx]
 	audio.volume_db = vol_db
+	audio.bus = _AUDIO_BUSES_list[AUDIO_BUSES.SFX]
 	audio.play()
 
 
@@ -115,10 +155,11 @@ func begin_stream(sfx_stream: SFX_stream, _2d := false, pos := Vector2.ZERO, vol
 	sfx_stream_dir_node.add_child(audio)
 	audio.finished.connect(audio.play)
 	audio.stream = _SFX_stream_list[sfx_stream]
-	audio.volume_db = vol_db
 	var id := _stream_id
 	_stream_id += 1
 	audio.name = stream_name(id)
+	audio.volume_db = vol_db
+	audio.bus = _AUDIO_BUSES_list[AUDIO_BUSES.SFX]
 	audio.play()
 	return id
 
@@ -143,4 +184,3 @@ func setup_playlist(songs: Array[SONGS], starting_id := 0, start_playing := true
 	if start_playing:
 		soundtrack_player.stream = playlist[_playlist_id]
 		soundtrack_player.play()
-
