@@ -67,6 +67,9 @@ const _SONGS_list = [
 	preload("res://assets/audio/soundtrack/Rukkus - The Maze.mp3")
 ]
 
+const music_muted_db := 100.0
+const sfx_muted_db := 100.0
+
 var sfx_dir_node: Node
 var sfx_stream_dir_node: Node
 var _stream_id := 0
@@ -100,7 +103,7 @@ var mute_sfx:
 		AudioServer.set_bus_mute(AUDIO_BUSES.SFX, mute)
 
 
-func _ready() -> void:
+func _init() -> void:
 	sfx_dir_node = Node.new()
 	sfx_dir_node.name = "SFX Directory"
 	AudioServer.add_bus()
@@ -117,7 +120,7 @@ func _ready() -> void:
 	add_child(sfx_stream_dir_node)
 	add_child(soundtrack_player)
 	
-	setup_playlist([SONGS.The_Benjerman, SONGS.Nightfall])
+	call_deferred(&"setup_playlist", [SONGS.The_Benjerman, SONGS.Nightfall] as Array[SONGS])
 	mute_music = not Debug.SOUNDTRACK_ON_START
 	
 	process_mode = Node.PROCESS_MODE_ALWAYS

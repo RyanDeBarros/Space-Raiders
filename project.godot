@@ -20,11 +20,11 @@ config/icon="res://assets/ships/players/spaceShips_008.png"
 [autoload]
 
 Debug="*res://source/autoloads/debug.gd"
-Math="*res://source/autoloads/math.gd"
 Scenes="*res://source/autoloads/scenes.gd"
+AudioManager="*res://source/autoloads/audio_manager.gd"
+Math="*res://source/autoloads/math.gd"
 Info="*res://source/autoloads/info.gd"
 Utility="*res://source/autoloads/utility.gd"
-AudioManager="*res://source/autoloads/audio_manager.gd"
 Groups="*res://source/autoloads/groups.gd"
 
 [display]

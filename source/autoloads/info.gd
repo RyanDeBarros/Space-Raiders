@@ -1,5 +1,9 @@
 extends Node
 
+
+const SAVE_VERSION_UID := 0b01001101010010100100100100001001
+const SETTINGS_VERSION_UID := 0b10100100001000011000101000010110
+
 var arena_rect := Rect2(0, 0, 0, 0)
 var arena_rect_inv := Rect2(0, 0, 0, 0)
 
@@ -58,33 +62,54 @@ func _input(event: InputEvent) -> void:
 
 
 func _store_save_data() -> void:
-	var file = FileAccess.open("user://score_%s.save" % Debug.PROJECT_VERSION,\
-			FileAccess.WRITE)
+	var file = FileAccess.open("user://score_%s.save" % Debug.PROJECT_VERSION, FileAccess.WRITE)
+	file.store_32(SAVE_VERSION_UID)
+	
 	file.store_64(high_score)
+	
 	file.close()
-	file = FileAccess.open("user://settings_%s.save" % Debug.PROJECT_VERSION,\
-			FileAccess.WRITE)
+	file = FileAccess.open("user://settings_%s.save" % Debug.PROJECT_VERSION, FileAccess.WRITE)
+	file.store_32(SETTINGS_VERSION_UID)
+	
+	if AudioManager.mute_music:
+		file.store_float(AudioManager.music_muted_db)
+	else:
+		file.store_float(AudioManager.volume_db_music)
+	if AudioManager.mute_sfx:
+		file.store_float(AudioManager.sfx_muted_db)
+	else:
+		file.store_float(AudioManager.volume_db_sfx)
+	
 	file.store_float(player_camera_smoothing)
 	file.store_var(Debug.OVERLAY_BORDER_VISIBLE)
+	
 	file.close()
 
 
 func _unload_save_data() -> void:
-	var file = FileAccess.open("user://score_%s.save"  % Debug.PROJECT_VERSION,\
-			FileAccess.READ)
-	if file:
-		var v = file.get_64()
-		high_score = v if v else high_score
+	var file = FileAccess.open("user://score_%s.save"  % Debug.PROJECT_VERSION, FileAccess.READ)
+	if file and file.get_32() == SAVE_VERSION_UID:
+		high_score = file.get_64()
 		file.close()
-	file = FileAccess.open("user://settings_%s.save" % Debug.PROJECT_VERSION,\
-			FileAccess.READ)
-	if file:
-		var v = file.get_float()
-		player_camera_smoothing = v if v else player_camera_smoothing
-		v = file.get_var()
-		Debug.OVERLAY_BORDER_VISIBLE = v if v else Debug.OVERLAY_BORDER_VISIBLE
+	
+	file = FileAccess.open("user://settings_%s.save" % Debug.PROJECT_VERSION, FileAccess.READ)
+	if file and file.get_32() == SETTINGS_VERSION_UID:
+		var db = file.get_float()
+		if db == AudioManager.music_muted_db:
+			AudioManager.mute_music = true
+		else:
+			AudioManager.mute_music = false
+			AudioManager.volume_db_music = db
+		db = file.get_float()
+		if db == AudioManager.sfx_muted_db:
+			AudioManager.mute_sfx = true
+		else:
+			AudioManager.mute_sfx = false
+			AudioManager.volume_db_sfx = db
+		
+		player_camera_smoothing = file.get_float()
+		Debug.OVERLAY_BORDER_VISIBLE = file.get_var()
 		file.close()
-
 
 
 func _reset_save_data() -> void:
