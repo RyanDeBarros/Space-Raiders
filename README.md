@@ -4,7 +4,7 @@ This is a side project I've been working on since early March 2024, as a way to 
 
 ## Specifications
 
-It is written in Godot Engine using GDScript, and uses several JSON files as a way of managing large amounts of data, such as game settings, player/enemy/projectile design, and the upgrade system. As it is with version 1.0.0, the game *is* playable, but is minimal and limited in gameplay variety. Still, Space Raiders v1.0.0 consists of all the necessary game components:
+It is written in Godot Engine using GDScript, and uses several JSON files as a way of managing large amounts of data, such as game settings, player/enemy/projectile design, and the upgrade system. As it is in version 1.0.0, the game *is* playable, but is minimal and limited in gameplay variety. Still, Space Raiders v1.0.0 consists of all the necessary game components:
 * Player controls
 * Combat mechanics
 * Enemy design
