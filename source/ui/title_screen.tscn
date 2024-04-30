@@ -1,16 +1,16 @@
 [gd_scene load_steps=11 format=3 uid="uid://yko11tyxrroh"]
 
 [ext_resource type="Script" path="res://source/ui/title_screen.gd" id="1_10v7j"]
-[ext_resource type="Texture2D" uid="uid://5sw4yhbiqyy1" path="res://assets/bkgs/black.png" id="1_bmuqh"]
-[ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="2_vtldn"]
+[ext_resource type="Texture2D" uid="uid://5sw4yhbiqyy1" path="res://assets/bkgs/black.png" id="2_xdt1e"]
+[ext_resource type="FontFile" uid="uid://dy3sgyh8lpdux" path="res://assets/fonts/Asap_Condensed-ExtraBold.ttf" id="3_y3thc"]
 [ext_resource type="PackedScene" uid="uid://4jckmklwusca" path="res://source/ui/settings_screen.tscn" id="4_wj7hx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_igaod"]
-font = ExtResource("2_vtldn")
+font = ExtResource("3_y3thc")
 font_size = 128
 
 [sub_resource type="LabelSettings" id="LabelSettings_nn741"]
-font = ExtResource("2_vtldn")
+font = ExtResource("3_y3thc")
 font_size = 48
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8so6u"]
@@ -60,7 +60,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_bmuqh")
+texture = ExtResource("2_xdt1e")
 stretch_mode = 1
 
 [node name="TitleLabel" type="Label" parent="Modulator"]
@@ -114,7 +114,7 @@ offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("2_vtldn")
+theme_override_fonts/font = ExtResource("3_y3thc")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_8so6u")
 theme_override_styles/hover = SubResource("StyleBoxFlat_8ykx5")
@@ -136,7 +136,7 @@ offset_bottom = 255.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-theme_override_fonts/font = ExtResource("2_vtldn")
+theme_override_fonts/font = ExtResource("3_y3thc")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_8so6u")
 theme_override_styles/hover = SubResource("StyleBoxFlat_8ykx5")

@@ -70,13 +70,44 @@ const _SONGS_list = [
 const music_muted_db := 100.0
 const sfx_muted_db := 100.0
 
+
+class Playlist:
+	var _tracks: Array[AudioStream]
+	var _tracks_available: Array[AudioStream]
+	
+	
+	func _init(tracks: Array[AudioStream]) -> void:
+		self._tracks = tracks
+		reset()
+	
+	
+	func reset() -> void:
+		for t in _tracks:
+			_tracks_available.push_back(t)
+	
+	
+	func play_next(soundtrack_player: AudioStreamPlayer) -> void:
+		if len(_tracks_available) == 0:
+			reset()
+		var track := _tracks_available.pick_random() as AudioStream
+		_tracks_available.erase(track)
+		soundtrack_player.stream = track
+		soundtrack_player.play()
+
+
+class Playlists:
+	static var MAIN_MENU := Playlist.new([_SONGS_list[SONGS.The_Benjerman]])
+	static var MAIN_LEVEL := Playlist.new([_SONGS_list[SONGS.Nightfall],
+			_SONGS_list[SONGS.The_Maze], _SONGS_list[SONGS.Spaceman],
+			_SONGS_list[SONGS.Overall_Control]])
+
+
 var sfx_dir_node: Node
 var sfx_stream_dir_node: Node
 var _stream_id := 0
 
 var soundtrack_player: AudioStreamPlayer
-var playlist: Array
-var _playlist_id := 0
+var current_playlist: Playlist
 
 var volume_db_music:
 	get:
@@ -119,17 +150,13 @@ func _init() -> void:
 	add_child(sfx_dir_node)
 	add_child(sfx_stream_dir_node)
 	add_child(soundtrack_player)
-	
-	call_deferred(&"setup_playlist", [SONGS.The_Benjerman, SONGS.Nightfall] as Array[SONGS])
+
 	mute_music = not Debug.SOUNDTRACK_ON_START
-	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func _on_song_end() -> void:
-	_playlist_id = (_playlist_id + 1) % len(playlist)
-	soundtrack_player.stream = playlist[_playlist_id]
-	soundtrack_player.play()
+	current_playlist.play_next(soundtrack_player)
 
 
 @warning_ignore("incompatible_ternary")
@@ -179,11 +206,8 @@ func stream_name(id: int) -> String:
 	return "AudioStream#%s" % str(id)
 
 
-func setup_playlist(songs: Array[SONGS], starting_id := 0, start_playing := true) -> void:
-	playlist.clear()
-	for song in songs:
-		playlist.push_back(_SONGS_list[song])
-	_playlist_id = starting_id
-	if start_playing:
-		soundtrack_player.stream = playlist[_playlist_id]
-		soundtrack_player.play()
+func setup_playlist(playlist: Playlist) -> void:
+	if current_playlist:
+		current_playlist.reset()
+	current_playlist = playlist
+	_on_song_end()
