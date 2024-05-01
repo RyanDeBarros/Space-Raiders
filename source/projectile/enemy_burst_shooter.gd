@@ -28,7 +28,7 @@ func _shoot_single() -> void:
 	burst_shot.projectile_motion.sync_velocity(burst_shot.projectile_motion.velocity *\
 			burst_shot.projectile_motion.velocity_dir.rotated(spread))
 	burst_shot.scale *= scale_mult
-	AudioManager.play_sfx(AudioManager.SFX.laser_2)
+	AudioManager.play_sfx(AudioManager.SFXs.LASER_2)
 
 
 func init_shooting() -> void:

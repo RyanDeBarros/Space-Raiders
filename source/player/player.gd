@@ -158,7 +158,7 @@ func _process(delta: float) -> void:
 			Info.main_stage.consume_half_exp()
 			healing = true
 		else:
-			AudioManager.play_sfx(AudioManager.SFX.two_tone)
+			AudioManager.play_sfx(AudioManager.SFXs.TWO_TONE)
 	if healing:
 		health += healing_rate * delta
 		current_healing_time += delta
@@ -225,23 +225,23 @@ func shoot() -> void:
 	Info.projectile_manager.add_child(basic_shot)
 	basic_shot.setup_from_node(self, projectile_info, "red.png", 1.57)
 	basic_shot.add_to_group(Groups.PLAYER_OWNED)
-	AudioManager.play_sfx(AudioManager.SFX.laser_1)
+	AudioManager.play_sfx(AudioManager.SFXs.LASER_1)
 
 
 func try_enable_shield() -> void:
 	if shield_meter > shield_initiate_fraction:
 		shield_on = true
 		shield_meter -= shield_initiate_fraction
-		AudioManager.play_sfx(AudioManager.SFX.shield_up)
+		AudioManager.play_sfx(AudioManager.SFXs.SHIELD_UP)
 	else:
-		AudioManager.play_sfx(AudioManager.SFX.two_tone)
+		AudioManager.play_sfx(AudioManager.SFXs.TWO_TONE)
 
 
 func try_disable_shield() -> void:
 	if not shield_on: return
 	shield_on = false
 	shield_regeneration_delay.start()
-	AudioManager.play_sfx(AudioManager.SFX.shield_down)
+	AudioManager.play_sfx(AudioManager.SFXs.SHIELD_DOWN)
 
 
 func descrease_power_meter(delta: float, factor := 1.0) -> void:
@@ -251,7 +251,7 @@ func descrease_power_meter(delta: float, factor := 1.0) -> void:
 func take_damage(damage: int) -> void:
 	if not shield_on:
 		health -= net_defense * damage
-		AudioManager.play_sfx(AudioManager.SFX.low_freq_explosion,\
+		AudioManager.play_sfx(AudioManager.SFXs.LOW_FREQ_EXPLOSION,\
 				false, Vector2.ZERO, audio_hit_db)
 	else:
 		_update_shield(get_process_delta_time())
@@ -271,7 +271,7 @@ func die() -> void:
 	get_tree().get_first_node_in_group(Groups.EXPLOSION_MANAGER).add_child(explosion)
 	explosion.position = position
 	explosion.scale *= explosion_scale_mult
-	AudioManager.play_sfx(AudioManager.SFX.explosion)
+	AudioManager.play_sfx(AudioManager.SFXs.EXPLOSION)
 
 
 func projectile_hit(projectile) -> void:

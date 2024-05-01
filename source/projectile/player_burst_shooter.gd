@@ -20,7 +20,7 @@ func handle_clicked() -> void:
 			await get_tree().create_timer(info["await_time"]).timeout
 		shooting = false
 	else:
-		AudioManager.play_sfx(AudioManager.SFX.two_tone)
+		AudioManager.play_sfx(AudioManager.SFXs.TWO_TONE)
 
 
 func handle_released() -> void:
@@ -42,4 +42,4 @@ func shoot_single() -> void:
 	Info.projectile_manager.add_child(burst_shot)
 	burst_shot.setup_from_node(player, power_proj["info"], "red.png")
 	burst_shot.add_to_group(Groups.PLAYER_OWNED)
-	AudioManager.play_sfx(AudioManager.SFX.laser_2)
+	AudioManager.play_sfx(AudioManager.SFXs.LASER_2)

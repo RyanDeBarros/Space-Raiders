@@ -134,7 +134,7 @@ func shoot():
 		basic_shot.projectile_motion.camera_indep = true
 		basic_shot.projectile_motion.velocity = proj_dict["initial_speed"]
 		basic_shot.scale *= proj_dict["scale_mult"]
-		AudioManager.play_relative_sound(AudioManager.SFX.laser_2, global_position,\
+		AudioManager.play_relative_sound(AudioManager.SFXs.LASER_2, global_position,\
 				audio_rel_pos_multiplier, shoot_volume_db)
 	elif proj_dict["info_index"] == "burst":
 		burst_shooter.init_shooting()
@@ -152,7 +152,7 @@ func projectile_hit(projectile: Area2D) -> void:
 
 func take_damage(damage: int) -> void:
 	health_component.health -= damage
-	AudioManager.play_relative_sound(AudioManager.SFX.impact_metal_1,\
+	AudioManager.play_relative_sound(AudioManager.SFXs.IMPACT_METAL_1,\
 			global_position, audio_rel_pos_multiplier, hit_volume_db)
 
 
@@ -162,7 +162,7 @@ func die() -> void:
 	explosion.position = position
 	explosion.scale *= Info.interceptor_info["appearance"]["explosion_scale_mult"]
 	enemy_destroyed.emit(score)
-	AudioManager.play_relative_sound(AudioManager.SFX.explosion, global_position,\
+	AudioManager.play_relative_sound(AudioManager.SFXs.EXPLOSION, global_position,\
 			audio_rel_pos_multiplier, explode_volume_db)
 	queue_free()
 

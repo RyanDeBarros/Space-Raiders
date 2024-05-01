@@ -132,7 +132,7 @@ func quit_to_title_screen() -> void:
 
 
 func level_up() -> void:
-	AudioManager.play_sfx(AudioManager.SFX.success)
+	AudioManager.play_sfx(AudioManager.SFXs.SUCCESS)
 	level_overlay.display_level_up_screen()
 
 

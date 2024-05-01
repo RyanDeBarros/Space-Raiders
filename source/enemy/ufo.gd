@@ -98,7 +98,7 @@ func projectile_hit(projectile: Area2D) -> void:
 
 func take_damage(damage: int) -> void:
 	health_component.health -= damage
-	AudioManager.play_relative_sound(AudioManager.SFX.impact_metal_1, global_position,\
+	AudioManager.play_relative_sound(AudioManager.SFXs.IMPACT_METAL_1, global_position,\
 			audio_rel_pos_multiplier, hit_volume_db)
 
 
@@ -109,7 +109,7 @@ func die() -> void:
 	explosion.scale *= Info.ufo_info["appearance"]["explosion_scale_mult"]
 	enemy_destroyed.emit(score)
 	queue_free()
-	AudioManager.play_relative_sound(AudioManager.SFX.explosion, global_position,\
+	AudioManager.play_relative_sound(AudioManager.SFXs.EXPLOSION, global_position,\
 			audio_rel_pos_multiplier, explode_volume_db)
 
 

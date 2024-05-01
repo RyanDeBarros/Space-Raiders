@@ -33,10 +33,10 @@ func handle_clicked() -> void:
 		to_shoot = true
 		build_up = true
 		build_up_damage = power_proj["min_damage"]
-		audio_id = AudioManager.begin_stream(AudioManager.SFX_stream.charge_up,\
+		audio_id = AudioManager.begin_stream(AudioManager.SFX_Streams.CHARGE_UP,\
 				false, Vector2.ZERO, charge_up_vol_db)
 	else:
-		AudioManager.play_sfx(AudioManager.SFX.two_tone)
+		AudioManager.play_sfx(AudioManager.SFXs.TWO_TONE)
 
 
 func handle_released() -> void:
@@ -49,7 +49,7 @@ func handle_released() -> void:
 		charge_shot.setup_from_node(player, power_proj["info"],
 				"red.png", roundi(build_up_damage))
 		charge_shot.add_to_group(Groups.PLAYER_OWNED)
-		AudioManager.play_sfx(AudioManager.SFX.laser_2)
+		AudioManager.play_sfx(AudioManager.SFXs.LASER_2)
 		build_up = false
 		build_up_damage = 0.0
 		AudioManager.cancel_stream(audio_id)

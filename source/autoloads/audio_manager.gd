@@ -1,74 +1,47 @@
 extends Node
 
 
-enum AUDIO_BUSES {
-	MUSIC = 1,
-	SFX = 2
-}
-
-enum SFX {
-	explosion,
-	thrust,
-	success,
-	laser_1,
-	laser_2,
-	lose,
-	shield_down,
-	shield_up,
-	two_tone,
-	zap,
-	low_freq_explosion,
-	impact_metal_1,
-	impact_metal_2,
-}
-
-enum SFX_stream {
-	charge_up
-}
-
-enum SONGS {
-	The_Benjerman,
-	Overall_Control,
-	Spaceman,
-	Nightfall,
-	The_Maze
-}
-
-const _AUDIO_BUSES_list = {
-	1: &"music",
-	2: &"sfx"
-}
-
-const _SFX_list = [
-	preload("res://assets/audio/sfx/SFX - Death Explosion.ogg"),
-	preload("res://assets/audio/sfx/SFX - Main engine thrust.ogg"),
-	preload("res://assets/audio/sfx/SFX - Success.ogg"),
-	preload("res://assets/audio/sfx/sfx_laser1.ogg"),
-	preload("res://assets/audio/sfx/sfx_laser2.ogg"),
-	preload("res://assets/audio/sfx/sfx_lose.ogg"),
-	preload("res://assets/audio/sfx/sfx_shieldDown.ogg"),
-	preload("res://assets/audio/sfx/sfx_shieldUp.ogg"),
-	preload("res://assets/audio/sfx/sfx_twoTone.ogg"),
-	preload("res://assets/audio/sfx/sfx_zap.ogg"),
-	preload("res://assets/audio/sfx/lowFrequency_explosion_001.ogg"),
-	preload("res://assets/audio/sfx/impactMetal_001.ogg"),
-	preload("res://assets/audio/sfx/impactMetal_002.ogg"),
-]
-
-const _SFX_stream_list = [
-	preload("res://assets/audio/sfx/spaceEngine_002.ogg"),
-]
-
-const _SONGS_list = [
-	preload("res://assets/audio/soundtrack/Enigmatic Legend - The Benjerman.mp3"),
-	preload("res://assets/audio/soundtrack/Fionn Hodgson - Overall Control (DJDroidFreak Promotion).mp3"),
-	preload("res://assets/audio/soundtrack/NIGHTkilla - Spaceman.mp3"),
-	preload("res://assets/audio/soundtrack/Nightkilla-Nightfall.mp3"),
-	preload("res://assets/audio/soundtrack/Rukkus - The Maze.mp3")
-]
+const BUS_MUSIC := &"music"
+const BUS_INDEX_MUSIC := 1
+const BUS_SFX := &"sfx"
+const BUS_INDEX_SFX := 2
 
 const music_muted_db := 100.0
 const sfx_muted_db := 100.0
+
+
+class SFXs:
+	static var EXPLOSION := preload("res://assets/audio/sfx/SFX - Death Explosion.ogg")
+	static var THRUST := preload("res://assets/audio/sfx/SFX - Main engine thrust.ogg")
+	static var SUCCESS := preload("res://assets/audio/sfx/SFX - Success.ogg")
+	static var LASER_1 := preload("res://assets/audio/sfx/sfx_laser1.ogg")
+	static var LASER_2 := preload("res://assets/audio/sfx/sfx_laser2.ogg")
+	static var LOSE := preload("res://assets/audio/sfx/sfx_lose.ogg")
+	static var SHIELD_DOWN := preload("res://assets/audio/sfx/sfx_shieldDown.ogg")
+	static var SHIELD_UP := preload("res://assets/audio/sfx/sfx_shieldUp.ogg")
+	static var TWO_TONE := preload("res://assets/audio/sfx/sfx_twoTone.ogg")
+	static var ZAP := preload("res://assets/audio/sfx/sfx_zap.ogg")
+	static var LOW_FREQ_EXPLOSION := preload("res://assets/audio/sfx/lowFrequency_explosion_001.ogg")
+	static var IMPACT_METAL_1 := preload("res://assets/audio/sfx/impactMetal_001.ogg")
+	static var IMPACT_METAL_2 := preload("res://assets/audio/sfx/impactMetal_002.ogg")
+
+
+class SFX_Streams:
+	static var CHARGE_UP := preload("res://assets/audio/sfx/spaceEngine_002.ogg")
+
+
+class Songs:
+	static var The_Benjerman := preload("res://assets/audio/soundtrack/Enigmatic Legend - The Benjerman.mp3")
+	static var Overall_Control := preload("res://assets/audio/soundtrack/Fionn Hodgson - Overall Control (DJDroidFreak Promotion).mp3")
+	static var Spaceman := preload("res://assets/audio/soundtrack/NIGHTkilla - Spaceman.mp3")
+	static var Nightfall := preload("res://assets/audio/soundtrack/Nightkilla-Nightfall.mp3")
+	static var The_Maze := preload("res://assets/audio/soundtrack/Rukkus - The Maze.mp3")
+
+
+class Playlists:
+	static var MAIN_MENU := Playlist.new([Songs.The_Benjerman])
+	static var MAIN_LEVEL := Playlist.new([Songs.Nightfall, Songs.The_Maze, Songs.Spaceman,
+			Songs.Overall_Control])
 
 
 class Playlist:
@@ -95,13 +68,6 @@ class Playlist:
 		soundtrack_player.play()
 
 
-class Playlists:
-	static var MAIN_MENU := Playlist.new([_SONGS_list[SONGS.The_Benjerman]])
-	static var MAIN_LEVEL := Playlist.new([_SONGS_list[SONGS.Nightfall],
-			_SONGS_list[SONGS.The_Maze], _SONGS_list[SONGS.Spaceman],
-			_SONGS_list[SONGS.Overall_Control]])
-
-
 var sfx_dir_node: Node
 var sfx_stream_dir_node: Node
 var _stream_id := 0
@@ -111,27 +77,27 @@ var current_playlist: Playlist
 
 var volume_db_music:
 	get:
-		return AudioServer.get_bus_volume_db(AUDIO_BUSES.MUSIC)
+		return AudioServer.get_bus_volume_db(BUS_INDEX_MUSIC)
 	set(db):
-		AudioServer.set_bus_volume_db(AUDIO_BUSES.MUSIC, db)
+		AudioServer.set_bus_volume_db(BUS_INDEX_MUSIC, db)
 
 var volume_db_sfx:
 	get:
-		return AudioServer.get_bus_volume_db(AUDIO_BUSES.SFX)
+		return AudioServer.get_bus_volume_db(BUS_INDEX_SFX)
 	set(db):
-		AudioServer.set_bus_volume_db(AUDIO_BUSES.SFX, db)
+		AudioServer.set_bus_volume_db(BUS_INDEX_SFX, db)
 
 var mute_music:
 	get:
-		return AudioServer.is_bus_mute(AUDIO_BUSES.MUSIC)
+		return AudioServer.is_bus_mute(BUS_INDEX_MUSIC)
 	set(mute):
-		AudioServer.set_bus_mute(AUDIO_BUSES.MUSIC, mute)
+		AudioServer.set_bus_mute(BUS_INDEX_MUSIC, mute)
 
 var mute_sfx:
 	get:
-		return AudioServer.is_bus_mute(AUDIO_BUSES.SFX)
+		return AudioServer.is_bus_mute(BUS_INDEX_SFX)
 	set(mute):
-		AudioServer.set_bus_mute(AUDIO_BUSES.SFX, mute)
+		AudioServer.set_bus_mute(BUS_INDEX_SFX, mute)
 
 
 func _init() -> void:
@@ -139,13 +105,13 @@ func _init() -> void:
 	sfx_dir_node.name = "SFX Directory"
 	AudioServer.add_bus()
 	AudioServer.add_bus()
-	AudioServer.set_bus_name(1, _AUDIO_BUSES_list[AUDIO_BUSES.MUSIC])
-	AudioServer.set_bus_name(2, _AUDIO_BUSES_list[AUDIO_BUSES.SFX])
+	AudioServer.set_bus_name(BUS_INDEX_MUSIC, BUS_MUSIC)
+	AudioServer.set_bus_name(BUS_INDEX_SFX, BUS_SFX)
 	sfx_stream_dir_node = Node.new()
 	sfx_stream_dir_node.name = "SFX Stream Directory"
 	soundtrack_player = AudioStreamPlayer.new()
 	soundtrack_player.name = "Soundtrack Player"
-	soundtrack_player.bus = _AUDIO_BUSES_list[AUDIO_BUSES.MUSIC]
+	soundtrack_player.bus = BUS_MUSIC
 	soundtrack_player.finished.connect(_on_song_end)
 	add_child(sfx_dir_node)
 	add_child(sfx_stream_dir_node)
@@ -160,36 +126,35 @@ func _on_song_end() -> void:
 
 
 @warning_ignore("incompatible_ternary")
-func play_sfx(sfx: SFX, _2d := false, pos := Vector2.ZERO, vol_db := 0.0) -> void:
+func play_sfx(sfx: AudioStream, _2d := false, pos := Vector2.ZERO, vol_db := 0.0) -> void:
 	var audio = AudioStreamPlayer2D.new() if _2d else AudioStreamPlayer.new()
 	if _2d:
 		audio.position = pos
 	sfx_dir_node.add_child(audio)
-	audio.name = "SFX[%s]" % SFX.keys()[sfx]
 	audio.finished.connect(audio.queue_free)
-	audio.stream = _SFX_list[sfx]
+	audio.stream = sfx
 	audio.volume_db = vol_db
-	audio.bus = _AUDIO_BUSES_list[AUDIO_BUSES.SFX]
+	audio.bus = BUS_SFX
 	audio.play()
 
 
-func play_relative_sound(sfx: SFX, pos: Vector2, pos_mult := 1.0, vol_db := 0.0) -> void:
+func play_relative_sound(sfx: AudioStream, pos: Vector2, pos_mult := 1.0, vol_db := 0.0) -> void:
 	play_sfx(sfx, true, pos_mult * (pos - Info.player.camera_pos()), vol_db)
 
 
 @warning_ignore("incompatible_ternary")
-func begin_stream(sfx_stream: SFX_stream, _2d := false, pos := Vector2.ZERO, vol_db := 0.0) -> int:
+func begin_stream(sfx_stream: AudioStream, _2d := false, pos := Vector2.ZERO, vol_db := 0.0) -> int:
 	var audio = AudioStreamPlayer2D.new() if _2d else AudioStreamPlayer.new()
 	if _2d:
 		audio.position = pos
 	sfx_stream_dir_node.add_child(audio)
 	audio.finished.connect(audio.play)
-	audio.stream = _SFX_stream_list[sfx_stream]
+	audio.stream = sfx_stream
 	var id := _stream_id
 	_stream_id += 1
 	audio.name = stream_name(id)
 	audio.volume_db = vol_db
-	audio.bus = _AUDIO_BUSES_list[AUDIO_BUSES.SFX]
+	audio.bus = BUS_SFX
 	audio.play()
 	return id
 
