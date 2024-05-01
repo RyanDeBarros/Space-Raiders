@@ -12,6 +12,8 @@ extends Control
 @export var audio_db_min := -30.0
 @export var audio_db_max := 0.0
 
+var turn_on := false
+
 @onready var music_volume_slider: HSlider = %MusicVolumeSlider
 @onready var sfx_volume_slider: HSlider = %SFXVolumeSlider
 @onready var camera_smoothing_slider: HSlider = %CameraSmoothingSlider
@@ -34,6 +36,8 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
+	if not turn_on:
+		AudioManager.play_sfx(AudioManager.UI_SFXs.CLICK_5)
 	if value <= slider_zero_threshold:
 		AudioManager.mute_music = true
 	else:
@@ -42,6 +46,8 @@ func _on_music_volume_slider_value_changed(value: float) -> void:
 
 
 func _on_sfx_volume_slider_value_changed(value: float) -> void:
+	if not turn_on:
+		AudioManager.play_sfx(AudioManager.UI_SFXs.CLICK_5)
 	if value <= slider_zero_threshold:
 		AudioManager.mute_sfx = true
 	else:
@@ -57,10 +63,14 @@ func _on_camera_smoothing_slider_value_changed(value: float) -> void:
 
 
 func _on_reset_save_data_button_pressed() -> void:
+	if not turn_on:
+		AudioManager.play_sfx(AudioManager.UI_SFXs.CLICK_5)
 	reset_save_data_confirm.visible = not reset_save_data_confirm.visible
 
 
 func _on_reset_save_data_confirm_pressed() -> void:
+	if not turn_on:
+		AudioManager.play_sfx(AudioManager.UI_SFXs.CLICK_5)
 	Info._reset_save_data()
 	parent.respond_to_data_reset()
 
@@ -71,16 +81,28 @@ func _on_screen_border_check_box_toggled(_toggled_on: bool) -> void:
 		Info.main_stage.level_overlay.sync_screen_border_visibility()
 
 
+func _turn_off() -> void:
+	turn_on = false
+
+
 func toggle(on: bool) -> void:
 	if on:
+		turn_on = true
+		call_deferred("_turn_off")
+		
 		var value := 100 * (((Info.player_camera_smoothing - camera_smoothing_min_value)\
 				/ (camera_smoothing_max_value - camera_smoothing_min_value))\
 				** (1 / camera_smoothing_slider_exp))
 		camera_smoothing_slider.value = value
-		music_volume_slider.value = 0.0 if AudioManager.mute_music else\
+		
+		value = 0.0 if AudioManager.mute_music else\
 				(AudioManager.volume_db_music - audio_db_min) / (audio_db_max - audio_db_min)
-		sfx_volume_slider.value = 0.0 if AudioManager.mute_sfx else\
+		music_volume_slider.value = value
+		
+		value = 0.0 if AudioManager.mute_sfx else\
 				(AudioManager.volume_db_sfx - audio_db_min) / (audio_db_max - audio_db_min)
+		sfx_volume_slider.value = value
+		
 		screen_border_check_box.button_pressed = Debug.OVERLAY_BORDER_VISIBLE
 		reset_save_data_confirm.visible = false
 		Utility.propogate_mouse_filter(self, Control.MOUSE_FILTER_STOP)

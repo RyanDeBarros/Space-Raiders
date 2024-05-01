@@ -54,7 +54,7 @@ func _notification(what: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("quit"):
-		Info.quit()
+		quit()
 	if event.is_action_pressed("full_screen"):
 		var fullscreen = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN\

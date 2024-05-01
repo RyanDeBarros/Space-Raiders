@@ -26,6 +26,12 @@ class SFXs:
 	static var IMPACT_METAL_2 := preload("res://assets/audio/sfx/impactMetal_002.ogg")
 
 
+class UI_SFXs:
+	static var CLICK_1 := preload("res://assets/audio/ui_sfx/click1.ogg")
+	static var CLICK_3 := preload("res://assets/audio/ui_sfx/click3.ogg")
+	static var CLICK_5 := preload("res://assets/audio/ui_sfx/click5.ogg")
+
+
 class SFX_Streams:
 	static var CHARGE_UP := preload("res://assets/audio/sfx/spaceEngine_002.ogg")
 
