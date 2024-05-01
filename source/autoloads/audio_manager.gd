@@ -30,6 +30,7 @@ class UI_SFXs:
 	static var CLICK_1 := preload("res://assets/audio/ui_sfx/click1.ogg")
 	static var CLICK_3 := preload("res://assets/audio/ui_sfx/click3.ogg")
 	static var CLICK_5 := preload("res://assets/audio/ui_sfx/click5.ogg")
+	static var STARTING := preload("res://assets/audio/ui_sfx/starting.ogg")
 
 
 class SFX_Streams:
@@ -81,17 +82,27 @@ var _stream_id := 0
 var soundtrack_player: AudioStreamPlayer
 var current_playlist: Playlist
 
+var vol_db_music
+var dim_db_music := 0.0
+
 var volume_db_music:
 	get:
-		return AudioServer.get_bus_volume_db(BUS_INDEX_MUSIC)
+		return vol_db_music
 	set(db):
-		AudioServer.set_bus_volume_db(BUS_INDEX_MUSIC, db)
+		vol_db_music = db
+		AudioServer.set_bus_volume_db(BUS_INDEX_MUSIC, db + dim_db_music)
 
 var volume_db_sfx:
 	get:
 		return AudioServer.get_bus_volume_db(BUS_INDEX_SFX)
 	set(db):
 		AudioServer.set_bus_volume_db(BUS_INDEX_SFX, db)
+
+
+func dim_music(db: float) -> void:
+	dim_db_music = db
+	AudioServer.set_bus_volume_db(BUS_INDEX_MUSIC, vol_db_music + db)
+
 
 var mute_music:
 	get:

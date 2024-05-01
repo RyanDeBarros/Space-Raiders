@@ -4,10 +4,12 @@ extends Control
 
 @export var parent: Node
 @export var slider_zero_threshold := 0.0
+
 @export_group("Camera Smoothing", "camera_smoothing_")
 @export var camera_smoothing_min_value := 0.001
 @export var camera_smoothing_max_value := 0.05
 @export var camera_smoothing_slider_exp := 3.0
+
 @export_group("Audio", "audio_")
 @export var audio_db_min := -30.0
 @export var audio_db_max := 0.0
@@ -76,6 +78,8 @@ func _on_reset_save_data_confirm_pressed() -> void:
 
 
 func _on_screen_border_check_box_toggled(_toggled_on: bool) -> void:
+	if not turn_on:
+		AudioManager.play_sfx(AudioManager.UI_SFXs.CLICK_5)
 	Debug.OVERLAY_BORDER_VISIBLE = screen_border_check_box.button_pressed
 	if is_instance_valid(Info.main_stage):
 		Info.main_stage.level_overlay.sync_screen_border_visibility()

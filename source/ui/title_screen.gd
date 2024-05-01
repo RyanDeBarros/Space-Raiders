@@ -15,6 +15,7 @@ func _ready() -> void:
 
 
 func _on_play_button_pressed() -> void:
+	AudioManager.play_sfx(AudioManager.UI_SFXs.STARTING, false, Vector2.ZERO, -10)
 	get_tree().change_scene_to_packed(Scenes.SANDBOX)
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
 	AudioManager.setup_playlist(AudioManager.Playlists.MAIN_LEVEL)

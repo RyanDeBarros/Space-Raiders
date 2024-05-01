@@ -3,6 +3,7 @@ extends Control
 
 
 @export var parent: Node
+@export var music_dim := 10
 
 var first_frame := true
 
@@ -26,8 +27,10 @@ func _on_visibility_changed() -> void:
 	if visible:
 		update_scores()
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
+		AudioManager.dim_music(-music_dim)
 	else:
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
+		AudioManager.dim_music(0)
 
 
 func _on_resume_button_pressed() -> void:
@@ -41,6 +44,7 @@ func _on_quit_button_pressed() -> void:
 func _on_settings_button_pressed() -> void:
 	pause_panel.visible = false
 	settings_screen.toggle(true)
+	AudioManager.dim_music(-music_dim)
 
 
 func close_settings() -> void:
